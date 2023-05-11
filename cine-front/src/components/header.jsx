@@ -4,12 +4,12 @@ const header = () => {
   return (
     <div>
       <header>
-        <div class="headerContainer">
-            <img src="../icons/DH Cinema-logos_black.png" alt="logoCinema">
+        <div className="headerContainer">
+          <img src="../icons/DH Cinema-logos_black.png" alt="logoCinema"/>
         </div>
-        <div class="headerUsuario">
-            <button class="botonCrearCuenta"> Crear Cuenta</button>
-            <button class="botonInicioSesion"> Iniciar Sesión </button>
+        <div className="headerUsuario">
+            <button className="botonCrearCuenta"> Crear Cuenta</button>
+            <button className="botonInicioSesion"> Iniciar Sesión </button>
         </div>
     </header>
     </div>

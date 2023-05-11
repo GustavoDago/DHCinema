@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "movie":{
+            "name":"SUPER MARIO BROS",
+            "description":"Cualquier cosa",
+            "rate": "88",
+            "categories": ["Accion","Aventura","Comedia"]
+        },
+        "image": "super-mario.jpg"
+    },
+    {
+        "id": "2",
+        "movie":{
+            "name":"GUARDIANES DE LA GALAXIA VOL. 3 ",
+            "description":"Cualquier cosa",
+            "rate": "99",
+            "categories": ["Accion","Aventura","Comedia"]
+        },
+        "image": "guardianes-de-la-galaxia.jpg"
+    },
+    {
+        "id": "3",
+        "movie":{
+            "name":"RAPIDOS Y FURIOSOS 10",
+            "description":"Cualquier cosa",
+            "rate": "1",
+            "categories": ["Accion","Aventura","Comedia"]
+        },
+        "image": "rapido-y-furioso.jpg"
+    },
+    {
+        "id": "4",
+        "movie":{
+            "name":"LA SIRENITA",
+            "description":"Cualquier cosa",
+            "rate": "2",
+            "categories": ["Accion","Aventura","Comedia"]
+        },
+        "image": "la-sirenita.jpg"
+    }
+]
