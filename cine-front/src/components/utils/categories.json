@@ -1,0 +1,12 @@
+[
+    {
+        "id":"1",
+        "name":"ACCION",
+        "image":"./categories/accion.jpg"
+    },
+    {
+        "id":"2",
+        "name":"AVENTURA",
+        "image":"./categories/aventura.jpg"
+    }
+]

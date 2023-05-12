@@ -38,5 +38,25 @@
             "categories": ["Accion","Aventura","Comedia"]
         },
         "image": "la-sirenita.jpg"
+    },
+    {  
+        "id": "5",
+        "movie":{
+            "name":"JOHN WICK 4",
+            "description":"Cualquier cosa",
+            "rate": "10",
+            "categories": ["Accion","Suspenso"]
+        },
+        "image": "john-wick-4.jpg"
+    },
+    {  
+        "id": "6",
+        "movie":{
+            "name":"AVATAR 2: EL CAMINO DEL AGUA",
+            "description":"Cualquier cosa",
+            "rate": "9.8",
+            "categories": ["Accion","Aventura","Ciencia ficcion","Drama"]
+        },
+        "image": "avatar-2.jpg"
     }
 ]

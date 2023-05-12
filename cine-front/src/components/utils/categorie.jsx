@@ -1,8 +1,12 @@
 function Categorie(props) {
     return(
-        <div>
-            <h4>{props.categorie}</h4>
-            <img src={props.image}/>
+        <div className="categorie-card">
+            <figure>
+                <h4>{props.name}</h4>
+                <img src={props.image}/>
+            </figure>
         </div>
     )
 }
+
+export default Categorie
