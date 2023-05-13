@@ -38,7 +38,6 @@ header{
   align-items: center;
   margin-bottom: 8vh;
   background-color: #0d1b2a;
-  position: sticky;
 }
 
 .headerContainer{
@@ -72,7 +71,8 @@ footer{
 .derechosFooter{
   display: flex;
   flex-direction: row;
-  list-style-type: none;
+  list-style: none;
+  color: #E0E1DD;
 }
 
 .derechosFooter img{
