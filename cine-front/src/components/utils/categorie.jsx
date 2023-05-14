@@ -1,9 +1,10 @@
 function Categorie(props) {
+    
     return(
         <div className="categorie-card">
-            <figure>
+            <figure onClick={() => props.updateFather(props.name)}>
                 <h4>{props.name}</h4>
-                <img src={props.image}/>
+                <img  src={props.image}/>
             </figure>
         </div>
     )

@@ -1,12 +1,32 @@
 [
     {
-        "id":"1",
-        "name":"ACCION",
+        "id":"0",
+        "name":"Todos",
         "image":"./categories/accion.jpg"
     },
     {
-        "id":"2",
-        "name":"AVENTURA",
+        "id":"1",
+        "name":"Accion",
+        "image":"./categories/accion.jpg"
+    },
+    {
+        "id":"3",
+        "name":"Aventura",
+        "image":"./categories/aventura.jpg"
+    },
+    {
+        "id":"4",
+        "name":"Comedia",
+        "image":"./categories/aventura.jpg"
+    },
+    {
+        "id":"5",
+        "name":"Ciencia Ficcion",
+        "image":"./categories/aventura.jpg"
+    },
+    {
+        "id":"6",
+        "name":"Terror",
         "image":"./categories/aventura.jpg"
     }
 ]
