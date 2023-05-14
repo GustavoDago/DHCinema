@@ -25,7 +25,7 @@
 }
 
 body{
-  
+  background-color: #E0E1DD;
   display: block;
   margin: 0;
   padding: 0;
@@ -136,7 +136,8 @@ footer{
 .derechosFooter{
   display: flex;
   flex-direction: row;
-  list-style-type: none;
+  list-style: none;
+  color: #E0E1DD;
 }
 
 .derechosFooter img{
@@ -152,11 +153,10 @@ footer{
 
 
 
-
 /* Home */
 
 
-/* Div donde estan las secciones de peliculas */
+/* Clases que manejan las secciones de peliculas en el home */
 
 .billboard-section{
   box-sizing: border-box;
@@ -165,6 +165,11 @@ footer{
 .billboard-section h3{
   color:black;
   text-align: left;
+  margin-left: 30px;
+}
+
+.billboard-section button{
+  margin: 30px 0px;
 }
 
 .recommended-section{
@@ -174,11 +179,12 @@ footer{
 .recommended-section h3{
   color:black;
   text-align: left;
+  margin-left: 30px;
 }
 
 .movie-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
@@ -205,7 +211,7 @@ footer{
   display:flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 30px;
+  margin: 20px 0px 0 20px;
 }
 
 .movie-card figure{
@@ -247,6 +253,8 @@ footer{
   opacity: 1;
   visibility: visible;
 }
+
+/* Clases que manejan el carrusel de categorias home */
 
 .categories-section {
   display: flex;
@@ -314,22 +322,5 @@ footer{
   position: relative;
   text-align: center;
   z-index: 999;
-  
-  
 }
 
-
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}

@@ -3,6 +3,7 @@ import data from "../components/utils/data.json"
 import Item from "../components/utils/item"
 import categories from "../components/utils/categories.json"
 import Categorie from "../components/utils/categorie"
+import {Link} from "react-router-dom"
 
 function Home() {
 
@@ -66,27 +67,35 @@ function Home() {
                             return dataM.movie.categories.includes(showCategorie) === true;
                         }
                     }).map(movie =>{
-                        return <Item
-                        key={movie.id}
-                        name={movie.movie.name}
-                        image={movie.image}
-                    />
-                    }
-                        
+                    return (
+                    <Link key={movie.id} to={`${movie.id}`}>
+                        <Item
+                            key={movie.id}
+                            name={movie.movie.name}
+                            image={movie.image}
+                        />
+                    </Link> )
+                    }    
                     )}
-                    
                     </div>
+                    <Link key={showCategorie} to={`/showmore-${showCategorie.toLowerCase()}`}>
+                        <button>Ver mas</button>
+                    </Link>
             </div>
             <div className="recommended-section">
                 <h3>Recomendados</h3>
                 <div className="movie-container">
-                    {data.map(data=> (
-                        <Item
-                            key={data.id}
-                            name={data.movie.name}
-                            image={data.image}
-                        />
-                        ))
+                    {data.map(data=> {
+                        return (
+                            <Link key={data.id} to={`${data.id}`}>
+                                <Item
+                                    key={data.id}
+                                    name={data.movie.name}
+                                    image={data.image}
+                                />
+                            </Link> )
+                    }
+                    )
                     }
                 </div>
             </div>
