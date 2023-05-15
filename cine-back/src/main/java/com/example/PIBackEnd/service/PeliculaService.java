@@ -244,4 +244,20 @@ public class PeliculaService {
             throw new ResourceNoContentException("Error. No existen Peliculas registradas.");
         }
     }
+
+    public List<Pelicula> OchoPeliculasRandom(){
+        logger.info("Creando lista de 8 Peliculas random");
+        List<Pelicula> listaPeliculas = peliculaRepository.findAll();
+        List<Pelicula> peliculasRandom = new ArrayList<>();
+        int tamanoLista = listaPeliculas.size();
+        Random random = new Random();
+        while (peliculasRandom.size() < 8) {
+            int indiceAleatorio = random.nextInt(tamanoLista);
+            Pelicula peliculaAleatoria = listaPeliculas.get(indiceAleatorio);
+            if(!peliculasRandom.contains(peliculaAleatoria)){
+                peliculasRandom.add(peliculaAleatoria);
+            }
+        }
+        return peliculasRandom;
+    }
 }
