@@ -5,7 +5,7 @@
             "name":"SUPER MARIO BROS",
             "description":"Cualquier cosa",
             "rate": "88",
-            "categories": ["Accion","Aventura","Comedia"]
+            "categories": ["Aventura","Comedia"]
         },
         "image": "super-mario.jpg"
     },
@@ -25,7 +25,7 @@
             "name":"RAPIDOS Y FURIOSOS 10",
             "description":"Cualquier cosa",
             "rate": "1",
-            "categories": ["Accion","Aventura","Comedia"]
+            "categories": ["Accion"]
         },
         "image": "rapido-y-furioso.jpg"
     },
@@ -35,7 +35,7 @@
             "name":"LA SIRENITA",
             "description":"Cualquier cosa",
             "rate": "2",
-            "categories": ["Accion","Aventura","Comedia"]
+            "categories": ["Aventura","Comedia"]
         },
         "image": "la-sirenita.jpg"
     },
