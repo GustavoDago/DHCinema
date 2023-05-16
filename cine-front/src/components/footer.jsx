@@ -1,9 +1,12 @@
 import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faLinkedin, faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
+
 
 const footer = () => {
-  return (
+return (
     <div>
-      <footer>
+    <footer>
         <div className="derechosFooter">
             <Link to="../home">
             <img src="../icons/DH Cinema-logos_black.png" alt="logoCinemaFooter"/>
@@ -15,21 +18,21 @@ const footer = () => {
         </div>
             <div className="iconosFooter">
             <a rel="https://m.facebook.com" target="_blank">
-                <img src="../icons/facebook.png" alt="iconFacebook"/>
+                <FontAwesomeIcon icon={faFacebook} />
             </a>
             <a rel="https://www.linkedin.com/login/es" target="_blank">
-                <img src="../icons/linkedin-in.png" alt="iconLikedIn"/>
+                <FontAwesomeIcon icon={faLinkedin} />
             </a>
             <a rel="https://twitter.com" target="_blank">
-                <img src="../icons/twitter.png" alt="iconTwitter"/>
+                <FontAwesomeIcon icon={faTwitter} />
             </a>
             <a rel="https://www.instagram.com/accounts/login/" target="_blank">
-                <img src="../icons/instagram.png" alt="iconInstagram"/>
+                <FontAwesomeIcon icon={faInstagram} />
             </a>
         </div>
     </footer>
     </div>
-  )
+)
 }
 
 export default footer
