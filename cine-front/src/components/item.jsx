@@ -5,7 +5,9 @@ function Item(props){
             <figure>
                 <div className="opt-card">
                     <p>{props.name}</p>
-                    <button >Mas detalles</button>
+                    <Link key={pros.id} to={`${props.id}`}>
+                        <button >Mas detalles</button>
+                    </Link>
                     <button>Comprar</button>
                 </div>
                 <img className="opt-image" src={props.image}/>

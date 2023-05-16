@@ -24,11 +24,14 @@
   max-width: none;
 }
 
-body{
+html,body{
   background-color: #E0E1DD;
   display: block;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  height:100vh;
 }
 
 .app{
@@ -159,7 +162,10 @@ footer{
 /* Clases que manejan las secciones de peliculas en el home */
 
 .billboard-section{
+  align-items: center;
   box-sizing: border-box;
+  word-wrap: break-word;
+  
 }
 
 .billboard-section h3{
@@ -179,12 +185,11 @@ footer{
 .recommended-section h3{
   color:black;
   text-align: left;
-  margin-left: 30px;
 }
 
 .movie-container{
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
@@ -211,7 +216,7 @@ footer{
   display:flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px 0 20px;
+  margin-left: 30px;
 }
 
 .movie-card figure{

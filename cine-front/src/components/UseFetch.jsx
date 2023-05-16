@@ -1,32 +1,34 @@
 // Clase preparada para recibir una url y hacer peticiones a traves de un parametro
 
-/**  const API_ENDPOINT = ``;
+const API_ENDPOINT = `http://localhost:8080`;
 
-export const useFetch = params => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error,setError] = useState(false);
-    const [data,setData] = useState(null);
 
-    const fetchMovie = url => {
-        setIsLoading (true);
-        fetch(url)
-            .then(respond => respond.json())
-            .then(respondJson => {
-                if (respondJson.Response === true){
-                    setData(respondJson.Search);
-                    setError(false);
-                } else {
-                    setError(true);
-                }
-                setIsLoading(false);
-                console.log("data: ",respondJson);
-            })
-            .catch(error => console.log(error))
+export const searchMoviesForCategories = (url) => {
+
+    if (url === 'Todos')
+    {
+        url = '/peliculas'
+    }else {
+        url = `/peliculas/categoria/${url.toLowerCase()}`
     }
+    
+    console.log(`${API_ENDPOINT}${url}`)
 
-    useEffect(() => {
-        fetchMovie(`${API_ENDPOINT}${params}`)
-    }, [params])
+    return fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => response.json())
+        .catch(error => {
+            console.error(error)
+        });
+};
 
-    return {isLoading,error,data}
-} */
+export const searchRandomMovies = () => {
+    const url =`/peliculas/random`
+
+
+    return fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => response.json())
+        .catch(error => {
+            console.error(error)
+        });
+    
+}

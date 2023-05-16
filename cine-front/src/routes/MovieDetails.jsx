@@ -4,4 +4,4 @@ function MovieDetails() {
     )
 }
 
-export default MovieDetails;
+export default MovieDet
