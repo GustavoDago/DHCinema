@@ -17,16 +17,16 @@ return (
             </ul>
         </div>
             <div className="iconosFooter">
-            <a rel="https://m.facebook.com" target="_blank">
+            <a href="https://m.facebook.com" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faFacebook} />
             </a>
-            <a rel="https://www.linkedin.com/login/es" target="_blank">
+            <a href="https://www.linkedin.com/login/es" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faLinkedin} />
             </a>
-            <a rel="https://twitter.com" target="_blank">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faTwitter} />
             </a>
-            <a rel="https://www.instagram.com/accounts/login/" target="_blank">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faInstagram} />
             </a>
         </div>
