@@ -6,6 +6,8 @@ import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/peliculas")
+@CrossOrigin
 public class PeliculaController {
 
     @Autowired
@@ -61,7 +64,12 @@ public class PeliculaController {
     }
 
     @GetMapping("/random")
-    public ResponseEntity<List<Pelicula>> OchoPeliculasRandom(){
+    public ResponseEntity<List<Pelicula>> OchoPeliculasRandom() throws ResourceBadRequestException {
         return ResponseEntity.ok(peliculaService.OchoPeliculasRandom());
+    }
+
+    @GetMapping("/pagina/{pagina}")
+    public ResponseEntity<Page<Pelicula>> paginacion(@PathVariable Integer pagina){
+        return ResponseEntity.ok(peliculaService.paginacion(PageRequest.of(pagina,10)));
     }
 }

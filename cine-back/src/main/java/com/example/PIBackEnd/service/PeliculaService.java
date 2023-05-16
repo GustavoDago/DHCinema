@@ -11,6 +11,8 @@ import com.example.PIBackEnd.repository.FechaRepository;
 import com.example.PIBackEnd.repository.PeliculaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
@@ -245,19 +247,27 @@ public class PeliculaService {
         }
     }
 
-    public List<Pelicula> OchoPeliculasRandom(){
+    public List<Pelicula> OchoPeliculasRandom() throws ResourceBadRequestException {
         logger.info("Creando lista de 8 Peliculas random");
         List<Pelicula> listaPeliculas = peliculaRepository.findAll();
-        List<Pelicula> peliculasRandom = new ArrayList<>();
-        int tamanoLista = listaPeliculas.size();
-        Random random = new Random();
-        while (peliculasRandom.size() < 8) {
-            int indiceAleatorio = random.nextInt(tamanoLista);
-            Pelicula peliculaAleatoria = listaPeliculas.get(indiceAleatorio);
-            if(!peliculasRandom.contains(peliculaAleatoria)){
-                peliculasRandom.add(peliculaAleatoria);
+        if(listaPeliculas.size() > 8){
+            List<Pelicula> peliculasRandom = new ArrayList<>();
+            int tamanoLista = listaPeliculas.size();
+            Random random = new Random();
+            while (peliculasRandom.size() < 8) {
+                int indiceAleatorio = random.nextInt(tamanoLista);
+                Pelicula peliculaAleatoria = listaPeliculas.get(indiceAleatorio);
+                if(!peliculasRandom.contains(peliculaAleatoria)){
+                    peliculasRandom.add(peliculaAleatoria);
+                }
             }
+            return peliculasRandom;
+        }else{
+            throw new ResourceBadRequestException("Error. Debe haber mas de 8 peliculas");
         }
-        return peliculasRandom;
+    }
+
+    public Page<Pelicula> paginacion(Pageable pageable){
+        return peliculaRepository.findAll(pageable);
     }
 }
