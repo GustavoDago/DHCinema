@@ -59,7 +59,6 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -101,15 +100,20 @@ header{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8vh;
-  background-color: #0d1b2a;
+  background-color: #1B263B;
   position: sticky;
+}
+
+#slogan{
+  position: relative;
+  top: 20px;
+  right: 60px;
 }
 
 .headerContainer{
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 
 .headerContainer img {
@@ -121,6 +125,36 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 15px;
+}
+
+.headerUsuario .botonCrearCuenta{
+  margin-right: 5px;
+}
+
+.botonCrearCuenta{
+  width: 100px;
+  height: 35px;
+  font-size: small;
+  display: block;
+  align-items: center;
+  border-radius: 35px;
+  background-color: #778DA9;
+  border: none;
+  cursor: pointer;
+}
+
+.botonInicioSesion{
+  width: 100px;
+  height: 35px;
+  font-size: small;
+  display: block;
+  border-radius: 35px;
+  background-color: #778DA9;
+  border: none;
+  cursor: pointer;
 }
 
 
@@ -136,6 +170,18 @@ footer{
 .derechosFooter{
   display: flex;
   flex-direction: row;
+  padding-left: 1rem;
+}
+
+.derechosFooter ul{
+  margin-top: 17px;
+}
+
+.derechosFooter ul li{
+  list-style-type: none;
+  margin-left: 20px;
+  font-size: small;
+  padding-top: 5px;
   list-style: none;
   color: #E0E1DD;
 }
@@ -145,9 +191,16 @@ footer{
   height: auto;
 }
 
+.iconosFooter{
+  padding-right: 10px;
+  padding-top: 25px;
+}
+
 .iconosFooter img {
   width: 32px; 
   height: 32px; 
+  margin-right: 3px;
+  align-items: center;
 }
 
 
