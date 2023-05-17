@@ -31,23 +31,23 @@ function Recommended() {
         <div className="recommended-section">
                 <h3>Recomendados</h3>
                 <div className="movie-container">
-                {isLoading ? (
-            <div>Cargando...</div>
-        ) : (movies.map(movie =>{
-            return (
-            
-                <Item
-                    key={movie.id}
-                    id={movie.id}
-                    name={movie.titulo}
-                    image={movie.imagen}
-                />
-            )
-            }    
-            ))
-        
-        }
-           </div>
+              {isLoading ? (
+                <div>Cargando...</div>
+              ) : (
+                Array.isArray(movies) && movies.length > 0 ? (
+                  movies.map(movie => (
+                      <Item
+                        key={movie.id}
+                        id={movie.id}
+                        name={movie.titulo}
+                        image={movie.imagen}
+                      />
+                  ))
+                ) : (
+                  <div>No se encontraron películas</div>
+                )
+              )}
+            </div>
         </div>
     )
 }

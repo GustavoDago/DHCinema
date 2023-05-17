@@ -32,3 +32,37 @@ export const searchRandomMovies = () => {
         });
     
 }
+
+export const searchMovieDetails = (id) =>{
+    const url=`/peliculas/${id}`
+
+    return fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error(error)
+        });
+}
+
+export const deleteMovie = async (id) => {
+    const url=`/peliculas/${id}`
+
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: 'DELETE'
+        })
+        .then((response) => {
+            console.log(response.status)
+            if (response.status == 200)
+                return true
+            else return false
+        }
+            
+        )
+        .catch((error) => {
+            console.error(error)
+            return error
+        })
+
+    
+    return response;
+
+}

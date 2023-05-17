@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Billboard(props) {
 
-    const [movies,setMovies] = useState([])
+    const [movies,setMovies] = useState()
     const [isLoading, setIsLoading] = useState(true)
 
     const titulo = () =>{
@@ -52,14 +52,12 @@ function Billboard(props) {
               ) : (
                 Array.isArray(movies) && movies.length > 0 ? (
                   movies.map(movie => (
-                    
                       <Item
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
                         image={movie.imagen}
                       />
-                    
                   ))
                 ) : (
                   <div>No se encontraron películas</div>
