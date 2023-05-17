@@ -3,22 +3,25 @@
 const API_ENDPOINT = `http://localhost:8080`;
 
 
-export const searchMoviesForCategories = (url) => {
+export const searchMoviesForCategories = async (url) => {
 
     if (url === 'Todos')
     {
         url = '/peliculas'
     }else {
-        url = `/peliculas/categoria/${url.toLowerCase()}`
+        url = `/peliculas/categoria/${url}`
     }
     
     console.log(`${API_ENDPOINT}${url}`)
 
-    return fetch(`${API_ENDPOINT}${url}`)
-        .then((response) => response.json())
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) =>{return response.json()
+        } )
         .catch(error => {
             console.error(error)
         });
+    console.log(response)
+    return response;
 };
 
 export const searchRandomMovies = () => {

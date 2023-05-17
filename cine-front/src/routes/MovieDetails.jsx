@@ -76,7 +76,7 @@ function MovieDetails() {
                     <div className="movie-first-div">
                         <h2>{movie.titulo}</h2>
                         <Link to={"/"}>
-                            <img  src="./icons/atras.png"/>
+                            <img  src={'\src\icons\atras.png'}/>
                         </Link>
                     </div>
                     

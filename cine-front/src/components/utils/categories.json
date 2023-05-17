@@ -26,6 +26,16 @@
     },
     {
         "id":"6",
+        "name":"Drama",
+        "image":"./categories/aventura.jpg"
+    },
+    {
+        "id":"7",
+        "name":"Romance",
+        "image":"./categories/aventura.jpg"
+    },
+    {
+        "id":"8",
         "name":"Terror",
         "image":"./categories/aventura.jpg"
     }

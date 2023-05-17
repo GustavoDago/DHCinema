@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { searchMoviesForCategories } from "../UseFetch";
 import Item from "../item"
 import { Link } from "react-router-dom";
-
-
+import ContentLoader from "react-content-loader";
 
 function Billboard(props) {
 
@@ -39,17 +38,38 @@ function Billboard(props) {
         };
         
         fetchMovieForCategorie()
-    },[props.categorie])
-    
+    },[props.categorie]) 
 
-   
+    const loadingBox = () => {
+      const loaders = []
+  
+        for (let i=0;i<8;i++){
+          loaders.push(
+          <div key={i} className="content-loader">
+            <ContentLoader
+              speed={2}
+              width="100%"
+              height="100%"
+              backgroundColor="#f3f3f3"
+              foregroundColor="#ecebeb"
+            >
+              <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
+            </ContentLoader>
+          </div>
+            
+          )
+        }
+  
+        return loaders;
+  }
 
     const renderBillboard = () => {
         return (
             <div className="movie-container">
               {isLoading ? (
-                <div>Cargando...</div>
-              ) : (
+                  loadingBox()
+                )
+               : (
                 Array.isArray(movies) && movies.length > 0 ? (
                   movies.map(movie => (
                       <Item
@@ -60,12 +80,14 @@ function Billboard(props) {
                       />
                   ))
                 ) : (
-                  <div>No se encontraron películas</div>
+                  loadingBox()
                 )
               )}
             </div>
           );
     }
+
+
 
 
     return (

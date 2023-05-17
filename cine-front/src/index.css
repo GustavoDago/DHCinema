@@ -165,7 +165,8 @@ footer{
   align-items: center;
   box-sizing: border-box;
   word-wrap: break-word;
-  
+  display: flex;
+  flex-direction: column;
 }
 
 .billboard-section h3{
@@ -180,20 +181,29 @@ footer{
 
 .recommended-section{
   background-color: #D9D9D9;
+  align-items: center;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .recommended-section h3{
   color:black;
   text-align: left;
+  margin-left: 30px;
 }
 
 .movie-container{
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta los valores según tus necesidades */
+  grid-gap: 10px;
+  grid-auto-flow: column;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding-bottom: 20px;
+  width: 80%;
 }
 
 .movie-container::-webkit-scrollbar{
@@ -216,7 +226,6 @@ footer{
   display:flex;
   justify-content: center;
   align-items: center;
-  margin-left: 30px;
 }
 
 .movie-card figure{
@@ -228,6 +237,14 @@ footer{
   box-shadow: 0px 15px 25px rgba(0,0,0,0.7);
   cursor: pointer;
   margin: 0;
+  
+  flex-grow: 0;
+}
+
+.content-loader{
+  width: 200px;
+  height: 280px;
+  flex-grow: 0;
 }
 
 .movie-card figure img{
@@ -336,12 +353,16 @@ footer{
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  padding: 0 30px;
+  color: black;
 }
 
 .movie-second-div{
   display: flex;
   justify-content: space-around;
   align-items:flex-start;
+  color: black;
+  padding-top: 40px;
 }
 
 .movie-second-div img{
@@ -358,6 +379,12 @@ footer{
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  padding: 20px;
+}
+
+.movie-third-div button{
+  margin: 10px;
+  background-color: #0D1B2A;
 }
 
 .modal-overlay{

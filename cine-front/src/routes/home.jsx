@@ -10,8 +10,6 @@ function Home() {
 
     const[showCategorie,setShowCategorie] = useState("Todos");
 
- 
-
 
     const updateCategorie = (value) => {
         setShowCategorie(value);

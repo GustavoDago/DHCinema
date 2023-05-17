@@ -1,7 +1,7 @@
 import { searchRandomMovies } from "../UseFetch";
-import { Link } from "react-router-dom";
 import Item from "../item";
 import { useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
 
 function Recommended() {
     const [movies, setMovies] = useState([])
@@ -27,12 +27,36 @@ function Recommended() {
         fetchMovieRandom()
     },[])
 
+    const loadingBox = () => {
+      const loaders = []
+  
+        for (let i=0;i<8;i++){
+          loaders.push(
+          <div key={i} className="content-loader">
+            <ContentLoader
+              
+              speed={2}
+              width="100%"
+              height="100%"
+              backgroundColor="#f3f3f3"
+              foregroundColor="#ecebeb"
+            >
+              <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
+            </ContentLoader>
+          </div>
+            
+          )
+        }
+  
+        return loaders;
+  }
+
     return (
         <div className="recommended-section">
                 <h3>Recomendados</h3>
                 <div className="movie-container">
               {isLoading ? (
-                <div>Cargando...</div>
+                loadingBox()
               ) : (
                 Array.isArray(movies) && movies.length > 0 ? (
                   movies.map(movie => (
@@ -44,7 +68,7 @@ function Recommended() {
                       />
                   ))
                 ) : (
-                  <div>No se encontraron películas</div>
+                  loadingBox()
                 )
               )}
             </div>
