@@ -24,11 +24,14 @@
   max-width: none;
 }
 
-body{
+html,body{
   background-color: #E0E1DD;
   display: block;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  height:100vh;
 }
 
 .app{
@@ -212,7 +215,11 @@ footer{
 /* Clases que manejan las secciones de peliculas en el home */
 
 .billboard-section{
+  align-items: center;
   box-sizing: border-box;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .billboard-section h3{
@@ -227,6 +234,11 @@ footer{
 
 .recommended-section{
   background-color: #D9D9D9;
+  align-items: center;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .recommended-section h3{
@@ -236,12 +248,15 @@ footer{
 }
 
 .movie-container{
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta los valores según tus necesidades */
+  grid-gap: 10px;
+  grid-auto-flow: column;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding-bottom: 20px;
+  width: 80%;
 }
 
 .movie-container::-webkit-scrollbar{
@@ -264,7 +279,6 @@ footer{
   display:flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px 0 20px;
 }
 
 .movie-card figure{
@@ -276,6 +290,14 @@ footer{
   box-shadow: 0px 15px 25px rgba(0,0,0,0.7);
   cursor: pointer;
   margin: 0;
+  
+  flex-grow: 0;
+}
+
+.content-loader{
+  width: 200px;
+  height: 280px;
+  flex-grow: 0;
 }
 
 .movie-card figure img{
@@ -377,3 +399,70 @@ footer{
   z-index: 999;
 }
 
+/** Seccion de vista de detalles **/
+
+.movie-first-div{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 30px;
+  color: black;
+}
+
+.movie-second-div{
+  display: flex;
+  justify-content: space-around;
+  align-items:flex-start;
+  color: black;
+  padding-top: 40px;
+}
+
+.movie-second-div img{
+  width: 30%;
+}
+
+.movie-second-div p{
+  width: 40%;
+}
+
+.movie-third-div{
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.movie-third-div button{
+  margin: 10px;
+  background-color: #0D1B2A;
+}
+
+.modal-overlay{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: black;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}

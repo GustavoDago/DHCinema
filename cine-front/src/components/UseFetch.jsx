@@ -1,32 +1,71 @@
 // Clase preparada para recibir una url y hacer peticiones a traves de un parametro
 
-/**  const API_ENDPOINT = ``;
+const API_ENDPOINT = `http://localhost:8080`;
 
-export const useFetch = params => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error,setError] = useState(false);
-    const [data,setData] = useState(null);
 
-    const fetchMovie = url => {
-        setIsLoading (true);
-        fetch(url)
-            .then(respond => respond.json())
-            .then(respondJson => {
-                if (respondJson.Response === true){
-                    setData(respondJson.Search);
-                    setError(false);
-                } else {
-                    setError(true);
-                }
-                setIsLoading(false);
-                console.log("data: ",respondJson);
-            })
-            .catch(error => console.log(error))
+export const searchMoviesForCategories = async (url) => {
+
+    if (url === 'Todos')
+    {
+        url = '/peliculas'
+    }else {
+        url = `/peliculas/categoria/${url}`
     }
+    
+    console.log(`${API_ENDPOINT}${url}`)
 
-    useEffect(() => {
-        fetchMovie(`${API_ENDPOINT}${params}`)
-    }, [params])
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) =>{return response.json()
+        } )
+        .catch(error => {
+            console.error(error)
+        });
+    console.log(response)
+    return response;
+};
 
-    return {isLoading,error,data}
-} */
+export const searchRandomMovies = () => {
+    const url =`/peliculas/random`
+
+
+    return fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => response.json())
+        .catch(error => {
+            console.error(error)
+        });
+    
+}
+
+export const searchMovieDetails = (id) =>{
+    const url=`/peliculas/${id}`
+
+    return fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error(error)
+        });
+}
+
+export const deleteMovie = async (id) => {
+    const url=`/peliculas/${id}`
+
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: 'DELETE'
+        })
+        .then((response) => {
+            console.log(response.status)
+            if (response.status == 200)
+                return true
+            else return false
+        }
+            
+        )
+        .catch((error) => {
+            console.error(error)
+            return error
+        })
+
+    
+    return response;
+
+}
