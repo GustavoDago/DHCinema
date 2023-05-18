@@ -69,3 +69,29 @@ export const deleteMovie = async (id) => {
     return response;
 
 }
+
+export const newMovie = async (data) => {
+    const url='/peliculas'
+
+    const response = await fetch (`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',        },
+        body: JSON.stringify(data),
+    })
+    .then((response) => {
+        console.log(response.status)
+        if (response.status == 200)
+            return true;
+        else {
+            console.log(response.text)
+            return false;}
+    })
+    .catch((error) => {
+        console.error(error)
+        return error;
+    })
+
+    return response;
+}

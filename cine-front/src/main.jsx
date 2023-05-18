@@ -6,6 +6,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from './routes/home.jsx'
 import ShowMore from './routes/ShowMore.jsx'
 import MovieDetails from './routes/MovieDetails.jsx'
+import AdministrationPanel from './routes/AdministrationPanel.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/' element={<Home/>}/>
           <Route path='peliculas/:genero/showmore/' element={<ShowMore/>}/>
           <Route path='peliculas/:id' element={<MovieDetails/>}/>
+          <Route path='admin/nueva-pelicula' element={<AdministrationPanel/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

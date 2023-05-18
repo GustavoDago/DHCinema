@@ -8,9 +8,8 @@ function Item(props){
                 <div className="opt-card">
                     <p>{props.name}</p>
                     <Link key={props.id} to={`peliculas/${props.id}`}>
-                        <button >Mas detalles</button>
+                        <button >Detalles</button>
                     </Link>
-                    <button>Comprar</button>
                 </div>
                 <img className="opt-image" src={props.image}/>
             </figure>
