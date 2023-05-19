@@ -1,21 +1,150 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
   text-align: center;
+  max-width: none;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+body{
+  
+  display: block;
+  margin: 0;
+  padding: 0;
+  background-color: #E0E1DD;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.app{
+  height: 100vh;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8vh;
+  background-color: #0d1b2a;
+}
+
+.headerContainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.headerContainer img {
+  width: 275px;
+  height: 195px;
+}
+
+.headerUsuario{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* footer */
+
+footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #0d1b2a;
+}
+
+.derechosFooter{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  color: #E0E1DD;
+}
+
+.derechosFooter img{
+  width: 90px;
+  height: auto;
+}
+
+.iconosFooter img {
+  width: 32px; 
+  height: 32px; 
+}
+
+
+
+.billboard-section h3{
+  color:black;
+  text-align: left;
+}
+
+.recommended-section{
+  background-color: #D9D9D9;
+}
+
+.recommended-section h3{
+  color:black;
+  text-align: left;
+}
+
+/* Home */
+
+.home-section{
+  padding: 20px;
+}
+
+.movie-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-card{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-card figure{
+  width: 200px;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px; 
+  box-shadow: 0px 15px 25px rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+
+.movie-card figure img{
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  transition: all 1s ease-out;
+}
+
+.opt-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position:absolute;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  transition: all 500ms ease-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.opt-card button{
+  width: 80%;
+}
+
+.movie-card figure:hover > .opt-card{
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes logo-spin {
