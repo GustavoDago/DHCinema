@@ -77,7 +77,8 @@ export const newMovie = async (data) => {
         method: "POST",
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',        },
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
     })
     .then((response) => {
@@ -93,5 +94,20 @@ export const newMovie = async (data) => {
         return error;
     })
 
+    return response;
+}
+
+export const showPages = async (number) => {
+    const url=`/peliculas/pagina/${number}`
+
+    const response = await fetch (`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch((error)=>{
+            console.log(error)
+            return false;
+        });
+    
     return response;
 }

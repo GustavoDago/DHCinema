@@ -9,7 +9,9 @@ function App() {
 
       <div className='app'>
         <Navbar/>
-        <Outlet/>
+        <div className='main-content'>
+          <Outlet/>
+        </div>
         <Footer/>
       </div>
     

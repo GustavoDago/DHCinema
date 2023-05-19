@@ -61,8 +61,8 @@ function Billboard(props) {
         }
   
         return loaders;
-  }
-
+    }
+  
     const renderBillboard = () => {
         return (
             <div className="movie-container">
@@ -71,7 +71,7 @@ function Billboard(props) {
                 )
                : (
                 Array.isArray(movies) && movies.length > 0 ? (
-                  movies.map(movie => (
+                  movies.slice(0,10).map(movie => (
                       <Item
                         key={movie.id}
                         id={movie.id}
@@ -94,7 +94,7 @@ function Billboard(props) {
     <div className="billboard-section">
     {titulo()}
     {renderBillboard()}
-    <Link key={props.categorie} to={`${props.categorieInfo}`}>
+    <Link to={`peliculas/pagina/1`}>
         <button>Ver mas</button>
     </Link>
     </div>

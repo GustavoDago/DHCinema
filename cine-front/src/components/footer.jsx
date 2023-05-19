@@ -5,18 +5,17 @@ import {faLinkedin, faFacebook, faTwitter, faInstagram} from '@fortawesome/free-
 
 const footer = () => {
 return (
-    <div>
     <footer>
         <div className="derechosFooter">
-            <Link to="../home">
-            <img src="../icons/DH Cinema-logos_black.png" alt="logoCinemaFooter"/>
+            <Link to="../">
+            <img src="../../icons/DH Cinema-logos_black.png" alt="logoCinemaFooter"/>
             </Link>
             <ul>
                 <li>2023</li>
                 <li>Derechos reservados</li>
             </ul>
         </div>
-            <div className="iconosFooter">
+        <div className="iconosFooter">
             <a href="https://m.facebook.com" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faFacebook} />
             </a>
@@ -31,7 +30,7 @@ return (
             </a>
         </div>
     </footer>
-    </div>
+    
 )
 }
 

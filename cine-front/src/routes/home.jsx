@@ -31,14 +31,6 @@ function Home() {
         console.log(width)
     }
 
-    const categorieInformation = () =>{
-        if (showCategorie === "Todos"){
-            return null;
-        } else {
-            return showCategorie.toLowerCase()
-        }
-    }
-
     
     return(
         <div className="home-section">
@@ -58,7 +50,6 @@ function Home() {
                 <img className='last-button' src="./icons/adelante.png" onClick={btnpressnext}/>
             </div>
             <Billboard
-                categorieInfo = {categorieInformation()}
                 categorie = {showCategorie}
             />
             <Recommended/>

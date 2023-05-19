@@ -14,7 +14,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 #root {
   margin: 0;
@@ -24,6 +28,10 @@
   max-width: none;
 }
 
+.main-content{
+  min-height: 100vh; 
+}
+
 html,body{
   background-color: #E0E1DD;
   display: block;
@@ -31,12 +39,7 @@ html,body{
   padding: 0;
   display: flex;
   flex-direction: column;
-  height:100vh;
-}
-
-.app{
-  height: 100vh;
-  
+  height: 100%;
 }
 
 a {
@@ -48,10 +51,8 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+.main-content{
+  flex:1;
 }
 
 h1 {
@@ -168,6 +169,8 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   background-color: #0d1b2a;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .derechosFooter{
@@ -224,8 +227,7 @@ footer{
 
 .billboard-section h3{
   color:black;
-  text-align: left;
-  margin-left: 30px;
+  text-align: center;
 }
 
 .billboard-section button{
@@ -243,8 +245,7 @@ footer{
 
 .recommended-section h3{
   color:black;
-  text-align: left;
-  margin-left: 30px;
+  text-align: center;
 }
 
 .movie-container{
@@ -283,7 +284,7 @@ footer{
 
 .movie-card figure{
   width: 200px;
-  height: 280px;
+  height: 100%;
   position: relative;
   overflow: hidden;
   border-radius: 6px; 
@@ -543,3 +544,76 @@ footer{
   display: flex;
   align-items: center;
 }
+
+/** Vista de mostrar todas las peliculas **/
+
+.all-movies{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-div{
+  display: flex;
+  justify-content: center;
+}
+
+.pages{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.page-container{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-self: start;
+ 
+  padding: 20px
+}
+
+.page-container .movie-card{
+  width: auto;
+  padding: 10px;
+
+}
+
+.page-container .movie-card figure{
+  padding: 0;
+  margin: 0;
+  
+}
+
+.page-container .movie-card figure img{
+  object-fit:fill;
+}
+
+.input-pages{
+  text-align: center;
+  font-size: 14px;
+  width: auto;
+  padding: 10px 0;
+}
+
+.pages-numbers{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 10px;
+}
+
+.pages-numbers p{
+  color:#3d3f42;
+  margin: 0 5px;
+}
+
+.page-container .content-loader{
+  margin: 10px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
