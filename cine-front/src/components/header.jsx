@@ -8,6 +8,7 @@ const header = () => {
         <Link to="/">
           <img src="../../icons/DH Cinema-logos_black.png" alt="logoCinema"/>
           </Link>
+          <h2 className="slogan"> D.H. My Home</h2>
         </div>
         <div className="headerUsuario">
             <button className="botonCrearCuenta"> Crear Cuenta</button>
@@ -15,6 +16,7 @@ const header = () => {
             <Link to="/admin/nueva-pelicula">
               <button className="botonInicioSesion"> Panel Administrador </button>
             </Link>
+            
             
         </div>
     </header>
