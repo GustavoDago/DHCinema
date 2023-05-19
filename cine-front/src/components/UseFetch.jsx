@@ -5,18 +5,18 @@ const API_ENDPOINT = `http://localhost:8080`;
 
 export const searchMoviesForCategories = async (url) => {
 
-    if (url === 'Todos')
-    {
+    if (url === 'Todos') {
         url = '/peliculas'
-    }else {
+    } else {
         url = `/peliculas/categoria/${url}`
     }
-    
+
     console.log(`${API_ENDPOINT}${url}`)
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
-        .then((response) =>{return response.json()
-        } )
+        .then((response) => {
+            return response.json()
+        })
         .catch(error => {
             console.error(error)
         });
@@ -25,7 +25,7 @@ export const searchMoviesForCategories = async (url) => {
 };
 
 export const searchRandomMovies = () => {
-    const url =`/peliculas/random`
+    const url = `/peliculas/random`
 
 
     return fetch(`${API_ENDPOINT}${url}`)
@@ -33,14 +33,14 @@ export const searchRandomMovies = () => {
         .catch(error => {
             console.error(error)
         });
-    
+
 }
 
-export const searchMovieDetails = (id) =>{
-    const url=`/peliculas/${id}`
+export const searchMovieDetails = (id) => {
+    const url = `/peliculas/${id}`
 
     return fetch(`${API_ENDPOINT}${url}`)
-        .then((response) => {return response.json()})
+        .then((response) => { return response.json() })
         .catch((error) => {
             console.error(error)
             return false
@@ -48,33 +48,33 @@ export const searchMovieDetails = (id) =>{
 }
 
 export const deleteMovie = async (id) => {
-    const url=`/peliculas/${id}`
+    const url = `/peliculas/${id}`
 
-    const response = await fetch(`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: 'DELETE'
-        })
+    })
         .then((response) => {
             console.log(response.status)
             if (response.status == 200)
                 return true
             else return false
         }
-            
+
         )
         .catch((error) => {
             console.error(error)
             return error
         })
 
-    
+
     return response;
 
 }
 
 export const newMovie = async (data) => {
-    const url='/peliculas'
+    const url = '/peliculas'
 
-    const response = await fetch (`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -82,41 +82,42 @@ export const newMovie = async (data) => {
         },
         body: JSON.stringify(data),
     })
-    .then((response) => {
-        console.log(response.status)
-        if (response.status == 200)
-            return true;
-        else {
-            console.log(response.text)
-            return false;}
-    })
-    .catch((error) => {
-        console.error(error)
-        return error;
-    })
+        .then((response) => {
+            console.log(response.status)
+            if (response.status == 200)
+                return true;
+            else {
+                console.log(response.text)
+                return false;
+            }
+        })
+        .catch((error) => {
+            console.error(error)
+            return error;
+        })
 
     return response;
 }
 
 export const showPages = async (number) => {
-    const url=`/peliculas/pagina/${number}`
+    const url = `/peliculas/pagina/${number}`
 
-    const response = await fetch (`${API_ENDPOINT}${url}`)
+    const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
             return response.json()
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.log(error)
             return false;
         });
-    
+
     return response;
 }
 
-export const fetchMovieDate = async (date) => {
-    const url=`/peliculas/fecha/${date}`
+export const fetchMovieTilte = async (title) => {
+    const url = `/peliculas/titulo/${encodeURIComponent(title)}`
 
-    const response = await fetch (`${API_ENDPOINT}${url}`)
+    const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
             return response.json()
         })
@@ -124,6 +125,6 @@ export const fetchMovieDate = async (date) => {
             console.log(error)
             return false;
         })
-    
+
     return response;
 }

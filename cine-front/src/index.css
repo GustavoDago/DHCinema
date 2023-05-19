@@ -62,6 +62,7 @@ h1 {
 
 button {
   border-radius: 8px;
+  
   border: 1px solid transparent;
   font-size: 1em;
   font-weight: 500;
@@ -69,6 +70,10 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+.main-content button{
+  padding: 10px;
 }
 
 button:hover {
@@ -217,6 +222,13 @@ footer{
 
 /* Clases que manejan las secciones de peliculas en el home */
 
+.search-movie{
+  width: 40%;
+  height: 3vh;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+
 .billboard-section{
   align-items: center;
   box-sizing: border-box;
@@ -295,6 +307,7 @@ footer{
   flex-grow: 0;
 }
 
+
 .content-loader{
   width: 200px;
   height: 280px;
@@ -322,7 +335,7 @@ footer{
 }
 
 .opt-card button{
-  width: 80%;
+  width: 100%;
 }
 
 .movie-card figure:hover > .opt-card{

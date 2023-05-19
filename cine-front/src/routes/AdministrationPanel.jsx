@@ -115,7 +115,7 @@ function AdministrationPanel(){
                 }, 2000)
             }
         } catch (error) {
-            setErrorMessage("Error al cargar la pelicula.Este")
+            setErrorMessage("Error al cargar la pelicula.")
                 setTimeout(() => {
                     setShowConfirmation(false)
                 }, 2000)
