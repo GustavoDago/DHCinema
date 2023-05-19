@@ -107,8 +107,10 @@ header{
   position: sticky;
 }
 
-#slogan{
+.slogan{
   position: relative;
+  font-size: small;
+  font-weight: 100;
   top: 20px;
   right: 60px;
 }
@@ -127,6 +129,7 @@ header{
 .headerUsuario{
   display: flex;
   justify-content: space-between;
+  width: 25vw;
   align-items: center;
   padding-right: 15px;
   padding-left: 15px;
@@ -469,8 +472,12 @@ footer{
 
 /** Panel de administrador **/
 
+
 .admin-form{
   text-align: center;
+}
+.admin-form h3{
+  color: #1b263b;
 }
 
 .admin-form form label{
@@ -478,8 +485,11 @@ footer{
 }
 
 .form-title{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   height: 3vh;
-  width: 70%;
+  width: 40%;
   text-align: center;
   margin: 10px 0px 30px 0;
 }
@@ -494,6 +504,7 @@ footer{
 }
 
 .date-container{
+  
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -501,21 +512,34 @@ footer{
 }
 
 .form-description{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   height: 15vh;
   width: 70%;
   text-align: center;
 }
 
+
 .date-picker{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   width: 200px;
   text-align: center;
 }
 
 .form-categories{
+  border: 2px solid #1b263b;
+  background-color: #ADADAD;
+  
   text-align: center;
   width: 30%;
-  height: 10%;
+  height: 20%;
   margin: 10px 0 30px 0;
+}
+.form-categories option:hover{
+font-size: medium;
 }
 
 .form-image{
@@ -537,13 +561,21 @@ footer{
 }
 
 .dropzone{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   text-align: center;
   display: flex;
   align-items: center;
 }
-@media (min-width:425px) {
+.form-image{
+  border-radius: 20px;
+}
+
+
+@media (max-width:425px) {
   
   .headerUsuario {
     flex-direction: column;
@@ -563,26 +595,26 @@ footer{
   }
 }
 
-@media (min-width:768px) {
-  .headerUsuario{
-    flex-direction: row;
-    width: 45vw;
+  @media (min-width:768px) and (max-width: 991px){
+    .headerUsuario{
+      flex-direction: row;
+      width: 45vw;
+    }
+    .headerUsuario button{
+      font-size: 12px;
+    }
+    .iconosFooter{
+      width: 30vw;
+    }
+    .iconosFooter a {
+      margin-right: 15px;
+      font-size: 3vw;
+    }
+    footer ul {
+      margin-left: 15vw;
+    }
+    .derechosFooter img{
+      width: 130px;
+      height: 115px;
+    }
   }
-  .headerUsuario button{
-    font-size: 12px;
-  }
-  .iconosFooter{
-    width: 30vw;
-  }
-  .iconosFooter a {
-    margin-right: 15px;
-    font-size: 3vw;
-  }
-  footer ul {
-    margin-left: 15vw;
-  }
-  .derechosFooter img{
-    width: 130px;
-    height: 115px;
-  }
-}
