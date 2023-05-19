@@ -105,13 +105,19 @@ header{
   align-items: center;
   margin-bottom: 8vh;
   background-color: #1B263B;
-  position: sticky;
+  width: 100%;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  z-index: 100;
 }
 
 #slogan{
   position: relative;
   top: 20px;
   right: 60px;
+  font-size: small;
+  font-weight: 100;
 }
 
 .headerContainer{
@@ -161,6 +167,12 @@ header{
   cursor: pointer;
 }
 
+/* body */
+
+body{
+  margin-top: 220px;
+}
+
 
 /* footer */
 
@@ -169,14 +181,16 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   background-color: #0d1b2a;
-  flex-shrink: 0;
-  margin-top: auto;
+}
+
+footer ul{
+  margin-left: 395px;
 }
 
 .derechosFooter{
   display: flex;
   flex-direction: row;
-  padding-left: 1rem;
+  margin-left: 1rem;
 }
 
 .derechosFooter ul{
@@ -198,11 +212,12 @@ footer{
 }
 
 .iconosFooter{
-  padding-right: 10px;
-  padding-top: 25px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 25px;
 }
 
-.iconosFooter img {
+.iconosFooter svg {
   width: 32px; 
   height: 32px; 
   margin-right: 3px;
@@ -397,7 +412,7 @@ footer{
   height: 100%;
   position: relative;
   text-align: center;
-  z-index: 999;
+  z-index: 99;
 }
 
 /** Seccion de vista de detalles **/
@@ -617,7 +632,7 @@ footer{
 }
 
 
-@media (min-width:425px) {
+@media (max-width:425px) {
   
   .headerUsuario {
     flex-direction: column;
@@ -626,6 +641,9 @@ footer{
   }
   .headerUsuario button{
     font-size: 12px;
+  }
+  footer ul{
+    margin-left: -13px;
   }
   .iconosFooter{
     justify-content: space-evenly;
@@ -637,7 +655,7 @@ footer{
   }
 }
 
-@media (min-width:768px) {
+@media (max-width:768px) {
   .headerUsuario{
     flex-direction: row;
     width: 45vw;
@@ -653,7 +671,7 @@ footer{
     font-size: 3vw;
   }
   footer ul {
-    margin-left: 15vw;
+    margin-left: 25vw;
   }
   .derechosFooter img{
     width: 130px;
