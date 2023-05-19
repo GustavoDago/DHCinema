@@ -544,6 +544,79 @@ footer{
   display: flex;
   align-items: center;
 }
+
+/** Vista de mostrar todas las peliculas **/
+
+.all-movies{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-div{
+  display: flex;
+  justify-content: center;
+}
+
+.pages{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.page-container{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-self: start;
+ 
+  padding: 20px
+}
+
+.page-container .movie-card{
+  width: auto;
+  padding: 10px;
+
+}
+
+.page-container .movie-card figure{
+  padding: 0;
+  margin: 0;
+  
+}
+
+.page-container .movie-card figure img{
+  object-fit:fill;
+}
+
+.input-pages{
+  text-align: center;
+  font-size: 14px;
+  width: auto;
+  padding: 10px 0;
+}
+
+.pages-numbers{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 10px;
+}
+
+.pages-numbers p{
+  color:#3d3f42;
+  margin: 0 5px;
+}
+
+.page-container .content-loader{
+  margin: 10px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
 @media (min-width:425px) {
   
   .headerUsuario {
