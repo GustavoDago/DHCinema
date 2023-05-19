@@ -6,8 +6,6 @@ import com.example.PIBackEnd.domain.Pelicula;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
-import com.example.PIBackEnd.repository.CategoriaRepository;
-import com.example.PIBackEnd.repository.FechaRepository;
 import com.example.PIBackEnd.repository.PeliculaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +20,14 @@ public class PeliculaService {
 
     private final static Logger logger = Logger.getLogger(PeliculaService.class);
     private PeliculaRepository peliculaRepository;
-    private CategoriaRepository categoriaRepository;
-    private FechaRepository fechaRepository;
+    private CategoriaService categoriaService;
+    private FechaService fechaService;
 
     @Autowired
-    public PeliculaService(PeliculaRepository peliculaRepository, CategoriaRepository categoriaRepository, FechaRepository fechaRepository) {
+    public PeliculaService(PeliculaRepository peliculaRepository, CategoriaService categoriaService, FechaService fechaService) {
         this.peliculaRepository = peliculaRepository;
-        this.categoriaRepository = categoriaRepository;
-        this.fechaRepository = fechaRepository;
+        this.categoriaService = categoriaService;
+        this.fechaService = fechaService;
     }
 
     public Pelicula guardarPelicula(Pelicula pelicula) throws ResourceBadRequestException {
@@ -41,145 +39,57 @@ public class PeliculaService {
             if (peliculaRepository.findByTitulo(titulo).isPresent()) {
                 throw new ResourceBadRequestException("Error. Ya existe una Pelicula con el mismo titulo");
             } else {
-                logger.info("Guardando Categorias");
-                Set<Categoria> categorias = pelicula.getCategorias();
-                Set<Categoria> nuevasCategorias = new HashSet<>();
-                for (Categoria categoria : categorias) {
-                    Set<Pelicula> peliculasGuardadas = categoria.getPeliculas();
-                    Optional<Categoria> categoriaExistente = categoriaRepository.findByCategoria(categoria.getCategoria());
-                    if (categoriaExistente.isPresent()) {
-                        nuevasCategorias.add(categoriaExistente.get());
-                    } else {
-                        categoriaRepository.save(categoria);
-                        nuevasCategorias.add(categoria);
-                    }
-                    if(!peliculasGuardadas.contains(pelicula)){
-                        peliculasGuardadas.add(pelicula);
-                        categoria.setPeliculas(peliculasGuardadas);
-                    }
-                }
-                logger.info("Guardando Fechas");
-                Set<Fecha> fechas = pelicula.getFechas();
-                Set<Fecha> nuevasFechas = new HashSet<>();
-                LocalDate fechaHoy = LocalDate.now();
-                int fechasChequeadas = 0;
-                for (Fecha fechaChequear : fechas) {
-                    if (fechaChequear.getFecha().isBefore(fechaHoy)) {
-                        fechasChequeadas++;
-                    }
-                }
-                if(fechasChequeadas > 0){
-                    throw new ResourceBadRequestException("Error. Las Fechas deben ser posteriores a " + fechaHoy);
-                }else{
-                    for (Fecha fecha : fechas) {
-                        Set<Pelicula> peliculasGuardadas = fecha.getPeliculas();
-                        Optional<Fecha> fechaExistente = fechaRepository.findByFecha(fecha.getFecha());
-                        if (fechaExistente.isPresent()) {
-                            nuevasFechas.add(fechaExistente.get());
-                        } else {
-                            fechaRepository.save(fecha);
-                            nuevasFechas.add(fecha);
-                        }
-                        if(!peliculasGuardadas.contains(pelicula)){
-                            peliculasGuardadas.add(pelicula);
-                            fecha.setPeliculas(peliculasGuardadas);
-                        }
-                    }
-                    pelicula.setCategorias(nuevasCategorias);
-                    pelicula.setFechas(nuevasFechas);
-                    return peliculaRepository.save(pelicula);
-                }
+                Set<Categoria> nuevasCategorias = categoriaService.guardarCategorias(pelicula.getCategorias());
+                Set<Fecha> nuevasFechas = fechaService.guardarFechas(pelicula.getFechas());
+
+                pelicula.setCategorias(nuevasCategorias);
+                pelicula.setFechas(nuevasFechas);
+                pelicula.setVigente(true);
+                return peliculaRepository.save(pelicula);
             }
         }
     }
 
     public Pelicula actualizarPelicula(Pelicula pelicula) throws ResourceNotFoundException, ResourceBadRequestException {
         logger.info("Actualizando Pelicula con id " + pelicula.getId());
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(pelicula.getId());
-        if (peliculaBuscada.isEmpty()) {
-            throw new ResourceNotFoundException("Error. Pelicula con id " + pelicula.getId() + " no encontrada");
-        }else{
+        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByIdAndVigente(pelicula.getId(),true);
+        if (peliculaBuscada.isPresent()) {
             if (pelicula.chequearAtributosVacios()) {
                 throw new ResourceBadRequestException("Error. La Pelicula tiene que contener todos sus campos");
-            }else{
-                if (pelicula.getTitulo() != null) {
-                    String titulo = pelicula.getTitulo();
-                    if (peliculaRepository.findByTitulo(titulo).isPresent() && !titulo.equals(pelicula.getTitulo())) {
-                        throw new ResourceBadRequestException("Error. Ya existe una Pelicula con el mismo titulo");
-                    }
-                    pelicula.setTitulo(titulo);
-                }
-                if (pelicula.getImagen() != null) {
-                    pelicula.setImagen(pelicula.getImagen());
-                }
-                if (pelicula.getDescripcion() != null) {
-                    pelicula.setDescripcion(pelicula.getDescripcion());
-                }
-                logger.info("Guardando Categorias");
-                Set<Categoria> categorias = pelicula.getCategorias();
-                Set<Categoria> nuevasCategorias = new HashSet<>();
-                for (Categoria categoria : categorias) {
-                    Set<Pelicula> peliculasGuardadas = categoria.getPeliculas();
-                    Optional<Categoria> categoriaExistente = categoriaRepository.findByCategoria(categoria.getCategoria());
-                    if (categoriaExistente.isPresent()) {
-                        nuevasCategorias.add(categoriaExistente.get());
-                    } else {
-                        categoriaRepository.save(categoria);
-                        nuevasCategorias.add(categoria);
-                    }
-                    if(!peliculasGuardadas.contains(pelicula)){
-                        peliculasGuardadas.add(pelicula);
-                        categoria.setPeliculas(peliculasGuardadas);
-                    }
-                }
-                logger.info("Guardando Fechas");
-                Set<Fecha> fechas = pelicula.getFechas();
-                Set<Fecha> nuevasFechas = new HashSet<>();
-                LocalDate fechaHoy = LocalDate.now();
-                int fechasChequeadas = 0;
-                for (Fecha fechaChequear : fechas) {
-                    if (fechaChequear.getFecha().isBefore(fechaHoy)) {
-                        fechasChequeadas++;
-                    }
-                }
-                if(fechasChequeadas > 0){
-                    throw new ResourceBadRequestException("Error. Las Fechas deben ser posteriores a " + fechaHoy);
-                }else{
-                    for (Fecha fecha : fechas) {
-                        Set<Pelicula> peliculasGuardadas = fecha.getPeliculas();
-                        Optional<Fecha> fechaExistente = fechaRepository.findByFecha(fecha.getFecha());
-                        if (fechaExistente.isPresent()) {
-                            nuevasFechas.add(fechaExistente.get());
-                        } else {
-                            fechaRepository.save(fecha);
-                            nuevasFechas.add(fecha);
-                        }
-                        if(!peliculasGuardadas.contains(pelicula)){
-                            peliculasGuardadas.add(pelicula);
-                            fecha.setPeliculas(peliculasGuardadas);
-                        }
-                    }
+            } else {
+                String titulo = pelicula.getTitulo();
+                Optional<Pelicula> peliculaBuscadaPorTitulo = peliculaRepository.findByTitulo(titulo);
+                if (peliculaBuscadaPorTitulo.isPresent() && !peliculaBuscadaPorTitulo.get().getId().equals(pelicula.getId())) {
+                    throw new ResourceBadRequestException("Error. Ya existe una Pelicula con el mismo titulo");
+                } else {
+                    Set<Categoria> nuevasCategorias = categoriaService.guardarCategorias(pelicula.getCategorias());
+                    Set<Fecha> nuevasFechas = fechaService.guardarFechas(pelicula.getFechas());
+
                     pelicula.setCategorias(nuevasCategorias);
                     pelicula.setFechas(nuevasFechas);
+                    pelicula.setVigente(true);
                     return peliculaRepository.save(pelicula);
                 }
             }
+        } else{
+            throw new ResourceNotFoundException("Error. La pelicula con id = " + pelicula.getId() + " no existe o ya no esta vigente");
         }
     }
 
     public void eliminarPelicula(Long id) throws ResourceNotFoundException {
         logger.warn("Borrando Pelicula con id = " + id);
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(id);
-        if(peliculaBuscada.isPresent()){
-            peliculaRepository.deleteById(id);
+        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByIdAndVigente(id,true);
+        if (peliculaBuscada.isPresent()){
+            peliculaBuscada.get().setVigente(false);
+            peliculaRepository.save(peliculaBuscada.get());
         }else{
-            throw new ResourceNotFoundException("Error. No existe la Pelicula con id = " + id + ".");
+            throw new ResourceNotFoundException("Error. No existe la Pelicula con id = " + id + " o no esta vigente");
         }
     }
 
     public Optional<Pelicula> buscarPeliculaPorTitulo(String titulo) throws ResourceNotFoundException {
         logger.info("Buscando Pelicula con titulo: " + titulo);
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByTitulo(titulo);
+        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByTituloAndVigente(titulo, true);
         if (peliculaBuscada.isPresent()){
             return peliculaBuscada;
         }
@@ -190,8 +100,8 @@ public class PeliculaService {
 
     public Optional<Pelicula> buscarPelicula(Long id) throws ResourceNotFoundException {
         logger.info("Buscando Pelicula con id = " + id);
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(id);
-        if (peliculaBuscada.isPresent()){
+        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByIdAndVigente(id,true);
+        if(peliculaBuscada.isPresent()){
             return peliculaBuscada;
         }
         else{
@@ -201,7 +111,7 @@ public class PeliculaService {
 
     public List<Pelicula> buscarPeliculasPorFecha(LocalDate fecha) throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas por fecha");
-        List<Pelicula> todasLasPeliculas = peliculaRepository.findAll();
+        List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
         List<Pelicula> peliculasEncontradas = new ArrayList<>();
         for (Pelicula pelicula : todasLasPeliculas) {
             for (Fecha fechaPelicula : pelicula.getFechas()) {
@@ -220,7 +130,7 @@ public class PeliculaService {
 
     public List<Pelicula> buscarPeliculasPorCategoria(String categoria) throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas por categoria");
-        List<Pelicula> todasLasPeliculas = peliculaRepository.findAll();
+        List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
         List<Pelicula> peliculasEncontradas = new ArrayList<>();
         for (Pelicula pelicula : todasLasPeliculas) {
             for (Categoria categoriaPelicula : pelicula.getCategorias()) {
@@ -239,7 +149,7 @@ public class PeliculaService {
 
     public List<Pelicula> buscarTodasPeliculas() throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas");
-        List<Pelicula> lista = peliculaRepository.findAll();
+        List<Pelicula> lista = peliculaRepository.findAllByVigenteTrue();
         if(lista.size() > 0){
             return lista;
         }else{
@@ -249,7 +159,7 @@ public class PeliculaService {
 
     public List<Pelicula> OchoPeliculasRandom() throws ResourceBadRequestException {
         logger.info("Creando lista de 8 Peliculas random");
-        List<Pelicula> listaPeliculas = peliculaRepository.findAll();
+        List<Pelicula> listaPeliculas = peliculaRepository.findAllByVigenteTrue();
         if(listaPeliculas.size() > 8){
             List<Pelicula> peliculasRandom = new ArrayList<>();
             int tamanoLista = listaPeliculas.size();
@@ -268,6 +178,6 @@ public class PeliculaService {
     }
 
     public Page<Pelicula> paginacion(Pageable pageable){
-        return peliculaRepository.findAll(pageable);
+        return peliculaRepository.findAllByVigenteTrue(pageable);
     }
 }

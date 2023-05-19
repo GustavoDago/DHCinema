@@ -21,7 +21,10 @@ public class Pelicula {
     @Column(nullable = false, length = 1000)
     private String descripcion;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST })
+    @Column(nullable = false)
+    private Boolean vigente;
+
+    @ManyToMany
     @JoinTable(
             name = "pelicula_categoria",
             joinColumns = { @JoinColumn(name = "pelicula_id") },
@@ -29,7 +32,7 @@ public class Pelicula {
     )
     private Set<Categoria> categorias = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST })
+    @ManyToMany
     @JoinTable(
             name = "pelicula_fecha",
             joinColumns = { @JoinColumn(name = "pelicula_id") },
@@ -94,5 +97,13 @@ public class Pelicula {
 
     public void setFechas(Set<Fecha> fechas) {
         this.fechas = fechas;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }
