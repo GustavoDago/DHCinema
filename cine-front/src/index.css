@@ -502,14 +502,20 @@ footer{
 .admin-form{
   text-align: center;
 }
+.admin-form h3{
+  color: #1b263b;
+}
 
 .admin-form form label{
   color: black;
 }
 
 .form-title{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   height: 3vh;
-  width: 70%;
+  width: 40%;
   text-align: center;
   margin: 10px 0px 30px 0;
 }
@@ -524,6 +530,7 @@ footer{
 }
 
 .date-container{
+  
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -531,21 +538,34 @@ footer{
 }
 
 .form-description{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   height: 15vh;
   width: 70%;
   text-align: center;
 }
 
+
 .date-picker{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   width: 200px;
   text-align: center;
 }
 
 .form-categories{
+  border: 2px solid #1b263b;
+  background-color: #ADADAD;
+  
   text-align: center;
   width: 30%;
-  height: 10%;
+  height: 20%;
   margin: 10px 0 30px 0;
+}
+.form-categories option:hover{
+font-size: medium;
 }
 
 .form-image{
@@ -567,11 +587,17 @@ footer{
 }
 
 .dropzone{
+  background-color: #ADADAD;
+  border: 2px solid #1b263b;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   text-align: center;
   display: flex;
   align-items: center;
+}
+.form-image{
+  border-radius: 20px;
 }
 
 /** Vista de mostrar todas las peliculas **/
