@@ -543,3 +543,46 @@ footer{
   display: flex;
   align-items: center;
 }
+@media (min-width:425px) {
+  
+  .headerUsuario {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 145px;
+  }
+  .headerUsuario button{
+    font-size: 12px;
+  }
+  .iconosFooter{
+    justify-content: space-evenly;
+    width: 20vw;
+    flex-direction: row;
+  }
+  .iconosFooter a {
+    margin-right: 6px;
+  }
+}
+
+@media (min-width:768px) {
+  .headerUsuario{
+    flex-direction: row;
+    width: 45vw;
+  }
+  .headerUsuario button{
+    font-size: 12px;
+  }
+  .iconosFooter{
+    width: 30vw;
+  }
+  .iconosFooter a {
+    margin-right: 15px;
+    font-size: 3vw;
+  }
+  footer ul {
+    margin-left: 15vw;
+  }
+  .derechosFooter img{
+    width: 130px;
+    height: 115px;
+  }
+}
