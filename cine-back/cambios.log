@@ -1,0 +1,348 @@
+[2023-05-14 15:46:01] [ INFO ] [PeliculaService:35] Guardando Pelicula nueva
+[2023-05-14 15:46:01] [ INFO ] [PeliculaService:43] Guardando Categorias
+[2023-05-14 15:48:25] [ INFO ] [PeliculaService:35] Guardando Pelicula nueva
+[2023-05-14 15:48:25] [ INFO ] [PeliculaService:43] Guardando Categorias
+[2023-05-14 15:50:34] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:50:34] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:52:21] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:52:22] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:52:26] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 15:54:18] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:54:19] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:54:23] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 15:55:00] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:55:01] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:55:01] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 15:55:31] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:55:32] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:55:32] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 15:55:43] [ INFO ] [PeliculaService:228] Buscando todas las Peliculas
+[2023-05-14 15:58:51] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:58:51] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:58:55] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 15:59:42] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 15:59:43] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 15:59:44] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 16:00:31] [ INFO ] [PeliculaService:240] Buscando todas las Peliculas
+[2023-05-14 16:00:41] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 16:00:41] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 16:00:42] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 16:00:50] [ INFO ] [PeliculaService:95] Actualizando Pelicula con id 1
+[2023-05-14 16:00:51] [ INFO ] [PeliculaService:116] Guardando Categorias
+[2023-05-14 16:00:51] [ INFO ] [PeliculaService:133] Guardando Fechas
+[2023-05-14 16:00:54] [ INFO ] [PeliculaService:240] Buscando todas las Peliculas
+[2023-05-14 16:01:31] [ INFO ] [PeliculaService:202] Buscando todas las Peliculas por fecha
+[2023-05-14 16:01:56] [ INFO ] [PeliculaService:95] Actualizando Pelicula con id 1
+[2023-05-14 16:01:58] [ INFO ] [PeliculaService:116] Guardando Categorias
+[2023-05-14 16:01:58] [ INFO ] [PeliculaService:133] Guardando Fechas
+[2023-05-14 16:02:19] [ INFO ] [PeliculaService:240] Buscando todas las Peliculas
+[2023-05-14 16:03:28] [ INFO ] [PeliculaService:95] Actualizando Pelicula con id 1
+[2023-05-14 16:03:30] [ INFO ] [PeliculaService:116] Guardando Categorias
+[2023-05-14 16:03:31] [ INFO ] [PeliculaService:133] Guardando Fechas
+[2023-05-14 16:03:43] [ INFO ] [PeliculaService:240] Buscando todas las Peliculas
+[2023-05-14 16:04:20] [ INFO ] [PeliculaService:202] Buscando todas las Peliculas por fecha
+[2023-05-14 16:04:31] [ INFO ] [PeliculaService:180] Buscando Pelicula con titulo: terror
+[2023-05-14 16:04:38] [ INFO ] [PeliculaService:180] Buscando Pelicula con titulo: pelicula1
+[2023-05-14 16:04:41] [ INFO ] [PeliculaService:180] Buscando Pelicula con titulo: pelicula2
+[2023-05-14 16:04:54] [ INFO ] [PeliculaService:221] Buscando todas las Peliculas por categoria
+[2023-05-14 16:05:01] [ INFO ] [PeliculaService:221] Buscando todas las Peliculas por categoria
+[2023-05-14 16:05:07] [ INFO ] [PeliculaService:221] Buscando todas las Peliculas por categoria
+[2023-05-14 22:01:01] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:01:02] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:01:06] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:01:39] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:01:39] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:01:40] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:01:49] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:01:50] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:01:50] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:01:58] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:01:58] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:01:59] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:07] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:07] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:08] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:14] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:14] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:15] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:20] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:20] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:21] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:27] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:27] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:28] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:33] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:33] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:34] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:42] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:42] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:43] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:48] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:48] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:49] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:02:54] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:02:54] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:02:55] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:00] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:03:00] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:03:01] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:07] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:03:07] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:03:08] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:13] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:03:13] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:03:14] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:19] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:03:20] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:03:21] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:25] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-14 22:03:26] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-14 22:03:27] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-14 22:03:33] [ INFO ] [PeliculaService:249] Creando lista de 8 Peliculas random
+[2023-05-14 22:03:52] [ INFO ] [PeliculaService:249] Creando lista de 8 Peliculas random
+[2023-05-14 22:04:23] [ INFO ] [PeliculaService:249] Creando lista de 8 Peliculas random
+[2023-05-16 19:22:48] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-16 19:22:48] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-16 19:22:48] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-16 19:22:56] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-16 19:22:56] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-16 19:22:56] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-16 19:23:01] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-16 19:23:01] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-16 19:23:01] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-16 19:24:49] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-16 19:24:49] [ INFO ] [PeliculaService:42] Guardando Categorias
+[2023-05-16 19:24:49] [ INFO ] [PeliculaService:59] Guardando Fechas
+[2023-05-16 19:31:55] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-16 19:31:55] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-16 19:31:59] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-16 19:32:10] [ INFO ] [PeliculaService:241] Buscando todas las Peliculas
+[2023-05-16 19:33:20] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-16 19:33:21] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-16 19:33:24] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-16 19:33:37] [ INFO ] [PeliculaService:251] Creando lista de 8 Peliculas random
+[2023-05-16 19:36:35] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-16 19:36:35] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-16 19:36:36] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-16 19:37:01] [ INFO ] [PeliculaService:251] Creando lista de 8 Peliculas random
+[2023-05-17 16:59:56] [ INFO ] [PeliculaService:241] Buscando todas las Peliculas
+[2023-05-17 17:01:52] [ INFO ] [PeliculaService:241] Buscando todas las Peliculas
+[2023-05-17 17:03:13] [ INFO ] [PeliculaService:192] Buscando Pelicula con id = 1
+[2023-05-17 17:55:30] [ INFO ] [PeliculaService:192] Buscando Pelicula con id = 1
+[2023-05-17 17:55:39] [ INFO ] [PeliculaService:241] Buscando todas las Peliculas
+[2023-05-17 19:07:46] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-17 19:07:46] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-17 19:07:50] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-17 19:08:26] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-17 19:08:26] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-17 19:08:27] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-17 19:08:36] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-17 19:08:36] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-17 19:08:36] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-17 19:09:33] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-17 19:09:33] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-17 19:09:33] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-17 19:09:38] [ INFO ] [PeliculaService:36] Guardando Pelicula nueva
+[2023-05-17 19:09:38] [ INFO ] [PeliculaService:44] Guardando Categorias
+[2023-05-17 19:09:38] [ INFO ] [PeliculaService:61] Guardando Fechas
+[2023-05-17 19:09:44] [ INFO ] [PeliculaService:241] Buscando todas las Peliculas
+[2023-05-18 23:59:02] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:02] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:02] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:05] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:05] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:05] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:07] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:07] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:07] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:20] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:23] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:23] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:23] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:26] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:26] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:26] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:28] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:28] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:28] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:31] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:31] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:31] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:33] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:33] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:33] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:38] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:38] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:38] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:41] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:41] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:41] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:43] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:43] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:43] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:45] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:45] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:45] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:48] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:48] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:48] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:51] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:51] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:51] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:54] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:54] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:54] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:56] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:56] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:56] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-18 23:59:59] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-18 23:59:59] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-18 23:59:59] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:02] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:02] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:02] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:05] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:05] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:05] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:08] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:08] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:08] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:10] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:10] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:11] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:13] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:13] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:13] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:15] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:15] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:15] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:18] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:18] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:18] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:20] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:20] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:20] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:24] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:00:24] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:00:24] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:00:29] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 1
+[2023-05-19 00:00:35] [ INFO ] [PeliculaService:113] Buscando todas las Peliculas por fecha
+[2023-05-19 00:00:41] [ INFO ] [PeliculaService:113] Buscando todas las Peliculas por fecha
+[2023-05-19 00:00:45] [ INFO ] [PeliculaService:113] Buscando todas las Peliculas por fecha
+[2023-05-19 00:01:07] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 1
+[2023-05-19 00:01:10] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 1
+[2023-05-19 00:01:12] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 1
+[2023-05-19 00:01:20] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:01:24] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: pelicula1
+[2023-05-19 00:01:27] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: pelicula2
+[2023-05-19 00:01:30] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 00:01:33] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:01:36] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:01:37] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:01:38] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:02:00] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 2
+[2023-05-19 00:02:04] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 2
+[2023-05-19 00:02:07] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 2
+[2023-05-19 00:02:32] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 2
+[2023-05-19 00:02:32] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:02:32] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:02:43] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:02:59] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 3
+[2023-05-19 00:03:14] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 2
+[2023-05-19 00:03:14] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:03:14] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:03:22] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 22
+[2023-05-19 00:03:22] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:03:22] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:03:24] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:03:35] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:40] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:41] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:42] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:44] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:03:56] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 122
+[2023-05-19 00:03:59] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 22
+[2023-05-19 00:04:02] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:04:28] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:04:33] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:04:45] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 22
+[2023-05-19 00:04:48] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 1
+[2023-05-19 00:04:53] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 2
+[2023-05-19 00:04:59] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 1
+[2023-05-19 00:06:51] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:06:51] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:06:51] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:07:15] [ INFO ] [PeliculaService:54] Actualizando Pelicula con id 27
+[2023-05-19 00:07:15] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:07:15] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:07:17] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:07:29] [ INFO ] [PeliculaService:113] Buscando todas las Peliculas por fecha
+[2023-05-19 00:07:34] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 27
+[2023-05-19 00:07:35] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 27
+[2023-05-19 00:07:39] [ INFO ] [PeliculaService:113] Buscando todas las Peliculas por fecha
+[2023-05-19 00:07:48] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: pelicula27
+[2023-05-19 00:09:02] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:09:08] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 00:11:28] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:28] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:28] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:31] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:31] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:31] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:34] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:34] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:34] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:37] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:37] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:37] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:39] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:39] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:39] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:42] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:42] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:42] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:46] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:46] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:46] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:48] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:48] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:48] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:52] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:11:58] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:11:58] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:11:58] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:11:59] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:12:10] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 1
+[2023-05-19 00:12:12] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:12:59] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:12:59] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:00] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:02] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:02] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:02] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:05] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:05] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:05] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:07] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:07] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:07] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:11] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:11] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:11] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:13] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:13] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:13] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:15] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:16] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:16] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:18] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:18] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:18] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:21] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 00:13:21] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 00:13:21] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 00:13:26] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 00:13:28] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 1
+[2023-05-19 00:13:30] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random

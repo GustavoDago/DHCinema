@@ -6,7 +6,7 @@
     },
     {
         "id":"1",
-        "name":"Accion",
+        "name":"Acción",
         "image":"./categories/accion.jpg"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "id":"5",
-        "name":"Ciencia Ficcion",
+        "name":"Ciencia Ficción",
         "image":"./categories/aventura.jpg"
     },
     {
