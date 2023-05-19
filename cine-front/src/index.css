@@ -184,6 +184,7 @@ footer{
 
 .derechosFooter ul{
   margin-top: 17px;
+  margin-left: 34.3vw;
 }
 
 .derechosFooter ul li{
@@ -201,11 +202,15 @@ footer{
 }
 
 .iconosFooter{
+  display: flex;
+  justify-content: space-around;
   padding-right: 10px;
   padding-top: 25px;
+  width: 20vw;
 }
 
-.iconosFooter img {
+
+.iconosFooter svg {
   width: 32px; 
   height: 32px; 
   margin-right: 3px;
@@ -550,6 +555,7 @@ font-size: medium;
   text-align: center;
   align-items: center;
   border: 1px solid black;
+  border-radius: 20px;
   margin:10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -577,6 +583,7 @@ font-size: medium;
     flex-direction: column;
     justify-content: space-around;
     height: 145px;
+    padding: 0;
   }
   .headerUsuario button{
     font-size: 12px;
@@ -588,6 +595,13 @@ font-size: medium;
   }
   .iconosFooter a {
     margin-right: 6px;
+  }
+  .iconosFooter svg{
+    width: 18px;
+    height: 18px;
+  }
+  .derechosFooter ul{
+    margin-left: auto;
   }
 }
 
@@ -606,8 +620,8 @@ font-size: medium;
       margin-right: 15px;
       font-size: 3vw;
     }
-    footer ul {
-      margin-left: 15vw;
+    .derechosFooter ul {
+      margin-left: 10vw;
     }
     .derechosFooter img{
       width: 130px;
