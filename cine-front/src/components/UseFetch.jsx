@@ -40,9 +40,10 @@ export const searchMovieDetails = (id) =>{
     const url=`/peliculas/${id}`
 
     return fetch(`${API_ENDPOINT}${url}`)
-        .then((response) => response.json())
+        .then((response) => {return response.json()})
         .catch((error) => {
             console.error(error)
+            return false
         });
 }
 
@@ -108,6 +109,21 @@ export const showPages = async (number) => {
             console.log(error)
             return false;
         });
+    
+    return response;
+}
+
+export const fetchMovieDate = async (date) => {
+    const url=`/peliculas/fecha/${date}`
+
+    const response = await fetch (`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
     
     return response;
 }

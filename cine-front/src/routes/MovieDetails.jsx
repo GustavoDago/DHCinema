@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Modal from "react-modal"
 import { deleteMovie } from "../components/UseFetch";
+import ContentLoader,{List} from "react-content-loader"
 
 
 Modal.setAppElement('#root')
@@ -11,7 +12,7 @@ Modal.setAppElement('#root')
 function MovieDetails() {
     const [showConfirmation, setShowConfirmation] = useState (false);
     const [content,setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
-    const [movie,setMovie] = useState ()
+    const [movie,setMovie] = useState (null)
     const [isLoading,setIsLoading] = useState(true)
     const [deleted,setDeleted] = useState(false)
     const params = useParams()
@@ -22,15 +23,64 @@ function MovieDetails() {
             setIsLoading(true);
             try{
                 const movieForId = await searchMovieDetails(params.id)
-                setMovie(movieForId);
-                setIsLoading(false);
+                if(movieForId != false){
+                    setMovie(movieForId);
+                    setIsLoading(false);
+                }
+                return
             } catch (error) {
                 console.error(error)
-                setIsLoading(false);
             }
         };
         fetchMovieId()
     },[])
+
+    const loadingImage = () => {
+            return (
+            
+              <ContentLoader
+                className="loadingImage"
+                speed={2}
+                width="100%"
+                height="70vh"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+              >
+                <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
+              </ContentLoader>
+            
+              )
+          
+    
+          
+    }
+
+    const loadingTitle = () => {
+        return (
+        
+          <ContentLoader
+            className="loading-tilte"
+            speed={2}
+            width="40%"
+            height="8vh"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#ecebeb"
+          >
+            <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
+          </ContentLoader>
+        
+          )
+      
+
+      
+}
+
+    const descriptionLoader = () => 
+        <List 
+            speed={2}
+            width="70vh"
+            height="100%vh"
+        />
 
     const handleDeleteButtonClick = () =>{
         setShowConfirmation(true);
@@ -71,25 +121,68 @@ function MovieDetails() {
     return (
         <div className="movie-details-container">
             {isLoading ? 
-            (<div>Cargando...</div>) : (movie !==null ? (
+            (<div className="movie-details">
+                <div className="movie-first-div">
+                    {loadingTitle()}
+                    <Link to={"/"}>
+                        <img id="back" src={'../../icons/atras.png'}/>
+                    </Link>
+                </div>    
+                <div className="movie-second-div">
+                    <div className="image-details">
+                        {loadingImage()}
+                    </div>
+                    <div className="description">
+                        {descriptionLoader()}
+                    </div>  
+                </div>
+                <div className="movie-third-div">
+                    <button>Eliminar</button>
+                </div>
+            </div>) : 
+            (movie !==null ? (
                 <div className="movie-details">
                     <div className="movie-first-div">
                         <h2>{movie.titulo}</h2>
+                        
                         <Link to={"/"}>
-                            <img  src={'\src\icons\atras.png'}/>
+                            <img id="back" src={'../../icons/atras.png'}/>
                         </Link>
+                        
                     </div>
                     
                     <div className="movie-second-div">
-                        <img src={movie.imagen}/>
-                        <p>{movie.descripcion}</p>
+                        <div className="image-details">
+                            <img src={movie.imagen}/>
+                        </div>
+                        <div className="description">
+                            <p>{movie.descripcion}</p>
+                        </div> 
+                        
                     </div>
                     <div className="movie-third-div">
-                        <button>Actualizar</button>
                         <button onClick={handleDeleteButtonClick}>Eliminar</button>
                     </div>
                 </div>
-            ) : (<div>No se encontro</div>))
+            ) : (<div className="movie-details">
+            <div className="movie-first-div">
+                {loadingTitle()}
+                <Link to={"/"}>
+                    <img  src={'../../icons/atras.png'}/>
+                </Link>
+            </div>    
+            <div className="movie-second-div">
+                <div className="image-details">
+                    {loadingImage()}
+                </div>
+                <div className="description">
+                    {descriptionLoader()}
+                </div>  
+            </div>
+            <div className="movie-third-div">
+                <button>Eliminar</button>
+            </div>
+        </div>))
             }
 
         <Modal
