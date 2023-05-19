@@ -30,6 +30,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .main-content{
   min-height: 100vh; 
+  padding-top:230px;
 }
 
 html,body{
@@ -41,6 +42,7 @@ html,body{
   flex-direction: column;
   height: 100%;
 }
+
 
 a {
   font-weight: 500;
@@ -110,11 +112,15 @@ header{
   align-items: center;
   margin-bottom: 8vh;
   background-color: #1B263B;
-  position: sticky;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
 }
 
-#slogan{
+.slogan{
   position: relative;
+  font-size: small;
+  font-weight: 100;
   top: 20px;
   right: 60px;
 }
@@ -205,6 +211,10 @@ footer{
 .iconosFooter{
   padding-right: 10px;
   padding-top: 25px;
+}
+
+.iconosFooter svg{
+  width: 6%;
 }
 
 .iconosFooter img {
@@ -410,7 +420,7 @@ footer{
   height: 100%;
   position: relative;
   text-align: center;
-  z-index: 999;
+  z-index: 99;
 }
 
 /** Seccion de vista de detalles **/
