@@ -198,6 +198,7 @@ footer ul{
 
 .derechosFooter ul{
   margin-top: 17px;
+  margin-left: 34.3vw;
 }
 
 .derechosFooter ul li{
@@ -216,11 +217,16 @@ footer ul{
 
 .iconosFooter{
   display: flex;
+  justify-content: space-around;
+  padding-right: 10px;
+  padding-top: 25px;
+  width: 20vw;
+  display: flex;
   flex-direction: row;
   margin-top: 25px;
 }
 
-.iconosFooter svg {
+.iconosFooter img {
   width: 32px; 
   height: 32px; 
   margin-right: 3px;
@@ -565,6 +571,7 @@ font-size: medium;
   text-align: center;
   align-items: center;
   border: 1px solid black;
+  border-radius: 20px;
   margin:10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -615,7 +622,6 @@ font-size: medium;
   justify-content: space-around;
   flex-wrap: wrap;
   align-self: start;
- 
   padding: 20px
 }
 
@@ -666,6 +672,7 @@ font-size: medium;
     flex-direction: column;
     justify-content: space-around;
     height: 145px;
+    padding: 0;
   }
   .headerUsuario button{
     font-size: 12px;
@@ -681,8 +688,38 @@ font-size: medium;
   .iconosFooter a {
     margin-right: 6px;
   }
+  .iconosFooter svg{
+    width: 18px;
+    height: 18px;
+  }
+  .derechosFooter ul{
+    margin-left: auto;
+  }
 }
 
+  @media (min-width:768px) and (max-width: 991px){
+    .headerUsuario{
+      flex-direction: row;
+      width: 45vw;
+    }
+    .headerUsuario button{
+      font-size: 12px;
+    }
+    .iconosFooter{
+      width: 30vw;
+    }
+    .iconosFooter a {
+      margin-right: 15px;
+      font-size: 3vw;
+    }
+    .derechosFooter ul {
+      margin-left: 10vw;
+    }
+    .derechosFooter img{
+      width: 130px;
+      height: 115px;
+    }
+  }
 @media (min-width:768px) {
   .headerUsuario{
     flex-direction: row;

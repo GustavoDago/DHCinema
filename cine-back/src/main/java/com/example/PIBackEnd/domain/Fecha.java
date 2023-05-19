@@ -14,7 +14,7 @@ public class Fecha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //para el proximo Sprint se agregara una relacion de Fechas a Horarios por eso la tabla usa id y no la misma fecha con identificador
+    //para el proximo Sprint se agregara una relacion de Fechas a Horarios por eso la tabla usa id y no la misma fecha con identificador.
     @Column(nullable = false)
     private LocalDate fecha;
 
