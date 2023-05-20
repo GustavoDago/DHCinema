@@ -346,3 +346,228 @@
 [2023-05-19 00:13:26] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
 [2023-05-19 00:13:28] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 1
 [2023-05-19 00:13:30] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 17:59:12] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 17:59:12] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 17:59:15] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 17:59:19] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 17:59:22] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: LA SIRENITA
+[2023-05-19 17:59:23] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 17:59:24] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 17:59:26] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 17:59:26] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 17:59:29] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 17:59:32] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:09:40] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:09:40] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:09:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:09:46] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:10:34] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:10:34] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:10:37] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:10:41] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:17:20] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:17:20] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:17:23] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:17:27] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:17:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:17:43] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:17:46] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:17:49] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:18:24] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:18:33] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:22:59] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:23:00] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:23:07] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:23:07] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:10] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:13] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:23:13] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:16] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:19] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 14
+[2023-05-19 18:23:19] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 14
+[2023-05-19 18:23:20] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:23:26] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:23:36] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:36] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:23:39] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:23:44] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:28:21] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:28:21] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:28:24] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:28:27] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:28:58] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:29:11] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:29:30] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:29:39] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:31:32] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:31:32] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:31:35] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:31:39] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:31:52] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: LA SIRENITA
+[2023-05-19 18:31:53] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 18:31:53] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 18:31:56] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:31:56] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:31:59] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:32:04] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:32:11] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 6
+[2023-05-19 18:32:12] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 6
+[2023-05-19 18:32:14] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:32:14] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:32:17] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:32:22] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:32:50] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:32:50] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:32:54] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:32:56] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:33:06] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 5
+[2023-05-19 18:33:06] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 5
+[2023-05-19 18:33:18] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:33:18] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:33:22] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:33:24] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:41:43] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:41:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:41:46] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:41:51] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:46:06] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:46:06] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:46:09] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:46:12] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:50:16] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:50:32] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:51:03] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:52:23] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:52:23] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:52:26] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:52:31] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:53:27] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:53:27] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:53:31] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:53:33] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:53:38] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 5
+[2023-05-19 18:53:39] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 5
+[2023-05-19 18:53:50] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:53:50] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:53:54] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:53:58] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:54:36] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 18:54:43] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:55:31] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 2
+[2023-05-19 18:55:31] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 2
+[2023-05-19 18:55:34] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 2
+[2023-05-19 18:55:37] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:55:37] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:55:40] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:55:45] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:56:03] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:56:03] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:56:07] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:56:10] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:58:57] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 18:58:57] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 18:58:58] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 18:59:04] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:59:04] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:59:07] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:59:10] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:59:48] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:59:48] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 18:59:52] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 18:59:54] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:00:19] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: E.T. EL EXTRATERRESTRE
+[2023-05-19 19:00:20] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 25
+[2023-05-19 19:00:21] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 25
+[2023-05-19 19:00:27] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:00:27] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:00:30] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:00:35] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:02] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 19:17:02] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 19:17:02] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 19:17:12] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:12] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:15] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:18] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: ANT-MAN Y LA AVISPA: QUANTUMANIA
+[2023-05-19 19:17:18] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:17:19] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:17:20] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:25] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:28] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:28] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:34] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:43] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:43] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:17:46] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:17:51] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:18:12] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 19:19:08] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:19:08] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:19:11] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:19:15] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:19:17] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 18
+[2023-05-19 19:19:18] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 18
+[2023-05-19 19:19:54] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 18
+[2023-05-19 19:19:57] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:19:57] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:20:00] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:20:03] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:21:57] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 3
+[2023-05-19 19:21:58] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 3
+[2023-05-19 19:22:04] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:22:04] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:22:08] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:22:09] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:22:32] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:22:32] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:22:35] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:22:41] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:24:42] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: ANT-MAN Y LA AVISPA: QUANTUMANIA
+[2023-05-19 19:24:43] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:24:44] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:24:45] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:24:45] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:24:50] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:24:53] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:25:00] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:25:01] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:25:04] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:25:06] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:58:44] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:58:44] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:58:48] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:58:53] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:59:17] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:59:18] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 26
+[2023-05-19 19:59:30] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 26
+[2023-05-19 19:59:34] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:59:34] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 19:59:39] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 19:59:41] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:00:21] [ INFO ] [PeliculaService:34] Guardando Pelicula nueva
+[2023-05-19 20:00:21] [ INFO ] [CategoriaService:24] Guardando Categoria nueva
+[2023-05-19 20:00:22] [ INFO ] [FechaService:26] Guardando Fecha nueva
+[2023-05-19 20:00:26] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:00:26] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:00:30] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:00:34] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:00:52] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:00:52] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:00:56] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:00:58] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:01:03] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 27
+[2023-05-19 20:01:04] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 27
+[2023-05-19 20:01:06] [ WARN ] [PeliculaService:80] Borrando Pelicula con id = 27
+[2023-05-19 20:01:10] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:01:10] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:01:12] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 20:01:14] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:01:17] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:01:17] [ INFO ] [PeliculaService:132] Buscando todas las Peliculas por categoria
+[2023-05-19 20:01:29] [ INFO ] [PeliculaService:91] Buscando Pelicula con titulo: LA SIRENITA
+[2023-05-19 20:01:30] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 20:01:31] [ INFO ] [PeliculaService:102] Buscando Pelicula con id = 4
+[2023-05-19 20:01:34] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:01:34] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
+[2023-05-19 20:01:40] [ INFO ] [PeliculaService:161] Creando lista de 8 Peliculas random
+[2023-05-19 20:01:44] [ INFO ] [PeliculaService:151] Buscando todas las Peliculas
