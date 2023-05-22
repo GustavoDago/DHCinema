@@ -701,10 +701,6 @@ font-size: medium;
   border-radius: 30px 0px 0px 30px;
 }
 
-.sign-in-first input{
-  border-radius: 30px;
-  
-}
 
 .sign-in-first button{
   align-self: center;
@@ -750,6 +746,7 @@ font-size: medium;
   filter: drop-shadow(0 0 1em #778DA9);
   padding-left: 40px;
   color: #1b263b;
+  border-radius: 30px;
 }
 
 #input-username{
@@ -777,6 +774,98 @@ font-size: medium;
 
 .register-div p {
   margin: 0px 5px;
+}
+
+/** Vista registro **/
+
+.register-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.register-container form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-self: center;
+  filter: drop-shadow(0 0 1em #778DA9);
+  background-color: white;
+  border-radius: 30px;
+  color: #1b263b;
+  padding: 40px 0;
+  margin-bottom: 30px;
+}
+
+.register-container .date-container label{
+  margin: 0px 5px 0px 0px;
+}
+
+.register-container .date-container .date-picker{
+  align-self: center;
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  border: 0px;
+  filter: drop-shadow(0 0 1em #778DA9);
+  color: #1b263b;
+  border-radius: 30px;
+  margin: 0px 10px;
+  align-self: center;
+}
+
+.register-input{
+  align-self: center;
+  height: 50px;
+  width: 20%;
+  background-color: white;
+  border: 0px;
+  filter: drop-shadow(0 0 1em #778DA9);
+  padding-left: 40px;
+  color: #1b263b;
+  border-radius: 30px;
+  margin: 0px 10px;
+}
+
+.register-email-pass{
+  display: flex;
+  flex-direction: column;
+}
+
+.register-email-pass input{
+  margin: 8px 0;
+  width: 45%;
+}
+
+.register-adress{
+  margin-top: 30px;
+  padding: 30px 0;
+  border-top: 1px solid black;
+}
+
+.register-adress div{
+  margin: 15px;
+}
+
+.register-checkbox{
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+}
+
+.new-button{
+  align-self: center;
+  width: 40%;
+  background-color: #778DA9;
+  border: 2px solid #0D1B2A;
+  margin-top: 20px;
+  border-radius: 30px;
+}
+
+.new-button:hover{
+  background-color: #0D1B2A;
 }
 
 @media (min-width:425px) {

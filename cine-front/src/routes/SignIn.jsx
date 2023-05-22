@@ -72,11 +72,11 @@ function SignIn() {
                         </div>
 
 
-                        <button type="submit">Iniciar Sesión</button>
+                        <button className="new-button" type="submit">Iniciar Sesión</button>
                     </form>
                     <div className="register-div">
                         <p>Todavia no tienes cuenta?</p>
-                        <Link to="/registrarse">
+                        <Link to="../registrarse">
                             <a>Registrate</a>
                         </Link>
                     </div>
