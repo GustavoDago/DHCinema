@@ -15,7 +15,7 @@ const header = () => {
               <button className="botonInicioSesion"> Iniciar Sesión </button>
             </Link>
             
-            <Link to="/admin/nueva-pelicula">
+            <Link to="/admin">
               <button className="botonInicioSesion"> Panel Administrador </button>
             </Link>
             

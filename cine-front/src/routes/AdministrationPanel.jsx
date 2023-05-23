@@ -176,7 +176,6 @@ function AdministrationPanel(){
     const {getRootProps, getInputProps, isDragActive} = useDropzone ({onDrop:handleDrop})
 
     return (<div className="admin-form">
-        <h3>Panel de Administrador</h3>
         <form onSubmit={handleSubmit}>
             <label>Titulo:</label>
             <input 
