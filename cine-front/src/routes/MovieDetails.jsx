@@ -161,7 +161,7 @@ function MovieDetails() {
                         
                     </div>
                     <div className="movie-third-div">
-                        <button onClick={handleDeleteButtonClick}>Eliminar</button>
+                        {/* <button onClick={handleDeleteButtonClick}>Eliminar</button> */}
                     </div>
                 </div>
             ) : (<div className="movie-details">
