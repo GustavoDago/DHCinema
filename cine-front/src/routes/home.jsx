@@ -11,6 +11,8 @@ Modal.setAppElement('#root')
 
 function Home() {
 
+    window.scrollTo(0, 0);
+
     const [searchTerm, setSearchTerm] = useState("");
     const [showCategorie, setShowCategorie] = useState("Todos");
     const [showConfirmation,setShowConfirmation] = useState (false);

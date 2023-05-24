@@ -26,6 +26,9 @@ const schema = yup.object({
 })
 
 function Register() {
+
+    window.scrollTo(0, 0);
+
     const { register, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
     });

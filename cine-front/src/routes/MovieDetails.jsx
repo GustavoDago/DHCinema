@@ -10,6 +10,9 @@ import ContentLoader,{List} from "react-content-loader"
 Modal.setAppElement('#root')
 
 function MovieDetails() {
+
+    window.scrollTo(0, 0);
+
     const [showConfirmation, setShowConfirmation] = useState (false);
     const [content,setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
     const [movie,setMovie] = useState (null)

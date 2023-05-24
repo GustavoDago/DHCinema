@@ -2,6 +2,7 @@
 import { Link, Outlet } from 'react-router-dom'
 
 const GestionAdmin = () => {
+  window.scrollTo(0, 0);
   return (
     < >
     <nav>
