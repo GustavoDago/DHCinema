@@ -1,214 +1,111 @@
-import { useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker"
-import es from 'date-fns/locale/es'
-registerLocale("es", es)
+import { useForm } from 'react-hook-form'
+import * as yup from "yup"
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const schema = yup.object({
+    nombre: yup.string()
+        .required('Se requiere un nombre.')
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+    apellido: yup.string()
+        .required('Se requiere un apellido.')
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+    email: yup.string()
+        .required('Se requiere un email.')
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.'),
+    confirmacionEmail: yup.string()
+        .required('Se requiere este campo.')
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.')
+        .oneOf([yup.ref('email')], 'Los emails no coinciden entre si.'),
+    contraseña: yup.string()
+        .required('Se requiere una contraseña.')
+        .min(6, 'La contraseña debe ser mayor a 6 caracteres.'),
+    contraseñaConfirmacion: yup.string()
+        .required('Se requiere este campo.')
+        .min(6, 'La contraseña debe ser mayor a 6 caracteres.')
+        .oneOf([yup.ref('contraseña')], 'Las contraseñas no coinciden entre si.')
+})
 
 function Register() {
-    const [name, setName] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [birthday, setBirthday] = useState(new Date())
-    const [email, setEmail] = useState("")
-    const [emailError,setEmailError] = useState('')
-    const [confirmEmail, setConfirmEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [passwordError,setPasswordError] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [showAdress, setShowAdress] = useState(false)
-    const [state, setState] = useState("")
-    const [city, setCity] = useState("")
-    const [street, setStreet] = useState("")
-    const [number, setNumber] = useState("")
-    const [postalCode, setPostalCode] = useState("")
-    const [showBilling, setShowBilling] = useState(false)
-
-
-
-    const onChangeName = (e) => setName(e.target.value)
-    const onChangeLastname = (e) => setLastname(e.target.value)
-    const onChangeBirthday = (date) => setBirthday(date)
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value)
-        validateEmail(e.target.value)
-    }
-    const onChangeEConfirmEmail = (e) => setConfirmEmail(e.target.value)
-    const onChangePassword = (e) => {
-        setPassword(e.target.value)
-        validatePassword(e.target.value)
-    }
-    const onChangeConfirmPassword = (e) => setConfirmPassword(e.target.value)
-    const onChangeState = (e) => setState(e.target.value)
-    const onChangeCity = (e) => setCity(e.target.value)
-    const onChangeStreet = (e) => setStreet(e.target.value)
-    const onChangeNumber = (e) => setNumber(e.target.value)
-    const onChangePostalCode = (e) => setPostalCode(e.target.value)
-    const onChangeShowAdress = (e) => setShowAdress(e.target.checked)
-    const onChangeShowBilling = (e) => setShowBilling(e.target.checked)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
-
-    const validateEmail = (value) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-          setEmailError('Ingrese un correo electrónico válido');
-        } else {
-          setEmailError('');
-        }
-    };
-
-    const validatePassword = (value) => {
-        if (value.length < 6) {
-          setPasswordError('La contraseña debe tener al menos 6 caracteres');
-        } else {
-          setPasswordError('');
-        }
-    };
+    const { register, formState: { errors }, handleSubmit } = useForm({
+        resolver: yupResolver(schema)
+    });
+    const onSubmit = data => console.log(data)
 
     return (
+        <div className='register'>
         <div className="register-container">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <h3>Registro</h3>
-                <div className="register-name">
-                    <input
-                        className="register-input"
-                        type="text"
-                        name="name"
-                        placeholder="Nombre"
-                        value={name}
-                        onChange={onChangeName}
-                    />
-                    <input
-                        className="register-input"
-                        type="text"
-                        name="lastname"
-                        placeholder="Apellido"
-                        value={lastname}
-                        onChange={onChangeLastname}
-                    />
-                </div>
-                <div className="date-container">
-                    <label>Fecha de nacimiento</label>
-                    <div className="date-center">
-                        <DatePicker
-                            className="date-picker"
-                            selected={birthday}
-                            onChange={onChangeBirthday}
-                            dateFormat={"dd-MM-yyyy"}
-                            multiple
-                            locale="es"
+                <div className="register-seccion1">
+                    <div>
+                        <input
+                            placeholder="Nombre"
+                            type='text'
+                            className={` ${errors.nombre ? 'error-input' : 'register-input'}`}
+                            {...register('nombre')}
+                            aria-invalid={errors.nombre ? "true" : "false"}
                         />
+                        <p>{errors.nombre?.message}</p>
+                    </div>
+                    <div>
+                        
+                        <input
+                            className={`${errors.apellido ? 'error-input' : 'register-input'}`}
+                            placeholder="Apellido"
+                            type='text'
+                            {...register('apellido')}
+                            aria-invalid={errors.apellido ? "true" : "false"}
+                        />
+                        <p>{errors.apellido?.message}</p>
                     </div>
                 </div>
-                <div className="register-email-pass">
-                    <input
-                        className="register-input"
-                        type="email"
-                        name="email"
-                        placeholder="E-mail"
-                        value={email}
-                        onChange={onChangeEmail}
-                    />
-                    {emailError && <p>{emailError}</p>}
-                    <input
-                        className="register-input"
-                        type="email"
-                        name="confirm-email"
-                        placeholder="Confirmar e-mail"
-                        value={confirmEmail}
-                        onChange={onChangeEConfirmEmail}
-                    />
-
-                    <input
-                        className="register-input"
-                        type="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={onChangePassword}
-                    />
-                    {passwordError && <p>{passwordError}</p>}
-                    <input
-                        className="register-input"
-                        type="password"
-                        name="cofirm-password"
-                        placeholder="Confirmar contraseña"
-                        value={confirmPassword}
-                        onChange={onChangeConfirmPassword}
-                    />
+                <div className='register-seccion2'>
+                    <div>
+                        <input
+                            className={`${errors.email ? 'error-input' : 'register-input'}`}
+                            placeholder="E-mail"
+                            type='email'
+                            {...register('email')}
+                            aria-invalid={errors.email ? "true" : "false"}
+                        />
+                        <p>{errors.email?.message}</p>
+                    </div>
+                    <div>
+                        <input
+                            className={`${errors.confirmacionEmail ? 'error-input' : 'register-input'}`}
+                            placeholder="Confirmacion e-mail"
+                            type='email'
+                            {...register('confirmacionEmail')}
+                            aria-invalid={errors.confirmacionEmail ? "true" : "false"}
+                        />
+                        <p>{errors.confirmacionEmail?.message}</p>
+                    </div>
+                    <div>
+                        <input
+                            className={`${errors.contraseña ? 'error-input' : 'register-input'}`}
+                            placeholder="Contraseña"
+                            type='password'
+                            {...register('contraseña')}
+                            aria-invalid={errors.contraseña ? "true" : "false"}
+                        />
+                        <p>{errors.contraseña?.message}</p>
+                    </div>
+                    <div>
+                        <input
+                            className={`${errors.contraseñaConfirmacion ? 'error-input' : 'register-input'}`}
+                            placeholder="Confirmacion contraseña"
+                            type='password'
+                            {...register('contraseñaConfirmacion')}
+                            aria-invalid={errors.contraseñaConfirmacion ? "true" : "false"}
+                        />
+                        <p>{errors.contraseñaConfirmacion?.message}</p>
+                    </div>
                 </div>
-                <label className="register-checkbox">
-                    <input
-                        
-                        type="checkbox"
-                        checked={showAdress}
-                        onChange={onChangeShowAdress}
-                    />
-                    Ingresar una direccion de facturacion
-                </label>
-                {
-                    showAdress ? (
-                        <div className="register-adress">
-                            <div>
-                                <input
-                                    className="register-input"
-                                    type="text"
-                                    name="state"
-                                    placeholder="Provincia"
-                                    value={state}
-                                    onChange={onChangeState}
-                                />
-                                <input
-                                    className="register-input"
-                                    type="text"
-                                    name="city"
-                                    placeholder="Ciudad"
-                                    value={city}
-                                    onChange={onChangeCity}
-                                />
-                            </div>
-                            <div>
-                                <input
-                                    className="register-input"
-                                    type="text"
-                                    name="street"
-                                    placeholder="Calle"
-                                    value={street}
-                                    onChange={onChangeStreet}
-                                />
-                                <input
-                                    className="register-input"
-                                    type="text"
-                                    name="number"
-                                    placeholder="Numero"
-                                    value={number}
-                                    onChange={onChangeNumber}
-                                />
-                                <input
-                                    className="register-input"
-                                    type="text"
-                                    name="postal-code"
-                                    placeholder="Codigo postal"
-                                    value={postalCode}
-                                    onChange={onChangePostalCode}
-                                />
-                            </div>
-                            <label className="register-checkbox">
-                                <input
-                                    
-                                    type="checkbox"
-                                    checked={showBilling}
-                                    onChange={onChangeShowBilling}
-                                />
-                                Ingresar un metodo de pago
-                            </label>
 
-                        </div>
-                    ) : ("")
-                }
 
                 <button className="new-button" type="submit">Registrarse</button>
             </form>
+        </div>
         </div>
 
     )

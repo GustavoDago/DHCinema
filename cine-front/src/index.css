@@ -30,7 +30,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .main-content{
   min-height: 100vh; 
-  padding-top:230px;
+  padding-top:200px;
 }
 
 html,body{
@@ -51,10 +51,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-.main-content{
-  flex:1;
 }
 
 h1 {
@@ -677,6 +673,14 @@ font-size: medium;
 
 /** Inicio sesion **/
 
+.sign-in-background{
+  height: 100vh;
+  padding: 25px 0 0 0;
+  background-image: url(../public/fondo-registro.jpg);
+  background-position: center;
+  background-size: cover;  
+}
+
 .sign-in-container{
   display: flex;
   justify-content: center;
@@ -749,6 +753,8 @@ font-size: medium;
   border-radius: 30px;
 }
 
+
+
 #input-username{
   margin: 30px 0px;
 }
@@ -778,12 +784,69 @@ font-size: medium;
 
 /** Vista registro **/
 
+.register{
+  padding: 25px 0 0 0;
+  min-height: 100vh;
+  background-image: url(../public/fondo-registro.jpg);
+  background-position: center;
+  background-size: cover;  
+}
+
 .register-container{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.register-container input{
+  width: 50%;
+  align-self: center;
+  height: 50px;
+  padding-left: 40px;
+  border-radius: 30px;
+  color: #1b263b;
+  filter: drop-shadow(0 0 1em #778DA9);
+  background-color: white;
+  margin:15px 0px
+}
+
+.register-seccion1{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.register-seccion1 div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.register-seccion1 div input{
+  align-self: center;
+  width: 100%;
+}
+
+.register-seccion1 p{
+  text-align: center;
+  width: 50%;
+}
+
+.register-container p{
+  font-size: small;
+  color: red;
+  margin: 4px 0px 15px 0px;
+}
+
+.error-input{
+  background-color: white;
+  border: 1px solid red;
   
 }
+
 
 .register-container form{
   display: flex;
@@ -795,65 +858,17 @@ font-size: medium;
   border-radius: 30px;
   color: #1b263b;
   padding: 40px 0;
-  margin-bottom: 30px;
 }
 
 .register-container .date-container label{
   margin: 0px 5px 0px 0px;
 }
 
-.register-container .date-container .date-picker{
-  align-self: center;
-  height: 50px;
-  width: 100%;
-  background-color: white;
-  border: 0px;
-  filter: drop-shadow(0 0 1em #778DA9);
-  color: #1b263b;
-  border-radius: 30px;
-  margin: 0px 10px;
-  align-self: center;
-}
 
 .register-input{
-  align-self: center;
-  height: 50px;
-  width: 20%;
-  background-color: white;
   border: 0px;
-  filter: drop-shadow(0 0 1em #778DA9);
-  padding-left: 40px;
-  color: #1b263b;
-  border-radius: 30px;
-  margin: 0px 10px;
 }
 
-.register-email-pass{
-  display: flex;
-  flex-direction: column;
-}
-
-.register-email-pass input{
-  margin: 8px 0;
-  width: 45%;
-}
-
-.register-adress{
-  margin-top: 30px;
-  padding: 30px 0;
-  border-top: 1px solid black;
-}
-
-.register-adress div{
-  margin: 15px;
-}
-
-.register-checkbox{
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  align-items: center;
-}
 
 .new-button{
   align-self: center;
