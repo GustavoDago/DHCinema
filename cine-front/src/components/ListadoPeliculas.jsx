@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
 //Genera una nabvar para elegir entre ver la lista de películas y el form de agregar película
 //Este código muestra una tabla con todas las películas, y a la derecha un botón para eliminar. 
 //También se puede agregar un botón para modificar y un form para hacer la modificación.

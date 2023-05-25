@@ -11,6 +11,10 @@ import SignIn from './routes/SignIn.jsx'
 import Register from './routes/Register.jsx'
 import ListadoPeliculas from './components/ListadoPeliculas.jsx'
 import GestionAdmin from './components/GestionAdmin.jsx'
+import ListadoCategorias from './components/ListadoCategorias.jsx'
+import NuevaCategoria from './components/Nueva-categoria.jsx'
+import AsignarCategoria from './components/AsignarCategoria.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -25,6 +29,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/admin' element={<ListadoPeliculas />} />
             <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
             <Route path='/admin/nueva-pelicula' element={<AdministrationPanel />} />
+            <Route path='/admin/listar-categorias' element={<ListadoCategorias />} />
+            <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
+            <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
           </Route>
           <Route path='inicio-sesion' element={<SignIn />} />
           <Route path='registrarse' element={<Register />} />
