@@ -12,9 +12,9 @@ const NuevaCategoria = () => {
   
     // Crear el objeto de datos a enviar al servidor
     const categoryData = {
-      titulo: title,
-      descripcion: description,
-      urlImagen: imageUrl,
+      categoria: title,
+      // descripcion: description,
+      // urlImagen: imageUrl,
     };
   
     // Realizar la petición POST al servidor
@@ -28,7 +28,7 @@ const NuevaCategoria = () => {
       .then((response) => response.json())
       .then((data) => {
         // Manejar la respuesta del servidor
-        console.log(data); // Puedes mostrar la respuesta en la consola o realizar alguna acción adicional
+        console.log(data); // En caso 
         // Resetear los campos del formulario
         setTitle("");
         setDescription("");

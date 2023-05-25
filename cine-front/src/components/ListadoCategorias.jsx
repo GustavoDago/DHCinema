@@ -54,15 +54,22 @@ const ListadoCategorias = () => {
             {Categorias.map((categoria) => (
               <tr id={categoria.id} key={categoria.id}>
                 <th scope='row'>{categoria.id}</th>
-                <td scope='row'>{categoria.titulo}</td>
+                <td scope='row'>{categoria.categoria}</td>
+                {/* 
                 <td scope='row'>{categoria.descripción}</td>
-                {/* <td scope='row'>{categoria.urlImagen}</td> */}
+                <td scope='row'>{categoria.urlImagen}</td> 
+                  Activar cuando esté agregado en la base de datos el campo urlImagen y el campo descripcion
+                
+                */}
                 
                 {/* 
                 Esta línea permite a futuro modificar una película
                 <td scope='row'><button ><Link key={dentista.id} to={"/Odontologos/" + dentista.id}>✍</Link> </button></td> 
                 */}
-                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)} >🚮</button></td>
+
+                {/*
+                  Esta línea permite borrar categorías
+                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)} >🚮</button></td> */}
               </tr>
             ))}
           </tbody>

@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/admin' element={<ListadoPeliculas />} />
             <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
             <Route path='/admin/nueva-pelicula' element={<AdministrationPanel />} />
-            <Route path='/admin/listar-categorias' element={<ListadoCategorias />} />
+            <Route path='/admin/ListadoCategorias' element={<ListadoCategorias />} />
             <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
             <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
           </Route>
