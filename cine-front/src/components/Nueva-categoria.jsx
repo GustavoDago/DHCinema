@@ -4,16 +4,34 @@ const NuevaCategoria = () => {
   
   
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [descripcion, setDescripcion] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
+      // Validar los campos antes de enviar la solicitud
+      const validationErrors = {};
+      if (title.trim() === "") {
+        validationErrors.title = "El título es requerido"
+      }
+      if (descripcion.trim() === "") {
+        validationErrors.descripcion = "La descripción es requerida"
+      }
+      if (imageUrl.trim() === "") {
+        validationErrors.imageUrl = "La URL de la imagen es requerida"
+      }
   
+      // Verificar si hay errores de validación
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
+
     // Crear el objeto de datos a enviar al servidor
     const categoryData = {
       categoria: title,
-      // descripcion: description,
+      // descripcion: descripcion,
       // urlImagen: imageUrl,
     };
   
@@ -28,11 +46,12 @@ const NuevaCategoria = () => {
       .then((response) => response.json())
       .then((data) => {
         // Manejar la respuesta del servidor
-        console.log(data); // En caso 
-        // Resetear los campos del formulario
+        console.log(data); // dejo lugar para acciones posteriores al agregado de los datos
+        // Reseteo los campos del formulario
         setTitle("");
-        setDescription("");
-        setImageUrl("");
+        setDescripcion("")
+        setImageUrl("")
+        setErrors({})
       })
       .catch((error) => {
         console.error(error); // Manejar el error en caso de que ocurra
@@ -50,14 +69,16 @@ const NuevaCategoria = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
+            {errors.title && <span>{errors.title}</span>}
           </div>
           <div>
             <label>Descripción:</label>
             <input
               type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={descripcion}
+              onChange={(e) => setDescripcion(e.target.value)}
             />
+            {errors.description && <span>{errors.description}</span>}
           </div>
           <div>
             <label>URL de la Imagen:</label>
@@ -66,6 +87,7 @@ const NuevaCategoria = () => {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
+            {errors.imageUrl && <span>{errors.imageUrl}</span>}
           </div>
           <button type="submit">Crear</button>
         </form>
