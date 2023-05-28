@@ -6,6 +6,8 @@ import es from 'date-fns/locale/es'
 import Modal from "react-modal"
 import { format } from 'date-fns'
 import { newMovie } from "../components/UseFetch";
+import MultipleImageDrop from "../components/AdministrationPanel/multipleImageDrop";
+import SingleImageDrop from "../components/AdministrationPanel/singleImageDrop";
 registerLocale("es", es)
 
 Modal.setAppElement('#root')
@@ -18,6 +20,8 @@ function AdministrationPanel() {
     const [selectedCategories, setSelectedCategories] = useState([])
     const [selectedDates, setSelectedDates] = useState(new Date())
     const [image, setImage] = useState(null)
+    const [banner, setBanner] = useState(null)
+    const [gallery, setGallery] = useState([])
     const [imagePreview, setImagePreview] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -34,7 +38,7 @@ function AdministrationPanel() {
         setSelectedDates(date)
     }
 
-    const handleCategoriesChange = (e) => {
+    const handleCategoriesChange = (e) => { 
         const options = e.target.selectedOptions;
         const selected = Array.from(options, (option) => option.value);
         setSelectedCategories(selected);
@@ -174,8 +178,9 @@ function AdministrationPanel() {
     const modalClassName = showConfirmation ? 'modal-overlay' : 'modal-overlay hidden';
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: handleDrop })
-
-    return (<div className="admin-form">
+    
+    return (
+    <div className="admin-form">
         <form onSubmit={handleSubmit}>
             <label>Titulo:</label>
             <input
@@ -232,7 +237,11 @@ function AdministrationPanel() {
                         {isDragActive ? <p>Suelta la imagen aqui...</p> : <p>Arrastra y suelta una imagen aqui, o haz click para seleccionar una imagen.</p>}
                     </div>)}
             </div>
+            <SingleImageDrop/>
+            <MultipleImageDrop/>
             <button type="submit">Guardar</button>
+
+            
 
         </form>
 

@@ -11,9 +11,9 @@ function Billboard(props) {
 
     const titulo = () =>{
         if (props.categorie !== "Todos"){
-            return (<h3>{`Peliculas de ${props.categorie.toLowerCase()}`}</h3>)
+            return (<h2>{`Peliculas de ${props.categorie.toLowerCase()}`}</h2>)
         } else {
-            return (<h3>Cartelera</h3>);
+            return (<h2>CARTELERA</h2>);
         }
     }
     
@@ -94,8 +94,8 @@ function Billboard(props) {
     <div className="billboard-section">
     {titulo()}
     {renderBillboard()}
-    <Link to={`peliculas/pagina/1`}>
-        <button>Ver mas</button>
+    <Link to={`/peliculas/pagina/1`}>
+        <button>VER MAS</button>
     </Link>
     </div>
     );
