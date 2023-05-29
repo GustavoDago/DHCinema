@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
 import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
 import Modal from "react-modal"
-import { deleteMovie } from "../components/UseFetch";
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/item"
@@ -11,17 +9,14 @@ import Item from "../components/item"
 Modal.setAppElement('#root')
 
 function MovieDetails() {
-    //const [showConfirmation, setShowConfirmation] = useState(false);
-    //const [content, setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    //const [deleted, setDeleted] = useState(false)
     const params = useParams()
     const [showVideo, setShowVideo] = useState(false);
-    const navigate = useNavigate();
 
-    const customSyles = {
+
+    const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
@@ -104,38 +99,8 @@ function MovieDetails() {
             height="100%vh"
         />
 
-    const handleDeleteButtonClick = () => {
-        setShowConfirmation(true);
-    }
 
-    const handleConfirm = async (res) => {
-        if (res == 'yes') {
-            try {
-                const response = await deleteMovie(params.id)
-                if (response == true) {
-                    setDeleted(true)
-                    setContent('La pelicula fue eliminada con exito')
-                    setTimeout(() => {
-                        setShowConfirmation(false)
-                        navigate('/');
-                    }, 2000);
-                } else {
-                    setContent('Hubo un problema a la hora de eliminar la pelicula')
-                    setShowConfirmation(false)
-                }
-            } catch (error) {
-                setContent('Hubo un error en la peticion a la red')
-                setShowConfirmation(false)
-            }
-        } else {
-            setShowConfirmation(false)
-        }
-
-    }
-
-    const closeModal = () => {
-        setShowConfirmation(false)
-    }
+   
 
     return (
         <div className={`movie-details `}>
@@ -227,7 +192,7 @@ function MovieDetails() {
             </div>
 
             <Modal
-                style={customSyles}
+                style={customStyles}
                 className="video-modal"
                 isOpen={showVideo}
                 onRequestClose={handleCloseVideo}

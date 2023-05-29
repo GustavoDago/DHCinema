@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import Modal from "react-modal";
 
-function SingleImageDrop() {
+Modal.setAppElement('#root')
+
+function SingleImageDrop({ image, setImage }) {
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState('');
     const [imageExtension, setImageExtension] = useState('')
+    const [showModal, setShowModal] = useState(false)
+
+    const customStyles = {
+        overlay: { zIndex: 20000 }
+    }
+
+    const handleModal = () => {
+        setShowModal(true)
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
+    }
 
     const handleImageDrop = (acceptedFiles) => {
-        const isDroppedOnDeleteButton = event.target.classList.contains('delete-button');
-
-        if (isDroppedOnDeleteButton) {
-            // Detener la propagación del evento para evitar que se abra el diálogo de selección de archivos
-            event.stopPropagation();
-            return;
-        }
         const file = acceptedFiles[0];
         if (file.name.split('.').pop() == 'jpg') {
             setImageExtension('/icons/jpg-extension.svg')
@@ -25,7 +34,8 @@ function SingleImageDrop() {
         const reader = new FileReader();
 
         reader.onload = () => {
-            setImageFile(file);
+            setImageFile(file)
+            setImage(file);
             setImagePreview(reader.result);
         };
 
@@ -35,12 +45,16 @@ function SingleImageDrop() {
     const removeImage = () => {
         setImageFile(null);
         setImagePreview('');
+        setImageExtension('')
+        setImage(null)
     };
 
     const ImageDropzone = () => {
         const { getRootProps, getInputProps, isDragActive } = useDropzone({
             onDrop: handleImageDrop,
-            accept: 'image/*',
+            accept: {
+                'image/*': ['.jpeg', '.jpg', '.png'],
+            },
             maxFiles: 1,
         });
 
@@ -48,27 +62,71 @@ function SingleImageDrop() {
             <div className="dropzone" {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                    <p>Suelta la imagen aquí...</p>
+                    <div className="dropzone-info">
+                        <img src="/icons/drag-drop.svg" />
+                        <p>Suelta las imagenes aquí...</p>
+                    </div>
                 ) : (
-                    <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionar una imagen.</p>
-                )}
-                {imagePreview && (
-                    <div className="file-preview">
-                        <div>{imageFile.name}</div>
-                        <img src={imageExtension} alt="Imagen seleccionada" />
-                        <button>Previsualizar</button>
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            removeImage();
-                        }}>Eliminar</button>
+                    <div className="dropzone-info">
+                        <img src="/icons/cloud.svg" />
+                        <p>Arrastra y suelta imagenes aquí, o haz clic para seleccionar imagenes.</p>
                     </div>
                 )}
             </div>
         );
     };
 
+    const ImagePreview = () => {
+        return (
+            image ? (
+                <div className="extension-container">
+                    <h4>{image.name}</h4>
+                    <img src={imageExtension} alt="Imagen seleccionada" />
 
-    return (<ImageDropzone />);
+                    <div className="extension-buttons" >
+                        <button className="show-button" onClick={handleModal}><img src='/icons/show.svg' /></button>
+                        <button className="delete-button" onClick={removeImage}><img src="/icons/delete.svg" /></button>
+                    </div>
+                </div>
+            ) : (
+                <div className="empty-files">
+                    <img src="/icons/empty.svg" />
+                    <h3>No hay archivos</h3>
+                </div>
+            )
+        )
+    }
+
+
+    return (
+        <div className="dropzone-container">
+            <ImageDropzone />
+            <div className="extensions-preview">
+                <ImagePreview />
+            </div>
+
+            <Modal
+                isOpen={showModal}
+                onRequestClose={closeModal}
+                className='modal'
+                style={customStyles}
+            >
+
+                <div className="modal-image-conteiner">
+                    <div className="modal-image-content">
+                        
+                            <div className="detail-image-part">
+                                <img src="/icons/close.svg" onClick={closeModal} />
+                            </div>
+                            <img src={imagePreview} />
+                        
+                    </div>
+                </div>
+            </Modal>
+        </div>
+
+
+    );
 }
 
 export default SingleImageDrop
