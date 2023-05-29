@@ -21,7 +21,7 @@ backend-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - cd cine-back/
-    - git pull
+    - mvn clean package
 
 frontend_job:
   stage: build
