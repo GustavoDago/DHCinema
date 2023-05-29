@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { showPages } from "../components/UseFetch";
 import ContentLoader from "react-content-loader";
-import Item from "../components/item";
+import Item from "../components/Item";
 
 function ShowMore() {
 
