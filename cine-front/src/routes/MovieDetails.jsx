@@ -9,6 +9,8 @@ import Item from "../components/item"
 Modal.setAppElement('#root')
 
 function MovieDetails() {
+    window.scrollTo(0, 0);
+    
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
