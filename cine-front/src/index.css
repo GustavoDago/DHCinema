@@ -617,6 +617,12 @@ font-size: medium;
   border-radius: 20px;
 }
 
+/** vista Asignar Categorías **/
+div.asignoCategorias{
+  display: flex;
+  justify-content: space-between;
+}
+
 /** Vista de mostrar todas las peliculas **/
 
 .all-movies{

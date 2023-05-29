@@ -8,10 +8,10 @@ const ListadoPeliculas = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [Peliculas, setPeliculas] = useState([])
     const url = 'http://localhost:8080/peliculas/';
+    useEffect(() => {
     const settings = {
       method: 'GET'
     }
-    useEffect(() => {
       fetch(url, settings)
         .then(response => response.json())
         .then(data => setPeliculas(data))
