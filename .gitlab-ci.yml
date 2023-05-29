@@ -29,8 +29,8 @@ frontend_job:
   image: node:latest
   script:
     - cd cine-front/
-    - sudo npm install
-    - sudo npm run build
+    - npm install
+    - npm run build
 
 test_job:
   stage: test
