@@ -30,6 +30,7 @@ frontend_job:
   script:
     - cd cine-front/
     - npm install
+    - npm fund
     - npm run build
 
 test_job:
