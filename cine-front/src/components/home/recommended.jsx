@@ -53,7 +53,7 @@ function Recommended() {
 
     return (
         <div className="recommended-section">
-                <h3>Recomendados</h3>
+                <h2>RECOMENDADOS</h2>
                 <div className="movie-container">
               {isLoading ? (
                 loadingBox()

@@ -1,45 +1,80 @@
 import React, { useEffect, useState } from 'react'
+import { deleteMovie } from './UseFetch'
+import { searchMoviesForCategories } from './UseFetch'
+import Modal from 'react-modal'
+import { useParams, useNavigate } from "react-router-dom"
 //Genera una nabvar para elegir entre ver la lista de películas y el form de agregar película
 //Este código muestra una tabla con todas las películas, y a la derecha un botón para eliminar. 
 //También se puede agregar un botón para modificar y un form para hacer la modificación.
 
+Modal.setAppElement('#root')
 
 const ListadoPeliculas = () => {
-    const [errorMessage, setErrorMessage] = useState('')
-    const [Peliculas, setPeliculas] = useState([])
-    const url = 'http://localhost:8080/peliculas/';
-    useEffect(() => {
-    const settings = {
-      method: 'GET'
-    }
-      fetch(url, settings)
-        .then(response => response.json())
-        .then(data => setPeliculas(data))
-    }, [])
+  const [isLoading, setIsLoading] = useState(false)
+  const [peliculas, setPeliculas] = useState([])
+  const [movieId,setMovieId] = useState('')
+  const [deleted, setDeleted] = useState(false)
+  const [content, setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
+  const params = useParams()
+  const navigate = useNavigate();
 
-    const handleBorrarPelicula = (id) => {
-        const settings = {
-          method: 'DELETE'
-        };
-        fetch(url + id, settings)
-          .then(response => {
-            if (response.ok) {
-    
-              const fila = document.querySelector(`tr[id="${id}"]`);
-              fila.remove();
-    
-              return response.text();
-            } else {
-              throw new Error(response.text());
-            }
-          })
-          .then(data => console.log((data)))
-          .catch(error => console.log((error.message)))
-    
-      };
+  const customStyles = {
+    overlay: { zIndex: 1000 }
+}
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      
+      try {
+        const movies = await searchMoviesForCategories("Todos");
+        setPeliculas(movies);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchMovie()
+  }, [])
+
+  const handleDeleteButtonClick = (id) => {
+    setMovieId(id)
+    setIsLoading(true);
+  }
+
+  const handleConfirm = async (res) => {
+    if (res == 'yes') {
+      try {
+        const response = await deleteMovie(movieId)
+        if (response == true) {
+          setDeleted(true)
+          const fila = document.querySelector(`tr[id="${id}"]`);
+          fila.remove();
+          setContent('La pelicula fue eliminada con exito')
+          setTimeout(() => {
+            setShowConfirmation(false)
+          }, 2000);
+        } else {
+          setContent('Hubo un problema a la hora de eliminar la pelicula')
+          setShowConfirmation(false)
+        }
+      } catch (error) {
+        setContent('Hubo un error en la peticion a la red')
+        setShowConfirmation(false)
+      }
+    } else {
+      setIsLoading(false)
+    }
+
+  }
+
+  const closeModal = () => {
+    setIsLoading(false)
+  }
+
+
 
   return (
-    <main >
+    <div>
       {/* renderizo las cards */}
       <div className='tabla' >
         <table>
@@ -50,22 +85,45 @@ const ListadoPeliculas = () => {
             </tr>
           </thead>
           <tbody>
-            {Peliculas.map((pelicula) => (
+            {peliculas.map((pelicula) => (
               <tr id={pelicula.id} key={pelicula.id}>
                 <th scope='row'>{pelicula.id}</th>
                 <td scope='row'>{pelicula.titulo}</td>
-                
+
                 {/* 
                 Esta línea permite a futuro modificar una película
                 <td scope='row'><button ><Link key={dentista.id} to={"/Odontologos/" + dentista.id}>✍</Link> </button></td> 
                 */}
-                <td scope='row'><button onClick={() => handleBorrarPelicula(pelicula.id)} >🚮</button></td>
+                <td scope='row'><button onClick={() => handleDeleteButtonClick(pelicula.id)}>🚮</button></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </main>
+      <Modal
+        isOpen={isLoading}
+        style={customStyles}
+        onRequestClose={closeModal}
+        contentLabel="Confirmacion"
+        className="modal-confirmation"
+      >
+
+        
+          <div className="confirmation-content">
+            {!deleted ? (<h2>Confirmacion</h2>) : ('')}
+
+            <p>{content}</p>
+            {!deleted ? (
+              <div className="modal-buttons">
+                <button onClick={() => handleConfirm('yes')}>Si</button>
+                <button onClick={() => handleConfirm('no')}>No</button>
+              </div>) :
+              ('')}
+
+          </div>
+        
+      </Modal>
+    </div>
   )
 }
 
