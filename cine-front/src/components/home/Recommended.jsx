@@ -1,5 +1,5 @@
 import { searchRandomMovies } from "../UseFetch";
-import Item from "../item";
+import Item from "../Item";
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 
