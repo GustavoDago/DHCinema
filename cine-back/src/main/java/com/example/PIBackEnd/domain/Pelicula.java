@@ -18,6 +18,15 @@ public class Pelicula {
     @Column(nullable = false, length = 500)
     private String imagen;
 
+    @Column(nullable = false, length = 500)
+    private String trailer;
+
+    @Column(nullable = false, length = 500)
+    private String portada;
+
+    @Column(nullable = false, length = 500)
+    private String banner;
+
     @Column(nullable = false, length = 1000)
     private String descripcion;
 
@@ -41,10 +50,7 @@ public class Pelicula {
     private Set<Fecha> fechas = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        if(null == this.titulo || null == this.imagen || null == this.descripcion || this.categorias.isEmpty() || this.fechas.isEmpty()){
-            return true;
-        }
-        return false;
+        return null == this.titulo || null == this.imagen || null == this.portada || null == this.trailer || null == this.banner || null == this.descripcion || this.categorias.isEmpty() || this.fechas.isEmpty();
     }
 
     public Long getId() {
@@ -105,5 +111,29 @@ public class Pelicula {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public String getPortada() {
+        return portada;
+    }
+
+    public void setPortada(String portada) {
+        this.portada = portada;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 }

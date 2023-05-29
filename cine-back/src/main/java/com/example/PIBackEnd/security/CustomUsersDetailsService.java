@@ -23,6 +23,7 @@ public class CustomUsersDetailsService implements UserDetailsService  {
     public CustomUsersDetailsService(IUsuariosRepository usuariosRepo) {
         this.usuariosRepo = usuariosRepo;
     }
+
     public Collection<GrantedAuthority> mapToAuthorities(List<Rol> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
     }
