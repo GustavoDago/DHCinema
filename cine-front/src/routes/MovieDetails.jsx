@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
-import Item from "../components/item"
+import Item from "../components/Item"
 
 Modal.setAppElement('#root')
 
