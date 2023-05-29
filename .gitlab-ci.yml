@@ -26,6 +26,7 @@ backend-job:       # This job runs in the build stage, which runs first.
 
 frontend_job:
   stage: build
+  image: npm:latest
   script:
     - cd cine-front/
     - npm install
