@@ -1,7 +1,6 @@
 package com.example.PIBackEnd.controller;
 
 import com.example.PIBackEnd.domain.Categoria;
-import com.example.PIBackEnd.domain.Pelicula;
 import com.example.PIBackEnd.exceptions.CategoriaExistenteException;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
