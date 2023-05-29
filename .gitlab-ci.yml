@@ -27,7 +27,8 @@ frontend_job:
   stage: build
   script:
     - cd cine-front/
-    - git clone  https://gitlab.ctd.academy/ctd/hispanos/proyecto-integrador-1/proyecto-integrador-0523/0822ft-c1/equipo-9/-/tree/main
+    - npm install
+    - npm run build
 
 test_job:
   stage: test
