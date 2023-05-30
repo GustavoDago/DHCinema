@@ -34,6 +34,7 @@ frontend_job:
 
 test_job:
   stage: test
+  image: maven:latest
   script:
     - cd cine-back/
     - mvn test
