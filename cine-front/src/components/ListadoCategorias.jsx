@@ -4,7 +4,7 @@ const ListadoCategorias = () => {
 
   const [errorMessage, setErrorMessage] = useState('')
   const [Categorias, setCategorias] = useState([])
-  const url = 'http://localhost:8080/categorias/';
+  const url = 'http://localhost:8080/categorias';
 
   useEffect(() => {
     const settings = {

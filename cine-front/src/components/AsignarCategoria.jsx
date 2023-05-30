@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListadoPeliculasRadioButton from "./ListadoPeliculasRadioButton";
 import ListadoCategoriasSeleccionar from "./ListadoCategoriasSeleccionar";
 
 const AsignarCategoria = () => {
 
-  window.scrollTo(0, 0);
+  useEffect(()=>{window.scrollTo(0, 0)},[])
+  
 
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState("");
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
@@ -20,7 +21,7 @@ const AsignarCategoria = () => {
 
 
   const guardarCambios = () => {
-    const url = "http://localhost:8080/peliculas/";
+    const url = "http://localhost:8080/peliculas";
 
     const stringificar =() => JSON.stringify({
       ...peliculaSeleccionada,

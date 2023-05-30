@@ -10,7 +10,7 @@ Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-    
+
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -102,7 +102,7 @@ function MovieDetails() {
         />
 
 
-   
+
 
     return (
         <div className={`movie-details `}>
@@ -160,11 +160,9 @@ function MovieDetails() {
                                             image={movie.imagen}
                                         />
                                     ))
-                                ) : ('')}
-
+                                ) : null}
                             </div>
                         </div>
-
                     </div>
                 </div>
                 {!isLoading && (<div className="movie-second-div">
@@ -175,17 +173,17 @@ function MovieDetails() {
                             </div>
                             <div className="half-right">
                                 {[...Array(4)].map((_, index) => (
-                                    <div  key={index}>
+                                    <div key={index}>
                                         <img src={movie.imagen} alt="Movie" />
                                     </div>
                                 ))}
 
                             </div>
                             <div className="button-container">
-                            <button>Ver más</button>
+                                <button>Ver más</button>
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </div>
 
 
