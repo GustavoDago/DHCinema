@@ -118,7 +118,7 @@ function MovieDetails() {
                                         <h4>GENEROS </h4>
 
                                         {movie.categorias.map(categorias => (
-                                            <p>{categorias.categoria}</p>
+                                            <p key={categorias.id}>{categorias.titulo}</p>
                                         ))}
 
                                     </div>
@@ -143,7 +143,7 @@ function MovieDetails() {
                                 <div>
                                     <h2>FECHAS</h2>
                                     {movie.fechas.map(fechas => (
-                                        <button className="dates-button">{fechas.fecha}</button>
+                                        <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
                                     ))}
                                 </div>
                             </div>

@@ -30,9 +30,9 @@ const NuevaCategoria = () => {
 
     // Crear el objeto de datos a enviar al servidor
     const categoryData = {
-      categoria: title,
-      // descripcion: descripcion,
-      // urlImagen: imageUrl,
+      titulo: title,
+      descripcion: descripcion,
+      urlImagen: imageUrl,
     };
   
     // Realizar la petición POST al servidor

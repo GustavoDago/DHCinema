@@ -59,8 +59,8 @@ public class PeliculaController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<List<Pelicula>> buscarPeliculasPorCategoria(@PathVariable String categoria) throws ResourceNoContentException {
-        return ResponseEntity.ok(peliculaService.buscarPeliculasPorCategoria(categoria));
+    public ResponseEntity<List<Pelicula>> buscarPeliculasPorTitulo(@PathVariable String titulo) throws ResourceNoContentException {
+        return ResponseEntity.ok(peliculaService.buscarPeliculasPorTitulo(titulo));
     }
 
     @GetMapping("/random")
