@@ -128,13 +128,13 @@ public class PeliculaService {
         }
     }
 
-    public List<Pelicula> buscarPeliculasPorCategoria(String categoria) throws ResourceNoContentException {
+    public List<Pelicula> buscarPeliculasPorTitulo(String titulo) throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas por categoria");
         List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
         List<Pelicula> peliculasEncontradas = new ArrayList<>();
         for (Pelicula pelicula : todasLasPeliculas) {
             for (Categoria categoriaPelicula : pelicula.getCategorias()) {
-                if (categoriaPelicula.getCategoria().equals(categoria)) {
+                if (categoriaPelicula.getTitulo().equals(titulo)) {
                     peliculasEncontradas.add(pelicula);
                     break;
                 }
@@ -143,7 +143,7 @@ public class PeliculaService {
         if(peliculasEncontradas.size() > 0){
             return peliculasEncontradas;
         }else{
-            throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + categoria + ".");
+            throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + titulo + ".");
         }
     }
 
