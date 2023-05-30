@@ -35,10 +35,7 @@ const GestionAdmin = () => {
         <Link to="/admin/asignar-categoria">Asignar Categoría</Link>
       </div>
       <hr />
-      {!panelElement == '' &&
       <Outlet />
-      }
-      
     </>
   )
 }

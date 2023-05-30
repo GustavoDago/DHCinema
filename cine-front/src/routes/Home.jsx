@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 
 function Home() {
-    window.scrollTo(0, 0);
+
     
     const [index, setIndex] = useState(0);
     const [showCategorie, setShowCategorie] = useState("Todos");

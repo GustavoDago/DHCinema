@@ -829,6 +829,8 @@ footer {
 
 .movie-details-description p {
   font-weight: 500;
+  height: 20vh;
+  overflow-y: scroll;
 }
 
 .movie-details-second {
@@ -894,7 +896,7 @@ footer {
 }
 
 .half-right>div img {
-  height: 100%;
+  height: 20vw;
   object-fit: contain;
 }
 

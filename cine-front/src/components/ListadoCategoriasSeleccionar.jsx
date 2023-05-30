@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccionadas, handleCategoriasSeleccionadas }) => {
   const [Categorias, setCategorias] = useState([]);
-  const url = 'http://localhost:8080/categorias/';
+  const url = 'http://localhost:8080/categorias';
 
   useEffect(() => {
     const settings = {
