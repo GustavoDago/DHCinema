@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .requestMatchers("/peliculas/random").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/peliculas").permitAll()
+                .requestMatchers(HttpMethod.GET,"/categorias/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/peliculas").hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
