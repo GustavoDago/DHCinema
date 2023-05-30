@@ -35,5 +35,5 @@ frontend_job:
 test_job:
   stage: test
   script:
-    - cd backend_directory
+    - cd cine-back/
     - mvn test
