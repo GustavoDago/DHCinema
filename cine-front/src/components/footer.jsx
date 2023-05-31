@@ -8,7 +8,7 @@ return (
     <footer>
         <div className="derechosFooter">
             <Link to="../">
-            <img src="../../icons/DH Cinema-logos_black.png" alt="logoCinemaFooter"/>
+            <img src="../../icons/dhcinema2-logo.png" alt="logoCinemaFooter"/>
             </Link>
             <ul>
                 <li>2023</li>

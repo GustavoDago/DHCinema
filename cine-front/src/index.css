@@ -30,7 +30,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .main-content{
   min-height: 100vh; 
-  padding-top:230px;
+  padding-top:200px;
 }
 
 html,body{
@@ -53,13 +53,13 @@ a:hover {
   color: #535bf2;
 }
 
-.main-content{
-  flex:1;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h3{
+  color: #1b263b
 }
 
 button {
@@ -74,6 +74,12 @@ button {
   transition: border-color 0.25s;
 }
 
+
+nav{
+  display: flex;
+  justify-content: space-around;
+}
+
 .main-content button{
   padding: 10px;
 }
@@ -86,9 +92,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.tabla{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;  
+}
 
-
-
+table{
+  color:#1a1a1a
+}
 
 .logo {
   height: 6em;
@@ -117,13 +131,6 @@ header{
   width: 100%;
 }
 
-.slogan{
-  position: relative;
-  font-size: small;
-  font-weight: 100;
-  top: 20px;
-  right: 60px;
-}
 
 .headerContainer{
   display: flex;
@@ -681,6 +688,218 @@ font-size: medium;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+
+/** Inicio sesion **/
+
+.sign-in-background{
+  height: 100vh;
+  padding: 25px 0 0 0;
+  background-image: url(../public/fondo-registro.jpg);
+  background-position: center;
+  background-size: cover;  
+}
+
+.sign-in-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sign-in{
+  align-items: center;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 30px;
+  filter: drop-shadow(0 0 1em #778DA9);
+}
+
+.sign-in-first{
+  width: 80%;
+  padding: 100px 40px;
+  background-color: white;
+  color: #1B263B;
+  border-radius: 30px 0px 0px 30px;
+}
+
+
+.sign-in-first button{
+  align-self: center;
+  width: 40%;
+  background-color: #778DA9;
+  border: 2px solid #0D1B2A;
+  margin-top: 20px;
+  border-radius: 30px;
+}
+
+.sign-in-first button:hover{
+  background-color: #0D1B2A;
+}
+
+.sign-in-second{
+  background-color: #1B263B;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px   30px 30px 0px;
+}
+
+.sign-in-second p{
+  margin: 0px 20px;
+}
+
+.sign-in form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.sign-in-inputs{
+  align-self: center;
+  height: 50px;
+  width: 70%;
+  background-color: white;
+  border: 0px;
+  filter: drop-shadow(0 0 1em #778DA9);
+  padding-left: 40px;
+  color: #1b263b;
+  border-radius: 30px;
+}
+
+
+
+#input-username{
+  margin: 30px 0px;
+}
+
+#input-password{
+  margin-bottom: 15px;
+}
+
+.remember-me label{
+  margin: 0px 20px 0px 0px;
+}
+
+.remember-me{
+  margin: 0px 0px 20px 0;
+}
+
+.register-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.register-div p {
+  margin: 0px 5px;
+}
+
+/** Vista registro **/
+
+.register{
+  padding: 25px 0 0 0;
+  min-height: 100vh;
+  background-image: url(../public/fondo-registro.jpg);
+  background-position: center;
+  background-size: cover;  
+}
+
+.register-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-container input{
+  width: 50%;
+  align-self: center;
+  height: 50px;
+  padding-left: 40px;
+  border-radius: 30px;
+  color: #1b263b;
+  filter: drop-shadow(0 0 1em #778DA9);
+  background-color: white;
+  margin:15px 0px
+}
+
+.register-seccion1{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.register-seccion1 div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.register-seccion1 div input{
+  align-self: center;
+  width: 100%;
+}
+
+.register-seccion1 p{
+  text-align: center;
+  width: 50%;
+}
+
+.register-container p{
+  font-size: small;
+  color: red;
+  margin: 4px 0px 15px 0px;
+}
+
+.error-input{
+  background-color: white;
+  border: 1px solid red;
+  
+}
+
+
+.register-container form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-self: center;
+  filter: drop-shadow(0 0 1em #778DA9);
+  background-color: white;
+  border-radius: 30px;
+  color: #1b263b;
+  padding: 40px 0;
+}
+
+.register-container .date-container label{
+  margin: 0px 5px 0px 0px;
+}
+
+
+.register-input{
+  border: 0px;
+}
+
+
+.new-button{
+  align-self: center;
+  width: 40%;
+  background-color: #778DA9;
+  border: 2px solid #0D1B2A;
+  margin-top: 20px;
+  border-radius: 30px;
+}
+
+.new-button:hover{
+  background-color: #0D1B2A;
+}
 
 @media (min-width:425px) {
   

@@ -4,6 +4,9 @@ import ContentLoader from "react-content-loader";
 import Item from "../components/item";
 
 function ShowMore() {
+
+    window.scrollTo(0, 0);
+
     const [isLoading,setIsLoading] = useState(true)
     const [movies,setMovies] = useState()
     const [pages,setPages] = useState(1)

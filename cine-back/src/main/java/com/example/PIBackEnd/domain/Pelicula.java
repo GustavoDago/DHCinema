@@ -1,6 +1,6 @@
 package com.example.PIBackEnd.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,13 +16,26 @@ public class Pelicula {
     private String titulo;
 
     @Column(nullable = false, length = 500)
-    private String imagen;
+    private String trailer;
+
+    @Column(nullable = false, length = 500)
+    private String portada;
+
+    @Column(nullable = false, length = 500)
+    private String banner;
 
     @Column(nullable = false, length = 1000)
     private String descripcion;
 
     @Column(nullable = false)
     private Boolean vigente;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "caracteristica_id",referencedColumnName = "id", nullable = false)
+    private Caracteristica caracteristicas;
+
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Imagen> imagenes = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -41,10 +54,7 @@ public class Pelicula {
     private Set<Fecha> fechas = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        if(null == this.titulo || null == this.imagen || null == this.descripcion || this.categorias.isEmpty() || this.fechas.isEmpty()){
-            return true;
-        }
-        return false;
+        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || this.fechas.isEmpty() || null == this.portada || null == this.trailer || null == this.banner;
     }
 
     public Long getId() {
@@ -61,14 +71,6 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 
     public String getDescripcion() {
@@ -105,5 +107,45 @@ public class Pelicula {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public Set<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Set<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public Caracteristica getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(Caracteristica caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public String getPortada() {
+        return portada;
+    }
+
+    public void setPortada(String portada) {
+        this.portada = portada;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 }

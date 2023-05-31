@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef } from "react"
 import categories from "../components/utils/categories.json"
 import Categorie from "../components/utils/categorie"
 import { useNavigate } from "react-router-dom"
@@ -10,6 +10,8 @@ import Modal from "react-modal"
 Modal.setAppElement('#root')
 
 function Home() {
+
+    window.scrollTo(0, 0);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [showCategorie, setShowCategorie] = useState("Todos");
