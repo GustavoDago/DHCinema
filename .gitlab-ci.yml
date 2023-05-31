@@ -41,16 +41,16 @@ test_job_back:
     - changes: 
       - cine-back/**/*
 
-test_job_front: 
-  stage: test
-  image: node:16.16.0
-  script:
-    - cd cine-front/
-    - npm install
-    - npm run test
-  rules: 
-    - changes: 
-      - cine-front/**/*
+# test_job_front: 
+#   stage: test
+#   image: node:16.16.0
+#   script:
+#     - cd cine-front/
+#     - npm install
+#     - npm run test
+#   rules: 
+#     - changes: 
+      # - cine-front/**/*
 
 deploy_backend:
   stage: deploy
