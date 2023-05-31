@@ -47,7 +47,7 @@ test_job_front:
   script:
     - cd cine-front/
     - npm install
-    - npm test
+    - npm run test
   rules: 
     - changes: 
       - cine-front/**/*
