@@ -44,10 +44,7 @@ const GestionAdmin = () => {
         <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORIA</Link>
       </div>
       <hr />
-      {!panelElement == '' &&
       <Outlet />
-      }
-      
     </>
   )
 }

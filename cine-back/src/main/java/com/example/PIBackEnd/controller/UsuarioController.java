@@ -1,9 +1,13 @@
 package com.example.PIBackEnd.controller;
 
+import com.example.PIBackEnd.domain.Rol;
+import com.example.PIBackEnd.domain.Usuario;
 import com.example.PIBackEnd.dtos.DtoAuthRespuesta;
 import com.example.PIBackEnd.dtos.DtoLogin;
 import com.example.PIBackEnd.dtos.DtoRegistro;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
+import com.example.PIBackEnd.exceptions.ResourceNoContentException;
+import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.security.JwtGenerador;
 import com.example.PIBackEnd.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +17,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth/")
-public class RestControllerAuth {
+@RequestMapping("/usuarios")
+@CrossOrigin
+public class UsuarioController {
 
     private AuthenticationManager authenticationManager;
     private JwtGenerador jwtGenerador;
     private UsuarioService usuarioService;
 
     @Autowired
-    public RestControllerAuth(AuthenticationManager authenticationManager, JwtGenerador jwtGenerador, UsuarioService usuarioService) {
+    public UsuarioController(AuthenticationManager authenticationManager, JwtGenerador jwtGenerador, UsuarioService usuarioService) {
         this.authenticationManager = authenticationManager;
         this.jwtGenerador = jwtGenerador;
         this.usuarioService = usuarioService;
@@ -50,5 +53,27 @@ public class RestControllerAuth {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerador.generarToken(authentication);
         return new ResponseEntity<>(new DtoAuthRespuesta(token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{email}/roles")
+    public ResponseEntity<String> cambiarRolesUsuario(@PathVariable("email") String email, @RequestBody List<Rol> nuevosRoles) throws ResourceBadRequestException {
+        usuarioService.asignarRoles(email, nuevosRoles);
+        return ResponseEntity.ok("Roles cambiados exitosamente");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Usuario>> buscarTodosUsuarios() throws ResourceNoContentException {
+        return ResponseEntity.ok(usuarioService.buscarTodosUsuarios());
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<Usuario> buscarUsuario(@PathVariable String email) throws ResourceNotFoundException {
+        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
+    }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<String> eliminarUsuario(@PathVariable String email) throws ResourceNotFoundException {
+        usuarioService.eliminarUsuario(email);
+        return ResponseEntity.ok("Eliminación del Usuario con email = " + email + ", con éxito");
     }
 }

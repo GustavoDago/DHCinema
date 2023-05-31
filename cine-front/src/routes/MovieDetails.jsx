@@ -4,13 +4,13 @@ import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
-import Item from "../components/item"
+import Item from "../components/Item"
 
 Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-    
+
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -102,7 +102,7 @@ function MovieDetails() {
         />
 
 
-   
+
 
     return (
         <div className={`movie-details `}>
@@ -118,7 +118,7 @@ function MovieDetails() {
                                         <h4>GENEROS </h4>
 
                                         {movie.categorias.map(categorias => (
-                                            <p>{categorias.categoria}</p>
+                                            <p key={categorias.id}>{categorias.titulo}</p>
                                         ))}
 
                                     </div>
@@ -143,7 +143,7 @@ function MovieDetails() {
                                 <div>
                                     <h2>FECHAS</h2>
                                     {movie.fechas.map(fechas => (
-                                        <button className="dates-button">{fechas.fecha}</button>
+                                        <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
                                     ))}
                                 </div>
                             </div>
@@ -160,11 +160,9 @@ function MovieDetails() {
                                             image={movie.imagen}
                                         />
                                     ))
-                                ) : ('')}
-
+                                ) : null}
                             </div>
                         </div>
-
                     </div>
                 </div>
                 {!isLoading && (<div className="movie-second-div">
@@ -175,17 +173,17 @@ function MovieDetails() {
                             </div>
                             <div className="half-right">
                                 {[...Array(4)].map((_, index) => (
-                                    <div  key={index}>
+                                    <div key={index}>
                                         <img src={movie.imagen} alt="Movie" />
                                     </div>
                                 ))}
 
                             </div>
                             <div className="button-container">
-                            <button>Ver más</button>
+                                <button>Ver más</button>
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </div>
 
 

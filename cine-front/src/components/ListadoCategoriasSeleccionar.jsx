@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccionadas, handleCategoriasSeleccionadas }) => {
   const [Categorias, setCategorias] = useState([]);
-  const url = 'http://localhost:8080/categorias/';
+  const url = 'http://localhost:8080/categorias';
 
   useEffect(() => {
     const settings = {
@@ -69,7 +69,7 @@ const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccio
             {Categorias.map(categoria => (
               <tr id={categoria.id} key={categoria.id}>
                 <td scope='row'>{categoria.id}</td>
-                <td scope='row'>{categoria.categoria}</td>
+                <td scope='row'>{categoria.titulo}</td>
                 <td scope='row'>
                   <input
                     type='checkbox'

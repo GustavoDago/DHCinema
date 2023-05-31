@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { searchMoviesForCategories } from "../UseFetch";
-import Item from "../item"
+import Item from "../Item"
 import { Link } from "react-router-dom";
 import ContentLoader from "react-content-loader";
 

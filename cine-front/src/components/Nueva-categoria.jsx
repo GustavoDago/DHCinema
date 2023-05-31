@@ -30,13 +30,13 @@ const NuevaCategoria = () => {
 
     // Crear el objeto de datos a enviar al servidor
     const categoryData = {
-      categoria: title,
-      // descripcion: descripcion,
-      // urlImagen: imageUrl,
+      titulo: title,
+      descripcion: descripcion,
+      urlImagen: imageUrl,
     };
   
     // Realizar la petición POST al servidor
-    fetch("http://localhost:8080/categorias/", {
+    fetch("http://localhost:8080/categorias", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

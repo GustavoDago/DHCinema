@@ -13,8 +13,14 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 25)
-    private String categoria;
+    @Column(nullable = false, length = 100)
+    private String titulo;
+
+    @Column(length = 500)
+    private String descripcion;
+
+    @Column(length = 500)
+    private String urlImagen;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "categorias")
@@ -28,12 +34,28 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
     }
 
     public Set<Pelicula> getPeliculas() {

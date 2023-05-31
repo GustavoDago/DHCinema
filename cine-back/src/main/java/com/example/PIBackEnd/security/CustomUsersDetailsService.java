@@ -2,7 +2,7 @@ package com.example.PIBackEnd.security;
 
 import com.example.PIBackEnd.domain.Rol;
 import com.example.PIBackEnd.domain.Usuario;
-import com.example.PIBackEnd.repository.IUsuariosRepository;
+import com.example.PIBackEnd.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,12 +17,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomUsersDetailsService implements UserDetailsService  {
-    private IUsuariosRepository usuariosRepo;
+    private IUsuarioRepository usuariosRepo;
 
     @Autowired
-    public CustomUsersDetailsService(IUsuariosRepository usuariosRepo) {
+    public CustomUsersDetailsService(IUsuarioRepository usuariosRepo) {
         this.usuariosRepo = usuariosRepo;
     }
+
     public Collection<GrantedAuthority> mapToAuthorities(List<Rol> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
     }
