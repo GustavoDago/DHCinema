@@ -1,29 +1,36 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { confirmAccount } from "../components/UseFetch";
 
 
 
+
 function ConfirmAccount() {
-    const [activated, setActivated] = useState(false)
-    const { token } = useParams();
+    const [message, setMessage] = useState('')
+    const location = useLocation()
+    const searchParam = new URLSearchParams(location.search);
+    const token = searchParam.get('token')
+
     useEffect(() => {
-
-        try {
-            const response = confirmAccount(token)
-
-            if (response != false && response != null) {
-                console.log(response)
-                if (response.include("Email verificado")) {
-                    setActivated(true)
-                } else {
-                    setActivated(false)
+        const accountConfimation = async () => {
+            try {
+                const response = await confirmAccount(token)
+    
+                if (response != false && response != null) {
+                    console.log(response)
+                    setMessage(response)
+                } else{
+                    setMessage("Hubo un error")
                 }
+            } catch (error) {
+                setMessage("Hubo un error.")
             }
-        } catch (error) {
-
         }
-    }, [])
+    
+        accountConfimation();
+    },[])
+
+
 
     return (
         <div className="confirm-email-conteiner">
@@ -32,15 +39,7 @@ function ConfirmAccount() {
                 <div className="confirm-email">
                     <h1>Confirmación de cuenta</h1>
 
-                    {activated ? (
-                        <div>
-                            <p>Tu cuenta se ha verificado correctamente. ¡Bienvenido!</p>
-                        </div>
-                    ) : (
-                        <div>
-                            <p>No se pudo verificar tu cuenta o ya se encuentra verificado. Por favor, intenta nuevamente.</p>
-                        </div>
-                    )}
+                    {message}
 
                     <button><a href="http://localhost:5173/">VOLVER A DHCINEMA</a></button>
                 </div>
@@ -50,4 +49,4 @@ function ConfirmAccount() {
         </div>);
 }
 
-export default ConfirmAccount;q
+export default ConfirmAccount;

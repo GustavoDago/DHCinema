@@ -85,6 +85,14 @@ function Register() {
                     }, 3500)
                 }
 
+            } else {
+                setIsLoading(false);
+                setMessage(response);
+                setAccepted(false);
+                setTimeout(() => {
+                    setMessage('')
+                    setShowConfirmation(false);
+                }, 3500)
             }
         } catch (error) {
             setIsLoading(false);

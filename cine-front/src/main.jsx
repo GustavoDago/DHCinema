@@ -17,27 +17,25 @@ import AsignarCategoria from './components/AsignarCategoria.jsx'
 import ConfirmAccount from './routes/ConfirmAccount.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/confirmar-cuenta' element={<ConfirmAccount />}/>
-        <Route path='/' element={<App />}>
-          <Route path='/' element={<Home />} />
-          <Route path='peliculas/pagina/:id' element={<ShowMore />} />
-          <Route path='peliculas/:id' element={<MovieDetails />} />
-          <Route
-            path='/admin' element={<GestionAdmin />}>
-            <Route path='/admin' element={<ListadoPeliculas />} />
-            <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
-            <Route path='/admin/nueva-pelicula' element={<AdministrationPanel />} />
-            <Route path='/admin/ListadoCategorias' element={<ListadoCategorias />} />
-            <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
-            <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
-          </Route>
-          <Route path='inicio-sesion' element={<SignIn />} />
-          <Route path='registrarse' element={<Register />} />
+  <BrowserRouter>
+    <Routes>
+      <Route path='/confirmar-cuenta' element={<ConfirmAccount />} />
+      <Route path='/' element={<App />}>
+        <Route path='/' element={<Home />} />
+        <Route path='peliculas/pagina/:id' element={<ShowMore />} />
+        <Route path='peliculas/:id' element={<MovieDetails />} />
+        <Route
+          path='/admin' element={<GestionAdmin />}>
+          <Route path='/admin' element={<ListadoPeliculas />} />
+          <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
+          <Route path='/admin/nueva-pelicula' element={<AdministrationPanel />} />
+          <Route path='/admin/ListadoCategorias' element={<ListadoCategorias />} />
+          <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
+          <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+        <Route path='inicio-sesion' element={<SignIn />} />
+        <Route path='registrarse' element={<Register />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 )

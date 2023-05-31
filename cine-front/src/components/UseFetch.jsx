@@ -140,7 +140,7 @@ export const fetchRegisterUser = async (user) => {
         },
         body: JSON.stringify(user),
     }).then((response) => {
-        if (response.ok){
+        if (response){
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
@@ -191,7 +191,7 @@ export const confirmAccount = async (token) => {
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
     .then((response) => {
-        if (response.ok){
+        if (response){
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');

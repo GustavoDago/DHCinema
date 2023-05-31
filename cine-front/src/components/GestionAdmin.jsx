@@ -16,6 +16,15 @@ const GestionAdmin = () => {
     } else if (panelElement == "nueva-pelicula"){
       setTitle('Agregar Nueva Pelicula')
       setDescription('Aqui podra agregar una nueva pelicula. Por favor proporcione el titulo, descripcion, genero/s, fechas disponibles, tiempo de reproduccion, imagenes de portada, banner y de galeria')
+    } else if(panelElement == "listado-categorias"){
+      setTitle('Listar Categorias')
+      setDescription('Aqui podra listar todas las categorias que se encuentran disponibles.')
+    }else if(panelElement == "crear-categoria"){
+      setTitle('Crear Categoria')
+      setDescription('Aqui podra crear una nueva categoria para asignarle a peliculas.')
+    } else if(panelElement == "asignar-categoria"){
+      setTitle('Asignar Categoria')
+      setDescription('Aqui podra listar todas las peliculas y asignarle una nueva categoria.')
     } 
   },[panelElement])
 
@@ -30,9 +39,9 @@ const GestionAdmin = () => {
       <div className='admin-links'>
         <Link onClick={() => setPanelElement("listar")} to="/admin/ListadoPeliculas">LISTAR PELICULAS</Link>
         <Link onClick={() => setPanelElement("nueva-pelicula")} to="/admin/nueva-pelicula">CARGAR PELICULA</Link>
-        <Link to="/admin/ListadoCategorias">Listar Categorías</Link>
-        <Link to="/admin/nueva-categoria">Crear Categoría</Link>
-        <Link to="/admin/asignar-categoria">Asignar Categoría</Link>
+        <Link onClick={() => setPanelElement("listado-categorias")} to="/admin/ListadoCategorias">LISTAR CATEGORIAS</Link>
+        <Link onClick={() => setPanelElement("crear-categoria")} to="/admin/nueva-categoria">CREAR CATEGORIA</Link>
+        <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORIA</Link>
       </div>
       <hr />
       {!panelElement == '' &&

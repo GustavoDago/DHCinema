@@ -52,23 +52,23 @@ function SignIn() {
             const response = await fetchLogInUser(data);
             if (response != false && response != null) {
                 console.log(response);
-                if (response.includes('valida')) {
+                if (response.includes('no posee')) {
                     setIsLoading(false);
                     setMessage(response);
+                    setAccepted(false);
+                    setTimeout(() => {
+                        setMessage('')
+                        setShowConfirmation(false);
+                    }, 3500)
+                } else {
+                    setIsLoading(false);
+                    setMessage('Ingreso sesion correctamente.')
                     setAccepted(true);
                     setTimeout(() => {
                         setMessage('')
                         setAccepted(false)
                         setShowConfirmation(false);
                         navigate("/");
-                    }, 3500)
-                } else {
-                    setIsLoading(false);
-                    setMessage('');
-                    setAccepted(false);
-                    setTimeout(() => {
-                        setMessage('No se encuentra registrado o no verifico su correo.')
-                        setShowConfirmation(false);
                     }, 2000)
                 } 
 

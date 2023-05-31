@@ -1462,9 +1462,12 @@ div.asignoCategorias {
   flex-direction: column;
   width: auto;
   height: 100%;
-
 }
 
+.modal-content-register img{
+  width: 100px;
+  height: auto;
+}
 
 .register-container form {
   display: flex;
