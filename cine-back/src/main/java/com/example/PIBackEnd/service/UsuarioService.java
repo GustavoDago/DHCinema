@@ -2,13 +2,22 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Rol;
 import com.example.PIBackEnd.domain.Usuario;
+import com.example.PIBackEnd.dtos.DtoLogin;
 import com.example.PIBackEnd.dtos.DtoRegistro;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.repository.IRolRepository;
 import com.example.PIBackEnd.repository.IUsuarioRepository;
+import com.example.PIBackEnd.security.JwtGenerador;
+import com.example.PIBackEnd.security.JwtUtil;
 import org.apache.log4j.Logger;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -23,11 +32,20 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
     private IRolRepository rolesRepository;
     private IUsuarioRepository usuarioRepository;
+    private JwtGenerador jwtGenerador;
+    private AuthenticationManager authenticationManager;
+    private EmailService emailService;
+    private JwtUtil jwtUtil;
 
-    public UsuarioService(PasswordEncoder passwordEncoder, IRolRepository rolesRepository, IUsuarioRepository usuariosRepository) {
+
+    public UsuarioService(PasswordEncoder passwordEncoder, IRolRepository rolesRepository, IUsuarioRepository usuarioRepository, JwtGenerador jwtGenerador, AuthenticationManager authenticationManager, EmailService emailService, JwtUtil jwtUtil) {
         this.passwordEncoder = passwordEncoder;
         this.rolesRepository = rolesRepository;
-        this.usuarioRepository = usuariosRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.jwtGenerador = jwtGenerador;
+        this.authenticationManager = authenticationManager;
+        this.emailService = emailService;
+        this.jwtUtil = jwtUtil;
     }
 
     public String guardarUsuario(DtoRegistro dtoRegistro) throws ResourceBadRequestException {
@@ -41,10 +59,23 @@ public class UsuarioService {
         usuarios.setEmail(dtoRegistro.getEmail());
         usuarios.setPassword(passwordEncoder.encode(dtoRegistro.getPassword()));
         Optional<Rol> roles = rolesRepository.findByNombre("USER");
+        usuarios.setActivo(false);
         if(roles.isPresent()){
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    dtoRegistro.getEmail(), dtoRegistro.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtGenerador.generarToken(authentication);
+            token = jwtUtil.encodeToken(token);
+            SimpleMailMessage mensajeEmail = new SimpleMailMessage();
+            mensajeEmail.setFrom("dhcinemaauth@gmail.com");
+            mensajeEmail.setTo(dtoRegistro.getEmail());
+            mensajeEmail.setSubject("Completa tu registro a DHCinema");
+            mensajeEmail.setText("Para confirmar tu cuenta, por favor has click en el siguiente enlace: "
+                    + "http://localhost:5173/confirmar-cuenta?token=" + token);
+            emailService.sendEmail(mensajeEmail);
             usuarios.setRoles(Collections.singletonList(roles.get()));
             usuarioRepository.save(usuarios);
-            return "Registro de usuario exitoso";
+            return "Registro de usuario exitoso. Verifica tu casilla de correo para validar tu email.";
         }else{
             throw new ResourceBadRequestException("Error. Debe existir Rol USER");
         }
@@ -124,5 +155,38 @@ public class UsuarioService {
         }else{
             throw new ResourceNotFoundException("Error. No existe el Usuario con email = " + email);
         }
+    }
+
+    //Verifica el token y en caso de ser positivo actualiza el usuario.
+    public ResponseEntity<String> confirmarEmail(String confirmacionToken) {
+
+        if(confirmacionToken != null) {
+            confirmacionToken = jwtUtil.decodeToken(confirmacionToken);
+            Boolean validacion = jwtGenerador.validarToken(confirmacionToken);
+            if(validacion){
+                String email = jwtGenerador.obtenerUsernameDeJwt(confirmacionToken);
+                Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+                if(usuario.isPresent()) {
+                    Usuario actualizarUsuario = usuario.get();
+                    if(actualizarUsuario.getActivo()){
+                        return ResponseEntity.badRequest().body("El usuario ya se encuentra verificado.");
+                    }
+                    actualizarUsuario.setActivo(true);
+                    usuarioRepository.save(actualizarUsuario);
+                    return ResponseEntity.ok("Email verificado correctamente!");
+                }
+            }
+        }
+        System.out.println("LLEGA ACA3");
+        return ResponseEntity.badRequest().body("Error: No se pudo verificar el email.");
+    }
+
+    public Boolean usuarioActivo (DtoLogin dtoLogin){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(dtoLogin.getEmail());
+        System.out.println(usuario.get().getNombre());
+        if(usuario.isPresent()){
+            return usuario.get().getActivo();
+        }
+        return false;
     }
 }

@@ -47,12 +47,18 @@ public class UsuarioController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<DtoAuthRespuesta> login(@RequestBody DtoLogin dtoLogin) {
+    public ResponseEntity<?> login(@RequestBody DtoLogin dtoLogin) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 dtoLogin.getEmail(), dtoLogin.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerador.generarToken(authentication);
-        return new ResponseEntity<>(new DtoAuthRespuesta(token), HttpStatus.OK);
+        Boolean activo = usuarioService.usuarioActivo(dtoLogin);
+        DtoAuthRespuesta dtoAuthRespuesta = new DtoAuthRespuesta(token);
+        if (activo){
+            return new ResponseEntity<>(new DtoAuthRespuesta(token), HttpStatus.OK);
+        } else {
+            return ResponseEntity.badRequest().body("Usted no posee una cuenta o debe verificarla.");
+        }
     }
 
     @PutMapping("/{email}/roles")
@@ -75,5 +81,11 @@ public class UsuarioController {
     public ResponseEntity<String> eliminarUsuario(@PathVariable String email) throws ResourceNotFoundException {
         usuarioService.eliminarUsuario(email);
         return ResponseEntity.ok("Eliminación del Usuario con email = " + email + ", con éxito");
+    }
+
+    @GetMapping ("/confirmar-cuenta")
+    public ResponseEntity<String> confirmUserAccount(@RequestParam("token")String confirmacionToken) {
+        ResponseEntity <String>  confirmar = usuarioService.confirmarEmail(confirmacionToken);
+        return confirmar;
     }
 }

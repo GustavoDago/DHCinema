@@ -55,6 +55,7 @@ public class SecurityConfig {
                 .requestMatchers("/usuarios/**").permitAll()
                 .requestMatchers("/roles").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/usuarios/{email}/roles").permitAll()
                 //.requestMatchers(HttpMethod.PUT, "/usuarios/{email}/roles").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
