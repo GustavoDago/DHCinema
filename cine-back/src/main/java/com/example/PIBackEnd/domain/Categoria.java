@@ -15,8 +15,10 @@ public class Categoria {
 
     @Column(nullable = false, length = 100)
     private String titulo;
+
     @Column(length = 500)
     private String descripcion;
+
     @Column(length = 500)
     private String urlImagen;
 

@@ -3,7 +3,7 @@ package com.example.PIBackEnd.service;
 import com.example.PIBackEnd.domain.Categoria;
 import com.example.PIBackEnd.exceptions.CategoriaExistenteException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
-import com.example.PIBackEnd.repository.CategoriaRepository;
+import com.example.PIBackEnd.repository.ICategoriaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ import java.util.Set;
 public class CategoriaService {
 
     private final static Logger logger = Logger.getLogger(CategoriaService.class);
-    private CategoriaRepository categoriaRepository;
+    private ICategoriaRepository categoriaRepository;
 
     @Autowired
-    public CategoriaService(CategoriaRepository categoriaRepository) {
+    public CategoriaService(ICategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
     }
 

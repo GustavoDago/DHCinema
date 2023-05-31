@@ -16,9 +16,6 @@ public class Pelicula {
     private String titulo;
 
     @Column(nullable = false, length = 500)
-    private String imagen;
-
-    @Column(nullable = false, length = 500)
     private String trailer;
 
     @Column(nullable = false, length = 500)
@@ -32,6 +29,13 @@ public class Pelicula {
 
     @Column(nullable = false)
     private Boolean vigente;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "caracteristica_id",referencedColumnName = "id", nullable = false)
+    private Caracteristica caracteristicas;
+
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Imagen> imagenes = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -50,7 +54,7 @@ public class Pelicula {
     private Set<Fecha> fechas = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        return null == this.titulo || null == this.imagen || null == this.portada || null == this.trailer || null == this.banner || null == this.descripcion || this.categorias.isEmpty() || this.fechas.isEmpty();
+        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || this.fechas.isEmpty() || null == this.portada || null == this.trailer || null == this.banner;
     }
 
     public Long getId() {
@@ -67,14 +71,6 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 
     public String getDescripcion() {
@@ -111,6 +107,22 @@ public class Pelicula {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public Set<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Set<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public Caracteristica getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(Caracteristica caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 
     public String getTrailer() {

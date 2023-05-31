@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/peliculas")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class PeliculaController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class PeliculaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarPelicula(@PathVariable Long id) throws ResourceNotFoundException {
         peliculaService.eliminarPelicula(id);
-        return ResponseEntity.ok("Eliminación de la Pelicula con id = " + id + " con éxito");
+        return ResponseEntity.ok("Eliminación de la Pelicula con id = " + id + ", con éxito");
     }
 
     @PostMapping
@@ -38,8 +38,8 @@ public class PeliculaController {
     }
 
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<Pelicula> buscarPeliculaPorTitulo(@PathVariable String titulo) throws ResourceNotFoundException {
-        return ResponseEntity.ok(peliculaService.buscarPeliculaPorTitulo(titulo).get());
+    public ResponseEntity<List<Pelicula>> buscarPeliculaPorTitulo(@PathVariable String titulo) throws ResourceNotFoundException {
+        return ResponseEntity.ok(peliculaService.buscarPeliculaPorTitulo(titulo));
     }
 
     @GetMapping
