@@ -14,12 +14,13 @@ import GestionAdmin from './components/GestionAdmin.jsx'
 import ListadoCategorias from './components/ListadoCategorias.jsx'
 import NuevaCategoria from './components/Nueva-categoria.jsx'
 import AsignarCategoria from './components/AsignarCategoria.jsx'
-
+import ConfirmAccount from './routes/ConfirmAccount.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path='/confirmar-cuenta' element={<ConfirmAccount />}/>
         <Route path='/' element={<App />}>
           <Route path='/' element={<Home />} />
           <Route path='peliculas/pagina/:id' element={<ShowMore />} />
