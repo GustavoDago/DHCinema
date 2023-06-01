@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react"
+import React, { useState, useRef } from "react"
 import categories from "../components/utils/categories.json"
 import Categorie from "../components/utils/Categorie"
 import Billboard from "../components/home/Billboard"
@@ -10,7 +10,6 @@ function Home() {
     
  
     const [index, setIndex] = useState(0);
-    const [showCategorie, setShowCategorie] = useState("Todos");
     const timeRef = useRef(null)
     const mod = (n, m) => {
         let result = n % m;
@@ -85,19 +84,7 @@ function Home() {
         setShowCategorie(value);
     }
 
-    const divRef = useRef(null);
-
-    const btnpressprev = () => {
-        let width = divRef.current.offsetWidth;
-        divRef.current.scrollLeft = divRef.current.scrollLeft - width;
-        console.log(width)
-    }
-
-    const btnpressnext = () => {
-        let width = divRef.current.offsetWidth;
-        divRef.current.scrollLeft = divRef.current.scrollLeft + width;
-        console.log(width)
-    }
+    
 
     return (
 
@@ -150,25 +137,9 @@ function Home() {
                 </div>
             </div>
 
-            <div className="categories-section">
-                <img className='first-button' src="./icons/atras.svg" onClick={btnpressprev} />
-                <div className="carrousel-slider" ref={divRef}>
-                    {categories.map(categorie => (
-                        <Categorie
-                            value={showCategorie}
-                            updateFather={updateCategorie}
-                            key={categorie.id}
-                            name={categorie.name}
-                            image={categorie.image}
-                        />
-                    ))}
-                </div>
-                <img className='last-button' src="./icons/adelante.svg" onClick={btnpressnext} />
-            </div>
+            
 
-            <Billboard
-                categorie={showCategorie}
-            />
+            <Billboard  />
             <Recommended />
 
 

@@ -5,7 +5,7 @@ const API_ENDPOINT = `http://localhost:8080`;
 
 export const searchMoviesForCategories = async (url) => {
 
-    if (url === 'Todos') {
+    if (url === 'Ninguno') {
         url = '/peliculas'
     } else {
         url = `/peliculas/categoria/${url}`
