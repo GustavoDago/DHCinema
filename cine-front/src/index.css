@@ -758,7 +758,27 @@ footer {
   height: 60vh;
   background-image: linear-gradient(to right, rgba(31.5, 10.5, 94.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 10.5, 94.5, 0.84) 50%, rgba(31.5, 10.5, 94.5, 0.84) 100%);
 }
-
+.caracteristica-item{
+  display:flex;
+  justify-content: space-evenly;
+  width: 98vw;
+}
+.movie-details-features {
+  display: flex;
+  font-weight: 600;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  color: #000;
+}
+.movie-details-features h2 {
+  position: relative;
+  text-align: left;
+  margin-left: 5vw;
+}
+.h2-movieDetails hr{
+  border: none; /* Eliminar el borde predeterminado */
+  border-top: 1px solid rgb(17, 5, 83); /* Establecer el color del borde superior */
+}
 .movie-first-info {
   position: absolute;
   top: 40%;
@@ -830,8 +850,12 @@ footer {
 
 .movie-details-description p {
   font-weight: 500;
-  height: 20vh;
-  overflow-y: scroll;
+  font-size: 14px;
+  height: 30vh;
+}
+.fechas-container {
+width: 50vw;
+margin-left: -10vw;
 }
 
 .movie-details-second {
@@ -859,7 +883,8 @@ footer {
 
 .movie-details-related {
   width: 50%;
-  padding-left: 30px;
+  padding-left: 20px;
+  margin-left: 13vw;
   text-align: left;
   border-left: 2px solid #1B263B;
 }
@@ -887,18 +912,20 @@ footer {
 .half-right {
   width: 50%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  grid-template-columns: repeat(2, 0fr);
+  grid-gap: 1px;
+  
 }
 
 .half-right>div {
-  width: 100%;
-  height: 100%;
+  width: 20vw;
+  height: 20vw;
 }
 
 .half-right>div img {
   height: 20vw;
-  object-fit: contain;
+  object-fit: fill;
+  
 }
 
 .button-container {
@@ -909,6 +936,18 @@ footer {
 
 .movie-second-div {
   padding: 20px 0;
+}
+.half-left img {
+  width: 40vw;
+  height: 60vh;
+}
+.half-right img {
+  width: 20vw;
+  height: 20vh;
+}
+ .image-details {
+  
+  
 }
 
 /** Panel de administrador **/

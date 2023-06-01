@@ -5,6 +5,10 @@ import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
+
+
 
 Modal.setAppElement('#root')
 
@@ -16,10 +20,11 @@ function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true)
     const params = useParams()
     const [showVideo, setShowVideo] = useState(false);
-    const [video,setVideo] = useState('')
-    const [banner,setBanner] = useState({})
-    const [first,setFirst] =  useState([{}])
-    const [last,setLast] =  useState([{}])
+    const [video, setVideo] = useState('')
+    const [banner, setBanner] = useState({})
+    const [first, setFirst] = useState([{}])
+    const [last, setLast] = useState([{}])
+    const [caracteristica, setCaracteristica] = useState([{}])
 
     const customStyles = {
         overlay: { zIndex: 1000 }
@@ -31,7 +36,7 @@ function MovieDetails() {
             try {
                 const movieForId = await searchMovieDetails(params.id)
                 const movieRandom = await searchRandomMovies()
-                
+
                 if (movieForId != false) {
                     console.log(movieForId)
                     setMovie(movieForId);
@@ -39,14 +44,18 @@ function MovieDetails() {
                         backgroundImage: `url(${movieForId.banner})`
                     })
                     setVideo(movieForId.trailer)
-                    setFirst(movieForId.imagenes.slice(0,1))
-                    setLast(movieForId.imagenes.slice(1,5))
+                    setFirst(movieForId.imagenes.slice(0, 1))
+                    setLast(movieForId.imagenes.slice(1, 5))
                 }
                 if (movieRandom != false) {
                     setMovies(movieRandom)
                 }
+                if (movieForId != false) {
+                    setCaracteristica(movieForId.caracteristicas);
+                }
+
                 setIsLoading(false);
-               
+
             } catch (error) {
                 console.error(error)
             }
@@ -112,12 +121,12 @@ function MovieDetails() {
             height="100%vh"
         />
 
-    
+
 
     return (
         <div className={`movie-details `}>
             <div>
-                <div className="banner-video" style={!isLoading ? banner: {}}>
+                <div className="banner-video" style={!isLoading ? banner : {}}>
                     <div className="banner-details">
                         <img className="play-icon" src="/icons/play_icon.svg" onClick={handleShowVideo} />
                         <div className="movie-first-info">
@@ -150,7 +159,7 @@ function MovieDetails() {
                                     <h2>DETALLES</h2>
                                     <p>{movie.descripcion}</p>
                                 </div>
-                                <div>
+                                <div className="fechas-container">
                                     <h2>FECHAS</h2>
                                     {movie.fechas.map(fechas => (
                                         <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
@@ -172,6 +181,24 @@ function MovieDetails() {
                                     ))
                                 ) : null}
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="movie-details-features">
+                    <div>
+                        <div className="h2-movieDetails">
+                            <h2>Que ofrece esta película?</h2>
+                            <hr></hr>
+                        </div>
+                        <div className="caracteristicas-container">
+                            {movie && movie.caracteristicas && (
+                                <div className="caracteristica-item">
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Clasificacion: {movie.caracteristicas.clasificacion}</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Director: {movie.caracteristicas.director}</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Duracion: {movie.caracteristicas.duracion} minutos</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Tipo de pantalla: {movie.caracteristicas.modalidad}</span>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
