@@ -49,7 +49,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("http://<dirección-del-EC2>");
+                    config.addAllowedOrigin("http://g9-pelis.s3-website.us-east-2.amazonaws.com/");
                     config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
                     config.setAllowedHeaders(Collections.singletonList("Authorization"));
                     cors.configurationSource(request -> config);
