@@ -27,9 +27,9 @@ frontend_job_build:
     name: react_dhcinema_build
     paths: 
     - cine-front/build
-  rules: 
-    - changes: 
-      - cine-front/**/*
+  # rules: 
+  #   - changes: 
+  #     - cine-front/**/*
 
 test_job_back:
   stage: test
@@ -88,6 +88,6 @@ deploy_Frontend:
     - ls build/
     - aws s3 sync build/ s3://g9-pelis
 
-  rules:
-    - changes:
-        - FrontEnd/**/*
+  # rules:
+  #   - changes:
+  #       - FrontEnd/**/*
