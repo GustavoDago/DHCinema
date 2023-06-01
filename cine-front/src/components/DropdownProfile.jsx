@@ -22,9 +22,7 @@ const DropdownProfile = () => {
 
     return (
         <div className="account-container" ref={menuRef}>
-            {localStorage.getItem('savedEmail') && localStorage.getItem('savedPassword') &&
-                <p>Hola {localStorage.getItem('savedEmail')}</p>
-            }
+            
             <div className="account-trigger" onClick={() => {setOpen(!open)}}>
                 <img src="/icons/account-icon.svg" />
             </div>
