@@ -394,8 +394,8 @@ footer {
 .iconosFooter svg {
   height: 30px;
   padding-right: 5px;
+  
 }
-
 
 
 .iconosFooter {
@@ -620,7 +620,7 @@ footer {
   position: relative;
   overflow: hidden;
   border-radius: 6px;
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 10px 10px 15px rgba(138, 136, 136, 0.664);
   cursor: pointer;
   margin: 0;
 
@@ -656,6 +656,8 @@ footer {
 
 .opt-card button {
   width: 100%;
+  color: #E0E1DD;
+  background-color: #415A77;
 }
 
 .movie-card figure:hover>.opt-card {
@@ -1203,6 +1205,31 @@ footer {
   margin: 0px 20px;
 }
 
+
+/* Form Crear Categoria */
+
+
+
+.form-crearCategoria div{
+  margin: 5px;
+}
+
+.form-crearCategoria button{
+  color: #0D1B2A;
+  background-color: #E0E1DD;
+  margin-top: 15px;
+}
+
+
+
+.form-crearCategoria button:hover{
+  color: #E0E1DD;
+  background-color: #415A77;
+  box-shadow: 0px 1px 5px #778DA9;
+}
+
+
+
 /** vista Asignar Categorías **/
 div.asignoCategorias {
   display: flex;
@@ -1220,6 +1247,7 @@ div.asignoCategorias {
 .page-div {
   display: flex;
   justify-content: center;
+  
 }
 
 .pages {

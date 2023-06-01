@@ -54,18 +54,18 @@ function ShowMore() {
         for (let i=0;i<10;i++){
             loaders.push(
             <div key={i} className="content-loader">
-              <ContentLoader
+            <ContentLoader
                 speed={2}
                 width="100%"
                 height="100%"
                 backgroundColor="#f3f3f3"
                 foregroundColor="#ecebeb"
-              >
+            >
                 <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
-              </ContentLoader>
+            </ContentLoader>
             </div>
             )
-          }
+        }
         return loaders;
     }
 
