@@ -8,6 +8,7 @@ import ShowMore from './routes/ShowMore.jsx'
 import MovieDetails from './routes/MovieDetails.jsx'
 import AdministrationPanel from './routes/AdministrationPanel.jsx'
 import SignIn from './routes/SignIn.jsx'
+import SignOut from './routes/SignOut.jsx'
 import Register from './routes/Register.jsx'
 import ListadoPeliculas from './components/ListadoPeliculas.jsx'
 import GestionAdmin from './components/GestionAdmin.jsx'
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Route>
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
+        <Route path='cerrar-sesion' element={<SignOut />} />  
       </Route>
     </Routes>
   </BrowserRouter>

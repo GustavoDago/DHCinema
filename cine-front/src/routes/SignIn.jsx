@@ -109,10 +109,10 @@ function SignIn() {
             <div className="sign-in-container">
                 <div className="sign-in">
                     <div className="sign-in-first">
-                        <div>
-                            <h2>Bienvenido!</h2>
-                            <p>Inicia sesion en tu cuenta</p>
-                        </div>
+                                <div>
+                                    <h2>Bienvenido!</h2>
+                                    <p>Inicia sesion en tu cuenta</p>
+                                </div>
                         <form onSubmit={handleSubmit}>
                             <input
                                 className="sign-in-inputs"

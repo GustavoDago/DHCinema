@@ -1391,7 +1391,8 @@ div.asignoCategorias {
 .register-div p {
   margin: 0px 5px;
 }
-
+/** Cierre de Sesion **/
+.signOut
 /** Vista registro **/
 
 .register {
