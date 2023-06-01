@@ -28,7 +28,7 @@ const DropdownProfile = () => {
             </div>
             <div className={`drop-down-profile ${open? 'active' : 'inactive'}`}>
                 <ul>
-                    {!sessionStorage.getItem('role') &&
+                    {sessionStorage.getItem('role') &&
                         <Link to='/perfil'>
                             <li className="drop-down-item-perfil">Perfil</li>
                         </Link>

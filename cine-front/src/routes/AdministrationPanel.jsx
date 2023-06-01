@@ -158,7 +158,7 @@ function AdministrationPanel() {
                 imagenes: multipleUrl.map((url) => ({imagen: url})),
                 categorias: selectedCategories.filter((category) => category.selected == true)
                 .map((category) => ({titulo: category.titulo})),
-                fechas: selectedDates.map((date) => ({ fecha: format(new Date(date), 'yyyy-MM-dd') }))
+                fechas: selectedDates.map((date) => ({ fecha: format(new Date('2022-07-23'), 'yyyy-MM-dd') }))
             };
             const jsonData = JSON.stringify(data);
             console.log(jsonData);
