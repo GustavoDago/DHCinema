@@ -745,7 +745,7 @@ footer {
   background-position: left calc((50vw - 170px) - 340px) top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('../public/banner-guardianes.jpg');
+
   position: relative;
   border-bottom: 1px solid black;
   box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.7);
@@ -876,16 +876,16 @@ footer {
 
 
 .half-left {
-  width: 50vw;
+  width: 50%;
 }
 
 .half-left img {
-  width: 450px;
+  width: 100%;
   height: auto;
 }
 
 .half-right {
-  width: 50vw;
+  width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
