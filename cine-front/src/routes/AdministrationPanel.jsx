@@ -2,11 +2,12 @@ import { useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Modal from "react-modal"
-import { format } from 'date-fns'
+
 import { fetchCategorias, newMovie } from "../components/UseFetch";
 import MultipleImageDrop from "../components/AdministrationPanel/multipleImageDrop";
 import SingleImageDrop from "../components/AdministrationPanel/singleImageDrop";
 import { useEffect } from "react";
+import { format, isValid } from "date-fns";
 
 Modal.setAppElement('#root')
 
@@ -16,15 +17,14 @@ function AdministrationPanel() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [selectedCategories, setSelectedCategories] = useState([])
-    const [selectedDates, setSelectedDates] = useState([])
+    
+    const [selectedDates, setSelectedDates] = useState([new Date()])
     const [image, setImage] = useState(null)
     const [banner, setBanner] = useState(null)
     const [gallery, setGallery] = useState([])
     const [multipleUrl, setMultipleUrl] = useState([])
-    const [imagePreview, setImagePreview] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const [isError, setIsError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [sala, setSala] = useState('')
     const [duration, setDuration] = useState('')
@@ -33,6 +33,7 @@ function AdministrationPanel() {
     const [lenguage, setLenguage] = useState('')
     const [director, setDirector] = useState('')
     const [actors, setActors] = useState('')
+    const [trailer,setTrailer] = useState('')
 
     useEffect(() => {
 
@@ -42,7 +43,12 @@ function AdministrationPanel() {
             try {
                 const categories = await fetchCategorias()
                 if (categories) {
-                    setSelectedCategories(categories);
+                    
+                    const updatedCategorias = categories.map(categoria => ({
+                        ...categoria,
+                        selected: false
+                      }));
+                    setSelectedCategories(updatedCategorias);
                     setIsLoading(false);
                     setErrorMessage('')
                     setShowConfirmation(false)
@@ -72,12 +78,8 @@ function AdministrationPanel() {
         setDescription(e.target.value)
     }
 
-    const handleCategoriesChange = (e) => {
-        const options = e.target.selectedOptions;
-        const selected = Array.from(options, (option) => option.value);
-        setSelectedCategories(selected);
-    }
-
+    
+    
 
     const closeModal = () => {
         setShowConfirmation(false)
@@ -103,7 +105,7 @@ function AdministrationPanel() {
 
 
         } catch (error) {
-            console.error('Error al subir la imagen')
+            console.error(error)
             return false
         }
     }
@@ -122,12 +124,13 @@ function AdministrationPanel() {
                 })
 
                 const result = await response.json();
+                console.log(result.secure_url)
                 setMultipleUrl((prevUrlList) => [...prevUrlList, result.secure_url])
 
                 if (gallery.length - 1 == index)
                     return true;
             } catch (error) {
-                console.error('Error al subir la imagen')
+                console.error(error)
                 return false
             }
         })
@@ -136,12 +139,26 @@ function AdministrationPanel() {
     const fetchNewMovie = async (url, bannerUrl) => {
 
         try {
+            selectedDates.map(date => console.log(format(date,'yyyy-MM-dd')))
             const data = {
                 titulo: title,
-                imagen: url,
+                trailer: trailer,
+                portada: url,
+                banner: bannerUrl,
                 descripcion: description,
-                categorias: selectedCategories.map((category) => ({ categoria: category })),
-                fechas: selectedDates.map((date) => ({ fecha: format(date, 'yyyy-MM-dd') }))
+                caracteristicas: {
+                    sala: sala,
+                    modalidad: type,
+                    reparto: actors,
+                    duracion: duration,
+                    clasificacion: clasification,
+                    opcionesIdioma: lenguage,
+                    director: director
+                },
+                imagenes: multipleUrl.map((url) => ({imagen: url})),
+                categorias: selectedCategories.filter((category) => category.selected == true)
+                .map((category) => ({titulo: category.titulo})),
+                fechas: selectedDates.map((date) => ({ fecha: format(new Date(date), 'yyyy-MM-dd') }))
             };
             const jsonData = JSON.stringify(data);
             console.log(jsonData);
@@ -158,7 +175,19 @@ function AdministrationPanel() {
                     setSelectedDates([])
                     setShowConfirmation(false)
                     setImage(null)
-                    setImagePreview(null)
+                    setBanner(null)
+                    setSelectedCategories([])
+                    setSelectedDates([])
+                    setGallery([])
+                    setMultipleUrl([])
+                    setSala('')
+                    setType('')
+                    setTrailer('')
+                    setDuration('')
+                    setLenguage('')
+                    setActors('')
+                    setClasification('')
+                    setDirector('')
                 }, 2000)
             } else {
                 setErrorMessage("Error al cargar la pelicula.")
@@ -167,7 +196,7 @@ function AdministrationPanel() {
                 }, 2000)
             }
         } catch (error) {
-
+            console.log(error)
             setErrorMessage("Error al cargar la pelicula.")
             setTimeout(() => {
                 setShowConfirmation(false)
@@ -181,7 +210,9 @@ function AdministrationPanel() {
         setErrorMessage("Cargando...")
         setShowConfirmation(true)
 
-        if (!title || !selectedCategories.length || !description || !selectedDates || !imagePreview) {
+        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories 
+            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || ! lenguage 
+            || !director || !actors || !trailer) {
             setErrorMessage("Todos los campos son requeridos.");
             setTimeout(() => {
                 setShowConfirmation(false)
@@ -191,14 +222,21 @@ function AdministrationPanel() {
 
         const currentDate = new Date();
         selectedDates.map((date) => {
+            const newDate = new Date(date)
             if (date < currentDate) {
                 setErrorMessage("La fechas deben ser iguales o posteriores a la fecha actual")
+                if(isValid(newDate)){
+                    console.log('valido'); // Formatear fecha válida
+                } else {
+                    console.log('invalido'); // Usar fecha predeterminada para fechas inválidas
+                }
                 setTimeout(() => {
                     setShowConfirmation(false)
                 }, 2000)
                 return
             }
         })
+
 
 
         const imageUpload = await uploadCloudinary(image)
@@ -216,7 +254,11 @@ function AdministrationPanel() {
             setTimeout(() => {
                 if ((imageUpload == "" || null) || (bannerUpload == "" || null)) {
                     setErrorMessage("Error al subir las imagenes.")
-                    setShowConfirmation(false)
+                
+                    setMultipleUrl([])
+                    setTimeout(() => {
+                        setShowConfirmation(false)
+                    }, 2500)
                     return
                 } else {
                     fetchNewMovie(imageUpload, bannerUpload)
@@ -233,6 +275,49 @@ function AdministrationPanel() {
     const onChangeSala = (e) => {
         setSala(e.target.value)
     }
+    const onChangeDuration = (e) => {
+        setDuration(e.target.value)
+    }
+    const onChangeClasification = (e) => {
+        setClasification(e.target.value)
+    }
+    const onChangeLenguage = (e) => {
+        setLenguage(e.target.value)
+    }
+
+    const onChangeActors = (e) => {
+        setActors(e.target.value)
+    }
+
+    const onChangeDirector = (e) => {
+        setDirector(e.target.value)
+    }
+
+    const onChangeType = (e) => {
+        setType(e.target.value)
+    }
+
+    const onChangeTrailer = (e) => {
+        setTrailer(e.target.value)
+    }
+
+    const handleCategoriesChange = (categoriaId) => {
+       
+        const updatedCategorias = selectedCategories.map(categoria => {
+            if (categoria.id === categoriaId) {
+              return {
+                ...categoria,
+                selected: !categoria.selected
+              };
+            }
+            return categoria;
+          });
+      
+          console.log(updatedCategorias)
+      
+          setSelectedCategories(updatedCategorias);
+    };
+
 
 
     return (
@@ -252,9 +337,12 @@ function AdministrationPanel() {
                                 />
                                 <label>Generos:</label>
                                 <div className="categories-form">
-                                    {selectedCategories.length > 0 && selectedCategories.map((categorie) => (
-                                        <label>
-                                            <input type="checkbox" key={categorie.id} value={categorie.titulo} />
+                                    {selectedCategories.length > 0 && selectedCategories.map((categorie,index) => (
+                                        <label key={categorie.id}>
+                                            <input type="checkbox"  
+                                            value={categorie.id} 
+                                            checked={categorie.selected}
+                                                onChange={() => handleCategoriesChange(categorie.id)} />
                                             {categorie.titulo}
                                         </label>
                                     ))}
@@ -269,17 +357,27 @@ function AdministrationPanel() {
                                 />
                                 <label>Director</label>
                                 <input
+                                className="form-title"
                                     type="text"
-                                    placeholder="Descripcion"
-                                    value={description}
-                                    onChange={onChangeDescription}
+                                    placeholder="Director"
+                                    value={director}
+                                    onChange={onChangeDirector}
                                 />
                                 <label>Reparto</label>
                                 <input
+                                    className="form-title"
                                     type="text"
-                                    placeholder="Descripcion"
-                                    value={description}
-                                    onChange={onChangeDescription}
+                                    placeholder="Reparto"
+                                    value={actors}
+                                    onChange={onChangeActors}
+                                />
+                                <label>Trailer</label>
+                                <input
+                                    className="form-title"
+                                    type="text"
+                                    placeholder="Url del trailer"
+                                    value={trailer}
+                                    onChange={onChangeTrailer}
                                 />
 
                                 <div className="date-container">
@@ -290,7 +388,7 @@ function AdministrationPanel() {
                                             multiple
                                             selected={selectedDates}
                                             onChange={setSelectedDates}
-                                            format={"DD-MM-YYYY"}
+                                            format={"YYYY-MM-DD"}
                                             plugins={[
                                                 <DatePanel />
                                             ]}
@@ -312,18 +410,18 @@ function AdministrationPanel() {
                                     <label>Modalidad</label>
                                     <input
                                         type="text"
-                                        placeholder="Descripcion"
-                                        value={description}
-                                        onChange={onChangeDescription}
+                                        placeholder="Modalidad"
+                                        value={type}
+                                        onChange={onChangeType}
                                     />
                                 </div>
                                 <div>
                                     <label>Duracion</label>
                                     <input
                                         type="text"
-                                        placeholder="Descripcion"
-                                        value={description}
-                                        onChange={onChangeDescription}
+                                        placeholder="Duracion"
+                                        value={duration}
+                                        onChange={onChangeDuration}
                                     />
                                 </div>
 
@@ -331,18 +429,18 @@ function AdministrationPanel() {
                                     <label>Clasificacion</label>
                                     <input
                                         type="text"
-                                        placeholder="Descripcion"
-                                        value={description}
-                                        onChange={onChangeDescription}
+                                        placeholder="Clasificacion"
+                                        value={clasification}
+                                        onChange={onChangeClasification}
                                     />
                                 </div>
                                 <div>
                                     <label>Idioma</label>
                                     <input
                                         type="text"
-                                        placeholder="Descripcion"
-                                        value={description}
-                                        onChange={onChangeDescription}
+                                        placeholder="Idioma"
+                                        value={lenguage}
+                                        onChange={onChangeLenguage}
                                     /></div>
 
                             </div>

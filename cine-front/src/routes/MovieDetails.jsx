@@ -15,7 +15,7 @@ Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-    
+
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -26,13 +26,16 @@ function MovieDetails() {
     const [first, setFirst] = useState([{}])
     const [last, setLast] = useState([{}])
     const [caracteristica, setCaracteristica] = useState([{}])
+    const [showGallery, setShowGallery] = useState(false)
+    const [imageId,setImageId] = useState(0)
 
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
+
     useEffect(() => {
-    
+
         const fetchMovieId = async () => {
             setIsLoading(true);
             try {
@@ -75,6 +78,12 @@ function MovieDetails() {
         else
             setShowVideo(false)
     }
+
+    const handleShowGallery = () => {
+        setImageId(0)
+        setShowGallery(!showGallery)
+    }
+
 
     const loadingImage = () => {
         return (
@@ -164,9 +173,9 @@ function MovieDetails() {
                                 <div className="fechas-container">
                                     <h2>FECHAS</h2>
                                     <div>
-                                    {movie.fechas.map(fechas => (
-                                        <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
-                                    ))}
+                                        {movie.fechas.map(fechas => (
+                                            <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -177,6 +186,7 @@ function MovieDetails() {
                                 {Array.isArray(movies) && movies.length > 0 ? (
                                     movies.slice(0, 4).map(movie => (
                                         <Item
+                            
                                             key={movie.id}
                                             id={movie.id}
                                             name={movie.titulo}
@@ -222,7 +232,7 @@ function MovieDetails() {
                             </div>
                             </div>
                             <div className="button-container">
-                                <button>Ver más</button>
+                                <img src="/icons/show-more.svg" onClick={handleShowGallery}/>
                             </div>
                         </div>
                     </div>
@@ -231,12 +241,12 @@ function MovieDetails() {
                 </div>)}
 
             </div>
-
-            <Modal
+            {!isLoading && (<Modal
                 style={customStyles}
                 className="video-modal"
                 isOpen={showVideo}
                 onRequestClose={handleCloseVideo}
+                shouldCloseOnOverlayClick={false}
             >
                 <div className="video-details">
                     <div className="detail-video-part">
@@ -248,8 +258,39 @@ function MovieDetails() {
                         url={!isLoading ? video : {}}
                     />
                 </div>
+            </Modal>)}
+            
+            {!isLoading && (
+                <Modal
+                style={customStyles}
+                className="show-gallery-modal"
+                isOpen={showGallery}
+                onRequestClose={handleShowGallery}
+                shouldCloseOnOverlayClick={false}
+            >
+                
+                <div className="show-gallery-conteiner">
+                    <div className="close-gallery">
+                        <img src="/icons/close-black.svg" onClick={handleShowGallery} />
+                    </div>
+                    <div className="gallery-image">
+                        <img src={movie.imagenes[imageId].imagen} />
+                    </div>
+                    <div className="carrousel-gallery">
+                    {movie.imagenes.map((image,index) => (
+                            <img onClick={() => {
+                                console.log(index)
+                                setImageId(index)
+                                
+                            }} key={index} src={image.imagen} />
+                        ))}
+                    </div>
+                </div>
             </Modal>
 
+
+            )}
+            
         </div>
     )
 }

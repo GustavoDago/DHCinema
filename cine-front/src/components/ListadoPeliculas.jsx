@@ -10,11 +10,13 @@ import { useParams, useNavigate } from "react-router-dom"
 Modal.setAppElement('#root')
 
 const ListadoPeliculas = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [showModal,setShowModal] = useState(false)
   const [peliculas, setPeliculas] = useState([])
   const [movieId,setMovieId] = useState('')
   const [deleted, setDeleted] = useState(false)
   const [content, setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
+
   const params = useParams()
   const navigate = useNavigate();
 
@@ -26,8 +28,9 @@ const ListadoPeliculas = () => {
     const fetchMovie = async () => {
       
       try {
-        const movies = await searchMoviesForCategories("Todos");
+        const movies = await searchMoviesForCategories("Ninguno");
         setPeliculas(movies);
+        setIsLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -38,7 +41,7 @@ const ListadoPeliculas = () => {
 
   const handleDeleteButtonClick = (id) => {
     setMovieId(id)
-    setIsLoading(true);
+    setShowModal(true)
   }
 
   const handleConfirm = async (res) => {
@@ -62,13 +65,13 @@ const ListadoPeliculas = () => {
         setShowConfirmation(false)
       }
     } else {
-      setIsLoading(false)
+      setShowModal(false)
     }
 
   }
 
   const closeModal = () => {
-    setIsLoading(false)
+    setShowModal(false)
   }
 
 
@@ -85,7 +88,7 @@ const ListadoPeliculas = () => {
             </tr>
           </thead>
           <tbody>
-            {peliculas.map((pelicula) => (
+            {!isLoading && peliculas.map((pelicula) => (
               <tr id={pelicula.id} key={pelicula.id}>
                 <th scope='row'>{pelicula.id}</th>
                 <td scope='row'>{pelicula.titulo}</td>
@@ -101,7 +104,7 @@ const ListadoPeliculas = () => {
         </table>
       </div>
       <Modal
-        isOpen={isLoading}
+        isOpen={showModal}
         style={customStyles}
         onRequestClose={closeModal}
         contentLabel="Confirmacion"
