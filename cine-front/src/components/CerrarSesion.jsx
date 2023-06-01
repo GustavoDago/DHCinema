@@ -1,14 +1,16 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 function CerrarSesion() {
+  const navigate = useNavigate()
   useEffect(() => {
-    localStorage.removeItem('savedEmail');
-    localStorage.removeItem('savedPassword')
-    localStorage.removeItem('rememberMe')  
-     
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('role')
+    sessionStorage.removeItem('nombre')
+    sessionStorage.removeItem('apellido')
   }, []);
 
-  return null;
+  return navigate('/');
 }
 
 export default CerrarSesion;

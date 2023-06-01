@@ -3,7 +3,7 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Modal from "react-modal"
 import { format } from 'date-fns'
-import { newMovie } from "../components/UseFetch";
+import { fetchCategorias, newMovie } from "../components/UseFetch";
 import MultipleImageDrop from "../components/AdministrationPanel/multipleImageDrop";
 import SingleImageDrop from "../components/AdministrationPanel/singleImageDrop";
 import { useEffect } from "react";
@@ -25,26 +25,40 @@ function AdministrationPanel() {
     const [errorMessage, setErrorMessage] = useState('')
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [isError, setIsError] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [sala, setSala] = useState('')
+    const [duration, setDuration] = useState('')
+    const [type, setType] = useState('')
+    const [clasification, setClasification] = useState('')
+    const [lenguage, setLenguage] = useState('')
+    const [director, setDirector] = useState('')
+    const [actors, setActors] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        
-        const fetchMovieRandom = async () => {
-            setIsLoading(true);
-            try{
-                const categories = false
-                setSelectedCategories(categories);
-                setIsLoading(false);
+        setShowConfirmation(true)
+        setErrorMessage('Cargando categorias...')
+        const fetchAllCategories = async () => {
+            try {
+                const categories = await fetchCategorias()
+                if (categories) {
+                    setSelectedCategories(categories);
+                    setIsLoading(false);
+                    setErrorMessage('')
+                    setShowConfirmation(false)
+                    console.log(selectedCategories)
+                }
+
             } catch (error) {
                 console.error(error)
                 setIsLoading(false);
-                
+                setErrorMessage('')
+                setShowConfirmation(false)
             }
         };
-        
-        fetchMovieRandom()
-    },[])
+
+        fetchAllCategories()
+    }, [])
 
     const customSyles = {
         overlay: { zIndex: 1000 }
@@ -95,22 +109,22 @@ function AdministrationPanel() {
     }
 
     const uploadMultipleCloudinary = async () => {
-        return gallery.map(async (image,index) => {
-            try{
+        return gallery.map(async (image, index) => {
+            try {
                 const formData = new FormData()
                 formData.append('file', image.file)
                 formData.append('upload_preset', 'wxfnshym')
                 formData.append('api_key', '533874313672784')
-    
+
                 const response = await fetch('https://api.cloudinary.com/v1_1/dmnjesfeg/image/upload', {
                     method: 'POST',
                     body: formData,
                 })
 
                 const result = await response.json();
-                setMultipleUrl((prevUrlList) => [...prevUrlList,result.secure_url])
+                setMultipleUrl((prevUrlList) => [...prevUrlList, result.secure_url])
 
-                if(gallery.length-1 == index)
+                if (gallery.length - 1 == index)
                     return true;
             } catch (error) {
                 console.error('Error al subir la imagen')
@@ -119,7 +133,7 @@ function AdministrationPanel() {
         })
     }
 
-    const fetchNewMovie = async (url,bannerUrl) => {
+    const fetchNewMovie = async (url, bannerUrl) => {
 
         try {
             const data = {
@@ -153,6 +167,7 @@ function AdministrationPanel() {
                 }, 2000)
             }
         } catch (error) {
+
             setErrorMessage("Error al cargar la pelicula.")
             setTimeout(() => {
                 setShowConfirmation(false)
@@ -204,7 +219,7 @@ function AdministrationPanel() {
                     setShowConfirmation(false)
                     return
                 } else {
-                    fetchNewMovie(imageUpload,bannerUpload)
+                    fetchNewMovie(imageUpload, bannerUpload)
                 }
 
             }, 1000)
@@ -215,82 +230,165 @@ function AdministrationPanel() {
 
     }
 
+    const onChangeSala = (e) => {
+        setSala(e.target.value)
+    }
+
 
     return (
-        <div className="admin-form">
-            <form onSubmit={handleSubmit}>
-                <label>Titulo:</label>
-                <input
-                    className="form-title"
-                    type="text"
-                    placeholder="Titulo de pelicula"
-                    value={title}
-                    onChange={onChangeTitle}
-                />
-                <label>Generos:</label>
-                {Array.isArray && selectedCategories.length > 0 && (selectedCategories.map((categorie,index) => {
-                    <label><input type="checkbox" id="index" value={categorie}/>{categorie}</label>
-                }))}
-                <label>Descripcion</label>
-                <input
-                    className="form-description"
-                    type="text"
-                    placeholder="Descripcion"
-                    value={description}
-                    onChange={onChangeDescription}
-                />
+        <div>
+            {!isLoading && (
+                <div className="admin-form">
+                    <form onSubmit={handleSubmit}>
+                        <div className="admin-div">
+                            <div className="admin-div-first">
+                                <label>Titulo:</label>
+                                <input
+                                    className="form-title"
+                                    type="text"
+                                    placeholder="Titulo de pelicula"
+                                    value={title}
+                                    onChange={onChangeTitle}
+                                />
+                                <label>Generos:</label>
+                                <div className="categories-form">
+                                    {selectedCategories.length > 0 && selectedCategories.map((categorie) => (
+                                        <label>
+                                            <input type="checkbox" key={categorie.id} value={categorie.titulo} />
+                                            {categorie.titulo}
+                                        </label>
+                                    ))}
+                                </div>
+                                <label>Descripcion</label>
+                                <input
+                                    className="form-description"
+                                    type="text"
+                                    placeholder="Descripcion"
+                                    value={description}
+                                    onChange={onChangeDescription}
+                                />
+                                <label>Director</label>
+                                <input
+                                    type="text"
+                                    placeholder="Descripcion"
+                                    value={description}
+                                    onChange={onChangeDescription}
+                                />
+                                <label>Reparto</label>
+                                <input
+                                    type="text"
+                                    placeholder="Descripcion"
+                                    value={description}
+                                    onChange={onChangeDescription}
+                                />
 
-                <div className="date-container">
-                    <label>Fecha:</label>
-                    <div className="date-center">
-                        <DatePicker
-                            className="date-picker"
-                            multiple
-                            selected={selectedDates}
-                            onChange={setSelectedDates}
-                            format={"DD-MM-YYYY"}
-                            plugins={[
-                                <DatePanel />
-                            ]}
+                                <div className="date-container">
+                                    <label>Fecha:</label>
+                                    <div className="date-center">
+                                        <DatePicker
+                                            className="date-picker"
+                                            multiple
+                                            selected={selectedDates}
+                                            onChange={setSelectedDates}
+                                            format={"DD-MM-YYYY"}
+                                            plugins={[
+                                                <DatePanel />
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="admin-div-last">
+                                <div>
+                                    <label>Sala</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Sala"
+                                        value={sala}
+                                        onChange={onChangeSala}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Modalidad</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Descripcion"
+                                        value={description}
+                                        onChange={onChangeDescription}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Duracion</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Descripcion"
+                                        value={description}
+                                        onChange={onChangeDescription}
+                                    />
+                                </div>
+
+                                <div>
+                                    <label>Clasificacion</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Descripcion"
+                                        value={description}
+                                        onChange={onChangeDescription}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Idioma</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Descripcion"
+                                        value={description}
+                                        onChange={onChangeDescription}
+                                    /></div>
+
+                            </div>
+                        </div>
+
+
+
+                        <label>Portada:</label>
+                        <SingleImageDrop
+                            image={image}
+                            setImage={setImage}
                         />
-                    </div>
+                        <label>Banner:</label>
+                        <SingleImageDrop
+                            image={banner}
+                            setImage={setBanner}
+                        />
+                        <label>Galeria:</label>
+                        <MultipleImageDrop
+                            gallery={gallery}
+                            setGallery={setGallery}
+                        />
+                        <button type="submit">Guardar</button>
+
+
+
+                    </form>
+
+                    <Modal
+                        isOpen={showConfirmation}
+                        onRequestClose={closeModal}
+                        contentLabel="Confirmacion"
+                        className="modal"
+                        style={customSyles}
+                    >
+
+                        <div className="modal-conteiner">
+                            <div className="modal-content">
+                                {errorMessage}
+                            </div>
+                        </div>
+                    </Modal>
                 </div>
-                
-                <label>Portada:</label>
-                <SingleImageDrop 
-                    image={image}
-                    setImage={setImage}
-                />
-                <label>Banner:</label>
-                <SingleImageDrop
-                    image={banner}
-                    setImage={setBanner}
-                />
-                <label>Galeria:</label>
-                <MultipleImageDrop
-                    gallery={gallery}
-                    setGallery={setGallery}
-                />
-                <button type="submit">Guardar</button>
+            )
+            }
 
-
-
-            </form>
-
-            <Modal
-                isOpen={showConfirmation}
-                onRequestClose={closeModal}
-                contentLabel="Confirmacion"
-                className="modal"
-                style={customSyles}
-            >
-
-                <div className="modal-conteiner">
-                    <div className="modal-content">
-                        {errorMessage}
-                    </div>
-                </div>
-            </Modal>
         </div>)
 }
 

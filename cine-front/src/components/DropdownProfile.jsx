@@ -28,22 +28,22 @@ const DropdownProfile = () => {
             </div>
             <div className={`drop-down-profile ${open? 'active' : 'inactive'}`}>
                 <ul>
-                    {!localStorage.getItem('savedEmail') && !localStorage.getItem('savedPassword') &&
+                    {!sessionStorage.getItem('role') &&
                         <Link to='/inicio-sesion'>
                             <li className="drop-down-item">Iniciar Sesion</li>
                         </Link>
                     }
-                    {!localStorage.getItem('savedEmail') && !localStorage.getItem('savedPassword') &&
+                    {!sessionStorage.getItem('role')  &&
                         <Link to='/registrarse'>
                             <li className="drop-down-item">Crear Cuenta</li>
                         </Link>
                     }
-                    {localStorage.getItem('savedEmail') && localStorage.getItem('savedPassword') &&
+                    {sessionStorage.getItem('role') == 'ADMIN' &&
                         <Link to='/admin'>
                             <li className="drop-down-item">Panel de Administrador</li>
                         </Link>
                     }
-                    {localStorage.getItem('savedEmail') && localStorage.getItem('savedPassword') &&
+                    {sessionStorage.getItem('role') &&
                         <Link to='/cerrar-sesion'>
                             <li className="drop-down-item">Cerrar Sesion</li>
                         </Link>

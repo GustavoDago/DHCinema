@@ -224,3 +224,17 @@ export const fetchGetUsuario = async (email) => {
     console.log(response)
     return response;
 }
+
+export const fetchCategorias = async () => {
+    const url='/categorias'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        });
+    console.log(response)
+    return response;
+}
