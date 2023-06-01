@@ -61,6 +61,8 @@ public class UsuarioService {
         Optional<Rol> roles = rolesRepository.findByNombre("USER");
         usuarios.setActivo(false);
         if(roles.isPresent()){
+            usuarios.setRoles(Collections.singletonList(roles.get()));
+            usuarioRepository.save(usuarios);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     dtoRegistro.getEmail(), dtoRegistro.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -73,8 +75,7 @@ public class UsuarioService {
             mensajeEmail.setText("Para confirmar tu cuenta, por favor has click en el siguiente enlace: "
                     + "http://localhost:5173/confirmar-cuenta?token=" + token);
             emailService.sendEmail(mensajeEmail);
-            usuarios.setRoles(Collections.singletonList(roles.get()));
-            usuarioRepository.save(usuarios);
+
             return "Registro de usuario exitoso. Verifica tu casilla de correo para validar tu email.";
         }else{
             throw new ResourceBadRequestException("Error. Debe existir Rol USER");
