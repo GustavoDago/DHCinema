@@ -30,7 +30,7 @@ const DropdownProfile = () => {
                 <ul>
                     {sessionStorage.getItem('role') &&
                         <Link to='/perfil'>
-                            <li className="drop-down-item-perfil">Perfil</li>
+                            <li className="drop-down-item">Perfil {!sessionStorage.getItem('nombre')}</li>
                         </Link>
                     }
                     {!sessionStorage.getItem('role') &&

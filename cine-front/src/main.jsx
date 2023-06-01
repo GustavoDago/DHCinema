@@ -17,6 +17,7 @@ import NuevaCategoria from './components/Nueva-categoria.jsx'
 import AsignarCategoria from './components/AsignarCategoria.jsx'
 import ConfirmAccount from './routes/ConfirmAccount.jsx'
 import Categories from './routes/Categories.jsx'
+import PerfilDropdown from './routes/PerfilDropDown.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
           <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
         </Route>
+        <Route path='perfil' element={<PerfilDropdown />} />
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
         <Route path='cerrar-sesion' element={<SignOut />} />  
