@@ -52,6 +52,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers("/categorias").permitAll()
                 .requestMatchers("/usuarios/**").permitAll()
                 .requestMatchers("/roles").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
