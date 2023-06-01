@@ -130,8 +130,8 @@ export const fetchMovieTilte = async (title) => {
 }
 
 export const fetchRegisterUser = async (user) => {
-    const url = "/api/auth/register"
-
+    const url = "/usuarios/register"
+    console.log(user)
     const response = await fetch(`${API_ENDPOINT}${url}`,{
         method: "POST",
         headers: {
@@ -141,6 +141,7 @@ export const fetchRegisterUser = async (user) => {
         body: JSON.stringify(user),
     }).then((response) => {
         if (response){
+            console.log(response)
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
@@ -159,7 +160,7 @@ export const fetchRegisterUser = async (user) => {
 }
 
 export const fetchLogInUser = async (user) => {
-    const url = "/api/auth/login"
+    const url = "/usuarios/login"
 
     const response = await fetch(`${API_ENDPOINT}${url}`,{
         method: "POST",
@@ -187,7 +188,7 @@ export const fetchLogInUser = async (user) => {
 }
 
 export const confirmAccount = async (token) => {
-    const url = `/api/auth/confirmar-cuenta?token=${token}`
+    const url = `/usuarios/confirmar-cuenta?token=${token}`
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
     .then((response) => {
@@ -205,5 +206,21 @@ export const confirmAccount = async (token) => {
         return false;
     })
 
+    return response;
+}
+
+export const fetchGetUsuario = async (email) => {
+    const url = `/usuarios/${email}`
+
+    console.log(`${API_ENDPOINT}${url}`)
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        });
+    console.log(response)
     return response;
 }

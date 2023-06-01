@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useContext } from "react"
 import categories from "../components/utils/categories.json"
 import Categorie from "../components/utils/Categorie"
 import Billboard from "../components/home/Billboard"
@@ -8,7 +8,7 @@ import { useEffect } from "react"
 
 function Home() {
     
-    
+ 
     const [index, setIndex] = useState(0);
     const [showCategorie, setShowCategorie] = useState("Todos");
     const timeRef = useRef(null)
@@ -19,6 +19,7 @@ function Home() {
     
     useEffect(() => {
         window.scrollTo(0, 0);
+        
     },[])
 
     const cards = [

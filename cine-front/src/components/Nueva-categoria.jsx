@@ -61,9 +61,9 @@ const NuevaCategoria = () => {
   return (
       <div>
         <h2>Crear Categoría</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form-crearCategoria'>
           <div>
-            <label>Título:</label>
+            <label>Título : </label>
             <input
               type="text"
               value={title}
@@ -72,7 +72,7 @@ const NuevaCategoria = () => {
             {errors.title && <span>{errors.title}</span>}
           </div>
           <div>
-            <label>Descripción:</label>
+            <label>Descripción : </label>
             <input
               type="text"
               value={descripcion}
@@ -81,7 +81,7 @@ const NuevaCategoria = () => {
             {errors.description && <span>{errors.description}</span>}
           </div>
           <div>
-            <label>URL de la Imagen:</label>
+            <label>URL de la Imagen : </label>
             <input
               type="text"
               value={imageUrl}
@@ -89,7 +89,7 @@ const NuevaCategoria = () => {
             />
             {errors.imageUrl && <span>{errors.imageUrl}</span>}
           </div>
-          <button type="submit">Crear</button>
+          <button type="submit">Crear Nueva categoria</button>
         </form>
       </div>
     );

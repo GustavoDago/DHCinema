@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
@@ -10,11 +10,12 @@ import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 
 
 
+
 Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-
+    const {data} = useContext(UserContext)
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -31,6 +32,7 @@ function MovieDetails() {
     }
 
     useEffect(() => {
+        console.log(data)
         const fetchMovieId = async () => {
             setIsLoading(true);
             try {
