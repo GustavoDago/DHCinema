@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/peliculas")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class PeliculaController {
 
     @Autowired
