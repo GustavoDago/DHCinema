@@ -1,4 +1,4 @@
-
+import { ContextProvider } from './components/global.context'
 import Navbar from './components/Header'
 import Footer from './components/Footer'
 import {Outlet} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {Outlet} from 'react-router-dom'
 function App() {
 
   return (
-
+    <ContextProvider>
       <div className='app'>
         <Navbar/>
         <div className='main-content'>
@@ -14,7 +14,7 @@ function App() {
         </div>
         <Footer/>
       </div>
-    
+    </ContextProvider>
   )
 }
 

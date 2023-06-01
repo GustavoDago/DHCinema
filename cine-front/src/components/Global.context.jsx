@@ -1,17 +1,17 @@
 // Clase GlobalContext preparada para recibir los datos del fetch y proveer a los hijos
 
-/** import { createContext, useState, useMemo } from "react";
-import { useFetch } from "./UseFetch";
+import { createContext, useState } from "react";
 
 
 
-export const GlobalContext = createContext();
+
+export const UserContext = createContext([]);
 
 export const ContextProvider = ({children}) => {
-    const [query,setQuery] = useState("movie");
-    const {isLoading, error, data} = useFetch(``)
+    const [userData,setUserData] = useState([])
 
-    return (<ContextProvider.Provider value={providerApi.data}>
+    return (
+    <UserContext.Provider value={{userData,setUserData}}>
         {children}
-    </ContextProvider.Provider>);
-} */
+    </UserContext.Provider>);
+} 

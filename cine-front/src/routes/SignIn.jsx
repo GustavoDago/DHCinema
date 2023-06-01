@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader"
-import { fetchLogInUser } from '../components/UseFetch'
+import { fetchGetUsuario, fetchLogInUser } from '../components/UseFetch'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'react-modal'
+import { UserContext } from "../components/global.context";
 
 Modal.setAppElement('#root')
 
@@ -16,7 +17,7 @@ function SignIn() {
     const [isLoading, setIsLoading] = useState(false);
     const [accepted, setAccepted] = useState(false);
     const navigate = useNavigate()
-
+    const {setData} = useContext(UserContext)
 
     const closeModal = () => {
         setShowConfirmation(false)
@@ -50,6 +51,8 @@ function SignIn() {
             }
             
             const response = await fetchLogInUser(data);
+            
+            console.log(newData)
             if (response != false && response != null) {
                 console.log(response);
                 if (response.includes('no posee')) {
@@ -63,13 +66,17 @@ function SignIn() {
                 } else {
                     setIsLoading(false);
                     setMessage('Ingreso sesion correctamente.')
+                    const newData = await fetchGetUsuario(username);
                     setAccepted(true);
                     setTimeout(() => {
                         setMessage('')
                         setAccepted(false)
                         setShowConfirmation(false);
                         navigate("/");
-                    }, 2000)
+                        if(newData){
+                            setData(newData)
+                        }
+                    }, 3000)
                 } 
 
             }else{
@@ -79,7 +86,7 @@ function SignIn() {
                 setTimeout(() => {
                     setMessage('')
                     setShowConfirmation(false);
-                }, 2000)
+                }, 3000)
             }
         } catch (error) {
             setIsLoading(false);
@@ -96,8 +103,8 @@ function SignIn() {
         window.scrollTo(0, 0);
         const savedEmail = localStorage.getItem('savedEmail');
         const savedPassword = localStorage.getItem('savedPassword');
-        const savedRememberMe = localStorage.getItem('rememberMe', rememberMe);
-        if (savedEmail && savedPassword) {
+        const savedRememberMe = localStorage.getItem('rememberMe');
+        if (savedEmail && savedPassword ) {
             setUsername(savedEmail)
             setPassword(savedPassword)
             setRememberMe(savedRememberMe)
