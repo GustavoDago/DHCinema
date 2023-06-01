@@ -5,7 +5,7 @@ import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
-import { UserContext } from "../components/global.context"
+
 
 Modal.setAppElement('#root')
 

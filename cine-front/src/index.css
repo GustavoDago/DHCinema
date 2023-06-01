@@ -874,7 +874,12 @@ footer {
 .grid-container {
   display: flex;
   position: relative;
+  width: 100%;
+  justify-content: center;
+  overflow-x: hidden;
 }
+
+
 
 
 .half-left {
@@ -884,6 +889,7 @@ footer {
 .half-left img {
   width: 100%;
   height: auto;
+  align-self: center;
 }
 
 .half-right {

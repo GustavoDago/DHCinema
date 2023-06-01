@@ -210,7 +210,7 @@ export const confirmAccount = async (token) => {
 }
 
 export const fetchGetUsuario = async (email) => {
-    url = `/usuarios/${email}`
+    const url = `/usuarios/${email}`
 
     console.log(`${API_ENDPOINT}${url}`)
 
