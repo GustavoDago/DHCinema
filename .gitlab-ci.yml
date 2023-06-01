@@ -12,9 +12,9 @@ backend_job_build:       # This job runs in the build stage, which runs first.
   artifacts:
     paths: 
     - cine-back/target/PI-BackEnd-0.0.1-SNAPSHOT.jar
-  rules: 
-    - changes:
-      - cine-back/**/*
+  # rules: 
+  #   - changes:
+  #     - cine-back/**/*
 
 frontend_job_build:
   stage: build
@@ -73,9 +73,9 @@ deploy_backend:
     - scp cine-back/target/PI-BackEnd-0.0.1-SNAPSHOT.jar ec2-user@$DEPLOY_SERVER_IP:~/
     - ssh ec2-user@$DEPLOY_SERVER_IP "sudo systemctl start dhcinema.service"
     - echo "Finished deploying the app."
-  rules:
-    - changes:
-        - BackEnd/**/*
+  # rules:
+  #   - changes:
+  #       - BackEnd/**/*
 deploy_Frontend:
   stage: deploy
   needs: [frontend_job_build]
