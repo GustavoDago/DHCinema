@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
@@ -15,7 +15,7 @@ Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-    const {data} = useContext(UserContext)
+    
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -32,7 +32,7 @@ function MovieDetails() {
     }
 
     useEffect(() => {
-        console.log(data)
+    
         const fetchMovieId = async () => {
             setIsLoading(true);
             try {
@@ -163,9 +163,11 @@ function MovieDetails() {
                                 </div>
                                 <div className="fechas-container">
                                     <h2>FECHAS</h2>
+                                    <div>
                                     {movie.fechas.map(fechas => (
                                         <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
                                     ))}
+                                    </div>
                                 </div>
                             </div>
                         )}
