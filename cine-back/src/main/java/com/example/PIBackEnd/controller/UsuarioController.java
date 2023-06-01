@@ -36,17 +36,18 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<String> guardarUsuario(@RequestBody DtoRegistro dtoRegistro) throws ResourceBadRequestException {
+        System.out.println(dtoRegistro.getNombre());
         return ResponseEntity.ok(usuarioService.guardarUsuario(dtoRegistro));
     }
 
-    @PostMapping("registerAdm")
+    @PostMapping("/registerAdm")
     public ResponseEntity<String> guardarUsuarioAdm(@RequestBody DtoRegistro dtoRegistro) throws ResourceBadRequestException {
         return ResponseEntity.ok(usuarioService.guardarUsuarioAdm(dtoRegistro));
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody DtoLogin dtoLogin) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 dtoLogin.getEmail(), dtoLogin.getPassword()));

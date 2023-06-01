@@ -27,7 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='peliculas/:id' element={<MovieDetails />} />
         <Route
           path='/admin' element={<GestionAdmin />}>
-          <Route path='/admin' element={<ListadoPeliculas />} />
           <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
           <Route path='/admin/nueva-pelicula' element={<AdministrationPanel />} />
           <Route path='/admin/ListadoCategorias' element={<ListadoCategorias />} />

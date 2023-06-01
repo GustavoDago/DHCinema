@@ -394,8 +394,8 @@ footer {
 .iconosFooter svg {
   height: 30px;
   padding-right: 5px;
+  
 }
-
 
 
 .iconosFooter {
@@ -580,7 +580,18 @@ footer {
 
 .movie-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 30px;
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+  width: 90vw;
+}
+.movie-container-cartelera {
+  display: grid;
+  grid-template-columns: auto;
   grid-gap: 30px;
   grid-auto-flow: column;
   overflow-x: scroll;
@@ -589,7 +600,7 @@ footer {
 
   padding-bottom: 20px;
 
-  width: 100%;
+  width: 90vw;
 }
 
 .movie-container::-webkit-scrollbar {
@@ -608,13 +619,31 @@ footer {
 }
 
 .movie-card {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.movie-card-cartelera{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 43vw;
+}
+
 .movie-card figure {
+  width: 200px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 10px 10px 15px rgba(138, 136, 136, 0.664);
+  cursor: pointer;
+  margin: 0;
+
+  flex-grow: 0;
+}
+.movie-card-cartelera figure {
   width: 200px;
   height: 100%;
   position: relative;
@@ -640,6 +669,12 @@ footer {
   transition: all 1s ease-out;
 }
 
+.movie-card-cartelera figure img {
+  width: 100%;
+  height: 100%;
+  transition: all 1s ease-out;
+}
+
 .opt-card {
   display: flex;
   flex-direction: column;
@@ -656,9 +691,16 @@ footer {
 
 .opt-card button {
   width: 100%;
+  color: #E0E1DD;
+  background-color: #415A77;
 }
 
 .movie-card figure:hover>.opt-card {
+  opacity: 1;
+  visibility: visible;
+}
+
+.movie-card-cartelera figure:hover>.opt-card {
   opacity: 1;
   visibility: visible;
 }
@@ -745,7 +787,7 @@ footer {
   background-position: left calc((50vw - 170px) - 340px) top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('../public/banner-guardianes.jpg');
+
   position: relative;
   border-bottom: 1px solid black;
   box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.7);
@@ -872,20 +914,26 @@ footer {
 .grid-container {
   display: flex;
   position: relative;
+  width: 100%;
+  justify-content: center;
+  overflow-x: hidden;
 }
+
+
 
 
 .half-left {
-  width: 50vw;
+  width: 50%;
 }
 
 .half-left img {
-  width: 450px;
+  width: 100%;
   height: auto;
+  align-self: center;
 }
 
 .half-right {
-  width: 50vw;
+  width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
@@ -1203,6 +1251,31 @@ footer {
   margin: 0px 20px;
 }
 
+
+/* Form Crear Categoria */
+
+
+
+.form-crearCategoria div{
+  margin: 5px;
+}
+
+.form-crearCategoria button{
+  color: #0D1B2A;
+  background-color: #E0E1DD;
+  margin-top: 15px;
+}
+
+
+
+.form-crearCategoria button:hover{
+  color: #E0E1DD;
+  background-color: #415A77;
+  box-shadow: 0px 1px 5px #778DA9;
+}
+
+
+
 /** vista Asignar Categorías **/
 div.asignoCategorias {
   display: flex;
@@ -1220,6 +1293,7 @@ div.asignoCategorias {
 .page-div {
   display: flex;
   justify-content: center;
+  
 }
 
 .pages {
@@ -1669,4 +1743,16 @@ div.asignoCategorias {
     width: 100%;
     height: 10vh;
   }
+
+  .ocultoEnMovil{
+    display: none;
+  }
+
+  .movie-card-cartelera {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+}
+
 }

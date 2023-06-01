@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
@@ -6,42 +6,55 @@ import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
 
+
 Modal.setAppElement('#root')
 
 function MovieDetails() {
     window.scrollTo(0, 0);
-
+    const {data} = useContext(UserContext)
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const params = useParams()
     const [showVideo, setShowVideo] = useState(false);
-
+    const [video,setVideo] = useState('')
+    const [banner,setBanner] = useState({})
+    const [first,setFirst] =  useState([{}])
+    const [last,setLast] =  useState([{}])
 
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
     useEffect(() => {
+        console.log(data)
         const fetchMovieId = async () => {
             setIsLoading(true);
             try {
                 const movieForId = await searchMovieDetails(params.id)
                 const movieRandom = await searchRandomMovies()
+                
                 if (movieForId != false) {
+                    console.log(movieForId)
                     setMovie(movieForId);
+                    setBanner({
+                        backgroundImage: `url(${movieForId.banner})`
+                    })
+                    setVideo(movieForId.trailer)
+                    setFirst(movieForId.imagenes.slice(0,1))
+                    setLast(movieForId.imagenes.slice(1,5))
                 }
-                if (movieForId != false) {
+                if (movieRandom != false) {
                     setMovies(movieRandom)
-                    setIsLoading(false);
                 }
-                return
+                setIsLoading(false);
+               
             } catch (error) {
                 console.error(error)
             }
         };
         fetchMovieId()
-    }, [])
+    }, [params.id])
 
     const handleCloseVideo = () => {
         setShowVideo(false)
@@ -101,19 +114,18 @@ function MovieDetails() {
             height="100%vh"
         />
 
-
-
+    
 
     return (
         <div className={`movie-details `}>
             <div>
-                <div className="banner-video">
+                <div className="banner-video" style={!isLoading ? banner: {}}>
                     <div className="banner-details">
                         <img className="play-icon" src="/icons/play_icon.svg" onClick={handleShowVideo} />
                         <div className="movie-first-info">
                             {!isLoading &&
                                 <div className="movie-first-info-details">
-                                    <img src={movie.imagen} />
+                                    <img src={movie.portada} />
                                     <div>
                                         <h4>GENEROS </h4>
 
@@ -126,7 +138,7 @@ function MovieDetails() {
                             }
                         </div>
                         <div className="movie-details-title">
-                            {!isLoading && <h1>{movie.titulo}</h1>}
+                            {!isLoading && <h1>{movie.titulo.toUpperCase()}</h1>}
                         </div>
 
                     </div>
@@ -157,7 +169,7 @@ function MovieDetails() {
                                             key={movie.id}
                                             id={movie.id}
                                             name={movie.titulo}
-                                            image={movie.imagen}
+                                            image={movie.portada}
                                         />
                                     ))
                                 ) : null}
@@ -169,11 +181,11 @@ function MovieDetails() {
                     <div className="image-details">
                         <div className="grid-container">
                             <div className="half-left">
-                                <img src={movie.imagen} alt="Movie" />
+                                <img src={first[0].imagen} alt="Movie" />
                             </div>
                             <div className="half-right">
-                                {[...Array(4)].map((_, index) => (
-                                    <div key={index}>
+                                {last.map((movie) => (
+                                    <div key={movie.id}>
                                         <img src={movie.imagen} alt="Movie" />
                                     </div>
                                 ))}
@@ -204,7 +216,7 @@ function MovieDetails() {
                     <ReactPlayer
                         width='100%'
                         height='100%'
-                        url="https://www.youtube.com/watch?v=FTGm7EexNmw&t=5s&ab_channel=MarvelEspa%C3%B1a"
+                        url={!isLoading ? video : {}}
                     />
                 </div>
             </Modal>

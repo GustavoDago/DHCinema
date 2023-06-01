@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader"
-import { fetchLogInUser } from '../components/UseFetch'
+import { fetchGetUsuario, fetchLogInUser } from '../components/UseFetch'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'react-modal'
+import { set } from "date-fns";
+
 
 Modal.setAppElement('#root')
 
@@ -48,8 +50,10 @@ function SignIn() {
                 email: username,
                 password: password,
             }
-            
+
             const response = await fetchLogInUser(data);
+
+            
             if (response != false && response != null) {
                 console.log(response);
                 if (response.includes('no posee')) {
@@ -61,27 +65,37 @@ function SignIn() {
                         setShowConfirmation(false);
                     }, 3500)
                 } else {
-                    setIsLoading(false);
-                    setMessage('Ingreso sesion correctamente.')
                     setAccepted(true);
-                    setTimeout(() => {
-                        setMessage('')
-                        setAccepted(false)
-                        setShowConfirmation(false);
-                        navigate("/");
-                    }, 2000)
-                } 
+                    const response = await fetchGetUsuario(username)
+                    if (response) {
+                        console.log(response)
+                        setIsLoading(false);
+                        setMessage('Ingreso sesion correctamente.')
+                        sessionStorage.setItem('nombre',response.nombre)
+                        sessionStorage.setItem('apellido',response.apellido)
+                        sessionStorage.setItem('email',response.email)
+                        sessionStorage.setItem('role',response.roles[0].nombre)
+                        setTimeout(() => {
+                            setMessage('')
+                            setShowConfirmation(false);
+                            navigate("/");
+                        }, 3000)
+                    } else {
+                        throw new Error("Error al buscar el usuario");
+                    }
+                }
 
-            }else{
+            } else {
                 setIsLoading(false);
                 setMessage('Hubo un error con el servidor. Vuelve a intentarlo.')
                 setAccepted(false);
                 setTimeout(() => {
                     setMessage('')
                     setShowConfirmation(false);
-                }, 2000)
+                }, 3000)
             }
         } catch (error) {
+            console.log(error)
             setIsLoading(false);
             setMessage("Hubo un error con el servidor. Vuelve a intentarlo.");
             setAccepted(false);
@@ -96,13 +110,15 @@ function SignIn() {
         window.scrollTo(0, 0);
         const savedEmail = localStorage.getItem('savedEmail');
         const savedPassword = localStorage.getItem('savedPassword');
-        const savedRememberMe = localStorage.getItem('rememberMe', rememberMe);
+        const savedRememberMe = localStorage.getItem('rememberMe');
         if (savedEmail && savedPassword) {
             setUsername(savedEmail)
             setPassword(savedPassword)
             setRememberMe(savedRememberMe)
         }
     }, [])
+
+
 
     return (
         <div className="sign-in-background">

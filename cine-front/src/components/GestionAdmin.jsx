@@ -37,8 +37,8 @@ const GestionAdmin = () => {
         </div>
       </div>
       <div className='admin-links'>
-        <Link onClick={() => setPanelElement("listar")} to="/admin/ListadoPeliculas">LISTAR PELICULAS</Link>
-        <Link onClick={() => setPanelElement("nueva-pelicula")} to="/admin/nueva-pelicula">CARGAR PELICULA</Link>
+        <Link onClick={() => setPanelElement("listar")} to="/admin/ListadoPeliculas">Listar peliculas</Link>
+        <Link onClick={() => setPanelElement("nueva-pelicula")} to="/admin/nueva-pelicula">Cargar Pelicula</Link>
         <Link onClick={() => setPanelElement("listado-categorias")} to="/admin/ListadoCategorias">LISTAR CATEGORIAS</Link>
         <Link onClick={() => setPanelElement("crear-categoria")} to="/admin/nueva-categoria">CREAR CATEGORIA</Link>
         <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORIA</Link>

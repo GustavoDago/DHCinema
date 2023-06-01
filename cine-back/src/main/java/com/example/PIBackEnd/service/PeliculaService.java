@@ -191,6 +191,7 @@ public class PeliculaService {
 
     public List<Pelicula> buscarPeliculasPorTitulo(String titulo) throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas por categoria");
+
         List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
         List<Pelicula> peliculasEncontradas = new ArrayList<>();
         for (Pelicula pelicula : todasLasPeliculas) {

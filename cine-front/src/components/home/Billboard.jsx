@@ -3,6 +3,7 @@ import { searchMoviesForCategories } from "../UseFetch";
 import Item from "../Item"
 import { Link } from "react-router-dom";
 import ContentLoader from "react-content-loader";
+import ItemCartelera from "../ItemCartelera";
 
 function Billboard(props) {
 
@@ -65,18 +66,21 @@ function Billboard(props) {
   
     const renderBillboard = () => {
         return (
-            <div className="movie-container">
+            <div className="movie-container-cartelera">
               {isLoading ? (
                   loadingBox()
                 )
                : (
                 Array.isArray(movies) && movies.length > 0 ? (
                   movies.slice(0,10).map(movie => (
-                      <Item
+                      <ItemCartelera
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
-                        image={movie.imagen}
+                        image={movie.portada}
+                        clasificacion={movie.caracteristicas.clasificacion}
+                        director={movie.caracteristicas.director}
+                        duracion={movie.caracteristicas.duracion}                        
                       />
                   ))
                 ) : (

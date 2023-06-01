@@ -25,7 +25,7 @@ public class Caracteristica {
     @Column(nullable = false, length = 30)
     private String clasificacion;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 40)
     private String opcionesIdioma;
 
     @Column(nullable = false, length = 25)
