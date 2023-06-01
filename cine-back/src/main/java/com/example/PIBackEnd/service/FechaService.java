@@ -2,7 +2,7 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Fecha;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
-import com.example.PIBackEnd.repository.FechaRepository;
+import com.example.PIBackEnd.repository.IFechaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.Set;
 public class FechaService {
 
     private final static Logger logger = Logger.getLogger(FechaService.class);
-    private FechaRepository fechaRepository;
+    private IFechaRepository fechaRepository;
 
     @Autowired
-    public FechaService(FechaRepository fechaRepository) {
+    public FechaService(IFechaRepository fechaRepository) {
         this.fechaRepository = fechaRepository;
     }
 

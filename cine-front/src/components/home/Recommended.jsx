@@ -64,7 +64,7 @@ function Recommended() {
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
-                        image={movie.imagen}
+                        image={movie.portada}
                       />
                   ))
                 ) : (

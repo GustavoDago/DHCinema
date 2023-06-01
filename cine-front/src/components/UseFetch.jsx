@@ -128,3 +128,82 @@ export const fetchMovieTilte = async (title) => {
 
     return response;
 }
+
+export const fetchRegisterUser = async (user) => {
+    const url = "/api/auth/register"
+
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    }).then((response) => {
+        if (response){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+        
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const fetchLogInUser = async (user) => {
+    const url = "/api/auth/login"
+
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    }).then((response) => {
+        if (response.ok){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const confirmAccount = async (token) => {
+    const url = `/api/auth/confirmar-cuenta?token=${token}`
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+    .then((response) => {
+        if (response){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}

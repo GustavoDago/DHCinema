@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 
 function Home() {
-
+    
     
     const [index, setIndex] = useState(0);
     const [showCategorie, setShowCategorie] = useState("Todos");
@@ -16,6 +16,10 @@ function Home() {
         let result = n % m;
         return result >= 0 ? result : result + m;
     };
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[])
 
     const cards = [
         {

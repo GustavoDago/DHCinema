@@ -1,37 +1,106 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BounceLoader from "react-spinners/BounceLoader"
+import { fetchLogInUser } from '../components/UseFetch'
+import { useNavigate } from 'react-router-dom'
+import Modal from 'react-modal'
+
+Modal.setAppElement('#root')
 
 function SignIn() {
-
-    window.scrollTo(0, 0);
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [accepted, setAccepted] = useState(false);
+    const navigate = useNavigate()
 
 
+    const closeModal = () => {
+        setShowConfirmation(false)
+    }
+    const customStyles = {
+        overlay: { zIndex: 1000 }
+    }
     const onChangeUsername = (e) => setUsername(e.target.value);
     const onChangePassword = (e) => setPassword(e.target.value);
     const onChangeRememberMe = (e) => setRememberMe(e.target.checked)
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowConfirmation(true)
+        setIsLoading(true)
 
         if (rememberMe) {
-            localStorage.setItem('savedEmail', email);
+            localStorage.setItem('savedEmail', username);
             localStorage.setItem('savedPassword', password);
+            localStorage.setItem('rememberMe', rememberMe);
         } else {
             localStorage.removeItem('savedEmail');
             localStorage.removeItem('savedPassword')
+            localStorage.removeItem('rememberMe')
+        }
+
+        try {
+            const data = {
+                email: username,
+                password: password,
+            }
+            
+            const response = await fetchLogInUser(data);
+            if (response != false && response != null) {
+                console.log(response);
+                if (response.includes('no posee')) {
+                    setIsLoading(false);
+                    setMessage(response);
+                    setAccepted(false);
+                    setTimeout(() => {
+                        setMessage('')
+                        setShowConfirmation(false);
+                    }, 3500)
+                } else {
+                    setIsLoading(false);
+                    setMessage('Ingreso sesion correctamente.')
+                    setAccepted(true);
+                    setTimeout(() => {
+                        setMessage('')
+                        setAccepted(false)
+                        setShowConfirmation(false);
+                        navigate("/");
+                    }, 2000)
+                } 
+
+            }else{
+                setIsLoading(false);
+                setMessage('Hubo un error con el servidor. Vuelve a intentarlo.')
+                setAccepted(false);
+                setTimeout(() => {
+                    setMessage('')
+                    setShowConfirmation(false);
+                }, 2000)
+            }
+        } catch (error) {
+            setIsLoading(false);
+            setMessage("Hubo un error con el servidor. Vuelve a intentarlo.");
+            setAccepted(false);
+            setTimeout(() => {
+                setShowConfirmation(false);
+            }, 3500)
         }
     }
 
+
     useEffect(() => {
+        window.scrollTo(0, 0);
         const savedEmail = localStorage.getItem('savedEmail');
         const savedPassword = localStorage.getItem('savedPassword');
+        const savedRememberMe = localStorage.getItem('rememberMe', rememberMe);
         if (savedEmail && savedPassword) {
             setUsername(savedEmail)
             setPassword(savedPassword)
-            setRememberMe(false)
+            setRememberMe(savedRememberMe)
         }
     }, [])
 
@@ -81,7 +150,7 @@ function SignIn() {
                         <div className="register-div">
                             <p>Todavia no tienes cuenta?</p>
                             <Link to="../registrarse">
-                                <a>Registrate</a>
+                                Registrate
                             </Link>
                         </div>
                     </div>
@@ -92,6 +161,35 @@ function SignIn() {
                 </div>
 
             </div>
+            <Modal
+                isOpen={showConfirmation}
+                onRequestClose={closeModal}
+                contentLabel="Confirmacion"
+                className="modal"
+                style={customStyles}
+                shouldCloseOnOverlayClick={false}
+            >
+
+                <div className="modal-conteiner">
+                    <div className="modal-content-register">
+                        {message}
+                        {isLoading ? (
+                            <BounceLoader
+                                color="#36d7b7"
+                                speedMultiplier={2}
+                                loading
+                            />
+                        ) : (
+                            accepted ? (
+                                <img src='./icons/accept.svg' />
+                            ) : (
+                                <img src='./icons/denied.svg' />
+                            )
+                        )
+                        }
+                    </div>
+                </div>
+            </Modal>
         </div>
 
     )

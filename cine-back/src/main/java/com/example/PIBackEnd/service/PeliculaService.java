@@ -2,11 +2,13 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Categoria;
 import com.example.PIBackEnd.domain.Fecha;
+import com.example.PIBackEnd.domain.Imagen;
 import com.example.PIBackEnd.domain.Pelicula;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
-import com.example.PIBackEnd.repository.PeliculaRepository;
+import com.example.PIBackEnd.repository.IImagenRepository;
+import com.example.PIBackEnd.repository.IPeliculaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,12 +21,15 @@ import java.util.*;
 public class PeliculaService {
 
     private final static Logger logger = Logger.getLogger(PeliculaService.class);
-    private PeliculaRepository peliculaRepository;
+    private IPeliculaRepository peliculaRepository;
     private CategoriaService categoriaService;
     private FechaService fechaService;
 
     @Autowired
-    public PeliculaService(PeliculaRepository peliculaRepository, CategoriaService categoriaService, FechaService fechaService) {
+    private IImagenRepository imagenRepository;
+
+    @Autowired
+    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FechaService fechaService) {
         this.peliculaRepository = peliculaRepository;
         this.categoriaService = categoriaService;
         this.fechaService = fechaService;
@@ -45,7 +50,36 @@ public class PeliculaService {
                 pelicula.setCategorias(nuevasCategorias);
                 pelicula.setFechas(nuevasFechas);
                 pelicula.setVigente(true);
-                return peliculaRepository.save(pelicula);
+
+                Set<Imagen> imagenes = pelicula.getImagenes();
+                Set<String> urls = new HashSet<>();
+
+                for(Imagen imagen : imagenes){
+                    String url = imagen.getImagen();
+                    if (urls.contains(url)) {
+                        throw new ResourceBadRequestException("Error. Las imágenes contienen elementos duplicados");
+                    }
+                    urls.add(url);
+                }
+
+                Set<Imagen> imagenNuevas = new HashSet<>();
+                for(Imagen imagen : imagenes){
+                    Optional<Imagen> imagenBuscada = imagenRepository.findByImagen(imagen.getImagen());
+                    if(imagenBuscada.isPresent()){
+                        throw new ResourceBadRequestException("Error. La Imagen con URL: " + imagen.getImagen() + ", esta asignada a otra pelicula");
+                    }else{
+                        imagenNuevas.add(imagen);
+                    }
+                }
+                pelicula.setImagenes(imagenNuevas);
+
+                Pelicula peliculaGuardada = peliculaRepository.save(pelicula);
+
+                for(Imagen imagen : peliculaGuardada.getImagenes()){
+                    imagen.setPelicula(peliculaGuardada);
+                    imagenRepository.save(imagen);
+                }
+                return peliculaGuardada;
             }
         }
     }
@@ -68,6 +102,33 @@ public class PeliculaService {
                     pelicula.setCategorias(nuevasCategorias);
                     pelicula.setFechas(nuevasFechas);
                     pelicula.setVigente(true);
+
+                    Set<Imagen> imagenes = pelicula.getImagenes();
+                    Set<String> urls = new HashSet<>();
+
+                    for (Imagen imagen : imagenes) {
+                        String url = imagen.getImagen();
+                        if (urls.contains(url)) {
+                            throw new ResourceBadRequestException("Error. Las imágenes contienen elementos duplicados");
+                        }
+                        urls.add(url);
+                    }
+
+                    Set<Imagen> imagenNuevas = new HashSet<>();
+                    for (Imagen imagen : imagenes) {
+                        Optional<Imagen> imagenBuscada = imagenRepository.findByImagen(imagen.getImagen());
+                        if (imagenBuscada.isPresent() && imagenBuscada.get().getPelicula().getId().equals(pelicula.getId())) {
+                            imagenNuevas.add(imagenBuscada.get());
+                        }else if(imagenBuscada.isPresent() && !imagenBuscada.get().getPelicula().getId().equals(pelicula.getId())){
+                            throw new ResourceBadRequestException("Error. La Imagen con URL: " + imagen.getImagen() + ", esta asignada a otra pelicula");
+                        }else if(imagenBuscada.isEmpty()){
+                            imagen.setPelicula(pelicula);
+                            imagenRepository.save(imagen);
+                            imagenNuevas.add(imagen);
+                        }
+                    }
+                    pelicula.setImagenes(imagenNuevas);
+
                     return peliculaRepository.save(pelicula);
                 }
             }
@@ -87,14 +148,14 @@ public class PeliculaService {
         }
     }
 
-    public Optional<Pelicula> buscarPeliculaPorTitulo(String titulo) throws ResourceNotFoundException {
-        logger.info("Buscando Pelicula con titulo: " + titulo);
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findByTituloAndVigente(titulo, true);
-        if (peliculaBuscada.isPresent()){
-            return peliculaBuscada;
+    public List<Pelicula> buscarPeliculaPorTitulo(String parteDelTitulo) throws ResourceNotFoundException {
+        logger.info("Buscando Peliculas con titulo o parte del titulo: " + parteDelTitulo);
+        List<Pelicula> peliculasBuscadas = peliculaRepository.findByTituloContainingIgnoreCaseAndVigente(parteDelTitulo, true);
+        if (peliculasBuscadas.size() > 0){
+            return peliculasBuscadas;
         }
         else{
-            throw new ResourceNotFoundException("Error. No existe la Pelicula con titulo: " + titulo + ".");
+            throw new ResourceNotFoundException("Error. No existen Peliculas con titulo o parte del titulo: " + parteDelTitulo + ".");
         }
     }
 
@@ -128,13 +189,14 @@ public class PeliculaService {
         }
     }
 
-    public List<Pelicula> buscarPeliculasPorCategoria(String categoria) throws ResourceNoContentException {
+    public List<Pelicula> buscarPeliculasPorTitulo(String titulo) throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas por categoria");
+
         List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
         List<Pelicula> peliculasEncontradas = new ArrayList<>();
         for (Pelicula pelicula : todasLasPeliculas) {
             for (Categoria categoriaPelicula : pelicula.getCategorias()) {
-                if (categoriaPelicula.getCategoria().equals(categoria)) {
+                if (categoriaPelicula.getTitulo().equals(titulo)) {
                     peliculasEncontradas.add(pelicula);
                     break;
                 }
@@ -143,7 +205,7 @@ public class PeliculaService {
         if(peliculasEncontradas.size() > 0){
             return peliculasEncontradas;
         }else{
-            throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + categoria + ".");
+            throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + titulo + ".");
         }
     }
 

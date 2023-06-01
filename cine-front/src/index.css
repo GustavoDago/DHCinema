@@ -113,7 +113,7 @@ button:focus-visible {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.modal-conteiner{
+.modal-conteiner {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -121,9 +121,10 @@ button:focus-visible {
   width: 40%;
   height: 40%;
   background-color: #1B263B;
+  border-radius: 30px;
 }
 
-.modal-image-conteiner{
+.modal-image-conteiner {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -133,17 +134,17 @@ button:focus-visible {
   background-color: #1B263B;
 }
 
-.modal-image-content{
+.modal-image-content {
   display: flex;
   flex-direction: column;
-  
+
   align-items: center;
   width: 100%;
   height: 100%;
 }
 
 
-.detail-image-part{
+.detail-image-part {
   align-self: flex-start;
   width: 100%;
   height: 5%;
@@ -151,27 +152,27 @@ button:focus-visible {
   display: flex;
 }
 
-.modal-image-preview{
+.modal-image-preview {
   width: 100%;
   height: 95%;
 }
 
-.modal-object{
+.modal-object {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  
+
 }
 
 
-.detail-image-part img{
+.detail-image-part img {
   height: 50%;
   align-self: center;
   width: auto;
   margin-left: 5px;
 }
 
-.modal-content{
+.modal-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -746,7 +747,7 @@ footer {
   background-position: left calc((50vw - 170px) - 340px) top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('../public/banner-guardianes.jpg');
+
   position: relative;
   border-bottom: 1px solid black;
   box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.7);
@@ -877,16 +878,16 @@ footer {
 
 
 .half-left {
-  width: 50vw;
+  width: 50%;
 }
 
 .half-left img {
-  width: 450px;
+  width: 100%;
   height: auto;
 }
 
 .half-right {
-  width: 50vw;
+  width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
@@ -1006,12 +1007,12 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
 }
 
-.date-container label{
+.date-container label {
   text-align: left;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .form-description {
@@ -1024,7 +1025,7 @@ footer {
   text-align: center;
 }
 
-.rmdp-input{
+.rmdp-input {
   background-color: #1B263B;
   border: none;
   width: 200px;
@@ -1061,7 +1062,7 @@ footer {
   height: 100%;
 }
 
-.dropzone-container{
+.dropzone-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1074,7 +1075,7 @@ footer {
   margin: 20px 0;
 }
 
-.dropzone{
+.dropzone {
   width: 96%;
   align-self: center;
   border: 1px dashed #E0E1DD;
@@ -1085,32 +1086,32 @@ footer {
   background-color: #415A77;
 }
 
-.dropzone-info{
+.dropzone-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 15px 0px;
 }
 
-.dropzone-info p{
+.dropzone-info p {
   font-size: small;
   font-weight: 500;
 }
 
-.dropzone-info img{
+.dropzone-info img {
   width: 15%;
   height: auto;
   align-self: center;
   object-fit: cover;
 }
 
-.extensions-preview{
+.extensions-preview {
   display: inline-flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.empty-files{
+.empty-files {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1118,30 +1119,30 @@ footer {
   padding: 10px 0;
 }
 
-.empty-files img{
+.empty-files img {
   align-self: center;
 
 }
 
-.empty-files h3{
+.empty-files h3 {
   color: #415A77;
 }
 
-.extension-container{
+.extension-container {
   width: 20%;
 }
 
-.extensions-preview h4{
+.extensions-preview h4 {
   margin: 0;
   font-size: 10px;
   margin-bottom: 3px;
 }
 
-.extensions-preview img{
+.extensions-preview img {
   width: 20%;
 }
 
-.extension-buttons button{
+.extension-buttons button {
   background-color: transparent;
   border: none;
   padding: 0;
@@ -1149,11 +1150,11 @@ footer {
   margin: 3px;
 }
 
-.show-button img{
+.show-button img {
   width: 100%;
 }
 
-.delete-button img{
+.delete-button img {
   width: 100%;
 }
 
@@ -1161,7 +1162,7 @@ footer {
   border-radius: 20px;
 }
 
-.admin-form form button{
+.admin-form form button {
   align-self: center;
   background-color: white;
   color: #1B263B;
@@ -1177,12 +1178,12 @@ footer {
   padding: 30px 20%;
 }
 
-.modal-confirmation{
+.modal-confirmation {
   width: 100%;
   height: 100%;
 }
 
-.confirmation-content{
+.confirmation-content {
   background-color: #1B263B;
   width: 50%;
   height: 20%;
@@ -1197,7 +1198,7 @@ footer {
   transform: translate(-50%, -50%);
 }
 
-.confirmation-content .modal-buttons button{
+.confirmation-content .modal-buttons button {
   width: 5vh;
   height: 3vh;
   background-color: #415A77;
@@ -1230,7 +1231,7 @@ footer {
 
 
 /** vista Asignar Categorías **/
-div.asignoCategorias{
+div.asignoCategorias {
   display: flex;
   justify-content: space-between;
 }
@@ -1484,6 +1485,19 @@ div.asignoCategorias{
 
 }
 
+.modal-content-register {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: auto;
+  height: 100%;
+}
+
+.modal-content-register img{
+  width: 100px;
+  height: auto;
+}
 
 .register-container form {
   display: flex;
@@ -1518,6 +1532,57 @@ div.asignoCategorias{
 
 .new-button:hover {
   background-color: #0D1B2A;
+}
+
+/** Vista confirmacion cuenta **/
+
+.confirm-email-conteiner {
+  background-color: #415A77;
+  height: 100vh;
+}
+
+.confirm-email-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.confirm-email-content img {
+  width: 20%;
+  align-self: center;
+}
+
+.confirm-email {
+  background-color: #0D1B2A;
+  width: 30%;
+  height: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.7);
+}
+
+.confirm-email button {
+  width: 40%;
+  height: 60px;
+  background-color: #415A77;
+  border-radius: 10px;
+  border: 2px solid white;
+  color: white;
+  align-self: center;
+  margin: 30px;
+}
+
+.confirm-email button a {
+  text-decoration: none;
+  color: white
 }
 
 /** Tablet **/
