@@ -61,6 +61,9 @@ const header = () => {
           <Link to="/peliculas/pagina/1">
             <p>CARTELERA</p>
           </Link>
+          <Link to="/categorias/">
+            <p>CATEGORIAS</p>
+          </Link>
         </div>
       </div>
       <div className='right-header'>

@@ -5,29 +5,19 @@ import { Link } from "react-router-dom";
 import ContentLoader from "react-content-loader";
 import ItemCartelera from "../ItemCartelera";
 
-function Billboard(props) {
+function Billboard() {
 
     const [movies,setMovies] = useState()
     const [isLoading, setIsLoading] = useState(true)
-
-    const titulo = () =>{
-        if (props.categorie !== "Todos"){
-            return (<h2>{`Peliculas de ${props.categorie.toLowerCase()}`}</h2>)
-        } else {
-            return (<h2>CARTELERA</h2>);
-        }
-    }
     
-
-
     useEffect(()=>{
 
         
         const fetchMovieForCategorie = async () => {
             setIsLoading(true);
             try{
-                const movieForCategorie = await searchMoviesForCategories(props.categorie)
-                console.log(props.categorie)
+                const movieForCategorie = await searchMoviesForCategories("Ninguno")
+                
                 setMovies(movieForCategorie);
                 console.log(movies)
                 setIsLoading(false);
@@ -39,7 +29,7 @@ function Billboard(props) {
         };
         
         fetchMovieForCategorie()
-    },[props.categorie]) 
+    },[]) 
 
     const loadingBox = () => {
       const loaders = []
@@ -66,21 +56,18 @@ function Billboard(props) {
   
     const renderBillboard = () => {
         return (
-            <div className="movie-container-cartelera">
+            <div className="movie-container">
               {isLoading ? (
                   loadingBox()
                 )
                : (
                 Array.isArray(movies) && movies.length > 0 ? (
                   movies.slice(0,10).map(movie => (
-                      <ItemCartelera
+                      <Item
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
-                        image={movie.portada}
-                        clasificacion={movie.caracteristicas.clasificacion}
-                        director={movie.caracteristicas.director}
-                        duracion={movie.caracteristicas.duracion}                        
+                        image={movie.portada}                 
                       />
                   ))
                 ) : (
@@ -96,7 +83,7 @@ function Billboard(props) {
 
     return (
     <div className="billboard-section">
-    {titulo()}
+    <h2>CARTELERA</h2>
     {renderBillboard()}
     <Link to={`/peliculas/pagina/1`}>
         <button>VER MAS</button>
