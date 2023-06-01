@@ -209,6 +209,7 @@ function MovieDetails() {
                 {!isLoading && (<div className="movie-second-div">
                     <div className="image-details">
                         <div className="grid-container">
+                            <div className="bloque_img">
                             <div className="half-left">
                                 <img src={first[0].imagen} alt="Movie" />
                             </div>
@@ -218,13 +219,12 @@ function MovieDetails() {
                                         <img src={movie.imagen} alt="Movie" />
                                     </div>
                                 ))}
-
+                            </div>
                             </div>
                             <div className="button-container">
                                 <button>Ver más</button>
                             </div>
                         </div>
-
                     </div>
 
 

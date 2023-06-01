@@ -14,9 +14,10 @@ function ItemCartelera(props){
                 <img className="opt-image" src={props.image}/>
             </figure>
             <ul className="ocultoEnMovil">
-                <li>Clasificación:{props.clasificacion}</li>
-                <li>Director:{props.director}</li>
-                <li>Duración:{props.duracion} min</li>
+                <li>{props.name}</li>
+                <li>Clasificación: {props.clasificacion}</li>
+                <li>Director: {props.director}</li>
+                <li>Duración: {props.duracion} min</li>
             </ul>
         </div>
     )

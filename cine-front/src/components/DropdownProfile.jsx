@@ -29,6 +29,11 @@ const DropdownProfile = () => {
             <div className={`drop-down-profile ${open? 'active' : 'inactive'}`}>
                 <ul>
                     {!sessionStorage.getItem('role') &&
+                        <Link to='/perfil'>
+                            <li className="drop-down-item-perfil">Perfil</li>
+                        </Link>
+                    }
+                    {!sessionStorage.getItem('role') &&
                         <Link to='/inicio-sesion'>
                             <li className="drop-down-item">Iniciar Sesion</li>
                         </Link>
