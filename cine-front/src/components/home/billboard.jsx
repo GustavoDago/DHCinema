@@ -1,32 +1,23 @@
 import { useEffect, useState } from "react";
 import { searchMoviesForCategories } from "../UseFetch";
-import Item from "../item"
+import Item from "../Item"
 import { Link } from "react-router-dom";
 import ContentLoader from "react-content-loader";
+import ItemCartelera from "../ItemCartelera";
 
-function Billboard(props) {
+function Billboard() {
 
     const [movies,setMovies] = useState()
     const [isLoading, setIsLoading] = useState(true)
-
-    const titulo = () =>{
-        if (props.categorie !== "Todos"){
-            return (<h3>{`Peliculas de ${props.categorie.toLowerCase()}`}</h3>)
-        } else {
-            return (<h3>Cartelera</h3>);
-        }
-    }
     
-
-
     useEffect(()=>{
 
         
         const fetchMovieForCategorie = async () => {
             setIsLoading(true);
             try{
-                const movieForCategorie = await searchMoviesForCategories(props.categorie)
-                console.log(props.categorie)
+                const movieForCategorie = await searchMoviesForCategories("Ninguno")
+                
                 setMovies(movieForCategorie);
                 console.log(movies)
                 setIsLoading(false);
@@ -38,7 +29,7 @@ function Billboard(props) {
         };
         
         fetchMovieForCategorie()
-    },[props.categorie]) 
+    },[]) 
 
     const loadingBox = () => {
       const loaders = []
@@ -76,7 +67,7 @@ function Billboard(props) {
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
-                        image={movie.imagen}
+                        image={movie.portada}                 
                       />
                   ))
                 ) : (
@@ -92,10 +83,10 @@ function Billboard(props) {
 
     return (
     <div className="billboard-section">
-    {titulo()}
+    <h2>CARTELERA</h2>
     {renderBillboard()}
-    <Link to={`peliculas/pagina/1`}>
-        <button>Ver mas</button>
+    <Link to={`/peliculas/pagina/1`}>
+        <button>VER MAS</button>
     </Link>
     </div>
     );

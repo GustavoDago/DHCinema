@@ -7,7 +7,7 @@ function Item(props){
             <figure>
                 <div className="opt-card">
                     <p>{props.name}</p>
-                    <Link key={props.id} to={`peliculas/${props.id}`}>
+                    <Link key={props.id} to={`/peliculas/${props.id}`}>
                         <button id="details-button">Detalles</button>
                     </Link>
                 </div>

@@ -1,5 +1,5 @@
 import { searchRandomMovies } from "../UseFetch";
-import Item from "../item";
+import Item from "../Item";
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 
@@ -53,7 +53,7 @@ function Recommended() {
 
     return (
         <div className="recommended-section">
-                <h3>Recomendados</h3>
+                <h2>RECOMENDADOS</h2>
                 <div className="movie-container">
               {isLoading ? (
                 loadingBox()
@@ -64,7 +64,7 @@ function Recommended() {
                         key={movie.id}
                         id={movie.id}
                         name={movie.titulo}
-                        image={movie.imagen}
+                        image={movie.portada}
                       />
                   ))
                 ) : (
