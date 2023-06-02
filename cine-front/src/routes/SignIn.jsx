@@ -1,39 +1,136 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BounceLoader from "react-spinners/BounceLoader"
+import { fetchGetUsuario, fetchLogInUser } from '../components/UseFetch'
+import { useNavigate } from 'react-router-dom'
+import Modal from 'react-modal'
+import { set } from "date-fns";
+
+
+Modal.setAppElement('#root')
 
 function SignIn() {
-
-    window.scrollTo(0, 0);
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [accepted, setAccepted] = useState(false);
+    const navigate = useNavigate()
 
 
+    const closeModal = () => {
+        setShowConfirmation(false)
+    }
+    const customStyles = {
+        overlay: { zIndex: 1000 }
+    }
     const onChangeUsername = (e) => setUsername(e.target.value);
     const onChangePassword = (e) => setPassword(e.target.value);
     const onChangeRememberMe = (e) => setRememberMe(e.target.checked)
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowConfirmation(true)
+        setIsLoading(true)
+
+
 
         if (rememberMe) {
-            localStorage.setItem('savedEmail', email);
+            localStorage.setItem('savedEmail', username);
             localStorage.setItem('savedPassword', password);
+            localStorage.setItem('rememberMe', rememberMe);
         } else {
             localStorage.removeItem('savedEmail');
             localStorage.removeItem('savedPassword')
+            localStorage.removeItem('rememberMe')
+        }
+
+        if ((username == '' || null) || (password == '' || null)){
+            setIsLoading(false);
+            setMessage('Debe ingresar todos los campos');
+            setAccepted(false);
+            setTimeout(() => {
+                setMessage('')
+                setShowConfirmation(false);
+            }, 3500)
+        }
+
+        try {
+            const data = {
+                email: username,
+                password: password,
+            }
+
+            const response = await fetchLogInUser(data);
+
+
+            if (response != false && response != null) {
+                console.log(response);
+                if (response.includes('no posee')) {
+                    setIsLoading(false);
+                    setMessage(response);
+                    setAccepted(false);
+                    setTimeout(() => {
+                        setMessage('')
+                        setShowConfirmation(false);
+                    }, 3500)
+                } else {
+                    setAccepted(true);
+                    const response = await fetchGetUsuario(username)
+                    if (response) {
+                        console.log(response)
+                        setIsLoading(false);
+                        setMessage('Ingreso sesion correctamente.')
+                        sessionStorage.setItem('nombre', response.nombre)
+                        sessionStorage.setItem('apellido', response.apellido)
+                        sessionStorage.setItem('email', response.email)
+                        sessionStorage.setItem('role', response.roles[0].nombre)
+                        setTimeout(() => {
+                            setMessage('')
+                            setShowConfirmation(false);
+                            navigate("/");
+                        }, 3000)
+                    } else {
+                        throw new Error("Error al buscar el usuario");
+                    }
+                }
+
+            } else {
+                setIsLoading(false);
+                setMessage('Por favor, verifica tu direccion de correo.')
+                setAccepted(false);
+                setTimeout(() => {
+                    setMessage('')
+                    setShowConfirmation(false);
+                }, 3000)
+            }
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false);
+            setMessage("Hubo un error con el servidor. Vuelve a intentarlo.");
+            setAccepted(false);
+            setTimeout(() => {
+                setShowConfirmation(false);
+            }, 3500)
         }
     }
 
+
     useEffect(() => {
+        window.scrollTo(0, 0);
         const savedEmail = localStorage.getItem('savedEmail');
         const savedPassword = localStorage.getItem('savedPassword');
+        const savedRememberMe = localStorage.getItem('rememberMe');
         if (savedEmail && savedPassword) {
             setUsername(savedEmail)
             setPassword(savedPassword)
-            setRememberMe(false)
+            setRememberMe(savedRememberMe)
         }
     }, [])
+
+
 
     return (
         <div className="sign-in-background">
@@ -81,7 +178,7 @@ function SignIn() {
                         <div className="register-div">
                             <p>Todavia no tienes cuenta?</p>
                             <Link to="../registrarse">
-                                <a>Registrate</a>
+                                Registrate
                             </Link>
                         </div>
                     </div>
@@ -92,6 +189,35 @@ function SignIn() {
                 </div>
 
             </div>
+            <Modal
+                isOpen={showConfirmation}
+                onRequestClose={closeModal}
+                contentLabel="Confirmacion"
+                className="modal"
+                style={customStyles}
+                shouldCloseOnOverlayClick={false}
+            >
+
+                <div className="modal-conteiner">
+                    <div className="modal-content-register">
+                        {message}
+                        {isLoading ? (
+                            <BounceLoader
+                                color="#36d7b7"
+                                speedMultiplier={2}
+                                loading
+                            />
+                        ) : (
+                            accepted ? (
+                                <img src='./icons/accept.svg' />
+                            ) : (
+                                <img src='./icons/denied.svg' />
+                            )
+                        )
+                        }
+                    </div>
+                </div>
+            </Modal>
         </div>
 
     )

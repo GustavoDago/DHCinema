@@ -5,7 +5,7 @@ const API_ENDPOINT = `http://localhost:8080`;
 
 export const searchMoviesForCategories = async (url) => {
 
-    if (url === 'Todos') {
+    if (url === 'Ninguno') {
         url = '/peliculas'
     } else {
         url = `/peliculas/categoria/${url}`
@@ -126,5 +126,115 @@ export const fetchMovieTilte = async (title) => {
             return false;
         })
 
+    return response;
+}
+
+export const fetchRegisterUser = async (user) => {
+    const url = "/usuarios/register"
+    console.log(user)
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    }).then((response) => {
+        if (response){
+            console.log(response)
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+        
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const fetchLogInUser = async (user) => {
+    const url = "/usuarios/login"
+
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    }).then((response) => {
+        if (response.ok){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const confirmAccount = async (token) => {
+    const url = `/usuarios/confirmar-cuenta?token=${token}`
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+    .then((response) => {
+        if (response){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const fetchGetUsuario = async (email) => {
+    const url = `/usuarios/${email}`
+
+    console.log(`${API_ENDPOINT}${url}`)
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        });
+    console.log(response)
+    return response;
+}
+
+export const fetchCategorias = async () => {
+    const url='/categorias'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        });
+    console.log(response)
     return response;
 }

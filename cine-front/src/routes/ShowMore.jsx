@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { showPages } from "../components/UseFetch";
 import ContentLoader from "react-content-loader";
-import Item from "../components/item";
+import Item from "../components/Item";
 
 function ShowMore() {
 
@@ -54,18 +54,18 @@ function ShowMore() {
         for (let i=0;i<10;i++){
             loaders.push(
             <div key={i} className="content-loader">
-              <ContentLoader
+            <ContentLoader
                 speed={2}
                 width="100%"
                 height="100%"
                 backgroundColor="#f3f3f3"
                 foregroundColor="#ecebeb"
-              >
+            >
                 <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
-              </ContentLoader>
+            </ContentLoader>
             </div>
             )
-          }
+        }
         return loaders;
     }
 
@@ -83,7 +83,7 @@ function ShowMore() {
                                     key={movie.id}
                                     id={movie.id}
                                     name={movie.titulo}
-                                    image={movie.imagen}
+                                    image={movie.portada}
                                 />
                             ))
                         ) : (
@@ -99,7 +99,7 @@ function ShowMore() {
     const amountOfPages = () =>{
         return (
             <div className="pages">
-                <img className='first-button' src="../../icons/atras.png"onClick={prevPage}/>
+                <img className='first-button' src="/icons/atras.svgq"onClick={prevPage}/>
                 <div className="pages-numbers">
                     <input
                         type="number"
@@ -113,7 +113,7 @@ function ShowMore() {
                         <p>de</p>
                         <p>{pages}</p>
                 </div>
-                <img className='first-button' src="../../icons/adelante.png"onClick={nextPage}/>
+                <img className='first-button' src="/icons/adelante.svg"onClick={nextPage}/>
             </div>
         )
     }

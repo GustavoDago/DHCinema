@@ -14,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -52,9 +56,11 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers("/categorias").permitAll()
                 .requestMatchers("/usuarios/**").permitAll()
                 .requestMatchers("/roles").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/usuarios/{email}/roles").permitAll()
                 //.requestMatchers(HttpMethod.PUT, "/usuarios/{email}/roles").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

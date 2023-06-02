@@ -36,23 +36,30 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<String> guardarUsuario(@RequestBody DtoRegistro dtoRegistro) throws ResourceBadRequestException {
+        System.out.println(dtoRegistro.getNombre());
         return ResponseEntity.ok(usuarioService.guardarUsuario(dtoRegistro));
     }
 
-    @PostMapping("registerAdm")
+    @PostMapping("/registerAdm")
     public ResponseEntity<String> guardarUsuarioAdm(@RequestBody DtoRegistro dtoRegistro) throws ResourceBadRequestException {
         return ResponseEntity.ok(usuarioService.guardarUsuarioAdm(dtoRegistro));
     }
 
-    @PostMapping("login")
-    public ResponseEntity<DtoAuthRespuesta> login(@RequestBody DtoLogin dtoLogin) {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody DtoLogin dtoLogin) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 dtoLogin.getEmail(), dtoLogin.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerador.generarToken(authentication);
-        return new ResponseEntity<>(new DtoAuthRespuesta(token), HttpStatus.OK);
+        Boolean activo = usuarioService.usuarioActivo(dtoLogin);
+        DtoAuthRespuesta dtoAuthRespuesta = new DtoAuthRespuesta(token);
+        if (activo){
+            return new ResponseEntity<>(new DtoAuthRespuesta(token), HttpStatus.OK);
+        } else {
+            return ResponseEntity.badRequest().body("Usted no posee una cuenta o debe verificarla.");
+        }
     }
 
     @PutMapping("/{email}/roles")
@@ -75,5 +82,11 @@ public class UsuarioController {
     public ResponseEntity<String> eliminarUsuario(@PathVariable String email) throws ResourceNotFoundException {
         usuarioService.eliminarUsuario(email);
         return ResponseEntity.ok("Eliminación del Usuario con email = " + email + ", con éxito");
+    }
+
+    @GetMapping ("/confirmar-cuenta")
+    public ResponseEntity<String> confirmUserAccount(@RequestParam("token")String confirmacionToken) {
+        ResponseEntity <String>  confirmar = usuarioService.confirmarEmail(confirmacionToken);
+        return confirmar;
     }
 }
