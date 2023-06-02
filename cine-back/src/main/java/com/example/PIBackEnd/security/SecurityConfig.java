@@ -47,13 +47,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
-                .cors(cors -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("http://g9-pelis.s3-website.us-east-2.amazonaws.com/");
-                    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
-                    config.setAllowedHeaders(Collections.singletonList("Authorization"));
-                    cors.configurationSource(request -> config);
-                })
+                .cors(Customizer.withDefaults())
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)

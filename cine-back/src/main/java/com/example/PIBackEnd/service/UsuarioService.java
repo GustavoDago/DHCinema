@@ -93,7 +93,6 @@ public class UsuarioService {
         usuarios.setEmail(dtoRegistro.getEmail());
         usuarios.setActivo(true);
         usuarios.setPassword(passwordEncoder.encode(dtoRegistro.getPassword()));
-        usuarios.setActivo(true);
         Optional<Rol> roles = rolesRepository.findByNombre("ADMIN");
         if(roles.isPresent()){
             usuarios.setRoles(Collections.singletonList(roles.get()));
