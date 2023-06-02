@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader"
 import { fetchGetUsuario, fetchLogInUser } from '../components/UseFetch'
@@ -35,6 +35,8 @@ function SignIn() {
         setShowConfirmation(true)
         setIsLoading(true)
 
+
+
         if (rememberMe) {
             localStorage.setItem('savedEmail', username);
             localStorage.setItem('savedPassword', password);
@@ -45,6 +47,16 @@ function SignIn() {
             localStorage.removeItem('rememberMe')
         }
 
+        if ((username == '' || null) || (password == '' || null)){
+            setIsLoading(false);
+            setMessage('Debe ingresar todos los campos');
+            setAccepted(false);
+            setTimeout(() => {
+                setMessage('')
+                setShowConfirmation(false);
+            }, 3500)
+        }
+
         try {
             const data = {
                 email: username,
@@ -53,7 +65,7 @@ function SignIn() {
 
             const response = await fetchLogInUser(data);
 
-            
+
             if (response != false && response != null) {
                 console.log(response);
                 if (response.includes('no posee')) {
@@ -71,10 +83,10 @@ function SignIn() {
                         console.log(response)
                         setIsLoading(false);
                         setMessage('Ingreso sesion correctamente.')
-                        sessionStorage.setItem('nombre',response.nombre)
-                        sessionStorage.setItem('apellido',response.apellido)
-                        sessionStorage.setItem('email',response.email)
-                        sessionStorage.setItem('role',response.roles[0].nombre)
+                        sessionStorage.setItem('nombre', response.nombre)
+                        sessionStorage.setItem('apellido', response.apellido)
+                        sessionStorage.setItem('email', response.email)
+                        sessionStorage.setItem('role', response.roles[0].nombre)
                         setTimeout(() => {
                             setMessage('')
                             setShowConfirmation(false);
@@ -87,7 +99,7 @@ function SignIn() {
 
             } else {
                 setIsLoading(false);
-                setMessage('Hubo un error con el servidor. Vuelve a intentarlo.')
+                setMessage('Por favor, verifica tu direccion de correo.')
                 setAccepted(false);
                 setTimeout(() => {
                     setMessage('')
@@ -125,10 +137,10 @@ function SignIn() {
             <div className="sign-in-container">
                 <div className="sign-in">
                     <div className="sign-in-first">
-                                <div>
-                                    <h2>Bienvenido!</h2>
-                                    <p>Inicia sesion en tu cuenta</p>
-                                </div>
+                        <div>
+                            <h2>Bienvenido!</h2>
+                            <p>Inicia sesion en tu cuenta</p>
+                        </div>
                         <form onSubmit={handleSubmit}>
                             <input
                                 className="sign-in-inputs"

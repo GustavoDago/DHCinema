@@ -43,11 +43,10 @@ function AdministrationPanel() {
             try {
                 const categories = await fetchCategorias()
                 if (categories) {
-                    
                     const updatedCategorias = categories.map(categoria => ({
                         ...categoria,
                         selected: false
-                      }));
+                    }));
                     setSelectedCategories(updatedCategorias);
                     setIsLoading(false);
                     setErrorMessage('')

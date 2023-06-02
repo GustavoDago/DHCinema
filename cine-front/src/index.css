@@ -976,10 +976,13 @@ height: auto;
 .grid-container {
   position: relative;
   width: 100%;
+  display: flex;
   justify-content: center;
   overflow-x: hidden;
   align-items: center;
 }
+
+
 
 .show-gallery-conteiner{
   display: flex;
@@ -1060,6 +1063,7 @@ height: auto;
 }
 
 .button-container {
+  width: 50vh;
   position: absolute;
   bottom: 10px;
   right: 90px;

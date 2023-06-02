@@ -99,7 +99,7 @@ function ShowMore() {
     const amountOfPages = () =>{
         return (
             <div className="pages">
-                <img className='first-button' src="../../icons/atras.png"onClick={prevPage}/>
+                <img className='first-button' src="/icons/atras.svgq"onClick={prevPage}/>
                 <div className="pages-numbers">
                     <input
                         type="number"
@@ -113,7 +113,7 @@ function ShowMore() {
                         <p>de</p>
                         <p>{pages}</p>
                 </div>
-                <img className='first-button' src="../../icons/adelante.png"onClick={nextPage}/>
+                <img className='first-button' src="/icons/adelante.svg"onClick={nextPage}/>
             </div>
         )
     }
