@@ -286,10 +286,12 @@ header {
 
 }
 
+
 .header-section p {
   text-decoration: none;
   color: white;
   font-weight: 200;
+  margin-right: 20px;
 }
 
 .header-section p:hover {
@@ -300,7 +302,7 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 30%;
+  width: auto%;
 }
 
 .headerContainer img {
@@ -311,7 +313,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 25%;
+  width: auto;
+}
+
+.right-header div{
+  margin-right: 30px;
 }
 
 .error-message-header {
