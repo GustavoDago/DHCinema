@@ -2,12 +2,12 @@ import { useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Modal from "react-modal"
-
 import { fetchCategorias, newMovie } from "../components/UseFetch";
 import MultipleImageDrop from "../components/AdministrationPanel/multipleImageDrop";
 import SingleImageDrop from "../components/AdministrationPanel/singleImageDrop";
 import { useEffect } from "react";
-import { format, isValid } from "date-fns";
+import { isValid } from "date-fns";
+import moment from "moment";
 
 Modal.setAppElement('#root')
 
@@ -17,7 +17,6 @@ function AdministrationPanel() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [selectedCategories, setSelectedCategories] = useState([])
-    
     const [selectedDates, setSelectedDates] = useState([new Date()])
     const [image, setImage] = useState(null)
     const [banner, setBanner] = useState(null)
@@ -139,7 +138,6 @@ function AdministrationPanel() {
     const fetchNewMovie = async (url, bannerUrl) => {
 
         try {
-            selectedDates.map(date => console.log(format(date,'yyyy-MM-dd')))
             const data = {
                 titulo: title,
                 trailer: trailer,
@@ -158,7 +156,7 @@ function AdministrationPanel() {
                 imagenes: multipleUrl.map((url) => ({imagen: url})),
                 categorias: selectedCategories.filter((category) => category.selected == true)
                 .map((category) => ({titulo: category.titulo})),
-                fechas: selectedDates.map((date) => ({ fecha: format(new Date(date), 'yyyy-MM-dd') }))
+                fechas: selectedDates.map((date) => ({ fecha: moment(date.toDate()).format('YYYY-MM-DD') }))
             };
             const jsonData = JSON.stringify(data);
             console.log(jsonData);
@@ -207,6 +205,7 @@ function AdministrationPanel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(selectedDates)
         setErrorMessage("Cargando...")
         setShowConfirmation(true)
 

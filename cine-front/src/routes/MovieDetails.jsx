@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
@@ -7,6 +7,8 @@ import ReactPlayer from "react-player"
 import Item from "../components/Item"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
+import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
+
 
 
 
@@ -14,8 +16,8 @@ import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 Modal.setAppElement('#root')
 
 function MovieDetails() {
-    window.scrollTo(0, 0);
 
+    const [mapLoaded, setMapLoaded] = useState(false);
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -27,7 +29,10 @@ function MovieDetails() {
     const [last, setLast] = useState([{}])
     const [caracteristica, setCaracteristica] = useState([{}])
     const [showGallery, setShowGallery] = useState(false)
-    const [imageId,setImageId] = useState(0)
+    const [imageId, setImageId] = useState(0)
+    const [location, setLocation] = useState(null)
+    const [selectedMarker, setSelectedMarker] = useState(null)
+
 
     const customStyles = {
         overlay: { zIndex: 1000 }
@@ -35,9 +40,25 @@ function MovieDetails() {
 
 
     useEffect(() => {
-
+        window.scrollTo(0, 0);
         const fetchMovieId = async () => {
+
             setIsLoading(true);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        console.log(latitude)
+                        setLocation({ lat: latitude, lng: longitude });
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                )
+            } else {
+                setLocation({ lat: 0, lng: 0 })
+            }
+
             try {
                 const movieForId = await searchMovieDetails(params.id)
                 const movieRandom = await searchRandomMovies()
@@ -66,6 +87,7 @@ function MovieDetails() {
             }
         };
         fetchMovieId()
+
     }, [params.id])
 
     const handleCloseVideo = () => {
@@ -83,6 +105,34 @@ function MovieDetails() {
         setImageId(0)
         setShowGallery(!showGallery)
     }
+
+
+
+    const markers = [
+        {
+            id: 1,
+            position: { lat: -34.6037444, lng: -58.3816444 },
+            title: 'Cinema DH 1',
+            description: 'Descripción del lugar 1',
+            rating: 4.5,
+        },
+        {
+            id: 2,
+            position: { lat: -31.4167, lng: -64.1833 },
+            title: 'Cinema DH 2',
+            description: 'Descripción del lugar 2',
+            rating: 4.5,
+        },
+        {
+            id: 3,
+            position: { lat: -24.7829, lng: -65.4124 },
+            title: 'Cinema DH 3',
+            description: 'Descripción del lugar 3',
+            rating: 4.5,
+        },
+        // Agrega más marcadores aquí...
+    ];
+
 
 
     const loadingImage = () => {
@@ -132,7 +182,14 @@ function MovieDetails() {
             height="100%vh"
         />
 
+    const icons = {
+        url: '/icons/dhcinema2-logo-tiny.png',
+        scaledSize: new google.maps.Size(50, 50)
+    }
 
+    const handleMapLoad = () => {
+        setMapLoaded(true);
+    };
 
     return (
         <div className={`movie-details `}>
@@ -186,7 +243,7 @@ function MovieDetails() {
                                 {Array.isArray(movies) && movies.length > 0 ? (
                                     movies.slice(0, 4).map(movie => (
                                         <Item
-                            
+
                                             key={movie.id}
                                             id={movie.id}
                                             name={movie.titulo}
@@ -223,24 +280,88 @@ function MovieDetails() {
                                 <img src={first[0].imagen} alt="Movie" />
                             </div>
                             <div className="half-right">
-                                {last.map((movie) => (
-                                    <div key={movie.id}>
-                                        <img src={movie.imagen} alt="Movie" />
+                                {last.map((mov, index) => (
+                                    <div key={mov.id}>
+                                        {index == last.length - 1 ? (
+                                            <figure>
+                                                <div>
+                                                    <p onClick={handleShowGallery}>{`+ ${movie.imagenes.length - 6}`}</p>
+                                                </div>
+                                                <img src={mov.imagen} alt="Movie Gallery" />
+                                            </figure>
+                                        ) :
+                                            (
+                                                <img src={mov.imagen} alt="Movie" />
+                                            )}
+
                                     </div>
                                 ))}
 
                             </div>
-                            <div className="button-container">
-                                <img src="/icons/show-more.svg" onClick={handleShowGallery}/>
-                            </div>
+
                         </div>
 
                     </div>
 
 
                 </div>)}
+                <div className="map-container">
+
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '100%' }}
+                        center={location}
+                        zoom={4}
+                    >
+                        <MarkerF
+                            position={location}
+                            title="Tu ubicacion actual"
+                        >
+
+                        </MarkerF>
+                        {
+                            markers.map((local) => (
+                                <MarkerF
+                                    key={local.id}
+                                    position={local.position}
+                                    title={local.title}
+                                    icon={{
+                                        url: '/icons/dhcinema2-logo-tiny.png',
+                                        scaledSize: new google.maps.Size(40, 40)
+                                    }}
+                                    onClick={() => setSelectedMarker(local)}
+
+
+                                />
+
+                            ))
+                        }
+                        {
+                            selectedMarker && (
+                                <InfoWindow
+                                    position={selectedMarker.position}
+                                    onCloseClick={() => setSelectedMarker(null)}
+                                >
+                                    <div className="cinema-item-map">
+                                        <h3>{selectedMarker.title}</h3>
+                                        <h5>Calle falsa 123</h5>
+                                        <p>Valoracion: {selectedMarker.rating}</p>
+                                    </div>
+                                </InfoWindow>
+                            )
+                        }
+
+
+                    </GoogleMap>
+
+
+
+
+
+                </div>
+
 
             </div>
+
             {!isLoading && (<Modal
                 style={customStyles}
                 className="video-modal"
@@ -259,38 +380,42 @@ function MovieDetails() {
                     />
                 </div>
             </Modal>)}
-            
+
+
+
+
+
             {!isLoading && (
                 <Modal
-                style={customStyles}
-                className="show-gallery-modal"
-                isOpen={showGallery}
-                onRequestClose={handleShowGallery}
-                shouldCloseOnOverlayClick={false}
-            >
-                
-                <div className="show-gallery-conteiner">
-                    <div className="close-gallery">
-                        <img src="/icons/close-black.svg" onClick={handleShowGallery} />
+                    style={customStyles}
+                    className="show-gallery-modal"
+                    isOpen={showGallery}
+                    onRequestClose={handleShowGallery}
+                    shouldCloseOnOverlayClick={false}
+                >
+
+                    <div className="show-gallery-conteiner">
+                        <div className="close-gallery">
+                            <img src="/icons/close-black.svg" onClick={handleShowGallery} />
+                        </div>
+                        <div className="gallery-image">
+                            <img src={movie.imagenes[imageId].imagen} />
+                        </div>
+                        <div className="carrousel-gallery">
+                            {!isLoading && movie.imagenes.map((image, index) => (
+                                <img onClick={() => {
+                                    console.log(index)
+                                    setImageId(index)
+
+                                }} key={index} src={image.imagen} />
+                            ))}
+                        </div>
                     </div>
-                    <div className="gallery-image">
-                        <img src={movie.imagenes[imageId].imagen} />
-                    </div>
-                    <div className="carrousel-gallery">
-                    {movie.imagenes.map((image,index) => (
-                            <img onClick={() => {
-                                console.log(index)
-                                setImageId(index)
-                                
-                            }} key={index} src={image.imagen} />
-                        ))}
-                    </div>
-                </div>
-            </Modal>
+                </Modal>
 
 
             )}
-            
+
         </div>
     )
 }
