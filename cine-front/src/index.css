@@ -971,7 +971,7 @@ height: auto;
 .image-details{
   display: flex;
   justify-content: center;
-  height: 60vh;
+  
 }
 
 .grid-container {
@@ -1035,11 +1035,10 @@ height: auto;
 
 .half-left {
   width: 50%;
-  height: 100%;
+  height: 60vh;
 }
 
 .half-left img {
-  width: 100%;
   height: 100%;
   align-self: center;
   object-fit: cover;
@@ -1049,7 +1048,11 @@ height: auto;
   width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 100%;
+  height: 60vh;
+}
+
+.half-right div{
+  height: 30vh;
 }
 
 .half-right div figure{
@@ -1583,6 +1586,30 @@ div.asignoCategorias {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.all-movies form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin: 20px 0;
+  width: 100%;
+}
+
+
+.all-movies form .search-movie{
+  min-height: 35px;
+  background-color: white;
+  border-radius: 4px;
+  width: 20vw;
+  border: none;
+}
+.all-movies div .rmdp-input{
+  background-color: white;
+  height: 35px;
+  padding: 0;
+  margin: 0 20px;
+}
 
 /** Inicio sesion **/
 

@@ -3,19 +3,22 @@ import { showPages } from "../components/UseFetch";
 import ContentLoader from "react-content-loader";
 import Item from "../components/Item";
 import DatePicker from "react-multi-date-picker";
+import Select from "react-select";
+import citysOptions from "../components/utils/citysOptions.json"
 
 
 function ShowMore() {
 
     window.scrollTo(0, 0);
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const [selectedDates,setSelectedDates] = useState()
+    const [selectedDates, setSelectedDates] = useState()
     const [searchTerm, setSearchTerm] = useState("");
     const [isLoading, setIsLoading] = useState(true)
     const [movies, setMovies] = useState()
     const [pages, setPages] = useState(1)
     const [actualPage, setActualPage] = useState(1)
     const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
+
 
     useEffect(() => {
         const fetchShowMovies = async () => {
@@ -99,6 +102,7 @@ function ShowMore() {
         return loaders;
     }
 
+
     const renderElements = () => {
         return (
             <div className="page-div">
@@ -151,26 +155,45 @@ function ShowMore() {
     return (
 
         <div className="all-movies">
-            <div className="search-movie">
-                <form onSubmit={handleSearch} className='search-bar'>
-                    <input
-                        type="text"
-                        placeholder="Buscar películas..."
-                        value={searchTerm}
-                        onChange={handleInputChangeSearch} />
-                </form>
-            </div>
-            <div className="date-container">
-                <div className="date-center">
+            <form>
+                <Select
+                    isClearable={true}
+                    isSearchable={true}
+                    placeholder="Busque o seleccione una pelicula"
+                    options={citysOptions.map(
+                        (city) => (
+                            { value: city.city, label: city.city }
+                        )
+                    )}
+
+                ></Select>
+
+
+                <div >
                     <DatePicker
+                        className="date-picker-search"
                         placeholder="Fecha"
-                        className="date-picker"
                         selected={selectedDates}
                         onChange={setSelectedDates}
                         format={"DD-MM-YYYY"}
                     />
                 </div>
-            </div>
+
+                <div>
+                    <Select
+                        isClearable={true}
+                        isSearchable={true}
+                        placeholder="Selecciona una ciudad..."
+                        options={citysOptions.map(
+                            (city) => (
+                                { value: city.city, label: city.city }
+                            )
+                        )}
+
+                    ></Select>
+                </div>
+            </form>
+
             {renderElements()}
             {amountOfPages()}
         </div>
