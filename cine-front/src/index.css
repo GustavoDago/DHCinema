@@ -1127,12 +1127,18 @@ height: auto;
 .admin-links {
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 6vh;
 }
 
 .admin-links a {
   text-decoration: none;
+  background-color:#1B263B;
   color: white;
+  padding-top:2vh;
+  padding-bottom: 2vh;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  border-radius: 30px;
 }
 
 .admin-links a:hover {
@@ -1447,18 +1453,46 @@ height: auto;
 }
 
 
+
+
+/* Div de creacion de categoria; panel admin */
+
+div .crearCategoria{
+  /* background-color: #1B263B; */
+}
+.crearCategoria form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+  
+
 /* Form Crear Categoria */
-
-
-
 .form-crearCategoria div{
   margin: 5px;
+  width: 32vw;
+  display: flex;
+  justify-content: space-between;
 }
-
+.form-crearCategoria div label{
+  font-weight: 500;
+  padding-top: 2%;
+}
+.form-crearCategoria div input{
+  background-color: #1B263B;
+  border: none;
+  border-radius: 10px;
+   height: 3vh;
+  /*width: 90%;
+  padding-left: 20px;
+  text-align: left;
+  margin: 10px 0px 30px 0; */
+}
 .form-crearCategoria button{
   color: #0D1B2A;
   background-color: #E0E1DD;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 
