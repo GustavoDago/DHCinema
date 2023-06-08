@@ -24,7 +24,11 @@ const DropdownProfile = () => {
         <div className="account-container" ref={menuRef}>
             
             <div className="account-trigger" onClick={() => {setOpen(!open)}}>
-                <img src="/icons/account-icon.svg" />
+            {!sessionStorage.getItem('role') ? 
+            (<img src="/icons/account-icon.svg" />) 
+            :
+            <div>{sessionStorage.getItem('nombre').charAt(0)}{sessionStorage.getItem('apellido').charAt(0)} </div>
+            }
             </div>
             <div className={`drop-down-profile ${open? 'active' : 'inactive'}`}>
                 <ul>
