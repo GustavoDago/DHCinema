@@ -1457,9 +1457,7 @@ height: auto;
 
 /* Div de creacion de categoria; panel admin */
 
-div .crearCategoria{
-  /* background-color: #1B263B; */
-}
+
 .crearCategoria form{
   display: flex;
   flex-direction: column;
