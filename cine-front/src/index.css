@@ -85,6 +85,10 @@ nav {
 
 .main-content button {
   padding: 10px;
+  color: #0D1B2A;
+  background-color: #E0E1DD;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 button:hover {
@@ -1506,7 +1510,10 @@ height: auto;
 /** vista Asignar Categorías **/
 div.asignoCategorias {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+div .asignoCategorias div{
+ width: 20vw;
 }
 
 /** Vista de mostrar todas las peliculas **/
