@@ -5,6 +5,7 @@ import Item from "../components/Item";
 import DatePicker from "react-multi-date-picker";
 import Select from "react-select";
 import citysOptions from "../components/utils/citysOptions.json"
+import ItemShowMore from "../components/ShowMore/ItemShowMore";
 
 
 function ShowMore() {
@@ -113,11 +114,9 @@ function ShowMore() {
                         : (
                             Array.isArray(movies) && movies.length > 0 ? (
                                 movies.map(movie => (
-                                    <Item
+                                    <ItemShowMore
                                         key={movie.id}
-                                        id={movie.id}
-                                        name={movie.titulo}
-                                        image={movie.portada}
+                                        movie={movie}
                                     />
                                 ))
                             ) : (
@@ -153,49 +152,87 @@ function ShowMore() {
     }
 
     return (
-
-        <div className="all-movies">
-            <form>
-                <Select
-                    isClearable={true}
-                    isSearchable={true}
-                    placeholder="Busque o seleccione una pelicula"
-                    options={citysOptions.map(
-                        (city) => (
-                            { value: city.city, label: city.city }
-                        )
-                    )}
-
-                ></Select>
-
-
-                <div >
-                    <DatePicker
-                        className="date-picker-search"
-                        placeholder="Fecha"
-                        selected={selectedDates}
-                        onChange={setSelectedDates}
-                        format={"DD-MM-YYYY"}
-                    />
-                </div>
-
+        <div className="complete-billboard">
+            <div className="filters">
                 <div>
+                    <h4>Sala</h4>
+                    <div>
+                        <button>2D</button>
+                        <button>3D</button>
+                        <button>4D</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>Idioma</h3>
+                    <div>
+                        <button>Castellano</button>
+                        <button>Ingles (Subtitulado)</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>Clasificacion</h3>
+                    <div>
+                        <button>ATP</button>
+                        <button>R</button>
+                        <button>PG</button>
+                        <button>PG-13</button>
+                        <button>K-16</button>
+                    </div>
+                </div>
+            </div>
+            <div className="all-movies">
+                <form>
+                    {Array.isArray(movies) && movies.length > 0 && <Select
+                        isClearable={true}
+                        isSearchable={true}
+                        placeholder="Busque o seleccione una pelicula"
+                        options={movies.map(
+                            (movie) => (
+                                { value: movie.titulo, label: movie.titulo }
+                            )
+                        )}
+
+                    ></Select>}
                     <Select
                         isClearable={true}
                         isSearchable={true}
-                        placeholder="Selecciona una ciudad..."
+                        placeholder="Busque o seleccione un cine"
                         options={citysOptions.map(
                             (city) => (
-                                { value: city.city, label: city.city }
+                                { value: city.cine, label: city.cine }
                             )
                         )}
 
                     ></Select>
-                </div>
-            </form>
 
-            {renderElements()}
-            {amountOfPages()}
+                    <div >
+                        <DatePicker
+                            className="date-picker-search"
+                            placeholder="Fecha"
+                            selected={selectedDates}
+                            onChange={setSelectedDates}
+                            format={"DD-MM-YYYY"}
+                        />
+                    </div>
+
+                    <div>
+                        <Select
+                            isClearable={true}
+                            isSearchable={true}
+                            placeholder="Selecciona una ciudad..."
+                            options={citysOptions.map(
+                                (city) => (
+                                    { value: city.city, label: city.city }
+                                )
+                            )}
+
+                        ></Select>
+                    </div>
+                </form>
+
+                {renderElements()}
+                {amountOfPages()}
+            </div>
         </div>
     );
 }

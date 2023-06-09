@@ -14,6 +14,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -78,6 +82,8 @@ button {
 }
 
 
+
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -90,13 +96,6 @@ nav {
 button:hover {
   border-color: #646cff;
 }
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-
 
 .logo {
   height: 6em;
@@ -193,6 +192,7 @@ header {
   z-index: 100;
   width: 100%;
   height: 70px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .account-container {
@@ -385,6 +385,8 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+
+  border-top: 1px solid black;
 }
 
 
@@ -1520,6 +1522,8 @@ div.asignoCategorias {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .page-div {
@@ -1537,12 +1541,11 @@ div.asignoCategorias {
 }
 
 .page-container {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-self: start;
-
   padding: 20px
 }
 
@@ -1596,7 +1599,6 @@ div.asignoCategorias {
   width: 100%;
 }
 
-
 .all-movies form .search-movie{
   min-height: 35px;
   background-color: white;
@@ -1604,12 +1606,135 @@ div.asignoCategorias {
   width: 20vw;
   border: none;
 }
+
 .all-movies div .rmdp-input{
   background-color: white;
   height: 35px;
   padding: 0;
   margin: 0 20px;
 }
+
+.complete-billboard{
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.filters{
+  height:auto;
+  width: 20%;
+  background-color: #1b263b;
+  display: flex;
+  flex-direction: column;
+}
+
+.filters div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 20px 0px;
+}
+
+.filters div h3{
+  color: white;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.filters div div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.filters div div button{
+  padding: 15px 30px;
+  margin: 10px 20px;
+}
+
+.item-show-more{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 50%;
+  height: 30vh;
+  margin: 20px 0px;
+  border-radius: 30px;
+}
+
+.item-show-more:hover{
+  scale: 1.05;
+}
+
+.item-show-more:hover .item-show-more-first{
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.5);
+}
+
+.item-show-more:hover .item-show-more-second{
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.5);
+}
+
+
+.item-show-more-first{
+  width: 30%;
+  height: 100%;
+  box-shadow: 0px 5px 30px;
+  box-shadow: 0px 5px 30px rgba(255, 255, 255, 0.1);
+
+}
+
+.item-show-more-first img{
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(5px 0px 5px rgba(0,0,0,.4));
+  object-fit: cover;
+}
+
+.item-show-more-second{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-evenly;
+  color: #000;
+  width: 40%;
+
+  box-shadow: 0px 5px 30px rgba(255, 255, 255, 0.1);
+}
+
+
+.item-show-more-second div div{
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+}
+
+.item-show-more-second div div button{
+  padding: 10px;
+  margin: 0px 5px;
+}
+
+.item-show-more-second div h5{
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.options-buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.options-buttons button{
+  width: 60px;
+  height: auto;
+  border: none;
+  background: none;
+}
+
+
+
+
 
 /** Inicio sesion **/
 
