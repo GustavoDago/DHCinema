@@ -1,5 +1,16 @@
-function ItemShowMore({ movie }) {
+import { useState } from "react";
 
+function ItemShowMore({ movie }) {
+    const [selectedRoom, setSelectedRoom] = useState(null)
+    const [selectedLenguaje,setSelectedLenguaje] = useState(null)
+
+    const handleButtonClickRoom = (option) => {
+        setSelectedRoom(option);
+    }
+
+    const handleButtonClickLenguaje = (option) => {
+        setSelectedLenguaje(option)
+    }
 
     return (
         <div className="item-show-more">
@@ -10,16 +21,25 @@ function ItemShowMore({ movie }) {
                 <div>
                     <h5>Sala</h5>
                     <div>
-                        <button>2D</button>
-                        <button>3D</button>
-                        <button>4D</button>
+                        <button className={selectedRoom == 1 ? 'option-button selected' : 'option-button'}
+                            onClick={()=> handleButtonClickRoom(1)}
+                        >2D</button>
+                        <button
+                        className={selectedRoom == 2 ? 'option-button selected' : 'option-button'}
+                        onClick={() => handleButtonClickRoom(2)}
+                        >3D</button>
+                        <button className={selectedRoom == 3 ? 'option-button selected' : 'option-button'}
+                            onClick={() => handleButtonClickRoom(3)}
+                        >4D</button>
                     </div>
                 </div>
                 <div>
                     <h5>Idioma</h5>
                     <div>
-                        <button>Castellano</button>
-                        <button>Subtitulada</button>
+                        <button className={selectedLenguaje == 1 ? 'option-button selected' : 'option-button'}
+                            onClick={() => handleButtonClickLenguaje(1)}>Castellano</button>
+                        <button className={selectedLenguaje == 2 ? 'option-button selected' : 'option-button'}
+                            onClick={() => handleButtonClickLenguaje(2)}>Subtitulada</button>
                     </div>
                 </div>
                 <div className="options-buttons">
