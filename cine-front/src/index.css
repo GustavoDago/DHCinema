@@ -1698,7 +1698,7 @@ div.asignoCategorias {
   background-color: white;
   justify-content: space-evenly;
   color: #000;
-  width: 40%;
+  width: 50%;
 
   box-shadow: 0px 5px 30px rgba(255, 255, 255, 0.1);
 }
@@ -1713,6 +1713,18 @@ div.asignoCategorias {
 .item-show-more-second div div button{
   padding: 10px;
   margin: 0px 5px;
+  background-color: transparent;
+  border: 1px solid #000;
+}
+
+.item-show-more-second div div button:hover{
+  background-color: #000;
+  color: white;
+}
+
+.item-show-more-second div div button:focus{
+  background-color: #000;
+  color: white;
 }
 
 .item-show-more-second div h5{
@@ -1722,19 +1734,41 @@ div.asignoCategorias {
 
 .options-buttons{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly; 
+}
+
+.options-buttons button:nth-child(1) {
+  background-color: red;
+}
+
+.options-buttons button:nth-child(2){
+  background-color:#0D1B2A;
+}
+
+.options-buttons button:nth-child(3){
+  background-color: cyan;
 }
 
 .options-buttons button{
-  width: 60px;
   height: auto;
+  padding: 0;
+  width: 100px;
   border: none;
   background: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
+.options-buttons button p{
+  font-size: small;
+}
 
-
-
+.options-buttons button img{
+  width: 30px;
+}
 
 /** Inicio sesion **/
 

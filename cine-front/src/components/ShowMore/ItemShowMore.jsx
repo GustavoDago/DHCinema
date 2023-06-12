@@ -23,7 +23,7 @@ function ItemShowMore({ movie }) {
                     </div>
                 </div>
                 <div className="options-buttons">
-                    <button><img src="/icons/youtube.svg" /><p>Trailer</p></button>
+                    <button><img src="/icons/youtube-3.svg" /><p>Trailer</p></button>
                     <button><img src="/icons/ticket.svg" /><p>Reserva</p></button>
                     <button><img src="/icons/information.svg" /><p>Info</p></button>
                 </div>
