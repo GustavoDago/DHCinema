@@ -32,7 +32,7 @@ function AdministrationPanel() {
     const [lenguage, setLenguage] = useState('')
     const [director, setDirector] = useState('')
     const [actors, setActors] = useState('')
-    const [trailer,setTrailer] = useState('')
+    const [trailer, setTrailer] = useState('')
 
     useEffect(() => {
 
@@ -42,11 +42,11 @@ function AdministrationPanel() {
             try {
                 const categories = await fetchCategorias()
                 if (categories) {
-                    
+
                     const updatedCategorias = categories.map(categoria => ({
                         ...categoria,
                         selected: false
-                      }));
+                    }));
                     setSelectedCategories(updatedCategorias);
                     setIsLoading(false);
                     setErrorMessage('')
@@ -77,8 +77,8 @@ function AdministrationPanel() {
         setDescription(e.target.value)
     }
 
-    
-    
+
+
 
     const closeModal = () => {
         setShowConfirmation(false)
@@ -153,9 +153,9 @@ function AdministrationPanel() {
                     opcionesIdioma: lenguage,
                     director: director
                 },
-                imagenes: multipleUrl.map((url) => ({imagen: url})),
+                imagenes: multipleUrl.map((url) => ({ imagen: url })),
                 categorias: selectedCategories.filter((category) => category.selected == true)
-                .map((category) => ({titulo: category.titulo})),
+                    .map((category) => ({ titulo: category.titulo })),
                 fechas: selectedDates.map((date) => ({ fecha: moment(date.toDate()).format('YYYY-MM-DD') }))
             };
             const jsonData = JSON.stringify(data);
@@ -209,8 +209,8 @@ function AdministrationPanel() {
         setErrorMessage("Cargando...")
         setShowConfirmation(true)
 
-        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories 
-            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || ! lenguage 
+        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories
+            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || !lenguage
             || !director || !actors || !trailer) {
             setErrorMessage("Todos los campos son requeridos.");
             setTimeout(() => {
@@ -224,7 +224,7 @@ function AdministrationPanel() {
             const newDate = new Date(date)
             if (date < currentDate) {
                 setErrorMessage("La fechas deben ser iguales o posteriores a la fecha actual")
-                if(isValid(newDate)){
+                if (isValid(newDate)) {
                     console.log('valido'); // Formatear fecha válida
                 } else {
                     console.log('invalido'); // Usar fecha predeterminada para fechas inválidas
@@ -253,7 +253,7 @@ function AdministrationPanel() {
             setTimeout(() => {
                 if ((imageUpload == "" || null) || (bannerUpload == "" || null)) {
                     setErrorMessage("Error al subir las imagenes.")
-                
+
                     setMultipleUrl([])
                     setTimeout(() => {
                         setShowConfirmation(false)
@@ -301,20 +301,20 @@ function AdministrationPanel() {
     }
 
     const handleCategoriesChange = (categoriaId) => {
-       
+
         const updatedCategorias = selectedCategories.map(categoria => {
             if (categoria.id === categoriaId) {
-              return {
-                ...categoria,
-                selected: !categoria.selected
-              };
+                return {
+                    ...categoria,
+                    selected: !categoria.selected
+                };
             }
             return categoria;
-          });
-      
-          console.log(updatedCategorias)
-      
-          setSelectedCategories(updatedCategorias);
+        });
+
+        console.log(updatedCategorias)
+
+        setSelectedCategories(updatedCategorias);
     };
 
 
@@ -336,12 +336,14 @@ function AdministrationPanel() {
                                 />
                                 <label>Generos:</label>
                                 <div className="categories-form">
-                                    {selectedCategories.length > 0 && selectedCategories.map((categorie,index) => (
+                                    {selectedCategories.length > 0 && selectedCategories.map((categorie, index) => (
                                         <label key={categorie.id}>
-                                            <input type="checkbox"  
-                                            value={categorie.id} 
-                                            checked={categorie.selected}
-                                                onChange={() => handleCategoriesChange(categorie.id)} />
+                                            <input 
+                                                type="checkbox"
+                                                value={categorie.id}
+                                                checked={categorie.selected}
+                                                onChange={() => handleCategoriesChange(categorie.id)}
+                                            />
                                             {categorie.titulo}
                                         </label>
                                     ))}
@@ -356,7 +358,7 @@ function AdministrationPanel() {
                                 />
                                 <label>Director</label>
                                 <input
-                                className="form-title"
+                                    className="form-title"
                                     type="text"
                                     placeholder="Director"
                                     value={director}
