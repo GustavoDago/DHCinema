@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react"
-import categories from "../components/utils/categories.json"
-import Categorie from "../components/utils/Categorie"
 import Billboard from "../components/home/Billboard"
 import Recommended from "../components/home/Recommended"
 import { useEffect } from "react"

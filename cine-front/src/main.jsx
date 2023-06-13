@@ -8,7 +8,6 @@ import ShowMore from './routes/ShowMore.jsx'
 import MovieDetails from './routes/MovieDetails.jsx'
 import AdministrationPanel from './routes/AdministrationPanel.jsx'
 import SignIn from './routes/SignIn.jsx'
-import SignOut from './routes/SignOut.jsx'
 import Register from './routes/Register.jsx'
 import ListadoPeliculas from './components/ListadoPeliculas.jsx'
 import GestionAdmin from './components/GestionAdmin.jsx'
@@ -17,7 +16,11 @@ import NuevaCategoria from './components/Nueva-categoria.jsx'
 import AsignarCategoria from './components/AsignarCategoria.jsx'
 import ConfirmAccount from './routes/ConfirmAccount.jsx'
 import Categories from './routes/Categories.jsx'
+<<<<<<< HEAD
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
+=======
+import AsignarRol from './components/AsignarRol.jsx'
+>>>>>>> optimizandoSprint2
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -35,11 +38,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/ListadoCategorias' element={<ListadoCategorias />} />
           <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
           <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
+          <Route path='/admin/asignar-rol' element={<AsignarRol />} />
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
-        <Route path='cerrar-sesion' element={<SignOut />} />  
       </Route>
     </Routes>
   </BrowserRouter>

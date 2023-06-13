@@ -238,3 +238,29 @@ export const fetchCategorias = async () => {
     console.log(response)
     return response;
 }
+
+export const fetchUserList = async () =>{
+    const url='/usuarios'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchRolList = async () =>{
+    const url='/roles'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
