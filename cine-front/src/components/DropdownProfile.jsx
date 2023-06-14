@@ -64,7 +64,6 @@ const DropdownProfile = () => {
 
     return (
         <div className="account-container" ref={menuRef}>
-<<<<<<< HEAD
             
             <div className="account-trigger" onClick={() => {setOpen(!open)}}>
             {!sessionStorage.getItem('role') ? 
@@ -72,11 +71,6 @@ const DropdownProfile = () => {
             :
             <div>{sessionStorage.getItem('nombre').charAt(0)}{sessionStorage.getItem('apellido').charAt(0)} </div>
             }
-=======
-
-            <div className="account-trigger" onClick={() => { setOpen(!open) }}>
-                <img src="/icons/account-icon.svg" />
->>>>>>> optimizandoSprint2
             </div>
             <div className={`drop-down-profile ${open ? 'active' : 'inactive'}`}>
                 <ul>

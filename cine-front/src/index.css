@@ -192,11 +192,7 @@ header {
   width: 100%;
   z-index: 100;
   height: 70px;
-<<<<<<< HEAD
-  width: 100%;
-=======
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
->>>>>>> optimizandoSprint2
 }
 
 .account-container {
@@ -322,11 +318,7 @@ header {
   text-decoration: none;
   color: white;
   font-weight: 200;
-<<<<<<< HEAD
-  margin-left: 10px;
-=======
   margin-right: 20px;
->>>>>>> optimizandoSprint2
 }
 
 .header-section p:hover {
@@ -1022,12 +1014,7 @@ height: auto;
 
 .grid-container {
   position: relative;
-<<<<<<< HEAD
-  width: 100%;
-  display: flex;
-=======
   width: 96%;
->>>>>>> optimizandoSprint2
   justify-content: center;
   overflow-x: hidden;
   align-items: center;
@@ -1150,27 +1137,9 @@ height: auto;
 }
 
 .half-right>div img {
-<<<<<<< HEAD
-  height: 20vw;
-  object-fit: fill;
-  
-}
-
-.button-container {
-  width: 50vh;
-  position: absolute;
-  bottom: 10px;
-  right: 90px;
-}
-
-.button-container img{
-  width: 30%;
-  cursor: pointer;
-=======
   height: 100%;
   width: 100%;
   object-fit: cover;
->>>>>>> optimizandoSprint2
   
 }
 
