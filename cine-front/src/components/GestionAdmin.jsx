@@ -43,6 +43,8 @@ const GestionAdmin = () => {
         <Link onClick={() => setPanelElement("crear-categoria")} to="/admin/nueva-categoria">CREAR CATEGORIA</Link>
         <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORIA</Link>
         <Link onClick={() => setPanelElement("asignar-rol")} to="/admin/asignar-rol">ASIGNAR ROL</Link>
+        <Link onClick={() => setPanelElement("listado-ciudades")} to="/admin/ListadoCiudades">LISTAR CIUDADES</Link>
+        <Link onClick={() => setPanelElement("crear-ciudad")} to="/admin/nueva-ciudad">CREAR CIUDAD</Link>
       </div>
       <hr />
       <Outlet />
