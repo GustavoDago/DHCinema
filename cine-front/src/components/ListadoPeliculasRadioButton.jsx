@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const ListadoPeliculasRadioButton = ({handleSelectPelicula}) => {
     const [Peliculas, setPeliculas] = useState([]);
-    const url = "http://localhost:8080/peliculas";
+    const url = "http://18.220.249.237:8080/peliculas";
 
 
 useEffect(() => {

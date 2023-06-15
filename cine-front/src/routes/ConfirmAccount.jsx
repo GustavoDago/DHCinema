@@ -41,7 +41,7 @@ function ConfirmAccount() {
 
                     {message}
 
-                    <button><a href="http://localhost:5173/">VOLVER A DHCINEMA</a></button>
+                    <button><a href="http://18.220.249.237:5173/">VOLVER A DHCINEMA</a></button>
                 </div>
 
             </div>

@@ -1,6 +1,6 @@
 // Clase preparada para recibir una url y hacer peticiones a traves de un parametro
 
-const API_ENDPOINT = `http://localhost:8080`;
+const API_ENDPOINT = `http://18.220.249.237:8080`;
 
 
 export const searchMoviesForCategories = async (url) => {
