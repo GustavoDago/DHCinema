@@ -1,8 +1,6 @@
 package com.example.PIBackEnd.service;
 
-import com.example.PIBackEnd.domain.Categoria;
-import com.example.PIBackEnd.domain.Imagen;
-import com.example.PIBackEnd.domain.Pelicula;
+import com.example.PIBackEnd.domain.*;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
@@ -21,14 +19,14 @@ public class PeliculaService {
     private final static Logger logger = Logger.getLogger(PeliculaService.class);
     private IPeliculaRepository peliculaRepository;
     private CategoriaService categoriaService;
-
-    @Autowired
+    private FuncionService funcionService;
     private IImagenRepository imagenRepository;
 
     @Autowired
-    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, IImagenRepository imagenRepository) {
+    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FuncionService funcionService, IImagenRepository imagenRepository) {
         this.peliculaRepository = peliculaRepository;
         this.categoriaService = categoriaService;
+        this.funcionService = funcionService;
         this.imagenRepository = imagenRepository;
     }
 
@@ -122,6 +120,8 @@ public class PeliculaService {
                     }
                     pelicula.setImagenes(imagenNuevas);
 
+                    pelicula.setFunciones(peliculaBuscada.get().getFunciones());
+
                     return peliculaRepository.save(pelicula);
                 }
             }
@@ -135,6 +135,10 @@ public class PeliculaService {
         Optional<Pelicula> peliculaBuscada = peliculaRepository.findByIdAndVigente(id,true);
         if (peliculaBuscada.isPresent()){
             peliculaBuscada.get().setVigente(false);
+            Set<Funcion> funciones = peliculaBuscada.get().getFunciones();
+            for (Funcion funcion:funciones) {
+                funcionService.eliminarFuncionCascada(funcion.getId());
+            }
             peliculaRepository.save(peliculaBuscada.get());
         }else{
             throw new ResourceNotFoundException("Error. No existe la Pelicula con id = " + id + " o no esta vigente");

@@ -34,6 +34,9 @@ public class Reserva {
     @Column
     private String opcionesIdioma;
 
+    @Column
+    private Boolean vigente;
+
 
     @ManyToOne
     @JsonIgnore
@@ -123,5 +126,13 @@ public class Reserva {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }

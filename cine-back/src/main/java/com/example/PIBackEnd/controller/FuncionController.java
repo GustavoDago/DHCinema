@@ -7,8 +7,11 @@ import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.service.FuncionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -43,6 +46,14 @@ public class FuncionController {
     @PutMapping
     public ResponseEntity<FuncionDTO> actualizarFuncion(@RequestBody FuncionDTO funcion) throws ResourceBadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(funcionService.actualizarFuncion(funcion));
+    }
+
+    @GetMapping("/buscador")
+    public ResponseEntity<List<Funcion>> buscador(@RequestParam (required = false) String ciudad,
+                                                  @RequestParam (required = false) String cine,
+                                                  @RequestParam (required = false) String pelicula,
+                                                  @RequestParam (required = false) LocalDate fecha) throws ResourceBadRequestException, ResourceNoContentException {
+        return ResponseEntity.ok(funcionService.buscador(ciudad, cine, pelicula, fecha));
     }
 
     /*@DeleteMapping("/{id}")

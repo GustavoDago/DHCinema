@@ -29,7 +29,7 @@ public class RolController {
     }
 
     @DeleteMapping("/{nombre}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable String nombre) throws ResourceNotFoundException {
+    public ResponseEntity<String> eliminarUsuario(@PathVariable String nombre) throws ResourceNotFoundException, ResourceBadRequestException {
         rolService.eliminarRol(nombre);
         return ResponseEntity.ok("Eliminación del Rol con nombre = " + nombre + ", con éxito");
     }

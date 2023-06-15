@@ -45,7 +45,7 @@ public class ReservaService {
         if (reserva.chequearAtributosVacios()) {
             throw new ResourceBadRequestException("Error. La Reserva tiene que contener todos sus campos");
         }else{
-            Optional<Usuario> optionalUsuario = usuarioRepository.findById(reserva.getUsuario_id());
+            Optional<Usuario> optionalUsuario = usuarioRepository.findByIdAndActivoTrue(reserva.getUsuario_id());
             if(optionalUsuario.isEmpty()){
                 throw new ResourceBadRequestException("Error. No se encontró el Usuario con ID: " + reserva.getUsuario_id());
             }
@@ -70,7 +70,7 @@ public class ReservaService {
 
     public List<Reserva> buscarTodasReservas() throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas");
-        List<Reserva> lista = reservaRepository.findAll();
+        List<Reserva> lista = reservaRepository.findAllByVigenteTrue();
         if(lista.size() > 0){
             return lista;
         }else{
@@ -78,19 +78,18 @@ public class ReservaService {
         }
     }
 
-    //CAPAZ ACA METERLE COMO A FUNCIONES EL VIGENTE PARA QUE NO TRAIGA TODOO
     public List<Reserva> buscarTodasReservasPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas para Usuario: " + email);
-        List<Reserva> lista = reservaRepository.findAllByUsuarioEmail(email);
+        List<Reserva> lista = reservaRepository.findAllByVigenteTrueAndUsuarioEmail(email);
         List<Reserva> nuevaLista = new ArrayList<>();
         LocalDate fechaActual = LocalDate.now();
         LocalTime horaActual = LocalTime.now();
         for (Reserva reserva:lista) {
-            if(reserva.getFechaProyeccion().isAfter(fechaActual)){
+            if (reserva.getFechaProyeccion().isAfter(fechaActual) || (reserva.getFechaProyeccion().isEqual(fechaActual) && reserva.getHoraProyeccion().isAfter(horaActual))) {
                 nuevaLista.add(reserva);
-            }
-            if(reserva.getFechaProyeccion().isEqual(fechaActual) && reserva.getHoraProyeccion().isAfter(horaActual)){
-                nuevaLista.add(reserva);
+            }else{
+                reserva.setVigente(false);
+                reservaRepository.save(reserva);
             }
         }
         if(nuevaLista.size() < 1){
@@ -115,27 +114,13 @@ public class ReservaService {
         reserva.setUsuarioEmail(usuario.get().getEmail());
         reserva.setPeliculaNombre(pelicula.get().getTitulo());
         reserva.setSala(sala.get().getNombre());
+        reserva.setVigente(true);
 
         reserva.setUsuario(usuario.get());
         reserva.setFuncion(func.get());
 
         return reserva;
     }
-
-    /*private Reserva convertirReservaDTOaReserva(ReservaDTO reservaDTO){
-        Reserva reserva = new Reserva();
-        Funcion funcion = new Funcion();
-        Usuario usuario = new Usuario();
-
-        reserva.setId(reservaDTO.getId());
-        usuario.setId(reservaDTO.getUsuario_id());
-        funcion.setId(reservaDTO.getFuncion_id());
-
-        reserva.setUsuario(usuario);
-        reserva.setFuncion(funcion);
-
-        return reserva;
-    }*/
 
     private ReservaDTO convertirReservaaReservaDTO(Reserva reserva){
         ReservaDTO reservaDTO = new ReservaDTO();

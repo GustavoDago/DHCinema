@@ -103,10 +103,7 @@ public class FuncionService {
                 if(funcion.getFechaProyeccion().isEqual(fechaActual) && funcion.getHoraProyeccion().isAfter(horaActual)){
                     nuevaLista.add(funcion);
                 }else{
-                    //LLAMAR A LA FUNCION DE ELIMINAR FUNCION
-                    funcion.setVigente(false);
-                    funcionRepository.save(funcion);
-                    //funcionService.eliminarFuncionCascada(funcion.getId());
+                    eliminarFuncionCascada(funcion.getId());
                 }
             }
         }
@@ -118,44 +115,74 @@ public class FuncionService {
 
     public FuncionDTO actualizarFuncion(FuncionDTO funcion) throws ResourceBadRequestException, ResourceNotFoundException {
         logger.info("Actualizando Funcion");
-        if (funcion.chequearAtributosVacios()) {
-            throw new ResourceBadRequestException("Error. La Funcion tiene que contener todos sus campos");
-        }else{
-            Optional<Funcion> optionalFuncion = funcionRepository.findByIdAndVigente(funcion.getId(), true);
-            if(optionalFuncion.isPresent()){
-                Optional<Sala> optionalSala = salaRepository.findByIdAndVigenteTrue(funcion.getSala_id());
-                if(optionalSala.isEmpty()){
-                    throw new ResourceBadRequestException("Error. No se encontró la Sala con ID: " + funcion.getSala_id());
-                }
-                Optional<Pelicula> optionalPelicula = peliculaRepository.findByIdAndVigente(funcion.getPelicula_id(), true);
-                if(optionalPelicula.isEmpty()){
-                    throw new ResourceBadRequestException("Error. No se encontró la Pelicula con ID: " + funcion.getPelicula_id());
-                }
+            if (funcion.chequearAtributosVacios()) {
+                throw new ResourceBadRequestException("Error. La Funcion tiene que contener todos sus campos");
+            }else{
+                Optional<Funcion> optionalFuncion = funcionRepository.findByIdAndVigente(funcion.getId(), true);
+                if(optionalFuncion.isPresent()){
+                    Set<Reserva> reservas = convertirFuncionDTOaFuncion(funcion).getReservas();
+                    if(reservas.size() < 1){
+                        throw new ResourceBadRequestException("Error. No se puede modificar la Funcion con Reservas activas");
+                    }
+                    Optional<Sala> optionalSala = salaRepository.findByIdAndVigenteTrue(funcion.getSala_id());
+                    if(optionalSala.isEmpty()){
+                        throw new ResourceBadRequestException("Error. No se encontró la Sala con ID: " + funcion.getSala_id());
+                    }
+                    Optional<Pelicula> optionalPelicula = peliculaRepository.findByIdAndVigente(funcion.getPelicula_id(), true);
+                    if(optionalPelicula.isEmpty()){
+                        throw new ResourceBadRequestException("Error. No se encontró la Pelicula con ID: " + funcion.getPelicula_id());
+                    }
 
-                LocalDate fechaActual = LocalDate.now();
-                LocalTime horaActual = LocalTime.now();
-                List<Funcion> lista = funcionRepository.findAllByVigenteTrue();
-                if(funcion.getFechaProyeccion().isAfter(fechaActual) || (funcion.getFechaProyeccion().isEqual(fechaActual) && funcion.getHoraProyeccion().isAfter(horaActual))){
-                    if (!optionalFuncion.get().getFechaProyeccion().equals(funcion.getFechaProyeccion()) || !optionalFuncion.get().getHoraProyeccion().equals(funcion.getHoraProyeccion()) || !optionalFuncion.get().getSala().getId().equals(funcion.getSala_id())){
-                        for (Funcion func : lista) {
-                            if(Objects.equals(func.getSala().getId(), funcion.getSala_id()) && func.getFechaProyeccion().isEqual(funcion.getFechaProyeccion())){
-                                Duration dif = Duration.between(func.getHoraProyeccion(), funcion.getHoraProyeccion());
-                                long difHoras = Math.abs(dif.toHours());
-                                if(difHoras < 4){
-                                    throw new ResourceBadRequestException("Error. Existe otra Funcion en esa Fecha con menos de 4 horas de diferencia entre ellas");
+                    LocalDate fechaActual = LocalDate.now();
+                    LocalTime horaActual = LocalTime.now();
+                    List<Funcion> lista = funcionRepository.findAllByVigenteTrue();
+                    if(funcion.getFechaProyeccion().isAfter(fechaActual) || (funcion.getFechaProyeccion().isEqual(fechaActual) && funcion.getHoraProyeccion().isAfter(horaActual))){
+                        if (!optionalFuncion.get().getFechaProyeccion().equals(funcion.getFechaProyeccion()) || !optionalFuncion.get().getHoraProyeccion().equals(funcion.getHoraProyeccion()) || !optionalFuncion.get().getSala().getId().equals(funcion.getSala_id())){
+                            for (Funcion func : lista) {
+                                if(Objects.equals(func.getSala().getId(), funcion.getSala_id()) && func.getFechaProyeccion().isEqual(funcion.getFechaProyeccion())){
+                                    Duration dif = Duration.between(func.getHoraProyeccion(), funcion.getHoraProyeccion());
+                                    long difHoras = Math.abs(dif.toHours());
+                                    if(difHoras < 4){
+                                        throw new ResourceBadRequestException("Error. Existe otra Funcion en esa Fecha con menos de 4 horas de diferencia entre ellas");
+                                    }
                                 }
                             }
                         }
+                        Funcion funcionAGuardar = convertirFuncionDTOaFuncion(funcion);
+                        funcionAGuardar.setReservas(optionalFuncion.get().getReservas());
+                        return convertirFuncionaFuncionDTO(funcionRepository.save(funcionAGuardar));
+                    }else{
+                        throw new ResourceBadRequestException("Error. La Fecha o la Hora son anteriores a la Fecha y Hora actual");
                     }
-                    Funcion funcionAGuardar = convertirFuncionDTOaFuncion(funcion);
-                    funcionAGuardar.setReservas(optionalFuncion.get().getReservas());
-                    return convertirFuncionaFuncionDTO(funcionRepository.save(funcionAGuardar));
                 }else{
-                    throw new ResourceBadRequestException("Error. La Fecha o la Hora son anteriores a la Fecha y Hora actual");
+                    throw new ResourceNotFoundException("Error. La Funcion con id = " + funcion.getId() + " no existe o ya no esta vigente");
                 }
-            }else{
-                throw new ResourceNotFoundException("Error. La Funcion con id = " + funcion.getId() + " no existe o ya no esta vigente");
             }
+    }
+
+    public List<Funcion> buscador(String ciudad, String cine, String pelicula, LocalDate fecha) throws ResourceBadRequestException, ResourceNoContentException {
+        List<Funcion> funciones = funcionRepository.findAllByVigenteTrue();
+        List<Funcion> lista = new ArrayList<>();
+
+        if(ciudad == null && cine == null && pelicula == null && fecha == null){
+            throw new ResourceBadRequestException("Error. Debe elegir criterios para realizar la búsqueda");
+        }
+
+        for(Funcion funcion : funciones){
+            boolean coincideCiudad = ciudad == null || funcion.getSala().getCine().getCiudad().getNombre().equals(ciudad);
+            boolean coincideCine = cine == null || funcion.getSala().getCine().getNombre().equals(cine);
+            boolean coincidePelicula = pelicula == null || funcion.getPelicula().getTitulo().equals(pelicula);
+            boolean coincideFecha = fecha == null || funcion.getFechaProyeccion().equals(fecha);
+
+            if(coincideCiudad && coincideCine && coincidePelicula && coincideFecha){
+                lista.add(funcion);
+            }
+        }
+
+        if(lista.size() > 0){
+            return lista;
+        }else{
+            throw new ResourceNoContentException("Error. No existen Funciones disponibles con esos criterios");
         }
     }
 

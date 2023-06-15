@@ -65,7 +65,7 @@ public class SecurityConfig {
 
                 .requestMatchers("/categorias").permitAll()
                 .requestMatchers("/usuarios/**").permitAll()
-                .requestMatchers("/roles").permitAll()
+                .requestMatchers("/roles/**").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
                 //.requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/puntajes/**").permitAll()

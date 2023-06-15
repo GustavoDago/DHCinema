@@ -9,8 +9,6 @@ import java.util.Optional;
 @Repository
 public interface IFuncionRepository extends JpaRepository<Funcion, Long> {
     Optional<Funcion> findByIdAndVigente(Long id, Boolean vigente);
-
     List<Funcion> findAllByVigenteTrueAndPelicula_Titulo(String nombrePelicula);
-
     List<Funcion> findAllByVigenteTrue();
 }

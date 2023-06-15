@@ -122,4 +122,12 @@ public class Usuario {
     public void setReservas(Set<Reserva> reservas) {
         this.reservas = reservas;
     }
+
+    public List<Favorito> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
 }
