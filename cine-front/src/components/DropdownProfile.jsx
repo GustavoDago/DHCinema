@@ -19,13 +19,14 @@ const DropdownProfile = () => {
             sessionStorage.clear()
             setMessage(
                 <div className="modal-content-register">
-                    Cerro sesion correctamente!
+                    Cerró sesión correctamente!
                     <img src='/icons/accept.svg' />
                 </div>
             )
             setTimeout(() => {
                 setShowConfirmation(false)
                 setMessage('')
+                navigate('/')
             },3000)
         } else {
             setMessage('')
@@ -38,7 +39,7 @@ const DropdownProfile = () => {
         setMessage(
             <div className="modal-content-register">
                 <div className="log-out-confirmation">
-                    <h3>Seguro que quieres cerrar sesion?</h3>
+                    <h3>Seguro que quieres cerrar sesión?</h3>
                 </div>
                 <div className="modal-buttons">
                     <button onClick={() => handleConfirm(true)}>Si</button>
@@ -81,7 +82,7 @@ const DropdownProfile = () => {
                     }
                     {!sessionStorage.getItem('role') &&
                         <Link to='/inicio-sesion'>
-                            <li className="drop-down-item">Iniciar Sesion</li>
+                            <li className="drop-down-item">Iniciar Sesión</li>
                         </Link>
                     }
                     {!sessionStorage.getItem('role') &&
@@ -95,7 +96,7 @@ const DropdownProfile = () => {
                         </Link>
                     }
                     {sessionStorage.getItem('role') &&
-                        <li className="drop-down-item" onClick={handleShowConfirmation}>Cerrar Sesion</li>
+                        <li className="drop-down-item" onClick={handleShowConfirmation}>Cerrar Sesión</li>
                     }
 
                 </ul>

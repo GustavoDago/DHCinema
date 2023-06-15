@@ -416,7 +416,7 @@ function AdministrationPanel() {
                                     />
                                 </div>
                                 <div>
-                                    <label>Duracion</label>
+                                    <label>Duración</label>
                                     <input
                                         type="text"
                                         placeholder="Duracion"
@@ -426,7 +426,7 @@ function AdministrationPanel() {
                                 </div>
 
                                 <div>
-                                    <label>Clasificacion</label>
+                                    <label>Clasificación</label>
                                     <input
                                         type="text"
                                         placeholder="Clasificacion"

@@ -139,7 +139,7 @@ function SignIn() {
                     <div className="sign-in-first">
                         <div>
                             <h2>Bienvenido!</h2>
-                            <p>Inicia sesion en tu cuenta</p>
+                            <p>Inicia sesión en tu cuenta</p>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <input
@@ -184,7 +184,7 @@ function SignIn() {
                     </div>
                     <div className="sign-in-second">
                         <h3>Bienvenido de vuelta!</h3>
-                        <p>Disfruta de los estrenos y las mejores peliculas en nuestros cines. Inicia sesion para obtener ya tu reserva!</p>
+                        <p>Disfruta de los estrenos y las mejores películas en nuestros cines. Inicia sesión para obtener ya tu reserva!</p>
                     </div>
                 </div>
 
