@@ -65,6 +65,7 @@ const NuevaCategoria = () => {
           <div>
             <label>Título : </label>
             <input
+              className='sign-in-inputs'
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -74,6 +75,7 @@ const NuevaCategoria = () => {
           <div>
             <label>Descripción : </label>
             <input
+            className='sign-in-inputs'
               type="text"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
@@ -83,13 +85,14 @@ const NuevaCategoria = () => {
           <div>
             <label>URL de la Imagen : </label>
             <input
+            className='sign-in-inputs'
               type="text"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
             {errors.imageUrl && <span>{errors.imageUrl}</span>}
           </div>
-          <button type="submit">Crear Nueva categoria</button>
+          <button className='new-button' type="submit">Crear Nueva categoria</button>
         </form>
       </div>
     );

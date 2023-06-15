@@ -1,9 +1,6 @@
 package com.example.PIBackEnd.service;
 
-import com.example.PIBackEnd.domain.Categoria;
-import com.example.PIBackEnd.domain.Fecha;
-import com.example.PIBackEnd.domain.Imagen;
-import com.example.PIBackEnd.domain.Pelicula;
+import com.example.PIBackEnd.domain.*;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
@@ -14,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -23,16 +19,15 @@ public class PeliculaService {
     private final static Logger logger = Logger.getLogger(PeliculaService.class);
     private IPeliculaRepository peliculaRepository;
     private CategoriaService categoriaService;
-    private FechaService fechaService;
-
-    @Autowired
+    private FuncionService funcionService;
     private IImagenRepository imagenRepository;
 
     @Autowired
-    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FechaService fechaService) {
+    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FuncionService funcionService, IImagenRepository imagenRepository) {
         this.peliculaRepository = peliculaRepository;
         this.categoriaService = categoriaService;
-        this.fechaService = fechaService;
+        this.funcionService = funcionService;
+        this.imagenRepository = imagenRepository;
     }
 
     public Pelicula guardarPelicula(Pelicula pelicula) throws ResourceBadRequestException {
@@ -45,10 +40,8 @@ public class PeliculaService {
                 throw new ResourceBadRequestException("Error. Ya existe una Pelicula con el mismo titulo");
             } else {
                 Set<Categoria> nuevasCategorias = categoriaService.guardarCategorias(pelicula.getCategorias());
-                Set<Fecha> nuevasFechas = fechaService.guardarFechas(pelicula.getFechas());
 
                 pelicula.setCategorias(nuevasCategorias);
-                pelicula.setFechas(nuevasFechas);
                 pelicula.setVigente(true);
 
                 Set<Imagen> imagenes = pelicula.getImagenes();
@@ -97,10 +90,8 @@ public class PeliculaService {
                     throw new ResourceBadRequestException("Error. Ya existe una Pelicula con el mismo titulo");
                 } else {
                     Set<Categoria> nuevasCategorias = categoriaService.guardarCategorias(pelicula.getCategorias());
-                    Set<Fecha> nuevasFechas = fechaService.guardarFechas(pelicula.getFechas());
 
                     pelicula.setCategorias(nuevasCategorias);
-                    pelicula.setFechas(nuevasFechas);
                     pelicula.setVigente(true);
 
                     Set<Imagen> imagenes = pelicula.getImagenes();
@@ -129,6 +120,8 @@ public class PeliculaService {
                     }
                     pelicula.setImagenes(imagenNuevas);
 
+                    pelicula.setFunciones(peliculaBuscada.get().getFunciones());
+
                     return peliculaRepository.save(pelicula);
                 }
             }
@@ -142,6 +135,10 @@ public class PeliculaService {
         Optional<Pelicula> peliculaBuscada = peliculaRepository.findByIdAndVigente(id,true);
         if (peliculaBuscada.isPresent()){
             peliculaBuscada.get().setVigente(false);
+            Set<Funcion> funciones = peliculaBuscada.get().getFunciones();
+            for (Funcion funcion:funciones) {
+                funcionService.eliminarFuncionCascada(funcion.getId());
+            }
             peliculaRepository.save(peliculaBuscada.get());
         }else{
             throw new ResourceNotFoundException("Error. No existe la Pelicula con id = " + id + " o no esta vigente");
@@ -167,25 +164,6 @@ public class PeliculaService {
         }
         else{
             throw new ResourceNotFoundException("Error. No existe la Pelicula con id = " + id + ".");
-        }
-    }
-
-    public List<Pelicula> buscarPeliculasPorFecha(LocalDate fecha) throws ResourceNoContentException {
-        logger.info("Buscando todas las Peliculas por fecha");
-        List<Pelicula> todasLasPeliculas = peliculaRepository.findAllByVigenteTrue();
-        List<Pelicula> peliculasEncontradas = new ArrayList<>();
-        for (Pelicula pelicula : todasLasPeliculas) {
-            for (Fecha fechaPelicula : pelicula.getFechas()) {
-                if (fechaPelicula.getFecha().equals(fecha)) {
-                    peliculasEncontradas.add(pelicula);
-                    break;
-                }
-            }
-        }
-        if(peliculasEncontradas.size() > 0){
-            return peliculasEncontradas;
-        }else{
-            throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + fecha + ".");
         }
     }
 

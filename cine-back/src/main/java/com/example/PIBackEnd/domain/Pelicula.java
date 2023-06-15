@@ -1,5 +1,6 @@
 package com.example.PIBackEnd.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,16 +46,19 @@ public class Pelicula {
     )
     private Set<Categoria> categorias = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "pelicula_fecha",
-            joinColumns = { @JoinColumn(name = "pelicula_id") },
-            inverseJoinColumns = { @JoinColumn(name = "fecha_id") }
-    )
-    private Set<Fecha> fechas = new HashSet<>();
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Funcion> funciones = new HashSet<>();
+
+    @OneToMany(mappedBy = "pelicula")
+    @JsonIgnore
+    private Set<Puntaje> puntajes = new HashSet<>();
+
+    @OneToMany(mappedBy = "pelicula")
+    @JsonIgnore
+    private Set<Favorito> favoritos = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || this.fechas.isEmpty() || null == this.portada || null == this.trailer || null == this.banner;
+        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || null == this.portada || null == this.trailer || null == this.banner;
     }
 
     public Long getId() {
@@ -71,58 +75,6 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void agregarCategoria(Categoria categoria){
-        categorias.add(categoria);
-    }
-
-    public Set<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(Set<Categoria> categorias) {
-        this.categorias = categorias;
-    }
-
-    public Set<Fecha> getFechas() {
-        return fechas;
-    }
-
-    public void setFechas(Set<Fecha> fechas) {
-        this.fechas = fechas;
-    }
-
-    public Boolean getVigente() {
-        return vigente;
-    }
-
-    public void setVigente(Boolean vigente) {
-        this.vigente = vigente;
-    }
-
-    public Set<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(Set<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
-
-    public Caracteristica getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public void setCaracteristicas(Caracteristica caracteristicas) {
-        this.caracteristicas = caracteristicas;
     }
 
     public String getTrailer() {
@@ -147,5 +99,69 @@ public class Pelicula {
 
     public void setBanner(String banner) {
         this.banner = banner;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
+    }
+
+    public Caracteristica getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(Caracteristica caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public Set<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Set<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public Set<Funcion> getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(Set<Funcion> funciones) {
+        this.funciones = funciones;
+    }
+
+    public Set<Puntaje> getPuntajes() {
+        return puntajes;
+    }
+
+    public void setPuntajes(Set<Puntaje> puntajes) {
+        this.puntajes = puntajes;
+    }
+
+    public Set<Favorito> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(Set<Favorito> favoritos) {
+        this.favoritos = favoritos;
     }
 }

@@ -47,12 +47,6 @@ public class PeliculaController {
         return ResponseEntity.ok(peliculaService.buscarTodasPeliculas());
     }
 
-    @GetMapping("/fecha/{fechaString}")
-    public ResponseEntity<List<Pelicula>> buscarPeliculasPorFecha(@PathVariable String fechaString) throws ResourceNoContentException {
-        LocalDate fecha = LocalDate.parse(fechaString);
-        return ResponseEntity.ok(peliculaService.buscarPeliculasPorFecha(fecha));
-    }
-
     @PutMapping
     public ResponseEntity<Pelicula> actualizarPelicula(@RequestBody Pelicula pelicula) throws ResourceBadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(peliculaService.actualizarPelicula(pelicula));

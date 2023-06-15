@@ -18,4 +18,7 @@ public class Rol {
 
     @Column(nullable = false)
     private String nombre;
+
+    @Column()
+    private Boolean vigente;
 }

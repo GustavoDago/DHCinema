@@ -1,6 +1,7 @@
 
 
 const PerfilDropdown = () => {
+    window.scrollTo(0, 0);
     return (
         <div className="h1dropdown">
             <h1>Datos de perfil</h1>
