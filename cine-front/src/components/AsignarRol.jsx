@@ -22,14 +22,15 @@ const AsignarRol = () => {
               return { ...rol, isSelected };
             });
             return { ...user, roles: userRoles };
-          });
+          })
           setUserList(updatedList);
           setIsLoading(false);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+        } 
+    catch (error) {
+      console.error(error);
+    }
+  }
 
     getUsersRolList();
   }, []);
@@ -124,72 +125,4 @@ const AsignarRol = () => {
   );
 };
 
-<<<<<<< HEAD
-        setRolList(updateUser)
-    }
-
-    const submitChanges = () =>{
-        const fetchAllRols = () => {
-            userList.map()
-        }
-    }
-
-
-
-    return (
-        <div>
-            <div>
-                Listado Usuarios
-            </div>
-            {!isLoading && Array.isArray(userList) && userList.length > 0 ? (
-                userList.filter(user => user.email !== sessionStorage.getItem('email')).map((user) => (
-                    <Accordion
-                        key={user.id}            
-                        title={
-                            <div>
-                                <h3>{user.id}</h3>
-                                <h3>{user.email}</h3>
-                            </div>
-                        }
-                        content={
-                            <div>
-                                <h4>Nombre: {user.nombre}</h4>
-                                <h4>Apellido: {user.apellido}</h4>
-                                <h4>Email: {user.email}</h4>
-                                <h4>Esta activo: {user.activo ? 'Usuario activado' : 'Falta confirmacion del email'}</h4>
-                                <label>Roles:</label>
-                                {
-                                    Array.isArray(user.roles) && user.roles.length > 0 && (
-                                        user.roles.map((rol) => (
-                                            <label key={rol.id}>
-                                                <input 
-                                                    type="checkbox"
-                                                    value={rol.id}
-                                                    checked={rol.isSelected}
-                                                    onChange={() => handleRolChanger()}
-                                                />
-                                                {rol.nombre}
-                                            </label>
-                                        ))
-                                    )
-                                }
-
-                            </div>
-                        }
-                        active={false}
-                        
-                    />
-                )
-                )
-            ) : 'Cargando listado'}
-                <button onClick={submitChanges}>
-                    Guardar
-                </button>
-        </div>
-    );
-}
-
 export default AsignarRol;
-=======
-export default AsignarRol;
->>>>>>> 238643af7aa4bdede7421af175fe59d13ab25583
