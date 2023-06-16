@@ -456,7 +456,65 @@ footer {
   justify-content: center;
   height: 80px;
   align-items: center;
+  cursor: pointer;
 }
+
+
+/* seccion share footer */
+
+.shareModalhtml{
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-Width: 400px;
+  width: 40%;
+  height: 40%;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  background-color: #778DA9;
+  
+}
+
+.shareModalhtml svg{
+  height: 50px;
+  margin: 15px;
+}
+
+.shareModalhtml svg {
+  background-color: white;
+  color: #1B263B;
+  border-radius: 10px;
+  
+}
+
+.modalCompartirLink{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1a;
+  width: 100%;
+}
+
+.modalCompartirLink a{
+  color: #E0E1DD;
+  justify-content: center;
+  align-items: center;
+}
+
+.urlLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+/* Share Movie Details */
 
 
 /* Home */
