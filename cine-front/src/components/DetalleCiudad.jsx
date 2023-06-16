@@ -41,6 +41,7 @@ const DetalleCiudad = () => {
         fetch(url, settings)
           .then(response => response.json())
           .then(data => {
+            alert("Ciudad modificada correctamente")
           navigate("/admin/ListadoCiudades")
             
           })

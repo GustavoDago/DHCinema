@@ -26,7 +26,7 @@ const ListadoCiudades = () => {
 
           const fila = document.querySelector(`tr[id="${id}"]`);
           fila.remove();
-
+          alert("ciudad borrada correctamente")
           return response.text();
         } else {
           throw new Error(response.text());
