@@ -54,9 +54,10 @@ const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccio
 
   return (
     <main>
-      <h2>Seleccione categorías</h2>
+      
       {/* renderizo las cards */}
       <div className='tabla'>
+        <h2>Seleccione categorías</h2>
         <table>
           <thead>
             <tr>

@@ -5,6 +5,7 @@ import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
+import BloquePoliticas from "../components/BloquePoliticas.jsx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
@@ -360,7 +361,10 @@ function MovieDetails() {
 
 
                 </div>
-
+                <div>
+                    <h2 className="tituloPoliticas">Qué tenés que saber</h2>
+                    <BloquePoliticas/>
+                </div>
 
             </div>
 
