@@ -59,7 +59,7 @@ const NuevaCategoria = () => {
   };
 
   return (
-      <div>
+      <div className='crearCategoria'>
         <h2>Crear Categoría</h2>
         <form onSubmit={handleSubmit} className='form-crearCategoria'>
           <div>
