@@ -2,6 +2,7 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Cine;
 import com.example.PIBackEnd.domain.Ciudad;
+import com.example.PIBackEnd.domain.Funcion;
 import com.example.PIBackEnd.domain.Sala;
 import com.example.PIBackEnd.dtos.CineDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
@@ -12,6 +13,8 @@ import com.example.PIBackEnd.repository.ICiudadRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -87,6 +90,23 @@ public class CineService {
                 throw new ResourceNotFoundException("Error. El Cine con nombre = " + cine.getNombre() + " no existe o ya no esta vigente");
             }
         }
+    }
+
+    public List<Cine> buscarCinesPorTituloPelicula(String titulo){
+        List<Cine> lista = cineRepository.findAllByVigenteTrue();
+        List<Cine> cinesNuevos = new ArrayList<>();
+        for (Cine cine:lista) {
+            Set<Sala> salas = cine.getSalas();
+            for (Sala sala:salas) {
+                Set<Funcion> funciones = sala.getFunciones();
+                for (Funcion funcion:funciones) {
+                    if(funcion.getPelicula().getTitulo().equals(titulo) && (!cinesNuevos.contains(cine))){
+                        cinesNuevos.add(cine);
+                    }
+                }
+            }
+        }
+        return cinesNuevos;
     }
 
     public void eliminarCine(Long id) throws ResourceNotFoundException {
