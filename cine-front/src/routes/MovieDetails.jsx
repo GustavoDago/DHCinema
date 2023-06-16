@@ -5,6 +5,7 @@ import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
+import BloquePoliticas from "../components/BloquePoliticas.jsx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
@@ -278,7 +279,7 @@ function MovieDetails() {
                         <div className="grid-container bloque_img">
                     
                             <div className="half-left">
-                                <img src={first[0].imagen} alt="Movie" />
+                                {/* <img src={first[0].imagen} alt="Movie" /> */}
                             </div>
                             <div className="half-right">
                                 {last.map((mov, index) => (
@@ -360,7 +361,10 @@ function MovieDetails() {
 
 
                 </div>
-
+                <div>
+                    <h2 className="tituloPoliticas">Qué tenés que saber</h2>
+                    <BloquePoliticas/>
+                </div>
 
             </div>
 
@@ -400,9 +404,9 @@ function MovieDetails() {
                         <div className="close-gallery">
                             <img src="/icons/close-black.svg" onClick={handleShowGallery} />
                         </div>
-                        <div className="gallery-image">
+                        {/* <div className="gallery-image">
                             <img src={movie.imagenes[imageId].imagen} />
-                        </div>
+                        </div> */}
                         <div className="carrousel-gallery">
                             {!isLoading && movie.imagenes.map((image, index) => (
                                 <img onClick={() => {

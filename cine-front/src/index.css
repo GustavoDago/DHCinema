@@ -1165,6 +1165,26 @@ height: auto;
   width: 100%;
   height: 400px;
 }
+/* Bloque de Politicas */
+.tituloPoliticas{
+  background-color: #0D1B2A;
+}
+.bloquePoliticas{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.bloquePoliticas h2{
+background-color: #1B263B;
+}
+.bloquePoliticas div{
+  padding-bottom: 2vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+.bloquePoliticas div p{
+  color: #0D1B2A;
+}
+/* Fin bloque de politicas */
 
 .cinema-item-map{
   color: #0D1B2A;
@@ -2338,7 +2358,13 @@ div .asignoCategorias div{
   .bloque_img{
     display: none;
   }
-
+  .bloquePoliticas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .bloquePoliticas div{
+    padding: 1%;
+  }
 
 }
 
@@ -2440,5 +2466,12 @@ div .asignoCategorias div{
 }
 .movie-details-related {
   display: none;
+}
+.bloquePoliticas{
+  display: flex;
+  flex-direction: column;
+}
+.bloquePoliticas div{
+  padding: 1%;
 }
 }
