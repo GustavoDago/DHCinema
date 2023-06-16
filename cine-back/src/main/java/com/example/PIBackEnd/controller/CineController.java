@@ -42,7 +42,7 @@ public class CineController {
     }
 
     @GetMapping("/buscar/{titulo}")
-    public ResponseEntity<List<Cine>> buscarCinesPorTituloPelicula(@PathVariable String titulo) throws ResourceNoContentException {
+    public ResponseEntity<List<String>> buscarCinesPorTituloPelicula(@PathVariable String titulo){
         return ResponseEntity.ok(cineService.buscarCinesPorTituloPelicula(titulo));
     }
 }

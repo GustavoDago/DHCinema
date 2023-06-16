@@ -13,7 +13,6 @@ import com.example.PIBackEnd.repository.ICiudadRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -92,16 +91,16 @@ public class CineService {
         }
     }
 
-    public List<Cine> buscarCinesPorTituloPelicula(String titulo){
+    public List<String> buscarCinesPorTituloPelicula(String titulo){
         List<Cine> lista = cineRepository.findAllByVigenteTrue();
-        List<Cine> cinesNuevos = new ArrayList<>();
+        List<String> cinesNuevos = new ArrayList<>();
         for (Cine cine:lista) {
             Set<Sala> salas = cine.getSalas();
             for (Sala sala:salas) {
                 Set<Funcion> funciones = sala.getFunciones();
                 for (Funcion funcion:funciones) {
-                    if(funcion.getPelicula().getTitulo().equals(titulo) && (!cinesNuevos.contains(cine))){
-                        cinesNuevos.add(cine);
+                    if(funcion.getPelicula().getTitulo().equals(titulo) && (!cinesNuevos.contains(cine.getNombre()))){
+                        cinesNuevos.add(cine.getNombre());
                     }
                 }
             }

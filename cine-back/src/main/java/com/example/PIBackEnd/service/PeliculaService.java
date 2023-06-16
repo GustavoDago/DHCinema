@@ -22,12 +22,15 @@ public class PeliculaService {
     private FuncionService funcionService;
     private IImagenRepository imagenRepository;
 
+    private FavoritoService favoritoService;
+
     @Autowired
-    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FuncionService funcionService, IImagenRepository imagenRepository) {
+    public PeliculaService(IPeliculaRepository peliculaRepository, CategoriaService categoriaService, FuncionService funcionService, IImagenRepository imagenRepository, FavoritoService favoritoService) {
         this.peliculaRepository = peliculaRepository;
         this.categoriaService = categoriaService;
         this.funcionService = funcionService;
         this.imagenRepository = imagenRepository;
+        this.favoritoService = favoritoService;
     }
 
     public Pelicula guardarPelicula(Pelicula pelicula) throws ResourceBadRequestException {
@@ -138,6 +141,10 @@ public class PeliculaService {
             Set<Funcion> funciones = peliculaBuscada.get().getFunciones();
             for (Funcion funcion:funciones) {
                 funcionService.eliminarFuncionCascada(funcion.getId());
+            }
+            Set<Favorito> favoritos = peliculaBuscada.get().getFavoritos();
+            for (Favorito favorito:favoritos) {
+                favoritoService.eliminarFavoritoCascada(favorito.getId());
             }
             peliculaRepository.save(peliculaBuscada.get());
         }else{
