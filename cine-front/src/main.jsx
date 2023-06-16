@@ -19,6 +19,9 @@ import Categories from './routes/Categories.jsx'
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
 import AsignarRol from './components/AsignarRol.jsx'
 import ReserveSection from './components/ReserveSection.jsx'
+import ListadoCiudades from './components/ListadoCiudades.jsx'
+import Nuevaciudad from './components/Nueva-ciudad.jsx'
+import DetalleCiudad from './components/DetalleCiudad.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -37,6 +40,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/nueva-categoria' element={<NuevaCategoria />} />
           <Route path='/admin/asignar-categoria' element={<AsignarCategoria />} />
           <Route path='/admin/asignar-rol' element={<AsignarRol />} />
+          <Route path='/admin/ListadoCiudades' element={<ListadoCiudades />} />
+          <Route path='/admin/nueva-ciudad' element={<Nuevaciudad />} />
+          <Route path='/admin/Ciudades/:id' element={<DetalleCiudad />} />
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
         <Route path='reservas' element={<ReserveSection />}/>

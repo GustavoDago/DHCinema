@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
-
+import { faLinkedin, faFacebook, faTwitter, faInstagram, faCloudsmith} from '@fortawesome/free-brands-svg-icons'
+import ShareModal from './CompartirProducto';
+import { useState } from 'react';
 
 const footer = () => {
+    const [showModal, setShowModal] = useState(false);
+    const openModal = () => {
+        setShowModal(true);
+    };
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+
     return (
         <footer>
             
@@ -19,6 +29,14 @@ const footer = () => {
                 </ul>
             </div>
             <div className="iconosFooter">
+                <a target='_blank' rel="noopener noreferrer" onClick={openModal}>
+                <ShareModal
+                    showConfirmation={showModal}
+                    closeModal={closeModal}
+                    shouldClose={true}
+                />
+                <FontAwesomeIcon icon={faCloudsmith} />
+                </a>
                 <a href="https://m.facebook.com" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faFacebook} />
                 </a>

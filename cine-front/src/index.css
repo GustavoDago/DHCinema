@@ -91,6 +91,10 @@ nav {
 
 .main-content button {
   padding: 10px;
+  color: #0D1B2A;
+  background-color: #E0E1DD;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 button:hover {
@@ -389,6 +393,8 @@ header {
   cursor: pointer;
 }
 
+
+
 /* Perfil dropdown*/
 
 
@@ -456,7 +462,72 @@ footer {
   justify-content: center;
   height: 80px;
   align-items: center;
+  cursor: pointer;
 }
+
+
+/* seccion share footer */
+
+.shareModalhtml{
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-Width: 400px;
+  width: 60%;
+  height: auto;
+  padding: 20px 40px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border-radius: 0px 15px 15px 15px;
+}
+
+.shareModalhtml svg{
+  height: 50px;
+  margin: 15px;
+  background-color: white;
+  color: #000;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.modalCompartirLink{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.shareModalhtml .urlLink{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modalCompartirLink a{
+  color: #000;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.shareModalhtml .modalCompartirLink a:hover {
+  text-decoration: underline;
+}
+
+.urlLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+/* Share Movie Details */
 
 
 /* Home */
@@ -1239,6 +1310,26 @@ height: auto;
   width: 100%;
   height: 800px;
 }
+/* Bloque de Politicas */
+.tituloPoliticas{
+  background-color: #0D1B2A;
+}
+.bloquePoliticas{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.bloquePoliticas h2{
+background-color: #1B263B;
+}
+.bloquePoliticas div{
+  padding-bottom: 2vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+.bloquePoliticas div p{
+  color: #0D1B2A;
+}
+/* Fin bloque de politicas */
 
 .cinema-item-map{
   color: #0D1B2A;
@@ -1413,12 +1504,18 @@ height: auto;
 .admin-links {
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 6vh;
 }
 
 .admin-links a {
   text-decoration: none;
+  background-color:#1B263B;
   color: white;
+  padding-top:2vh;
+  padding-bottom: 2vh;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  border-radius: 30px;
 }
 
 .admin-links a:hover {
@@ -1733,18 +1830,44 @@ height: auto;
 }
 
 
+
+
+/* Div de creacion de categoria; panel admin */
+
+
+.crearCategoria form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+  
+
 /* Form Crear Categoria */
-
-
-
 .form-crearCategoria div{
   margin: 5px;
+  width: 32vw;
+  display: flex;
+  justify-content: space-between;
 }
-
+.form-crearCategoria div label{
+  font-weight: 500;
+  padding-top: 2%;
+}
+.form-crearCategoria div input{
+  background-color: #1B263B;
+  border: none;
+  border-radius: 10px;
+   height: 3vh;
+  /*width: 90%;
+  padding-left: 20px;
+  text-align: left;
+  margin: 10px 0px 30px 0; */
+}
 .form-crearCategoria button{
   color: #0D1B2A;
   background-color: #E0E1DD;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 
@@ -1760,7 +1883,10 @@ height: auto;
 /** vista Asignar Categorías **/
 div.asignoCategorias {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+div .asignoCategorias div{
+ width: 20vw;
 }
 
 /** Vista de mostrar todas las peliculas **/
@@ -2486,7 +2612,13 @@ div.asignoCategorias {
   .bloque_img{
     display: none;
   }
-
+  .bloquePoliticas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .bloquePoliticas div{
+    padding: 1%;
+  }
 
 }
 
@@ -2588,5 +2720,12 @@ div.asignoCategorias {
 }
 .movie-details-related {
   display: none;
+}
+.bloquePoliticas{
+  display: flex;
+  flex-direction: column;
+}
+.bloquePoliticas div{
+  padding: 1%;
 }
 }

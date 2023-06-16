@@ -29,17 +29,7 @@ public class FuncionService {
 
     private ReservaService reservaService;
 
-    //private FuncionService funcionService;
-
-    /*@Autowired
-    public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ReservaService reservaService, FuncionService funcionService) {
-        this.funcionRepository = funcionRepository;
-        this.salaRepository = salaRepository;
-        this.peliculaRepository = peliculaRepository;
-        this.reservaService = reservaService;
-        this.funcionService = funcionService;
-    }*/
-
+    @Autowired
     public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ReservaService reservaService) {
         this.funcionRepository = funcionRepository;
         this.salaRepository = salaRepository;
@@ -160,26 +150,24 @@ public class FuncionService {
             }
     }
 
-    public List<Funcion> buscador(String ciudad, String cine, String pelicula, LocalDate fecha) throws ResourceBadRequestException, ResourceNoContentException {
+    public List<Funcion> buscador(String cine, String pelicula) throws ResourceBadRequestException, ResourceNoContentException {
         List<Funcion> funciones = funcionRepository.findAllByVigenteTrue();
         List<Funcion> lista = new ArrayList<>();
 
-        if(ciudad == null && cine == null && pelicula == null && fecha == null){
-            throw new ResourceBadRequestException("Error. Debe elegir criterios para realizar la búsqueda");
+        if (cine == null || pelicula == null) {
+            throw new ResourceBadRequestException("Error. Debe proporcionar valores para ambos parámetros 'cine' y 'pelicula'");
         }
 
         for(Funcion funcion : funciones){
-            boolean coincideCiudad = ciudad == null || funcion.getSala().getCine().getCiudad().getNombre().equals(ciudad);
-            boolean coincideCine = cine == null || funcion.getSala().getCine().getNombre().equals(cine);
-            boolean coincidePelicula = pelicula == null || funcion.getPelicula().getTitulo().equals(pelicula);
-            boolean coincideFecha = fecha == null || funcion.getFechaProyeccion().equals(fecha);
+            boolean coincideCine = funcion.getSala().getCine().getNombre().equals(cine);
+            boolean coincidePelicula = funcion.getPelicula().getTitulo().equals(pelicula);
 
-            if(coincideCiudad && coincideCine && coincidePelicula && coincideFecha){
+            if(coincideCine && coincidePelicula){
                 lista.add(funcion);
             }
         }
 
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Funciones disponibles con esos criterios");

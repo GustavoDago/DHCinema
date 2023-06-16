@@ -36,7 +36,7 @@ const NuevaCategoria = () => {
     };
   
     // Realizar la petición POST al servidor
-    fetch("http://localhost:8080/categorias", {
+    fetch("http://18.220.249.237:8080/categorias", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const NuevaCategoria = () => {
   };
 
   return (
-      <div>
+      <div className='crearCategoria'>
         <h2>Crear Categoría</h2>
         <form onSubmit={handleSubmit} className='form-crearCategoria'>
           <div>

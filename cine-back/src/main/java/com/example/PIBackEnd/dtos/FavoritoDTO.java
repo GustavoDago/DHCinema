@@ -1,14 +1,18 @@
 package com.example.PIBackEnd.dtos;
 
-import lombok.Data;
-
-@Data
 public class FavoritoDTO {
     private Long id;
     private Long pelicula_id;
     private Long usuario_id;
-    private Boolean favorito;
+    //private Boolean favorito;
 
+    /*public Boolean chequearAtributosVacios(){
+        return null == this.pelicula_id || null == this.usuario_id || null == this.favorito;
+    }*/
+
+    public Boolean chequearAtributosVacios(){
+        return null == this.pelicula_id || null == this.usuario_id;
+    }
 
     public Long getId() {
         return id;
@@ -34,11 +38,11 @@ public class FavoritoDTO {
         this.usuario_id = usuario_id;
     }
 
-    public Boolean getFavorito() {
+    /*public Boolean getFavorito() {
         return favorito;
     }
 
     public void setFavorito(Boolean favorito) {
         this.favorito = favorito;
-    }
+    }*/
 }

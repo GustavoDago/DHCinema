@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccionadas, handleCategoriasSeleccionadas }) => {
   const [Categorias, setCategorias] = useState([]);
-  const url = 'http://localhost:8080/categorias';
+  const url = 'http://18.220.249.237:8080/categorias';
 
   useEffect(() => {
     const settings = {
@@ -54,9 +54,10 @@ const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccio
 
   return (
     <main>
-      <h2>Seleccione categorías</h2>
+      
       {/* renderizo las cards */}
       <div className='tabla'>
+        <h2>Seleccione categorías</h2>
         <table>
           <thead>
             <tr>
