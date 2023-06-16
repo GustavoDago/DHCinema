@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/ciudades/**").permitAll()
-                .requestMatchers("/favoritos").permitAll()
+                .requestMatchers("/favoritos/**").permitAll()
                 .requestMatchers("/funciones/**").permitAll()
                 .requestMatchers("/cines/**").permitAll()
                 .requestMatchers("/salas/**").permitAll()

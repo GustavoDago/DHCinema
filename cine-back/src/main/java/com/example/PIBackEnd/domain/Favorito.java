@@ -23,15 +23,11 @@ public class Favorito {
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean favorito;
 
+    @Column(nullable = false)
+    private Long idPelicula;
 
-    public Favorito() {
-    }
-
-    public Favorito(Usuario usuario, Pelicula pelicula, boolean favorito) {
-        this.usuario = usuario;
-        this.pelicula = pelicula;
-        this.favorito = favorito;
-    }
+    @Column
+    private Boolean vigente;
 
     public Long getId() {
         return id;
@@ -63,5 +59,21 @@ public class Favorito {
 
     public void setFavorito(Boolean favorito) {
         this.favorito = favorito;
+    }
+
+    public Long getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(Long idPelicula) {
+        this.idPelicula = idPelicula;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }

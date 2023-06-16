@@ -40,4 +40,9 @@ public class CineController {
     public ResponseEntity<CineDTO> actualizarCiudad(@RequestBody CineDTO cine) throws ResourceBadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(cineService.actualizarCine(cine));
     }
+
+    @GetMapping("/buscar/{titulo}")
+    public ResponseEntity<List<String>> buscarCinesPorTituloPelicula(@PathVariable String titulo){
+        return ResponseEntity.ok(cineService.buscarCinesPorTituloPelicula(titulo));
+    }
 }

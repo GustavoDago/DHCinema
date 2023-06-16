@@ -29,17 +29,7 @@ public class FuncionService {
 
     private ReservaService reservaService;
 
-    //private FuncionService funcionService;
-
-    /*@Autowired
-    public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ReservaService reservaService, FuncionService funcionService) {
-        this.funcionRepository = funcionRepository;
-        this.salaRepository = salaRepository;
-        this.peliculaRepository = peliculaRepository;
-        this.reservaService = reservaService;
-        this.funcionService = funcionService;
-    }*/
-
+    @Autowired
     public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ReservaService reservaService) {
         this.funcionRepository = funcionRepository;
         this.salaRepository = salaRepository;

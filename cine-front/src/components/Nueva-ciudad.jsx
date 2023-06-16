@@ -37,6 +37,7 @@ const Nuevaciudad = () => {
         .then((data) => {
           // Manejar la respuesta del servidor
           console.log(data); // dejo lugar para acciones posteriores al agregado de los datos
+          alert("Ciudad creada correctamente")
           // Reseteo los campos del formulario
           setNombre("");
           setErrors({})
