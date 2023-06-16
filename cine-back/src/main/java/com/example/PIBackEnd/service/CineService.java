@@ -91,16 +91,16 @@ public class CineService {
         }
     }
 
-    public List<String> buscarCinesPorTituloPelicula(String titulo){
+    public List<Cine> buscarCinesPorTituloPelicula(String titulo){
         List<Cine> lista = cineRepository.findAllByVigenteTrue();
-        List<String> cinesNuevos = new ArrayList<>();
+        List<Cine> cinesNuevos = new ArrayList<>();
         for (Cine cine:lista) {
             Set<Sala> salas = cine.getSalas();
             for (Sala sala:salas) {
                 Set<Funcion> funciones = sala.getFunciones();
                 for (Funcion funcion:funciones) {
-                    if(funcion.getPelicula().getTitulo().equals(titulo) && (!cinesNuevos.contains(cine.getNombre()))){
-                        cinesNuevos.add(cine.getNombre());
+                    if (funcion.getPelicula().getTitulo().equals(titulo) && (!cinesNuevos.contains(cine))) {
+                        cinesNuevos.add(cine);
                     }
                 }
             }
