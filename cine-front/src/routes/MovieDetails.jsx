@@ -279,7 +279,7 @@ function MovieDetails() {
                         <div className="grid-container bloque_img">
                     
                             <div className="half-left">
-                                {/* <img src={first[0].imagen} alt="Movie" /> */}
+                                <img src={first[0].imagen} alt="Movie" />
                             </div>
                             <div className="half-right">
                                 {last.map((mov, index) => (
@@ -404,9 +404,9 @@ function MovieDetails() {
                         <div className="close-gallery">
                             <img src="/icons/close-black.svg" onClick={handleShowGallery} />
                         </div>
-                        {/* <div className="gallery-image">
+                        <div className="gallery-image">
                             <img src={movie.imagenes[imageId].imagen} />
-                        </div> */}
+                        </div>
                         <div className="carrousel-gallery">
                             {!isLoading && movie.imagenes.map((image, index) => (
                                 <img onClick={() => {
