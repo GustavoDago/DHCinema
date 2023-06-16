@@ -49,11 +49,9 @@ public class FuncionController {
     }
 
     @GetMapping("/buscador")
-    public ResponseEntity<List<Funcion>> buscador(@RequestParam (required = false) String ciudad,
-                                                  @RequestParam (required = false) String cine,
-                                                  @RequestParam (required = false) String pelicula,
-                                                  @RequestParam (required = false) LocalDate fecha) throws ResourceBadRequestException, ResourceNoContentException {
-        return ResponseEntity.ok(funcionService.buscador(ciudad, cine, pelicula, fecha));
+    public ResponseEntity<List<Funcion>> buscador(@RequestParam(required = false) String cine,
+                                                  @RequestParam(required = false) String pelicula) throws ResourceBadRequestException, ResourceNoContentException {
+        return ResponseEntity.ok(funcionService.buscador(cine, pelicula));
     }
 
     /*@DeleteMapping("/{id}")
