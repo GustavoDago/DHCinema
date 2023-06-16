@@ -15,7 +15,7 @@ const ShareModal = ({ showConfirmation, closeModal, shouldClose }) => {
     };
 
     const shareUrl = window.location.href;
-    const shareMessage = 'Mira la película que encontré en esta página!!';
+    const shareMessage = 'Mira la paginá de películas que encontré!!';
 
     return (
     <Modal
@@ -30,10 +30,10 @@ const ShareModal = ({ showConfirmation, closeModal, shouldClose }) => {
         <WhatsappShareButton url={shareUrl} title={shareMessage}>
             <FontAwesomeIcon icon={faWhatsapp} />
         </WhatsappShareButton>
-        <FacebookShareButton url={shareUrl} quote={shareMessage}>
+        <FacebookShareButton url='http://127.0.0.1:5173/' quote='Mira la paginá de películas que encontré!!' hashtag='#DHCinema'>
             <FontAwesomeIcon icon={faFacebook} />
         </FacebookShareButton>
-        <LinkedinShareButton url={shareUrl} title={shareMessage}>
+        <LinkedinShareButton url='http://127.0.0.1:5173/' title='Mira la paginá de películas que encontré!!'>
             <FontAwesomeIcon icon={faLinkedin} />
         </LinkedinShareButton>
         <TwitterShareButton url={shareUrl} title={shareMessage}>
