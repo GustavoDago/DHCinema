@@ -4,7 +4,6 @@ import BounceLoader from "react-spinners/BounceLoader"
 import { fetchGetUsuario, fetchLogInUser } from '../components/UseFetch'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'react-modal'
-import { set } from "date-fns";
 
 
 Modal.setAppElement('#root')
@@ -83,6 +82,7 @@ function SignIn() {
                         console.log(response)
                         setIsLoading(false);
                         setMessage('Ingreso sesion correctamente.')
+                        sessionStorage.setItem('id',response.id)
                         sessionStorage.setItem('nombre', response.nombre)
                         sessionStorage.setItem('apellido', response.apellido)
                         sessionStorage.setItem('email', response.email)

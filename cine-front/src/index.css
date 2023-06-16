@@ -461,6 +461,43 @@ footer {
 
 /* Home */
 
+.search-reserva{
+  background-color: #1B263B;
+  padding: 70px 0;
+  align-items: center;
+}
+
+.search-reserva h2{
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.search-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form .react-select-container{
+  margin: -0px 20px;
+  width: 300px;
+}
+
+.react-select-container{
+  color: #000;
+}
+
+.search-form button{
+  background-color: white;
+  color: #415A77;
+  border: 2px solid #415A77;
+}
+
+
+
+
 
 /* Clases que manejan las secciones de peliculas en el home */
 
@@ -882,6 +919,7 @@ footer {
 }
 .movie-first-info {
   position: absolute;
+
   top: 40%;
   left: 15%;
 }
@@ -946,7 +984,8 @@ footer {
 
 .movie-details-description {
   text-align: left;
-  width: 50%;
+  width: 60%;
+  margin-right: 20px;
   color: #000;
 }
 
@@ -1014,6 +1053,7 @@ height: auto;
 
 .grid-container {
   position: relative;
+  display: flex;
   width: 96%;
   justify-content: center;
   overflow-x: hidden;
@@ -1023,7 +1063,47 @@ height: auto;
   align-self: center;
 }
 
+.reserve-content{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  justify-content: space-between;
+  justify-content: center;
+}
 
+.reserve-box{
+  align-self: center;
+  background-color: #0D1B2A;
+  padding: 40px 300px;
+  text-align: center;
+  
+}
+
+.reserve-box h3{
+  color: #415A77;
+}
+
+.reserve-element div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.reserve-element h4{
+  margin-right: 20px;
+}
+
+.reserve-buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.reserve-buttons button{
+  padding: 10px 20px;
+  margin: 0px 20px;
+}
 
 .show-gallery-conteiner{
   display: flex;
@@ -1157,7 +1237,7 @@ height: auto;
 
 .map-container{
   width: 100%;
-  height: 400px;
+  height: 800px;
 }
 
 .cinema-item-map{
@@ -1169,11 +1249,13 @@ height: auto;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background-color: #21aeca;
+  color: white;
+  background-color: #1B263B;
+  margin-bottom: 2px;
 }
 
 .accordion-title:hover {
-  background-color: #3ab4cc;
+  background-color: #415A77;
 }
 
 .accordion-title,
@@ -1182,7 +1264,114 @@ height: auto;
 }
 
 .accordion-content {
-  background-color: #39b9d2;
+  background-color: #415A77;
+}
+
+.modalidad-content{
+  background-color: #0D1B2A;
+  padding: 20px 10px;
+  color: white;
+  margin: 10px;
+}
+
+.modalidad-content button{
+  margin-top: 40px;
+}
+
+.accordion-reserva{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.accordion-reserva button{
+  width: 30%;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.form-rank{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-reserva{
+  background-color: #0D1B2A;
+  border-radius: 90%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  margin-right: 40px;
+  color: white;
+}
+
+.rank-comment{
+  background-color: rgba(138, 136, 136, 0.2);
+  border-radius: 40px 0px 0px 40px;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  height: 6vh;
+  align-items: center;
+  margin: 30px;
+  color: #000;
+}
+
+.rank-comment-container{
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  
+  align-self: center;
+}
+
+.social-section{
+  color: #000;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  margin-left: 100px;
+}
+
+.form-rank img{
+  cursor: pointer;
+  margin-left: 20px;
+  width: 40px;
+}
+
+.descripcion-rank{
+  width: 40%;
+  height: 10vh;
+  background-color: #1b263b;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin-left: 10px;
+}
+
+.rank-movie-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 40px;
+}
+
+.no-rank{
+  color: #000;
+  background-color: rgba(138, 136, 136, 0.2);
+  width: 80%;
+  align-self: center;
+  border-radius: 10px;
 }
 
 /** Panel de administrador **/

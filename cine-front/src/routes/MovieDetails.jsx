@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
+import { fetchCinemaForTitle, fetchMovieTilte, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import ContentLoader, { List } from "react-content-loader"
@@ -8,7 +8,8 @@ import Item from "../components/Item"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
-
+import Accordion from "../components/Accordion"
+import { Box, Typography, FormControl, Select, MenuItem } from '@mui/material';
 
 
 
@@ -17,7 +18,7 @@ Modal.setAppElement('#root')
 
 function MovieDetails() {
 
-    const [mapLoaded, setMapLoaded] = useState(false);
+    const navigate = useNavigate()
     const [movie, setMovie] = useState(null)
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -32,12 +33,138 @@ function MovieDetails() {
     const [imageId, setImageId] = useState(0)
     const [location, setLocation] = useState(null)
     const [selectedMarker, setSelectedMarker] = useState(null)
-
+    const [cinema, setCinema] = useState(null)
+    const [titulo, setTitulo] = useState(null)
+    const [searchFunctions, setSearchFunctions] = useState([])
+    const [selectedDate, setSelectedDate] = useState(null)
+    const [datosObjeto, setDatosObjeto] = useState([])
+    const [allCinemas, setAllCinemas] = useState([])
+    const [selectedTime, setSelectedTime] = useState(null)
+    const [showReserve, setShowReserve] = useState(false)
+    const [reserveContent, setReserveContent] = useState('')
+    const [functionReserve, setFunctionReserve] = useState(null)
+    const [contentAwait, setContentAwait] = useState(false)
+    const [allRanking, setAllRanking] = useState([])
+    const [allUsers, setAllUsers] = useState([])
+    const [descriptionRank, setDescriptionRank] = useState('')
+    const [pointsRank, setPointsRank] = useState(0)
 
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
+    const fetchMovieCine = async (title, cinema) => {
+        if (cinema != null && title != null) {
+            const search = await fetchSearchFunction(cinema, title)
+            if (search) {
+                setCinema(cinema);
+                setTitulo(title);
+                setSearchFunctions(search)
+                console.log(search)
+            }
+        } else if (cinema == null) {
+            const search = await fetchCinemaForTitle(title)
+            if (search) {
+                setAllCinemas(search)
+                console.log(search)
+            }
+        }
+    }
+
+
+    const handleSubmit = async () => {
+        setShowReserve(true)
+        setContentAwait(true)
+        setReserveContent(
+            <div>
+                <h3>Cargando...</h3>
+            </div>
+        )
+        if (pointsRank == 0 || descriptionRank == null) {
+
+            setReserveContent(
+                <div>
+                    <h3>Debe completar todos los campos.</h3>
+                    <img src='/icons/denied.svg' />
+                </div>)
+            setTimeout(() => {
+                setReserveContent('')
+                setContentAwait(false)
+                setShowReserve(false)
+                return;
+            }, 3000)
+        } else {
+
+            const data = {
+                usuario_id: parseInt(sessionStorage.getItem('id')),
+                pelicula_id: movie.id,
+                puntaje: pointsRank,
+                valoracion: descriptionRank
+            }
+            try {
+                const rank = await postRanking(data)
+                if (rank) {
+                    setReserveContent(
+                        <div>
+                            <h3>Se registro su valoracion</h3>
+                            <img src='/icons/accept.svg' />
+                        </div>)
+                    setTimeout(() => {
+                        setReserveContent('')
+                        setContentAwait(false)
+                        setShowReserve(false)
+                    }, 3000)
+                } else {
+                    setReserveContent(
+                        <div>
+                            <h5>Hubo un error con la reserva</h5>
+                            <img src='/icons/denied.svg' />
+                        </div>
+                    )
+                    setTimeout(() => {
+                        setReserveContent('')
+                        setContentAwait(false)
+                        setShowReserve(false)
+                    }, 3000)
+                }
+            } catch (error) {
+                setReserveContent(
+                    <div>
+                        <h5>Hubo un error con la reserva</h5>
+                        <img src='/icons/denied.svg' />
+                    </div>
+                )
+                setTimeout(() => {
+                    setReserveContent('')
+                    setContentAwait(false)
+                    setShowReserve(false)
+                }, 3000)
+            }
+        }
+    }
+
+
+    useEffect(() => {
+        if (searchFunctions && selectedDate) {
+            const newArray = searchFunctions.filter(func => new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) == selectedDate)
+            const dividedData = newArray.reduce((result, obj) => {
+                if (!result[obj.modalidad]) {
+                    result[obj.modalidad] = {};
+                }
+
+                if (result[obj.modalidad][obj.opcionesIdioma]) {
+                    result[obj.modalidad][obj.opcionesIdioma].push(obj);
+                } else {
+                    result[obj.modalidad][obj.opcionesIdioma] = [obj];
+                }
+
+                return result;
+            }, {});
+
+            console.log(dividedData);
+            setDatosObjeto(dividedData)
+        }
+    }, [selectedDate])
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,18 +187,47 @@ function MovieDetails() {
             }
 
             try {
+                const url = window.location.href;
+                const url2 = new URL(url);
+                const searchParams = new URLSearchParams(url2.search);
+
+                const cinemaS = searchParams.get('cinema');
+                const tituloS = searchParams.get('titulo');
+                if (cinemaS != null && tituloS != null) {
+                    const search = await fetchSearchFunction(cinemaS, tituloS)
+                    if (search) {
+                        setCinema(cinemaS);
+                        setTitulo(tituloS);
+                        setSearchFunctions(search)
+                        console.log(search)
+                    }
+                }
+
+                const fetchUsers = await fetchUserList()
+                if (fetchUserList) {
+                    setAllUsers(fetchUsers)
+                }
+
+
                 const movieForId = await searchMovieDetails(params.id)
                 const movieRandom = await searchRandomMovies()
 
                 if (movieForId != false) {
+                    await fetchMovieCine(movieForId.titulo, null)
                     console.log(movieForId)
                     setMovie(movieForId);
+                    const fetchRank = await fetchRanking(params.id)
+                    if (fetchRank) {
+                        setAllRanking(fetchRank)
+                        console.log(fetchRank)
+                    }
                     setBanner({
                         backgroundImage: `url(${movieForId.banner})`
                     })
                     setVideo(movieForId.trailer)
                     setFirst(movieForId.imagenes.slice(0, 1))
                     setLast(movieForId.imagenes.slice(1, 5))
+                    setIsLoading(false);
                 }
                 if (movieRandom != false) {
                     setMovies(movieRandom)
@@ -80,7 +236,7 @@ function MovieDetails() {
                     setCaracteristica(movieForId.caracteristicas);
                 }
 
-                setIsLoading(false);
+
 
             } catch (error) {
                 console.error(error)
@@ -106,90 +262,116 @@ function MovieDetails() {
         setShowGallery(!showGallery)
     }
 
+    const handleReserva = () => {
+        if (sessionStorage.getItem('id') == null) {
+            setShowReserve(true)
+            setContentAwait(true)
+            setReserveContent(
+                <div>
+                    <h3>Debe ser un usuario registrado para poder reservar una pelicula</h3>
+                    <p>Sera redirigido a la pantalla de inicio de sesion</p>
+                    <img src='/icons/denied.svg' />
+                </div>
+            )
+            setTimeout(() => {
+                setReserveContent('')
+                setContentAwait(false)
+                setShowReserve(false)
+                navigate('/inicio-sesion')
+            }, 3000)
+        } else {
+            setReserveContent(
+                <div className="reserve-element">
+                    <h2>Datos usuario</h2>
+                    <div>
+                        <h4>Nombre: </h4><p>{sessionStorage.getItem('nombre')}</p>
+                    </div>
+                    <div>
+                        <h4>Apellido: </h4><p>{sessionStorage.getItem('apellido')}</p>
+                    </div>
+                    <div>
+                        <h4>Email: </h4><p>{sessionStorage.getItem('email')}</p>
+                    </div>
+                    <h3>{titulo}</h3>
+                    <div>
+                        <h4>Cine: </h4><p>{cinema}</p>
+                    </div>
+                    <div>
+                        <h4>Fecha: </h4><p>{functionReserve.fechaProyeccion}</p>
+                    </div>
+                    <div>
+                        <h4>Horario: </h4><p>{functionReserve.horaProyeccion}</p>
+                    </div>
+                    <div>
+                        <h4>Idioma: </h4><p>{functionReserve.opcionesIdioma}</p>
+                    </div>
 
-
-    const markers = [
-        {
-            id: 1,
-            position: { lat: -34.6037444, lng: -58.3816444 },
-            title: 'Cinema DH 1',
-            description: 'Descripción del lugar 1',
-            rating: 4.5,
-        },
-        {
-            id: 2,
-            position: { lat: -31.4167, lng: -64.1833 },
-            title: 'Cinema DH 2',
-            description: 'Descripción del lugar 2',
-            rating: 4.5,
-        },
-        {
-            id: 3,
-            position: { lat: -24.7829, lng: -65.4124 },
-            title: 'Cinema DH 3',
-            description: 'Descripción del lugar 3',
-            rating: 4.5,
-        },
-        // Agrega más marcadores aquí...
-    ];
-
-
-
-    const loadingImage = () => {
-        return (
-
-            <ContentLoader
-                className="loadingImage"
-                speed={2}
-                width="100%"
-                height="70vh"
-                backgroundColor="#f3f3f3"
-                foregroundColor="#ecebeb"
-            >
-                <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
-            </ContentLoader>
-
-        )
-
-
-
-    }
-
-    const loadingTitle = () => {
-        return (
-
-            <ContentLoader
-                className="loading-tilte"
-                speed={2}
-                width="40%"
-                height="8vh"
-                backgroundColor="#f3f3f3"
-                foregroundColor="#ecebeb"
-            >
-                <rect x="0" y="0" rx="3" ry="3" width="100%" height="100%" />
-            </ContentLoader>
-
-        )
-
-
+                </div>)
+            setShowReserve(true)
+        }
 
     }
 
-    const descriptionLoader = () =>
-        <List
-            speed={2}
-            width="70vh"
-            height="100%vh"
-        />
+    const handleReservaYes = async () => {
+        setContentAwait(true)
+        console.log(sessionStorage.getItem('id'))
+        const data = {
+            usuario_id: parseInt(sessionStorage.getItem('id')),
+            funcion_id: functionReserve.id
+        }
+        try {
+            const reserva = await fetchReserve(data)
+            if (reserva) {
+                setReserveContent(
+                    <div>
+                        <h5>Reserva realizada con exito</h5>
+                        <img src='/icons/accept.svg' />
+                    </div>
+                )
+                setTimeout(() => {
+                    setReserveContent('')
+                    setContentAwait(false)
+                    setShowReserve(false)
+                }, 3000)
 
-    const icons = {
-        url: '/icons/dhcinema2-logo-tiny.png',
-        scaledSize: new google.maps.Size(50, 50)
+            } else {
+                setReserveContent(
+                    <div>
+                        <h5>Hubo un error con la reserva</h5>
+                        <img src='/icons/denied.svg' />
+                    </div>
+                )
+                setTimeout(() => {
+                    setReserveContent('')
+                    setContentAwait(false)
+                    setShowReserve(false)
+                }, 3000)
+            }
+
+        } catch (error) {
+            setReserveContent(
+                <div>
+                    <h5>Hubo un error con la reserva</h5>
+                    <img src='./icons/denied.svg' />
+                </div>
+            )
+            setTimeout(() => {
+                setReserveContent('')
+                setContentAwait(false)
+                setShowReserve(false)
+            }, 3000)
+        }
     }
 
-    const handleMapLoad = () => {
-        setMapLoaded(true);
-    };
+    const handleReservaNo = () => {
+        handleCloseReserve()
+    }
+
+    const handleCloseReserve = () => {
+        setShowReserve(!showReserve)
+    }
+
+
 
     return (
         <div className={`movie-details `}>
@@ -227,14 +409,46 @@ function MovieDetails() {
                                     <h2>DETALLES</h2>
                                     <p>{movie.descripcion}</p>
                                 </div>
-                                <div className="fechas-container">
-                                    <h2>FECHAS</h2>
-                                    <div>
-                                        {movie.fechas.map(fechas => (
-                                            <button key={fechas.id} className="dates-button">{fechas.fecha}</button>
-                                        ))}
-                                    </div>
-                                </div>
+                                {cinema != null &&
+                                    <div className="accordion-reserva">
+                                        <Accordion
+                                            title={cinema}
+                                            active={true}
+                                            content={
+                                                <div>
+                                                    <div>
+                                                        {Array.isArray(searchFunctions) && searchFunctions.length > 0 && (
+                                                            searchFunctions.map((func) => (
+                                                                <button key={func.id} onClick={() => setSelectedDate(new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }))}>{new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</button>
+                                                            ))
+                                                        )}
+
+                                                    </div>
+                                                    <div className="modalidad-content">
+                                                        {datosObjeto != null && (
+                                                            Object.keys(datosObjeto).map(modalidad => (
+                                                                Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                    <div key={`${modalidad}-${idioma}`}>
+                                                                        <div>{modalidad} - {idioma}</div>
+                                                                        <div>
+                                                                            {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                <button key={obj.id} onClick={() => {
+                                                                                    setSelectedTime(obj.horaProyeccion)
+                                                                                    setFunctionReserve(obj)
+                                                                                }}>{obj.horaProyeccion}</button>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                ))
+                                                            ))
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            }
+                                        />
+                                        <button disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
+                                    </div>}
+
                             </div>
                         )}
                         <div className="movie-details-related">
@@ -273,10 +487,76 @@ function MovieDetails() {
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div>
+                        <div>
+                            <div className="social-section">
+
+                                <h2>Reseñas</h2>
+                            </div>
+
+                            <hr></hr>
+                        </div>
+                        <div>
+                            {Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                <div className="rank-movie-container">
+                                    <div className="rank-comment-container">
+                                    {
+                                        allRanking.map(rank => {
+                                            const usuario = allUsers.find(user => user.id == rank.id)
+                                            if (usuario) {
+                                                return <div className="rank-comment">
+                                                    <div className="icon-reserva">{usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}</div>
+                                                    <div>
+                                                        {rank.puntaje}
+                                                        {rank.valoracion}
+                                                    </div>
+                                                </div>;
+                                            }
+                                        })}
+                                        </div>
+                                </div>
+                            ) :
+                                <div className="rank-movie-container">
+                                    <div className="no-rank">
+                                        <h4>Esta pelicula no posee ninguna reseña.</h4>
+                                    </div>
+                                </div>}
+                        </div>
+                        {sessionStorage.getItem('id') &&
+                            <div>
+                                <form className="form-rank">
+                                    <Box>
+                                        <FormControl>
+                                            <Select value={pointsRank} onChange={(e) => { setPointsRank(parseInt(e.target.value)) }}>
+                                                <MenuItem value={0}>Puntaje</MenuItem>
+                                                <MenuItem value={1}>1</MenuItem>
+                                                <MenuItem value={2}>2</MenuItem>
+                                                <MenuItem value={3}>3</MenuItem>
+                                                <MenuItem value={4}>4</MenuItem>
+                                                <MenuItem value={5}>5</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                    <input
+                                        className="descripcion-rank"
+                                        type="text"
+                                        placeholder="Deja tu comentario sobre la pelicula..."
+                                        value={descriptionRank}
+                                        onChange={e => setDescriptionRank(e.target.value)}
+
+                                    />
+                                    <img onClick={handleSubmit} src="/icons/send.svg" />
+                                </form>
+                            </div>
+                        }
+                    </div>
+
+                </div>
                 {!isLoading && (<div className="movie-second-div">
                     <div className="image-details">
                         <div className="grid-container bloque_img">
-                    
+
                             <div className="half-left">
                                 <img src={first[0].imagen} alt="Movie" />
                             </div>
@@ -297,11 +577,9 @@ function MovieDetails() {
 
                                     </div>
                                 ))}
-                            
+
                             </div>
-                            <div className="button-container">
-                                <img src="/icons/show_more.svg" onClick={handleShowGallery}/>
-                            </div>
+
                         </div>
                     </div>
 
@@ -321,16 +599,16 @@ function MovieDetails() {
 
                         </MarkerF>
                         {
-                            markers.map((local) => (
+                            allCinemas.map((cinema) => (
                                 <MarkerF
-                                    key={local.id}
-                                    position={local.position}
-                                    title={local.title}
+                                    key={cinema.id}
+                                    position={{ lat: cinema.latitud, lng: cinema.longitud }}
+                                    title={cinema.nombre}
                                     icon={{
                                         url: '/icons/dhcinema2-logo-tiny.png',
                                         scaledSize: new google.maps.Size(40, 40)
                                     }}
-                                    onClick={() => setSelectedMarker(local)}
+                                    onClick={() => setSelectedMarker(cinema)}
 
 
                                 />
@@ -340,13 +618,15 @@ function MovieDetails() {
                         {
                             selectedMarker && (
                                 <InfoWindow
-                                    position={selectedMarker.position}
+                                    position={{ lat: selectedMarker.latitud, lng: selectedMarker.longitud }}
                                     onCloseClick={() => setSelectedMarker(null)}
                                 >
                                     <div className="cinema-item-map">
-                                        <h3>{selectedMarker.title}</h3>
-                                        <h5>Calle falsa 123</h5>
-                                        <p>Valoracion: {selectedMarker.rating}</p>
+                                        <h3>{selectedMarker.nombre}</h3>
+                                        <h5>{selectedMarker.direccion}</h5>
+                                        {sessionStorage.getItem('role') == 'ADMIN' && (
+                                            <h5>Latitud: {selectedMarker.latitud}, Longitud: {selectedMarker.longitud}</h5>
+                                        )}
                                     </div>
                                 </InfoWindow>
                             )
@@ -384,7 +664,31 @@ function MovieDetails() {
             </Modal>)}
 
 
+            {!isLoading && (
+                <Modal
+                    style={customStyles}
+                    className="reserve-modal"
+                    isOpen={showReserve}
+                    onRequestClose={handleCloseReserve}
+                    shouldCloseOnOverlayClick={false}
+                >
+                    <div className="reserve-content">
+                        <div className="reserve-box">
+                            <h2>RESERVA</h2>
+                            {reserveContent}
+                            {!contentAwait &&
+                                <div>
+                                    <h3>Deseas realizar la reserva?</h3>
+                                    <div className="reserve-buttons">
+                                        <button onClick={handleReservaYes}>Si</button>
+                                        <button onClick={handleReservaNo}>No</button>
+                                    </div>
+                                </div>}
 
+                        </div>
+
+                    </div>
+                </Modal>)}
 
 
             {!isLoading && (

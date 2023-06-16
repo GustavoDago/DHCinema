@@ -18,6 +18,7 @@ import ConfirmAccount from './routes/ConfirmAccount.jsx'
 import Categories from './routes/Categories.jsx'
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
 import AsignarRol from './components/AsignarRol.jsx'
+import ReserveSection from './components/ReserveSection.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/asignar-rol' element={<AsignarRol />} />
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
+        <Route path='reservas' element={<ReserveSection />}/>
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
       </Route>

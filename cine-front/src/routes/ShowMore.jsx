@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { showPages } from "../components/UseFetch";
+import { fetchAllCinemas, fetchAllCitys, fetchAllFunction, searchMoviesForCategories, showPages } from "../components/UseFetch";
 import ContentLoader from "react-content-loader";
-import Item from "../components/Item";
-import DatePicker from "react-multi-date-picker";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Select from "react-select";
-import citysOptions from "../components/utils/citysOptions.json"
 import ItemShowMore from "../components/ShowMore/ItemShowMore";
 
 
@@ -19,6 +18,20 @@ function ShowMore() {
     const [pages, setPages] = useState(1)
     const [actualPage, setActualPage] = useState(1)
     const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
+    const [citys, setCitys] = useState([])
+    const [cinemas, setCinemas] = useState([])
+    const [allDates, setAllDates] = useState([])
+    const [dateSelected, setDateSelected] = useState();
+    const [citySelected, setCitySelected] = useState();
+    const [movieSelected, setMovieSelected] = useState();
+    const [cinemaSelected, setCinemaSelected] = useState();
+    const [newCitys, setNewCitys] = useState([]);
+    const [allMovies, setAllMovies] = useState([]);
+
+   
+
+    
+
 
 
     useEffect(() => {
@@ -32,7 +45,6 @@ function ShowMore() {
                 setIsLoading(false)
             } catch (error) {
                 console.error(error)
-                setIsLoading(false)
             }
         }
 
@@ -129,6 +141,11 @@ function ShowMore() {
         )
     }
 
+    const isDateAllowed = (date) => {
+        const formattedDate = date.toISOString().slice(0, 10);
+        return allDates.includes(formattedDate)
+    }
+
     const amountOfPages = () => {
         return (
             <div className="pages">
@@ -151,88 +168,56 @@ function ShowMore() {
         )
     }
 
-    return (
-        <div className="complete-billboard">
-            <div className="filters">
-                <div>
-                    <h4>Sala</h4>
-                    <div>
-                        <button>2D</button>
-                        <button>3D</button>
-                        <button>4D</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>Idioma</h3>
-                    <div>
-                        <button>Castellano</button>
-                        <button>Ingles (Subtitulado)</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>Clasificación</h3>
-                    <div>
-                        <button>ATP</button>
-                        <button>R</button>
-                        <button>PG</button>
-                        <button>PG-13</button>
-                        <button>K-16</button>
-                    </div>
-                </div>
-            </div>
-            <div className="all-movies">
-                <form>
-                    {Array.isArray(movies) && movies.length > 0 && <Select
-                        isClearable={true}
-                        isSearchable={true}
-                        placeholder="Busque o seleccione una pelicula"
-                        options={movies.map(
-                            (movie) => (
-                                { value: movie.titulo, label: movie.titulo }
-                            )
-                        )}
+    const handleCitys = () => {
+        if (!isLoading) {
+            if (Array.isArray(newCitys) && newCitys.length > 0) {
 
-                    ></Select>}
+                return (
                     <Select
                         isClearable={true}
                         isSearchable={true}
-                        placeholder="Busque o seleccione un cine"
-                        options={citysOptions.map(
+                        value={citySelected}
+                        onChange={setCitySelected}
+                        placeholder="Selecciona una ciudad..."
+                        options={newCitys.map(
                             (city) => (
-                                { value: city.cine, label: city.cine }
+                                { value: city.nombre, label: city.nombre }
                             )
                         )}
 
                     ></Select>
+                )
+            }
+            else if (Array.isArray(citys) && citys.length > 0) {
+                return (<Select
+                    isClearable={true}
+                    isSearchable={true}
+                    value={citySelected}
+                    onChange={setCitySelected}
+                    placeholder="Selecciona una ciudad..."
+                    options={citys.map(
+                        (city) => (
+                            { value: city.nombre, label: city.nombre }
+                        )
+                    )}
 
-                    <div >
-                        <DatePicker
-                            className="date-picker-search"
-                            placeholder="Fecha"
-                            selected={selectedDates}
-                            onChange={setSelectedDates}
-                            format={"DD-MM-YYYY"}
-                        />
-                    </div>
+                ></Select>)
+            }
+        }
+    }
 
-                    <div>
-                        <Select
-                            isClearable={true}
-                            isSearchable={true}
-                            placeholder="Selecciona una ciudad..."
-                            options={citysOptions.map(
-                                (city) => (
-                                    { value: city.city, label: city.city }
-                                )
-                            )}
 
-                        ></Select>
-                    </div>
-                </form>
+    
+
+    return (
+        <div className="complete-billboard">
+            {!isLoading && 
+            <div className="all-movies">
+                
 
                 {renderElements()}
                 {amountOfPages()}
-            </div>
+            </div>}
         </div>
     );
 }

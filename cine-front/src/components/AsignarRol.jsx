@@ -61,14 +61,13 @@ const AsignarRol = () => {
             return user;
         })
 
-        
         setRolList(updateUser)
-
-        
     }
 
     const submitChanges = () =>{
-        
+        const fetchAllRols = () => {
+            userList.map()
+        }
     }
 
 
@@ -103,7 +102,7 @@ const AsignarRol = () => {
                                                     type="checkbox"
                                                     value={rol.id}
                                                     checked={rol.isSelected}
-                                                    onChange={()=> handleRolChanger(user.id,rol.id)}
+                                                    onChange={() => handleRolChanger()}
                                                 />
                                                 {rol.nombre}
                                             </label>
