@@ -1,32 +1,79 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import ModalGlobal from "./GlobalModal";
 
 const DropdownProfile = () => {
-    const [open,setOpen] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState('')
     let menuRef = useRef();
-    
+    const navigate = useNavigate()
+
+    const closeModal = () => {
+        setShowConfirmation(false)
+    }
+
+    const handleConfirm = (confirm) => {
+        setShowConfirmation(true)
+        if (confirm) {
+            sessionStorage.clear()
+            setMessage(
+                <div className="modal-content-register">
+                    Cerró sesión correctamente!
+                    <img src='/icons/accept.svg' />
+                </div>
+            )
+            setTimeout(() => {
+                setShowConfirmation(false)
+                setMessage('')
+                navigate('/')
+            },3000)
+        } else {
+            setMessage('')
+            setShowConfirmation(false)
+        }
+    }
+
+    const handleShowConfirmation = () => {
+        setShowConfirmation(true)
+        setMessage(
+            <div className="modal-content-register">
+                <div className="log-out-confirmation">
+                    <h3>Seguro que quieres cerrar sesión?</h3>
+                </div>
+                <div className="modal-buttons">
+                    <button onClick={() => handleConfirm(true)}>Si</button>
+                    <button onClick={() => handleConfirm(false)}>No</button>
+                </div>
+            </div>
+        )
+    }
 
     useEffect(() => {
         let handler = (e) => {
-            if(!menuRef.current.contains(e.target)){
+            if (!menuRef.current.contains(e.target)) {
                 setOpen(false)
             }
         }
 
-        document.addEventListener("mousedown",handler)
+        document.addEventListener("mousedown", handler)
 
-        return() => {
-            document.removeEventListener("mousedown",handler)
+        return () => {
+            document.removeEventListener("mousedown", handler)
         }
-    },[])
+    }, [])
 
     return (
         <div className="account-container" ref={menuRef}>
             
             <div className="account-trigger" onClick={() => {setOpen(!open)}}>
-                <img src="/icons/account-icon.svg" />
+            {!sessionStorage.getItem('role') ? 
+            (<img src="/icons/account-icon.svg" />) 
+            :
+            <div>{sessionStorage.getItem('nombre').charAt(0)}{sessionStorage.getItem('apellido').charAt(0)} </div>
+            }
             </div>
-            <div className={`drop-down-profile ${open? 'active' : 'inactive'}`}>
+            <div className={`drop-down-profile ${open ? 'active' : 'inactive'}`}>
                 <ul>
                     {sessionStorage.getItem('role') &&
                         <Link to='/perfil'>
@@ -35,10 +82,10 @@ const DropdownProfile = () => {
                     }
                     {!sessionStorage.getItem('role') &&
                         <Link to='/inicio-sesion'>
-                            <li className="drop-down-item">Iniciar Sesion</li>
+                            <li className="drop-down-item">Iniciar Sesión</li>
                         </Link>
                     }
-                    {!sessionStorage.getItem('role')  &&
+                    {!sessionStorage.getItem('role') &&
                         <Link to='/registrarse'>
                             <li className="drop-down-item">Crear Cuenta</li>
                         </Link>
@@ -49,13 +96,18 @@ const DropdownProfile = () => {
                         </Link>
                     }
                     {sessionStorage.getItem('role') &&
-                        <Link to='/cerrar-sesion'>
-                            <li className="drop-down-item">Cerrar Sesion</li>
-                        </Link>
+                        <li className="drop-down-item" onClick={handleShowConfirmation}>Cerrar Sesión</li>
                     }
 
                 </ul>
             </div>
+
+            <ModalGlobal
+                showConfirmation={showConfirmation}
+                closeModal={closeModal}
+                message={message}
+                shouldClose={false}
+            />
 
         </div>
 

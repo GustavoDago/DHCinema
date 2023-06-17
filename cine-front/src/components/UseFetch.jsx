@@ -1,6 +1,6 @@
 // Clase preparada para recibir una url y hacer peticiones a traves de un parametro
 
-const API_ENDPOINT = `http://localhost:8080`;
+const API_ENDPOINT = `http://18.220.249.237:8080`;
 
 
 export const searchMoviesForCategories = async (url) => {
@@ -236,5 +236,162 @@ export const fetchCategorias = async () => {
             console.error(error)
         });
     console.log(response)
+    return response;
+}
+
+export const fetchUserList = async () =>{
+    const url='/usuarios'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchRolList = async () =>{
+    const url='/roles'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchAllCinemas = async () => {
+    const url = '/cines'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchAllCitys = async () => {
+    const url = '/ciudades'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchAllFunction = async () => {
+    const url = '/funciones'
+
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchSearchFunction = async (cine,pelicula) => {
+    const url = `/funciones/buscador?cine=${cine}&pelicula=${pelicula}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchCinemaForTitle = async (titulo) => {
+    const url = `/cines/buscar/${titulo}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const fetchReserve = async (reserva) =>{
+    const url = '/reservas'
+    console.log(JSON.stringify(reserva))
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reserva),
+    }).then((response) => {
+        if (response.ok){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
+    return response;
+}
+
+export const fetchRanking = async (id) =>{
+    const url = `/puntajes/${id}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const postRanking = async (rank) => {
+    const url = '/puntajes'
+    console.log(JSON.stringify(rank))
+    const response = await fetch(`${API_ENDPOINT}${url}`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rank),
+    }).then((response) => {
+        if (response.ok){
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+    .catch((error) => {
+        console.log(error)
+        return false;
+    })
+
     return response;
 }

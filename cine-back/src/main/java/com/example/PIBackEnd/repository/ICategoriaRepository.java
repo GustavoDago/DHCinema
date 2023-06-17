@@ -8,4 +8,7 @@ import java.util.Optional;
 @Repository
 public interface ICategoriaRepository extends JpaRepository<Categoria,Long> {
     Optional<Categoria> findByTitulo(String titulo);
+
+    interface IPuntajeRepository {
+    }
 }

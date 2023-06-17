@@ -2,12 +2,12 @@ import { useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Modal from "react-modal"
-
 import { fetchCategorias, newMovie } from "../components/UseFetch";
 import MultipleImageDrop from "../components/AdministrationPanel/multipleImageDrop";
 import SingleImageDrop from "../components/AdministrationPanel/singleImageDrop";
 import { useEffect } from "react";
-import { format, isValid } from "date-fns";
+import { isValid } from "date-fns";
+import moment from "moment";
 
 Modal.setAppElement('#root')
 
@@ -17,7 +17,6 @@ function AdministrationPanel() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [selectedCategories, setSelectedCategories] = useState([])
-    
     const [selectedDates, setSelectedDates] = useState([new Date()])
     const [image, setImage] = useState(null)
     const [banner, setBanner] = useState(null)
@@ -33,7 +32,7 @@ function AdministrationPanel() {
     const [lenguage, setLenguage] = useState('')
     const [director, setDirector] = useState('')
     const [actors, setActors] = useState('')
-    const [trailer,setTrailer] = useState('')
+    const [trailer, setTrailer] = useState('')
 
     useEffect(() => {
 
@@ -77,8 +76,8 @@ function AdministrationPanel() {
         setDescription(e.target.value)
     }
 
-    
-    
+
+
 
     const closeModal = () => {
         setShowConfirmation(false)
@@ -138,7 +137,6 @@ function AdministrationPanel() {
     const fetchNewMovie = async (url, bannerUrl) => {
 
         try {
-            selectedDates.map(date => console.log(format(date,'yyyy-MM-dd')))
             const data = {
                 titulo: title,
                 trailer: trailer,
@@ -154,10 +152,10 @@ function AdministrationPanel() {
                     opcionesIdioma: lenguage,
                     director: director
                 },
-                imagenes: multipleUrl.map((url) => ({imagen: url})),
+                imagenes: multipleUrl.map((url) => ({ imagen: url })),
                 categorias: selectedCategories.filter((category) => category.selected == true)
-                .map((category) => ({titulo: category.titulo})),
-                fechas: selectedDates.map((date) => ({ fecha: format(new Date('2022-07-23'), 'yyyy-MM-dd') }))
+                    .map((category) => ({ titulo: category.titulo })),
+                fechas: selectedDates.map((date) => ({ fecha: moment(date.toDate()).format('YYYY-MM-DD') }))
             };
             const jsonData = JSON.stringify(data);
             console.log(jsonData);
@@ -206,11 +204,12 @@ function AdministrationPanel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(selectedDates)
         setErrorMessage("Cargando...")
         setShowConfirmation(true)
 
-        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories 
-            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || ! lenguage 
+        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories
+            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || !lenguage
             || !director || !actors || !trailer) {
             setErrorMessage("Todos los campos son requeridos.");
             setTimeout(() => {
@@ -224,7 +223,7 @@ function AdministrationPanel() {
             const newDate = new Date(date)
             if (date < currentDate) {
                 setErrorMessage("La fechas deben ser iguales o posteriores a la fecha actual")
-                if(isValid(newDate)){
+                if (isValid(newDate)) {
                     console.log('valido'); // Formatear fecha válida
                 } else {
                     console.log('invalido'); // Usar fecha predeterminada para fechas inválidas
@@ -253,7 +252,7 @@ function AdministrationPanel() {
             setTimeout(() => {
                 if ((imageUpload == "" || null) || (bannerUpload == "" || null)) {
                     setErrorMessage("Error al subir las imagenes.")
-                
+
                     setMultipleUrl([])
                     setTimeout(() => {
                         setShowConfirmation(false)
@@ -301,20 +300,20 @@ function AdministrationPanel() {
     }
 
     const handleCategoriesChange = (categoriaId) => {
-       
+
         const updatedCategorias = selectedCategories.map(categoria => {
             if (categoria.id === categoriaId) {
-              return {
-                ...categoria,
-                selected: !categoria.selected
-              };
+                return {
+                    ...categoria,
+                    selected: !categoria.selected
+                };
             }
             return categoria;
-          });
-      
-          console.log(updatedCategorias)
-      
-          setSelectedCategories(updatedCategorias);
+        });
+
+        console.log(updatedCategorias)
+
+        setSelectedCategories(updatedCategorias);
     };
 
 
@@ -336,12 +335,14 @@ function AdministrationPanel() {
                                 />
                                 <label>Generos:</label>
                                 <div className="categories-form">
-                                    {selectedCategories.length > 0 && selectedCategories.map((categorie,index) => (
+                                    {selectedCategories.length > 0 && selectedCategories.map((categorie, index) => (
                                         <label key={categorie.id}>
-                                            <input type="checkbox"  
-                                            value={categorie.id} 
-                                            checked={categorie.selected}
-                                                onChange={() => handleCategoriesChange(categorie.id)} />
+                                            <input 
+                                                type="checkbox"
+                                                value={categorie.id}
+                                                checked={categorie.selected}
+                                                onChange={() => handleCategoriesChange(categorie.id)}
+                                            />
                                             {categorie.titulo}
                                         </label>
                                     ))}
@@ -356,7 +357,7 @@ function AdministrationPanel() {
                                 />
                                 <label>Director</label>
                                 <input
-                                className="form-title"
+                                    className="form-title"
                                     type="text"
                                     placeholder="Director"
                                     value={director}
@@ -415,7 +416,7 @@ function AdministrationPanel() {
                                     />
                                 </div>
                                 <div>
-                                    <label>Duracion</label>
+                                    <label>Duración</label>
                                     <input
                                         type="text"
                                         placeholder="Duracion"
@@ -425,7 +426,7 @@ function AdministrationPanel() {
                                 </div>
 
                                 <div>
-                                    <label>Clasificacion</label>
+                                    <label>Clasificación</label>
                                     <input
                                         type="text"
                                         placeholder="Clasificacion"

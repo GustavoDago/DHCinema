@@ -10,12 +10,6 @@ public class Caracteristica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 10)
-    private String sala;
-
-    @Column(nullable = false, length = 5)
-    private String modalidad;
-
     @Column(nullable = false, length = 150)
     private String reparto;
 
@@ -24,9 +18,6 @@ public class Caracteristica {
 
     @Column(nullable = false, length = 30)
     private String clasificacion;
-
-    @Column(nullable = false, length = 40)
-    private String opcionesIdioma;
 
     @Column(nullable = false, length = 25)
     private String director;
@@ -37,22 +28,6 @@ public class Caracteristica {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getSala() {
-        return sala;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
-    }
-
-    public String getModalidad() {
-        return modalidad;
-    }
-
-    public void setModalidad(String modalidad) {
-        this.modalidad = modalidad;
     }
 
     public String getReparto() {
@@ -77,14 +52,6 @@ public class Caracteristica {
 
     public void setClasificacion(String clasificacion) {
         this.clasificacion = clasificacion;
-    }
-
-    public String getOpcionesIdioma() {
-        return opcionesIdioma;
-    }
-
-    public void setOpcionesIdioma(String opcionesIdioma) {
-        this.opcionesIdioma = opcionesIdioma;
     }
 
     public String getDirector() {

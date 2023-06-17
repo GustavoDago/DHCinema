@@ -36,7 +36,7 @@ const NuevaCategoria = () => {
     };
   
     // Realizar la petición POST al servidor
-    fetch("http://localhost:8080/categorias", {
+    fetch("http://18.220.249.237:8080/categorias", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,12 +59,13 @@ const NuevaCategoria = () => {
   };
 
   return (
-      <div>
+      <div className='crearCategoria'>
         <h2>Crear Categoría</h2>
         <form onSubmit={handleSubmit} className='form-crearCategoria'>
           <div>
             <label>Título : </label>
             <input
+              className='sign-in-inputs'
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -74,6 +75,7 @@ const NuevaCategoria = () => {
           <div>
             <label>Descripción : </label>
             <input
+            className='sign-in-inputs'
               type="text"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
@@ -83,13 +85,14 @@ const NuevaCategoria = () => {
           <div>
             <label>URL de la Imagen : </label>
             <input
+            className='sign-in-inputs'
               type="text"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
             {errors.imageUrl && <span>{errors.imageUrl}</span>}
           </div>
-          <button type="submit">Crear Nueva categoria</button>
+          <button className='new-button' type="submit">Crear Nueva categoria</button>
         </form>
       </div>
     );

@@ -1,5 +1,6 @@
 package com.example.PIBackEnd.service;
 
+import com.example.PIBackEnd.domain.Funcion;
 import com.example.PIBackEnd.domain.Rol;
 import com.example.PIBackEnd.domain.Usuario;
 import com.example.PIBackEnd.dtos.DtoLogin;
@@ -58,7 +59,7 @@ public class UsuarioService {
         usuarios.setApellido(dtoRegistro.getApellido());
         usuarios.setEmail(dtoRegistro.getEmail());
         usuarios.setPassword(passwordEncoder.encode(dtoRegistro.getPassword()));
-        Optional<Rol> roles = rolesRepository.findByNombre("USER");
+        Optional<Rol> roles = rolesRepository.findByNombreAndVigenteTrue("USER");
         usuarios.setActivo(false);
         if(roles.isPresent()){
             usuarios.setRoles(Collections.singletonList(roles.get()));
@@ -93,7 +94,7 @@ public class UsuarioService {
         usuarios.setEmail(dtoRegistro.getEmail());
         usuarios.setActivo(true);
         usuarios.setPassword(passwordEncoder.encode(dtoRegistro.getPassword()));
-        Optional<Rol> roles = rolesRepository.findByNombre("ADMIN");
+        Optional<Rol> roles = rolesRepository.findByNombreAndVigenteTrue("ADMIN");
         if(roles.isPresent()){
             usuarios.setRoles(Collections.singletonList(roles.get()));
             usuarioRepository.save(usuarios);
@@ -105,12 +106,12 @@ public class UsuarioService {
 
     public void asignarRoles(String email, List<Rol> roles) throws ResourceBadRequestException {
         logger.info("Asignando Roles nuevos a Usuario con email = " + email);
-        Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(email);
+        Optional<Usuario> optionalUsuario = usuarioRepository.findByEmailAndActivoTrue(email);
         if(optionalUsuario.isPresent()){
             Usuario usuario = optionalUsuario.get();
             List<Rol> rolesNuevos = new ArrayList<>();
             for (Rol rol : roles) {
-                Optional<Rol> rolBuscado = rolesRepository.findByNombre(rol.getNombre());
+                Optional<Rol> rolBuscado = rolesRepository.findByNombreAndVigenteTrue(rol.getNombre());
                 if (rolBuscado.isPresent()) {
                     if (!rolesNuevos.contains(rolBuscado.get())) {
                         rolesNuevos.add(rolBuscado.get());
@@ -130,7 +131,7 @@ public class UsuarioService {
 
     public Usuario buscarUsuarioPorEmail(String email) throws ResourceNotFoundException {
         logger.info("Buscando Usuario con email: " + email);
-        Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmailAndActivoTrue(email);
         if(usuarioBuscado.isPresent()){
             return usuarioBuscado.get();
         }
@@ -141,7 +142,17 @@ public class UsuarioService {
 
     public List<Usuario> buscarTodosUsuarios() throws ResourceNoContentException {
         logger.info("Buscando todos los Usuarios");
-        List<Usuario> lista = usuarioRepository.findAll();
+        List<Usuario> lista = usuarioRepository.findAllByActivoTrue();
+        if(lista.size() > 0){
+            return lista;
+        }else{
+            throw new ResourceNoContentException("Error. No existen Usuarios registrados.");
+        }
+    }
+
+    public List<Usuario> buscarTodosUsuariosPorRol(String rol) throws ResourceNoContentException {
+        logger.info("Buscando todos los Usuarios por Rol");
+        List<Usuario> lista = usuarioRepository.findAllByActivoTrue();
         if(lista.size() > 0){
             return lista;
         }else{
@@ -151,11 +162,12 @@ public class UsuarioService {
 
     public void eliminarUsuario(String email) throws ResourceNotFoundException {
         logger.warn("Borrando Usuario con email = " + email);
-        Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmailAndActivoTrue(email);
         if (usuarioBuscado.isPresent()){
-            usuarioRepository.deleteById(usuarioBuscado.get().getId());
+            usuarioBuscado.get().setActivo(false);
+            usuarioRepository.save(usuarioBuscado.get());
         }else{
-            throw new ResourceNotFoundException("Error. No existe el Usuario con email = " + email);
+            throw new ResourceNotFoundException("Error. No existe el Usuario con email = " + email + " o no esta vigente");
         }
     }
 

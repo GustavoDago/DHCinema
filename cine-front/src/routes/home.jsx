@@ -1,25 +1,105 @@
 import React, { useState, useRef } from "react"
-import categories from "../components/utils/categories.json"
-import Categorie from "../components/utils/Categorie"
 import Billboard from "../components/home/Billboard"
 import Recommended from "../components/home/Recommended"
 import { useEffect } from "react"
+import { searchMoviesForCategories, fetchAllCinemas } from "../components/UseFetch"
+import Select from "react-select";
+import { useNavigate } from 'react-router-dom'
+
 
 
 function Home() {
-    
- 
     const [index, setIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+    const [movies, setMovies] = useState([])
+    const [cinemas, setCinemas] = useState([])
+    const [movieSelected, setMovieSelected] = useState()
+    const [newCinemas, setNewCinemas] = useState([])
+    const [newMovies, setNewMovies] = useState([])
+    const [cinemaSelected, setCinemaSelected] = useState()
     const timeRef = useRef(null)
+    const navigate = useNavigate()
+
     const mod = (n, m) => {
         let result = n % m;
         return result >= 0 ? result : result + m;
     };
-    
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        
-    },[])
+        setIsLoading(true)
+
+        const fetchAllFilter = async () => {
+            try {
+                const movie = await searchMoviesForCategories('Ninguno')
+                const cinema = await fetchAllCinemas();
+                if (movie && cinema) {
+                    setMovies(movie)
+                    setCinemas(cinema)
+                    setIsLoading(false)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fetchAllFilter()
+    }, [])
+
+    useEffect(() => {
+        if (movieSelected != null) {
+            setNewCinemas([]);
+            const movie = movies.find((movieS) => movieS.titulo === movieSelected.value);
+            cinemas.forEach((cine) => {
+                cine.salas.forEach((sala) => {
+                    sala.funciones.forEach((funcion) => {
+                        movie.funciones.forEach((funcionMovie) => {
+                            if (funcionMovie.id === funcion.id) {
+                                setNewCinemas((prevCinemas) => [...prevCinemas, cine]);
+                            }
+                        });
+                    });
+                });
+            });
+        } else {
+            setNewCinemas([]);
+            if (cinemaSelected != null) {
+                setNewMovies([]);
+                const cinema = cinemas.find((cinemaS) => cinemaS.nombre === cinemaSelected.value);
+                cinema.salas.forEach((sala) => {
+                    sala.funciones.forEach((funcion) => {
+                        movies.forEach((movie) => {
+                            movie.funciones.forEach((funcionMovie) => {
+                                if (funcionMovie.id === funcion.id) {
+                                    setNewMovies((prevMovies) => [...prevMovies, movie]);
+                                }
+                            });
+                        });
+                    });
+                });
+            } else {
+                setNewMovies([]);
+            }
+        }
+    }, [movieSelected, cinemaSelected]);
+
+    useEffect(() => {
+        if (cinemaSelected != null) {
+            setNewMovies([]);
+            const cinema = cinemas.find((cinemaS) => cinemaS.nombre === cinemaSelected.value);
+            cinema.salas.forEach((sala) => {
+                sala.funciones.forEach((funcion) => {
+                    movies.forEach((movie) => {
+                        movie.funciones.forEach((funcionMovie) => {
+                            if (funcionMovie.id === funcion.id) {
+                                setNewMovies((prevMovies) => [...prevMovies, movie]);
+                            }
+                        });
+                    });
+                });
+            });
+        }
+    }, [cinemaSelected]);
 
     const cards = [
         {
@@ -46,7 +126,7 @@ function Home() {
     ];
 
     useEffect(() => {
-        if(timeRef.current !=null)
+        if (timeRef.current != null)
             clearTimeout(timeRef.current);
         const timer = setTimeout(() => {
             setIndex((prevIndex) => mod(prevIndex + 1, cards.length));
@@ -62,7 +142,7 @@ function Home() {
     }
 
     const handleClickLeft = () => {
-        setIndex((prevIndex) => mod(prevIndex-1,cards.length))
+        setIndex((prevIndex) => mod(prevIndex - 1, cards.length))
     }
 
     const handleMouseEnter = () => {
@@ -73,7 +153,7 @@ function Home() {
         if (timeRef.current) {
             clearTimeout(timeRef.current);
             timeRef.current = setTimeout(() => {
-              setIndex((prevIndex) => mod(prevIndex + 1, cards.length));
+                setIndex((prevIndex) => mod(prevIndex + 1, cards.length));
             }, 3000);
         }
     };
@@ -84,7 +164,100 @@ function Home() {
         setShowCategorie(value);
     }
 
-    
+    const handleMoviesSwitcher = () => {
+        if (Array.isArray(newMovies) && newMovies.length == 0 && cinemaSelected != null) {
+            return (
+                <Select
+                    isClearable={true}
+                    isSearchable={true}
+                    className="react-select-container"
+                    placeholder="Busque o seleccione una pelicula"
+                    options={[{ value: null, label: "Sin opciones" }]} />
+            )
+        }
+        if (Array.isArray(newMovies) && newMovies.length > 0) {
+            return (
+                <Select
+                    value={movieSelected}
+                    onChange={movie => setMovieSelected(movie)}
+                    isClearable={true}
+                    isSearchable={true}
+                    className="react-select-container"
+                    placeholder="Busque o seleccione una pelicula"
+                    options={newMovies.map(
+                        (movie) => (
+                            { value: movie.titulo, label: movie.titulo }
+                        )
+                    )}
+
+
+                ></Select>
+            )
+        } else if (Array.isArray(movies) && movies.length > 0) {
+            return (
+                <Select
+                    value={movieSelected}
+                    onChange={movie => setMovieSelected(movie)}
+                    isClearable={true}
+                    className="react-select-container"
+                    isSearchable={true}
+                    placeholder="Busque o seleccione una pelicula"
+                    options={movies.map(
+                        (movie) => (
+                            { value: movie.titulo, label: movie.titulo }
+                        )
+                    )}
+
+                ></Select>
+            )
+        }
+    }
+
+    const handleCinemasSwitcher = () => {
+        if (Array.isArray(newCinemas) && newCinemas.length > 0) {
+            return (
+                <Select
+                    isClearable={true}
+                    className="react-select-container"
+                    isSearchable={true}
+                    placeholder="Busque o seleccione un cine"
+                    value={cinemaSelected}
+                    onChange={setCinemaSelected}
+                    options={newCinemas.map(
+                        (cinema) => (
+                            { value: cinema.nombre, label: cinema.nombre }
+                        )
+                    )}
+
+                ></Select>
+            )
+        } else if (Array.isArray(cinemas) && cinemas.length > 0) {
+            return (
+                <Select
+                    isClearable={true}
+                    isSearchable={true}
+                    className="react-select-container"
+                    placeholder="Busque o seleccione un cine"
+                    value={cinemaSelected}
+                    onChange={setCinemaSelected}
+                    options={cinemas.map(
+                        (cinema) => (
+                            { value: cinema.nombre, label: cinema.nombre }
+                        )
+                    )}
+
+                ></Select>
+            )
+        }
+    }
+
+    const handleSearch = () => {
+        if (movieSelected != null && cinemaSelected != null) {
+            const foundMovie = movies.find((movie) => movie.titulo === movieSelected.value);
+            const url = `/peliculas/${foundMovie.id}?cinema=${cinemaSelected.value}&titulo=${movieSelected.value}`;
+            navigate(url);
+        }
+    }
 
     return (
 
@@ -99,9 +272,9 @@ function Home() {
 
                         if (i === index) {
                             className = "card card--active";
-                          } else if (i === mod(index + 1, cards.length)) {
+                        } else if (i === mod(index + 1, cards.length)) {
                             className = "card card--right";
-                          } else if (i === mod(index - 1, cards.length)) {
+                        } else if (i === mod(index - 1, cards.length)) {
                             className = "card card--left";
                         }
 
@@ -110,9 +283,9 @@ function Home() {
                                 onClick={() => {
                                     if (className === "card card--right") {
                                         handleClickRight();
-                                      } else if (className === "card card--left") {
+                                    } else if (className === "card card--left") {
                                         handleClickLeft();
-                                      }
+                                    }
                                 }}
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
@@ -136,10 +309,21 @@ function Home() {
                     })}
                 </div>
             </div>
+            <div className="search-reserva">
+                <h2>Busca peliculas en cartelera y en tu cine preferido</h2>
+                <form onSubmit={handleSearch} className="search-form">
+                    {!isLoading &&
+                        handleMoviesSwitcher()
+                    }
+                    {!isLoading &&
+                        handleCinemasSwitcher()
+                    }
+                    <button type="submit" disabled={!movieSelected || !cinemaSelected}>Buscar</button>
+                </form>
+            </div>
 
-            
 
-            <Billboard  />
+            <Billboard />
             <Recommended />
 
 
