@@ -21,7 +21,7 @@ const AsignarCategoria = () => {
 
 
   const guardarCambios = () => {
-    const url = "http://18.220.249.237:8080/peliculas";
+    const url = "http://localhost:8080/peliculas";
 
     const stringificar =() => JSON.stringify({
       ...peliculaSeleccionada,

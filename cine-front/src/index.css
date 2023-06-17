@@ -93,8 +93,7 @@ nav {
   padding: 10px;
   color: #0D1B2A;
   background-color: #E0E1DD;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  
 }
 
 button:hover {
@@ -216,7 +215,7 @@ header {
   align-self: center;
 }
 
-.account-trigger div{
+.account-trigger div {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -242,15 +241,15 @@ header {
   font-weight: 500;
 }
 
-.drop-down-profile ul a li{
+.drop-down-profile ul a li {
   color: #1B263B;
 }
 
-.drop-down-profile ul li{ 
+.drop-down-profile ul li {
   cursor: pointer;
 }
 
-.log-out-confirmation h3{
+.log-out-confirmation h3 {
   color: white;
 }
 
@@ -312,7 +311,7 @@ header {
 .header-section {
   display: flex;
   justify-content: space-evenly;
-  
+
   align-items: center;
 
 }
@@ -347,7 +346,7 @@ header {
   width: auto;
 }
 
-.right-header div{
+.right-header div {
   margin-right: 30px;
 }
 
@@ -399,12 +398,12 @@ header {
 
 
 
-.datosDropDown h3{
+.datosDropDown h3 {
   color: #415A77;
   font-weight: 200;
 }
 
-.h1dropdown h1{
+.h1dropdown h1 {
   font-weight: 400;
   font-size: 24px;
   margin-bottom: 10px;
@@ -453,7 +452,7 @@ footer {
 .iconosFooter svg {
   height: 30px;
   padding-right: 5px;
-  
+
 }
 
 
@@ -468,7 +467,7 @@ footer {
 
 /* seccion share footer */
 
-.shareModalhtml{
+.shareModalhtml {
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -485,7 +484,7 @@ footer {
   border-radius: 0px 15px 15px 15px;
 }
 
-.shareModalhtml svg{
+.shareModalhtml svg {
   height: 50px;
   margin: 15px;
   background-color: white;
@@ -494,7 +493,7 @@ footer {
   font-size: 20px;
 }
 
-.modalCompartirLink{
+.modalCompartirLink {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -503,12 +502,12 @@ footer {
   width: 100%;
 }
 
-.shareModalhtml .urlLink{
+.shareModalhtml .urlLink {
   margin-top: 20px;
   text-align: center;
 }
 
-.modalCompartirLink a{
+.modalCompartirLink a {
   color: #000;
   justify-content: center;
   align-items: center;
@@ -532,40 +531,45 @@ footer {
 
 /* Home */
 
-.search-reserva{
+.search-reserva {
   background-color: #1B263B;
   padding: 70px 0;
   align-items: center;
 }
 
-.search-reserva h2{
+.search-reserva h2 {
   padding: 0;
   margin: 0;
   margin-bottom: 30px;
 }
 
-.search-form{
+.search-form {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.search-form .react-select-container{
+.search-form .react-select-container {
   margin: -0px 20px;
   width: 300px;
 }
 
-.react-select-container{
+.react-select-container {
   color: #000;
 }
 
-.search-form button{
+.search-form button {
   background-color: white;
   color: #415A77;
   border: 2px solid #415A77;
 }
 
+.search-form button:hover{
+  background-color: #415A77;
+  color: white;
+  transition: 300ms;
+}
 
 
 
@@ -750,6 +754,7 @@ footer {
   padding-bottom: 20px;
   width: 90vw;
 }
+
 .movie-container-cartelera {
   display: grid;
   grid-template-columns: auto;
@@ -785,7 +790,7 @@ footer {
   align-items: center;
 }
 
-.movie-card-cartelera{
+.movie-card-cartelera {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -804,6 +809,7 @@ footer {
 
   flex-grow: 0;
 }
+
 .movie-card-cartelera figure {
   width: 200px;
   height: 100%;
@@ -866,8 +872,8 @@ footer {
   visibility: visible;
 }
 
-.ocultoEnMovil{
-  list-style-type: none ;
+.ocultoEnMovil {
+  list-style-type: none;
   text-align: left;
 }
 
@@ -967,11 +973,13 @@ footer {
   height: 60vh;
   background-image: linear-gradient(to right, rgba(31.5, 10.5, 94.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 10.5, 94.5, 0.84) 50%, rgba(31.5, 10.5, 94.5, 0.84) 100%);
 }
-.caracteristica-item{
-  display:flex;
+
+.caracteristica-item {
+  display: flex;
   justify-content: space-evenly;
   width: 98vw;
 }
+
 .movie-details-features {
   display: flex;
   font-weight: 600;
@@ -979,15 +987,20 @@ footer {
   margin-bottom: 10vh;
   color: #000;
 }
+
 .movie-details-features h2 {
   position: relative;
   text-align: left;
   margin-left: 5vw;
 }
-.h2-movieDetails hr{
-  border: none; /* Eliminar el borde predeterminado */
-  border-top: 1px solid rgb(17, 5, 83); /* Establecer el color del borde superior */
+
+.h2-movieDetails hr {
+  border: none;
+  /* Eliminar el borde predeterminado */
+  border-top: 1px solid rgb(17, 5, 83);
+  /* Establecer el color del borde superior */
 }
+
 .movie-first-info {
   position: absolute;
 
@@ -1065,24 +1078,34 @@ footer {
   font-size: 14px;
   height: 100%;
 }
+
 .fechas-container {
-width: 100%;
-height: auto;
+  width: 100%;
+  height: auto;
 }
 
-.fechas-container div{
+.fechas-container div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.fechas-container div button{
+.fechas-container div button {
   margin: 10px 5px;
 }
 
 .movie-details-second {
   position: relative;
-  height: 40vh;
+  height: 50vh;
+}
+
+.rank-comment-content{
+  display: flex;
+  align-items: center;
+}
+
+.rank-comment-content h4{
+  margin-right: 40px;
 }
 
 .movie-second-info {
@@ -1091,6 +1114,7 @@ height: auto;
   right: 6%;
   width: 55%;
   display: flex;
+  height: auto;
 }
 
 .movie-second-info h2 {
@@ -1116,10 +1140,10 @@ height: auto;
   width: 100%;
 }
 
-.image-details{
+.image-details {
   display: flex;
   justify-content: center;
-  
+
 }
 
 .grid-container {
@@ -1134,7 +1158,7 @@ height: auto;
   align-self: center;
 }
 
-.reserve-content{
+.reserve-content {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -1143,83 +1167,83 @@ height: auto;
   justify-content: center;
 }
 
-.reserve-box{
+.reserve-box {
   align-self: center;
   background-color: #0D1B2A;
   padding: 40px 300px;
   text-align: center;
-  
+
 }
 
-.reserve-box h3{
+.reserve-box h3 {
   color: #415A77;
 }
 
-.reserve-element div{
+.reserve-element div {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 
-.reserve-element h4{
+.reserve-element h4 {
   margin-right: 20px;
 }
 
-.reserve-buttons{
+.reserve-buttons {
   display: flex;
   justify-content: center;
 }
 
-.reserve-buttons button{
+.reserve-buttons button {
   padding: 10px 20px;
   margin: 0px 20px;
 }
 
-.show-gallery-conteiner{
+.show-gallery-conteiner {
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
 }
 
-.gallery-image{
+.gallery-image {
   width: 60%;
   height: 60vh;
   align-self: center;
 }
 
-.close-gallery img{
+.close-gallery img {
   width: 2%;
   padding-top: 20px;
   padding-left: 20px;
-  
+
 }
 
-.gallery-image img{
+.gallery-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.carrousel-gallery{
+.carrousel-gallery {
   width: 100%;
   align-self: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
 }
 
-.carrousel-gallery img{
+.carrousel-gallery img {
   width: 7%;
   cursor: pointer;
   margin: 40px 20px;
 }
 
-.carrousel-gallery img:hover{
+.carrousel-gallery img:hover {
   scale: 1.5;
-  
+
 }
 
 
@@ -1241,18 +1265,18 @@ height: auto;
   height: 60vh;
 }
 
-.half-right div{
+.half-right div {
   height: 30vh;
 }
 
-.half-right div figure{
+.half-right div figure {
   width: 100%;
-  height:100%;
+  height: 100%;
   position: relative;
   margin: 0;
 }
 
-.half-right div figure div{
+.half-right div figure div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1262,7 +1286,7 @@ height: auto;
   background: rgba(0, 0, 0, 0.7);
 }
 
-.half-right div figure div p{
+.half-right div figure div p {
   margin: 0;
   font-size: 60px;
   height: 100%;
@@ -1270,14 +1294,14 @@ height: auto;
   cursor: pointer;
 }
 
-.half-right div figure div p::before{
+.half-right div figure div p::before {
   content: '';
-  display: inline-block; 
+  display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
 
-.half-right div figure img{
+.half-right div figure img {
   width: 100%;
   height: 100%;
 }
@@ -1291,47 +1315,55 @@ height: auto;
   height: 100%;
   width: 100%;
   object-fit: cover;
-  
+
 }
 
 .movie-second-div {
   padding: 20px 0;
 }
+
 .half-left img {
   width: 100%;
 
 }
+
 .half-right img {
   width: 20vw;
   height: 20vh;
 }
 
-.map-container{
+.map-container {
   width: 100%;
   height: 800px;
 }
+
 /* Bloque de Politicas */
-.tituloPoliticas{
+.tituloPoliticas {
   background-color: #0D1B2A;
 }
-.bloquePoliticas{
+
+.bloquePoliticas {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-.bloquePoliticas h2{
-background-color: #1B263B;
+
+.bloquePoliticas h2 {
+  background-color: #1B263B;
 }
-.bloquePoliticas div{
+
+.bloquePoliticas div {
   padding-bottom: 2vh;
   padding-left: 3vw;
   padding-right: 3vw;
 }
-.bloquePoliticas div p{
+
+.bloquePoliticas div p {
   color: #0D1B2A;
 }
+
 /* Fin bloque de politicas */
 
-.cinema-item-map{
+.cinema-item-map {
   color: #0D1B2A;
 }
 
@@ -1357,39 +1389,38 @@ background-color: #1B263B;
 .accordion-content {
   background-color: #415A77;
 }
-
-.modalidad-content{
+.modalidad-content {
   background-color: #0D1B2A;
   padding: 20px 10px;
   color: white;
   margin: 10px;
 }
 
-.modalidad-content button{
+.modalidad-content button {
   margin-top: 40px;
 }
 
-.accordion-reserva{
+.accordion-reserva {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
 }
 
-.accordion-reserva button{
+.accordion-reserva button {
   width: 30%;
   margin-top: 10px;
   align-self: center;
 }
 
-.form-rank{
+.form-rank {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 
-.icon-reserva{
+.icon-reserva {
   background-color: #0D1B2A;
   border-radius: 90%;
   width: 40px;
@@ -1402,7 +1433,7 @@ background-color: #1B263B;
   color: white;
 }
 
-.rank-comment{
+.rank-comment {
   background-color: rgba(138, 136, 136, 0.2);
   border-radius: 40px 0px 0px 40px;
   width: 40%;
@@ -1415,16 +1446,16 @@ background-color: #1B263B;
   color: #000;
 }
 
-.rank-comment-container{
+.rank-comment-container {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   width: 60%;
-  
+
   align-self: center;
 }
 
-.social-section{
+.social-section {
   color: #000;
   display: flex;
   align-items: center;
@@ -1432,13 +1463,13 @@ background-color: #1B263B;
   margin-left: 100px;
 }
 
-.form-rank img{
+.form-rank img {
   cursor: pointer;
   margin-left: 20px;
   width: 40px;
 }
 
-.descripcion-rank{
+.descripcion-rank {
   width: 40%;
   height: 10vh;
   background-color: #1b263b;
@@ -1448,7 +1479,7 @@ background-color: #1B263B;
   margin-left: 10px;
 }
 
-.rank-movie-container{
+.rank-movie-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1457,7 +1488,7 @@ background-color: #1B263B;
   margin-bottom: 40px;
 }
 
-.no-rank{
+.no-rank {
   color: #000;
   background-color: rgba(138, 136, 136, 0.2);
   width: 80%;
@@ -1489,14 +1520,14 @@ background-color: #1B263B;
   background-image: linear-gradient(to right, rgb(12, 12, 12) calc((50vw - 170px) - 340px), rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0.3) 100%);
 }
 
-.categories-form{
+.categories-form {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 208px;
 }
 
-.categories-form label{
+.categories-form label {
   margin: 5px 30px;
   align-self: center;
 }
@@ -1509,9 +1540,9 @@ background-color: #1B263B;
 
 .admin-links a {
   text-decoration: none;
-  background-color:#1B263B;
+  background-color: #1B263B;
   color: white;
-  padding-top:2vh;
+  padding-top: 2vh;
   padding-bottom: 2vh;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
@@ -1544,25 +1575,25 @@ background-color: #1B263B;
   padding-top: 40px;
 }
 
-.admin-div{
+.admin-div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
 
-.admin-div-first{
+.admin-div-first {
   width: 50%;
   display: flex;
   flex-direction: column;
- 
+
 }
 
-.admin-div-first label{
+.admin-div-first label {
   text-align: left;
 }
 
-.admin-div-last{
+.admin-div-last {
   width: 45%;
   display: flex;
   flex-direction: row;
@@ -1570,18 +1601,18 @@ background-color: #1B263B;
   height: 40vh;
 }
 
-.admin-div-last div{
+.admin-div-last div {
   display: flex;
   flex-direction: column;
   text-align: left;
   margin: 0px 10px;
 }
 
-.admin-div-last div label{
+.admin-div-last div label {
   margin-bottom: 10px;
 }
 
-.admin-div-last input{
+.admin-div-last input {
   background-color: #1B263B;
   border: none;
   border-radius: 10px;
@@ -1644,7 +1675,7 @@ background-color: #1B263B;
   text-align: center;
 }
 
-.date-center{
+.date-center {
   text-align: left;
   margin: 5px 0px 20px 30px;
 }
@@ -1835,36 +1866,43 @@ background-color: #1B263B;
 /* Div de creacion de categoria; panel admin */
 
 
-.crearCategoria form{
+.crearCategoria form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  align-items: center;
 }
-  
+
 
 /* Form Crear Categoria */
-.form-crearCategoria div{
+.form-crearCategoria div {
+  align-self: center;
   margin: 5px;
-  width: 32vw;
+  width: 50%;
+  display: row;
   display: flex;
   justify-content: space-between;
 }
-.form-crearCategoria div label{
+
+.form-crearCategoria div label {
   font-weight: 500;
   padding-top: 2%;
 }
-.form-crearCategoria div input{
+
+.form-crearCategoria div input {
   background-color: #1B263B;
   border: none;
   border-radius: 10px;
-   height: 3vh;
+  height: 3vh;
   /*width: 90%;
   padding-left: 20px;
   text-align: left;
   margin: 10px 0px 30px 0; */
 }
-.form-crearCategoria button{
+
+.form-crearCategoria button {
   color: #0D1B2A;
   background-color: #E0E1DD;
   margin-top: 25px;
@@ -1872,7 +1910,7 @@ background-color: #1B263B;
 
 
 
-.form-crearCategoria button:hover{
+.form-crearCategoria button:hover {
   color: #E0E1DD;
   background-color: #415A77;
   box-shadow: 0px 1px 5px #778DA9;
@@ -1885,8 +1923,9 @@ div.asignoCategorias {
   display: flex;
   justify-content: space-evenly;
 }
-div .asignoCategorias div{
- width: 20vw;
+
+div .asignoCategorias div {
+  width: 20vw;
 }
 
 /** Vista de mostrar todas las peliculas **/
@@ -1902,7 +1941,7 @@ div .asignoCategorias div{
 .page-div {
   display: flex;
   justify-content: center;
-  
+
 }
 
 .pages {
@@ -1962,7 +2001,7 @@ div .asignoCategorias div{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.all-movies form{
+.all-movies form {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1972,7 +2011,7 @@ div .asignoCategorias div{
   width: 100%;
 }
 
-.all-movies form .search-movie{
+.all-movies form .search-movie {
   min-height: 35px;
   background-color: white;
   border-radius: 4px;
@@ -1980,77 +2019,77 @@ div .asignoCategorias div{
   border: none;
 }
 
-.all-movies div .rmdp-input{
+.all-movies div .rmdp-input {
   background-color: white;
   height: 35px;
   padding: 0;
   margin: 0 20px;
 }
 
-.complete-billboard{
+.complete-billboard {
   display: flex;
   flex-direction: row;
   height: auto;
   width: 100%;
 }
 
-.filters{
-  height:auto;
+.filters {
+  height: auto;
   width: 20%;
   background-color: #1b263b;
   display: flex;
   flex-direction: column;
 }
 
-.filters div{
+.filters div {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   margin: 20px 0px;
 }
 
-.filters div h3{
+.filters div h3 {
   color: white;
   text-align: left;
   margin-left: 30px;
 }
 
-.filters div div{
+.filters div div {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-.filters div div button{
+.filters div div button {
   padding: 15px 30px;
   margin: 10px 20px;
 }
 
-.item-show-more{
+.item-show-more {
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 50%;
-  height: 30vh;
+  height: 40vh;
   margin: 20px 0px;
   border-radius: 30px;
 }
 
-.item-show-more:hover{
+.item-show-more:hover {
   scale: 1.05;
 }
 
-.item-show-more:hover .item-show-more-first{
+.item-show-more:hover .item-show-more-first {
   box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.5);
 }
 
-.item-show-more:hover .item-show-more-second{
+.item-show-more:hover .item-show-more-second {
   box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.5);
 }
 
 
-.item-show-more-first{
+.item-show-more-first {
   width: 30%;
   height: 100%;
   box-shadow: 0px 5px 30px;
@@ -2058,14 +2097,14 @@ div .asignoCategorias div{
 
 }
 
-.item-show-more-first img{
+.item-show-more-first img {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(5px 0px 5px rgba(0,0,0,.4));
+  filter: drop-shadow(5px 0px 5px rgba(0, 0, 0, .4));
   object-fit: cover;
 }
 
-.item-show-more-second{
+.item-show-more-second {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -2077,13 +2116,13 @@ div .asignoCategorias div{
 }
 
 
-.item-show-more-second div div{
+.item-show-more-second div div {
   flex-direction: row;
   display: flex;
   justify-content: center;
 }
 
-.option-button{
+.option-button {
   padding: 10px;
   margin: 0px 5px;
   background-color: transparent;
@@ -2091,36 +2130,36 @@ div .asignoCategorias div{
   color: #000;
 }
 
-.item-show-more-second div div button:hover{
+.item-show-more-second div div button:hover {
   background-color: #000;
   color: white;
 }
 
 
 
-.item-show-more-second div h5{
+.item-show-more-second div h5 {
   margin: 0;
   margin-bottom: 10px;
 }
 
-.options-buttons{
+.options-buttons {
   display: flex;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
 }
 
 .options-buttons button:nth-child(1) {
   background-color: red;
 }
 
-.options-buttons button:nth-child(2){
-  background-color:#0D1B2A;
+.options-buttons button:nth-child(2) {
+  background-color: #0D1B2A;
 }
 
-.options-buttons button:nth-child(3){
+.options-buttons button:nth-child(3) {
   background-color: cyan;
 }
 
-.options-buttons button{
+.options-buttons button {
   height: auto;
   padding: 0;
   width: 100px;
@@ -2133,15 +2172,15 @@ div .asignoCategorias div{
   color: white;
 }
 
-.options-buttons button p{
+.options-buttons button p {
   font-size: small;
 }
 
-.options-buttons button img{
+.options-buttons button img {
   width: 30px;
 }
 
-.selected{
+.selected {
   background-color: #000;
   color: white;
 }
@@ -2256,6 +2295,7 @@ div .asignoCategorias div{
 .register-div p {
   margin: 0px 5px;
 }
+
 /** Cierre de Sesion **/
 .signOut
 /** Vista registro **/
@@ -2332,7 +2372,7 @@ div .asignoCategorias div{
   height: 100%;
 }
 
-.modal-content-register img{
+.modal-content-register img {
   width: 100px;
   height: auto;
 }
@@ -2425,13 +2465,13 @@ div .asignoCategorias div{
 
 /** Categorias **/
 
-.categories-compare{
+.categories-compare {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.compare-details{
+.compare-details {
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -2443,7 +2483,7 @@ div .asignoCategorias div{
 }
 
 
-.compare-details-titles{
+.compare-details-titles {
   background-color: white;
   width: 50%;
   border-radius: 20px 0px 0px 20px;
@@ -2454,14 +2494,15 @@ div .asignoCategorias div{
   justify-content: center;
 }
 
-.compare-details-titles h5{
+.compare-details-titles h5 {
   color: #61635d;
 }
 
-.compare-details-titles h3{
+.compare-details-titles h3 {
   margin: 0;
 }
-.compare-details-figure{
+
+.compare-details-figure {
   position: relative;
   display: flex;
   justify-content: center;
@@ -2469,19 +2510,19 @@ div .asignoCategorias div{
   width: 70%;
   position: relative;
   height: 100%;
-  
+
 }
 
-.compare-details-figure figure{
+.compare-details-figure figure {
   width: 100%;
   height: 100%;
   margin: 0;
   position: relative;
-  
+
 
 }
 
-.compare-details-figure figure div{
+.compare-details-figure figure div {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -2495,16 +2536,16 @@ div .asignoCategorias div{
   background: rgba(0, 0, 0, 0.3);
 }
 
-.compare-details-figure figure div button{
+.compare-details-figure figure div button {
   margin-left: 30px;
   margin-bottom: 30px;
 }
 
-.compare-details-figure figure div h2{
+.compare-details-figure figure div h2 {
   margin-left: 30px;
 }
 
-.compare-details-figure figure div p{
+.compare-details-figure figure div p {
   margin-left: 30px;
   border: 1px solid white;
   width: 6%;
@@ -2512,50 +2553,50 @@ div .asignoCategorias div{
   align-self: left;
 }
 
-.compare-details-figure figure img{
+.compare-details-figure figure img {
   width: 100%;
   height: 100%;
   border-radius: 0px 30px 30px 0px;
   object-fit: cover;
 }
 
-.image-compare{
+.image-compare {
   height: 100%;
   object-fit: fill;
 }
 
-.second-figure figure div{
+.second-figure figure div {
   display: flex;
   align-items: flex-end;
-  
+
 }
 
-.second-figure figure div p{
+.second-figure figure div p {
   margin-right: 30px;
-  
+
 }
 
-.second-figure figure div h2{
+.second-figure figure div h2 {
   margin-right: 30px;
-  
+
 }
 
-.second-figure figure div button{
+.second-figure figure div button {
   margin-right: 30px;
-  
+
 }
 
-.second-figure figure img{
+.second-figure figure img {
   border-radius: 30px 0px 0px 30px;
 }
 
-.second-figure figure div{
+.second-figure figure div {
   border-radius: 30px 0px 0px 30px;
 }
 
-.second-titles{
+.second-titles {
   border-radius: 0px 30px 30px 0px;
-  
+
 }
 
 /** Tablet **/
@@ -2564,9 +2605,11 @@ div .asignoCategorias div{
   .movie-second-div {
     flex-direction: column;
   }
-  .movie-details-description{
+
+  .movie-details-description {
     width: auto;
   }
+
   .movie-second-div .image-details {
     width: 100%;
   }
@@ -2609,14 +2652,16 @@ div .asignoCategorias div{
     text-align: center;
   }
 
-  .bloque_img{
+  .bloque_img {
     display: none;
   }
-  .bloquePoliticas{
+
+  .bloquePoliticas {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  .bloquePoliticas div{
+
+  .bloquePoliticas div {
     padding: 1%;
   }
 
@@ -2634,7 +2679,7 @@ div .asignoCategorias div{
     display: flex;
     width: 98vw;
     flex-direction: column;
-}
+  }
 
   .headerContainer img {
     height: 130px;
@@ -2691,13 +2736,15 @@ div .asignoCategorias div{
     justify-content: center;
     padding: 0;
   }
+
   .movie-details-features {
     display: flex;
     font-weight: 600;
     margin-top: 13vh;
     margin-bottom: 10vh;
     color: #000;
-}
+  }
+
   .loadingImage {
     width: 70%;
     height: 40vh;
@@ -2708,7 +2755,7 @@ div .asignoCategorias div{
     height: 10vh;
   }
 
-  .ocultoEnMovil{
+  .ocultoEnMovil {
     display: none;
   }
 
@@ -2717,15 +2764,18 @@ div .asignoCategorias div{
     justify-content: center;
     align-items: center;
     width: 60vw;
-}
-.movie-details-related {
-  display: none;
-}
-.bloquePoliticas{
-  display: flex;
-  flex-direction: column;
-}
-.bloquePoliticas div{
-  padding: 1%;
-}
+  }
+
+  .movie-details-related {
+    display: none;
+  }
+
+  .bloquePoliticas {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bloquePoliticas div {
+    padding: 1%;
+  }
 }

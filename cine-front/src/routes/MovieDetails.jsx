@@ -508,9 +508,9 @@ function MovieDetails() {
                                             if (usuario) {
                                                 return <div className="rank-comment">
                                                     <div className="icon-reserva">{usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}</div>
-                                                    <div>
-                                                        {rank.puntaje}
-                                                        {rank.valoracion}
+                                                    <div className="rank-comment-content">
+                                                        <h4>{rank.puntaje}</h4>
+                                                        <p>{rank.valoracion}</p>
                                                     </div>
                                                 </div>;
                                             }
@@ -599,7 +599,7 @@ function MovieDetails() {
                         >
 
                         </MarkerF>
-                        {
+                        {Array.isArray(allCinemas) && allCinemas.length > 0 &&(
                             allCinemas.map((cinema) => (
                                 <MarkerF
                                     key={cinema.id}
@@ -615,6 +615,7 @@ function MovieDetails() {
                                 />
 
                             ))
+                        )
                         }
                         {
                             selectedMarker && (
