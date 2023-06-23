@@ -24,6 +24,9 @@ public class Puntaje {
     @Column(nullable = true, length = 450)
     private String valoracion;
 
+    @Column
+    private Long IdUsuario;
+
     public Puntaje() {
     }
 
@@ -72,5 +75,13 @@ public class Puntaje {
 
     public void setValoracion(String valoracion) {
         this.valoracion = valoracion;
+    }
+
+    public Long getIdUsuario() {
+        return IdUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        IdUsuario = idUsuario;
     }
 }

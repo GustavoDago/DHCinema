@@ -9,7 +9,6 @@ import com.example.PIBackEnd.repository.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -71,13 +70,16 @@ public class ReservaService {
     public List<Reserva> buscarTodasReservas() throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas");
         List<Reserva> lista = reservaRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Reservas registradas.");
         }
     }
 
+    //METODO ACTUALIZAR
+
+    //HISTORIA 42, EDITAR METODO
     public List<Reserva> buscarTodasReservasPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas para Usuario: " + email);
         List<Reserva> lista = reservaRepository.findAllByVigenteTrueAndUsuarioEmail(email);

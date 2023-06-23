@@ -73,6 +73,7 @@ public class PuntajeService {
         puntaje.setId(puntajeDTO.getId());
         puntaje.setPuntaje(puntajeDTO.getPuntaje());
         puntaje.setValoracion(puntajeDTO.getValoracion());
+        puntaje.setIdUsuario(puntajeDTO.getUsuario_id());
         pelicula.setId(puntajeDTO.getPelicula_id());
         usuario.setId(puntajeDTO.getUsuario_id());
         puntaje.setPelicula(pelicula);
