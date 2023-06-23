@@ -1,19 +1,21 @@
+import "react-datepicker/dist/react-datepicker.css";
 import { useCallback, useEffect, useState } from "react"
 import { fetchCinemaForTitle, fetchMovieTilte, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate } from "react-router-dom"
 import Modal from "react-modal"
-import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
 import BloquePoliticas from "../components/BloquePoliticas.jsx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
-import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
+import { GoogleMap, InfoWindow, MarkerF } from "@react-google-maps/api"
 import Accordion from "../components/Accordion"
-import { Box, Typography, FormControl, Select, MenuItem } from '@mui/material';
+import { Box, FormControl, Select, MenuItem, Stack, Rating } from '@mui/material';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import moment from "moment/moment"
 
-
-
+import es from "date-fns/locale/es"
+registerLocale('es', es)
 
 Modal.setAppElement('#root')
 
@@ -47,6 +49,7 @@ function MovieDetails() {
     const [contentAwait, setContentAwait] = useState(false)
     const [allRanking, setAllRanking] = useState([])
     const [allUsers, setAllUsers] = useState([])
+    const [allDates, setAllDates] = useState([])
     const [descriptionRank, setDescriptionRank] = useState('')
     const [pointsRank, setPointsRank] = useState(0)
 
@@ -147,7 +150,9 @@ function MovieDetails() {
 
     useEffect(() => {
         if (searchFunctions && selectedDate) {
-            const newArray = searchFunctions.filter(func => new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) == selectedDate)
+            const date = moment(selectedDate, 'DD/MM/YYYY')
+            const formattedDate = date.format('YYYY-MM-DD')
+            const newArray = searchFunctions.filter(func => func.fechaProyeccion == formattedDate)
             const dividedData = newArray.reduce((result, obj) => {
                 if (!result[obj.modalidad]) {
                     result[obj.modalidad] = {};
@@ -164,6 +169,8 @@ function MovieDetails() {
 
             console.log(dividedData);
             setDatosObjeto(dividedData)
+        } else {
+            setDatosObjeto(null)
         }
     }, [selectedDate])
 
@@ -417,15 +424,23 @@ function MovieDetails() {
                                             active={true}
                                             content={
                                                 <div>
-                                                    <div>
-                                                        {Array.isArray(searchFunctions) && searchFunctions.length > 0 && (
-                                                            searchFunctions.map((func) => (
-                                                                <button key={func.id} onClick={() => setSelectedDate(new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }))}>{new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</button>
-                                                            ))
-                                                        )}
+                                                    <div className="reserve-datepicker">
+                                                        {Array.isArray(searchFunctions) && searchFunctions.length > 0 &&
+                                                            (<DatePicker
+                                                                showIcon
+                                                                selected={selectedDate}
+                                                                onChange={date => setSelectedDate(date)}
+                                                                filterDate={date => {
+                                                                    const formattedDate = date.toISOString().slice(0, 10)
+                                                                    return searchFunctions.some(func => func.fechaProyeccion == formattedDate)
+                                                                }}
+                                                                className="reserve-input-date"
+                                                                isClearable
+                                                                locale="es"
+                                                            />)}
 
                                                     </div>
-                                                    <div className="modalidad-content">
+                                                    {datosObjeto != null && <div className="modalidad-content">
                                                         {datosObjeto != null && (
                                                             Object.keys(datosObjeto).map(modalidad => (
                                                                 Object.keys(datosObjeto[modalidad]).map(idioma => (
@@ -443,11 +458,11 @@ function MovieDetails() {
                                                                 ))
                                                             ))
                                                         )}
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             }
                                         />
-                                        <button disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
+                                        <button className="reserva-button" disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
                                     </div>}
 
                             </div>
@@ -502,20 +517,23 @@ function MovieDetails() {
                             {Array.isArray(allRanking) && allRanking.length > 0 ? (
                                 <div className="rank-movie-container">
                                     <div className="rank-comment-container">
-                                    {
-                                        allRanking.map(rank => {
-                                            const usuario = allUsers.find(user => user.id == rank.id)
-                                            if (usuario) {
-                                                return <div className="rank-comment">
-                                                    <div className="icon-reserva">{usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}</div>
-                                                    <div className="rank-comment-content">
-                                                        <h4>{rank.puntaje}</h4>
-                                                        <p>{rank.valoracion}</p>
-                                                    </div>
-                                                </div>;
-                                            }
-                                        })}
-                                        </div>
+                                        {
+                                            allRanking.map(rank => {
+                                                console.log(rank)
+                                                console.log(allUsers)
+                                                console.log(sessionStorage.getItem('id'))
+                                                const usuario = allUsers.find(user => user.id == rank.id)
+                                                if (usuario) {
+                                                    return <div className="rank-comment">
+                                                        <div className="icon-reserva">{usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}</div>
+                                                        <div className="rank-comment-content">
+                                                            <h4>{rank.puntaje}</h4>
+                                                            <p>{rank.valoracion}</p>
+                                                        </div>
+                                                    </div>;
+                                                }
+                                            })}
+                                    </div>
                                 </div>
                             ) :
                                 <div className="rank-movie-container">
@@ -527,18 +545,17 @@ function MovieDetails() {
                         {sessionStorage.getItem('id') &&
                             <div>
                                 <form className="form-rank">
-                                    <Box>
-                                        <FormControl>
-                                            <Select value={pointsRank} onChange={(e) => { setPointsRank(parseInt(e.target.value)) }}>
-                                                <MenuItem value={0}>Puntaje</MenuItem>
-                                                <MenuItem value={1}>1</MenuItem>
-                                                <MenuItem value={2}>2</MenuItem>
-                                                <MenuItem value={3}>3</MenuItem>
-                                                <MenuItem value={4}>4</MenuItem>
-                                                <MenuItem value={5}>5</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </Box>
+                                    <Stack spacing={1}>
+                                        <Rating
+                                            name="size-large"
+                                            size="large"
+                                            value={pointsRank}
+                                            onChange = {(e,newValue) => {
+                                                setPointsRank(newValue)
+                                            }}
+                                        />
+                                    </Stack>
+
                                     <input
                                         className="descripcion-rank"
                                         type="text"
@@ -599,7 +616,7 @@ function MovieDetails() {
                         >
 
                         </MarkerF>
-                        {Array.isArray(allCinemas) && allCinemas.length > 0 &&(
+                        {Array.isArray(allCinemas) && allCinemas.length > 0 && (
                             allCinemas.map((cinema) => (
                                 <MarkerF
                                     key={cinema.id}
@@ -644,7 +661,7 @@ function MovieDetails() {
                 </div>
                 <div>
                     <h2 className="tituloPoliticas">Qué tenés que saber</h2>
-                    <BloquePoliticas/>
+                    <BloquePoliticas />
                 </div>
 
             </div>

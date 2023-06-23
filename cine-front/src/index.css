@@ -89,13 +89,6 @@ nav {
   justify-content: space-around;
 }
 
-.main-content button {
-  padding: 10px;
-  color: #0D1B2A;
-  background-color: #E0E1DD;
-  
-}
-
 button:hover {
   border-color: #646cff;
 }
@@ -1404,14 +1397,33 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 
-.accordion-reserva button {
+
+.reserva-button{
   width: 30%;
   margin-top: 10px;
   align-self: center;
+  padding: 10px;
+  color: #0D1B2A;
+  background-color: #E0E1DD;
+  
 }
+
+.reserve-datepicker{
+ width: fit-content;
+ 
+}
+
+.reserve-input-date{
+  background-color: white;
+  border: none;
+  height: 20px;
+  width: auto;
+  color: black;
+  border-radius: 10px;
+}
+
 
 .form-rank {
   display: flex;
