@@ -85,7 +85,7 @@ public class UsuarioService {
 
     public String guardarUsuarioAdm(DtoRegistro dtoRegistro) throws ResourceBadRequestException {
         logger.info("Guardando Usuario ADMIN nuevo");
-        if (usuarioRepository.existsByEmail(dtoRegistro.getNombre())) {
+        if (usuarioRepository.existsByEmail(dtoRegistro.getEmail())) {
             throw new ResourceBadRequestException("Error. Ya existe una Usuario Admin con el mismo email");
         }
         Usuario usuarios = new Usuario();

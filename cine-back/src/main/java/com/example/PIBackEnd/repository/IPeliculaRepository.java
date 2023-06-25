@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface IPeliculaRepository extends JpaRepository<Pelicula,Long> {
     Optional<Pelicula> findByTitulo(String titulo);
+    List<Pelicula> findByCategoriasId(Long id);
     //Optional<Pelicula> findByTituloAndVigente(String titulo, Boolean vigente);
     Page<Pelicula> findAll(Pageable pageable);
     List<Pelicula> findAllByVigenteTrue();

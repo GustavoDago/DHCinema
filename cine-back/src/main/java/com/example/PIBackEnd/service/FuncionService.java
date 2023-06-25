@@ -111,7 +111,7 @@ public class FuncionService {
                 Optional<Funcion> optionalFuncion = funcionRepository.findByIdAndVigente(funcion.getId(), true);
                 if(optionalFuncion.isPresent()){
                     Set<Reserva> reservas = convertirFuncionDTOaFuncion(funcion).getReservas();
-                    if(reservas.size() < 1){
+                    if(reservas.size() > 0){
                         throw new ResourceBadRequestException("Error. No se puede modificar la Funcion con Reservas activas");
                     }
                     Optional<Sala> optionalSala = salaRepository.findByIdAndVigenteTrue(funcion.getSala_id());
