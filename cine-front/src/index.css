@@ -1369,12 +1369,16 @@ footer {
 
 .accordion-title {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  color: white;
-  background-color: #1B263B;
+  color: #E0E1DD;
+  background-color: #778DA9;
   margin-bottom: 2px;
+  margin-right: 75px;
+  margin-left: 75px;
+  border-radius: 10px;
 }
 
 .accordion-title:hover {
@@ -1387,7 +1391,11 @@ footer {
 }
 
 .accordion-content {
-  background-color: #415A77;
+  background-color: #E0E1DD;
+  margin-right: 75px;
+  margin-left: 75px;
+  color: #000;
+  align-items: center;
 }
 .modalidad-content {
   background-color: #0D1B2A;
@@ -1831,6 +1839,15 @@ footer {
   flex-wrap: wrap;
   flex-direction: column;
   padding: 30px 20%;
+  background-color: #E0E1DD;
+  color: #000;
+  margin: 0px 150px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.tabla th{
+  font-weight: 700;
+  font-size: large;
 }
 
 .modal-confirmation {
@@ -1866,13 +1883,19 @@ footer {
 /* Div de creacion de categoria; panel admin */
 
 
+.crearCategoria{
+  background-color: #E0E1DD;
+  margin: 0px 300px;
+  color: #000;
+  border-radius: 10px;
+}
+
 .crearCategoria form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  align-items: center;
+  color: #000;
 }
 
 
@@ -1922,10 +1945,34 @@ footer {
 div.asignoCategorias {
   display: flex;
   justify-content: space-evenly;
+  margin-right: 350px;
 }
 
 div .asignoCategorias div {
   width: 20vw;
+}
+
+.asignoCategorias .tabla{
+  border-radius: 15px 15px 15px 15px;
+}
+
+.asignacionesRol h2{
+  text-shadow: 0 0 5px #fff;
+}
+
+
+/* Asignar rol */
+
+.asignacionesRol h2{
+  color: #E0E1DD;
+  font-size: larger;
+  font-weight: 700;
+}
+
+/* Contenido del div de asignacion de rol */
+
+.divContent{
+  margin: 150px;
 }
 
 /** Vista de mostrar todas las peliculas **/
@@ -2258,8 +2305,7 @@ div .asignoCategorias div {
 .sign-in-inputs {
   align-self: center;
   height: 50px;
-  width: 70%;
-  background-color: white;
+  width: 40%;
   border: 0px;
   filter: drop-shadow(0 0 1em #778DA9);
   padding-left: 40px;

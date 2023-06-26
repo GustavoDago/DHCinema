@@ -82,8 +82,10 @@ const AsignarRol = () => {
   };
 
   return (
-    <div>
-      <div>Listado Usuarios</div>
+    <div className="asignacionesRol">
+      <div>
+        <h2>Listado Usuarios</h2>
+      </div>
       {!isLoading && Array.isArray(userList) && userList.length > 0 ? (
         userList.filter(user => user.email !== sessionStorage.getItem('email')).map(user => (
           <Accordion
@@ -95,7 +97,7 @@ const AsignarRol = () => {
               </div>
             }
             content={
-              <div>
+              <div className="divContent">
                 <h4>Nombre: {user.nombre}</h4>
                 <h4>Apellido: {user.apellido}</h4>
                 <h4>Email: {user.email}</h4>
