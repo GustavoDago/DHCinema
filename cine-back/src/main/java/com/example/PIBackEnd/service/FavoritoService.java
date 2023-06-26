@@ -50,7 +50,7 @@ public class FavoritoService {
         }
     }
 
-    public FavoritoDTO actualizarFavorito(Long id) throws ResourceNotFoundException {
+    public Favorito actualizarFavorito(Long id) throws ResourceNotFoundException {
         logger.warn("Actualizando Favorito con id = " + id);
         Optional<Favorito> fav = iFavoritoRepository.findById(id);
         if(fav.isEmpty()){
@@ -62,13 +62,13 @@ public class FavoritoService {
             }else{
                 favorito.setFavorito(true);
             }
-            return convertirFavoritoaFavoritoDTO(iFavoritoRepository.save(favorito));
+            return iFavoritoRepository.save(favorito);
         }
     }
 
     public List<Favorito> buscarFavoritosPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todos los Favoritos para Usuario con email = " + email);
-        List<Favorito> favoritos = iFavoritoRepository.findAllByVigenteTrueAndFavoritoTrueAndUsuario_Email(email);
+        List<Favorito> favoritos = iFavoritoRepository.findAllByVigenteTrueAndUsuario_Email(email);
         if(!favoritos.isEmpty()){
             return favoritos;
         }else{

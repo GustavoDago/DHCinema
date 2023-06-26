@@ -24,7 +24,7 @@ public class FavoritoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FavoritoDTO> actualizarFavorito(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Favorito> actualizarFavorito(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(favoritoService.actualizarFavorito(id));
     }
 
