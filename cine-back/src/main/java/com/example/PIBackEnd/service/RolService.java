@@ -16,7 +16,8 @@ import java.util.Optional;
 @Service
 public class RolService {
 
-    private final static Logger logger = Logger.getLogger(RolService.class);
+    private static final Logger logger = Logger.getLogger(RolService.class);
+
     private IRolRepository rolesRepository;
 
     private IUsuarioRepository usuarioRepository;
@@ -41,7 +42,7 @@ public class RolService {
     public List<Rol> buscarTodosRoles() throws ResourceNoContentException {
         logger.info("Buscando todos los Roles");
         List<Rol> lista = rolesRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Roles registradas.");
@@ -63,7 +64,7 @@ public class RolService {
         logger.warn("Borrando Rol con nombre = " + nombre);
         Optional<Rol> rolBuscado = rolesRepository.findByNombreAndVigenteTrue(nombre);
         List<Usuario> usuariosConRol = usuarioRepository.findByRolesNombreAndActivoTrue(nombre);
-        if(usuariosConRol.size() < 1){
+        if(usuariosConRol.isEmpty()){
             if (rolBuscado.isPresent()){
                 rolBuscado.get().setVigente(false);
                 rolesRepository.save(rolBuscado.get());

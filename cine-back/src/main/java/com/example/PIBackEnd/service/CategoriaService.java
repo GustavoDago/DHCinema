@@ -18,8 +18,10 @@ import java.util.Set;
 @Service
 public class CategoriaService {
 
-    private final static Logger logger = Logger.getLogger(CategoriaService.class);
+    private static final Logger logger = Logger.getLogger(CategoriaService.class);
+
     private ICategoriaRepository categoriaRepository;
+
     private IPeliculaRepository peliculaRepository;
 
     @Autowired
@@ -48,7 +50,6 @@ public class CategoriaService {
         logger.info("Guardando Categoria nueva");
         Optional<Categoria> optionalCategoria = categoriaRepository.findByTituloAndVigenteTrue(categoria.getTitulo());
         if (optionalCategoria.isPresent()){
-            //throw new CategoriaExistenteException("La categoría ya existe en la base de datos");
             throw new ResourceBadRequestException("La categoría ya existe en la base de datos");
         } else {
             categoria.setVigente(true);

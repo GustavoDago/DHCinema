@@ -395,3 +395,7 @@ export const postRanking = async (rank) => {
 
     return response;
 }
+
+export const searchFunctionForId = async (id) => {
+    const url = '/funciones'
+}

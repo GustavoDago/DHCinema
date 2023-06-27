@@ -1,10 +1,8 @@
 package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Cine;
-import com.example.PIBackEnd.domain.Ciudad;
 import com.example.PIBackEnd.domain.Funcion;
 import com.example.PIBackEnd.domain.Sala;
-import com.example.PIBackEnd.dtos.CineDTO;
 import com.example.PIBackEnd.dtos.SalaDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
@@ -21,7 +19,7 @@ import java.util.Set;
 @Service
 public class SalaService {
 
-    private final static Logger logger = Logger.getLogger(SalaService.class);
+    private static final Logger logger = Logger.getLogger(SalaService.class);
 
     private ISalaRepository salaRepository;
 
@@ -58,7 +56,7 @@ public class SalaService {
     public List<Sala> buscarTodasSalas() throws ResourceNoContentException {
         logger.info("Buscando todas los Salas");
         List<Sala> lista = salaRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Salas registradas.");
@@ -106,7 +104,7 @@ public class SalaService {
         }
     }
 
-    public void eliminarSalaCascada(Long id) throws ResourceNotFoundException {
+    public void eliminarSalaCascada(Long id){
         logger.warn("Borrando Sala con id = " + id);
         Optional<Sala> salaBuscada = salaRepository.findByIdAndVigenteTrue(id);
         if (salaBuscada.isPresent()){

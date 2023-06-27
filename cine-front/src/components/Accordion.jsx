@@ -9,7 +9,7 @@ const Accordion = ({title, content, active}) => {
             setIsActive(!isActive)
             }}>
             <div>{title}</div>
-            <div>{isActive ? '-' : '+'}</div>
+            <div>{isActive ? <img src="/icons/close-accordion.svg"/> : <img src="/icons/open-accordion.svg"/>}</div>
           </div>
           {isActive && <div className="accordion-content">{content}</div>}
         </div>

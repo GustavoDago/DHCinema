@@ -16,10 +16,14 @@ import java.util.*;
 @Service
 public class PeliculaService {
 
-    private final static Logger logger = Logger.getLogger(PeliculaService.class);
+    private static final Logger logger = Logger.getLogger(PeliculaService.class);
+
     private IPeliculaRepository peliculaRepository;
+
     private CategoriaService categoriaService;
+
     private FuncionService funcionService;
+
     private IImagenRepository imagenRepository;
 
     private FavoritoService favoritoService;
@@ -155,7 +159,7 @@ public class PeliculaService {
     public List<Pelicula> buscarPeliculaPorTitulo(String parteDelTitulo) throws ResourceNotFoundException {
         logger.info("Buscando Peliculas con titulo o parte del titulo: " + parteDelTitulo);
         List<Pelicula> peliculasBuscadas = peliculaRepository.findByTituloContainingIgnoreCaseAndVigente(parteDelTitulo, true);
-        if (peliculasBuscadas.size() > 0){
+        if (!peliculasBuscadas.isEmpty()){
             return peliculasBuscadas;
         }
         else{
@@ -187,7 +191,7 @@ public class PeliculaService {
                 }
             }
         }
-        if(peliculasEncontradas.size() > 0){
+        if(!peliculasEncontradas.isEmpty()){
             return peliculasEncontradas;
         }else{
             throw new ResourceNoContentException("Error. No existen Peliculas registradas con categoria: " + titulo + ".");
@@ -197,7 +201,7 @@ public class PeliculaService {
     public List<Pelicula> buscarTodasPeliculas() throws ResourceNoContentException {
         logger.info("Buscando todas las Peliculas");
         List<Pelicula> lista = peliculaRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Peliculas registradas.");
@@ -226,5 +230,9 @@ public class PeliculaService {
 
     public Page<Pelicula> paginacion(Pageable pageable){
         return peliculaRepository.findAllByVigenteTrue(pageable);
+    }
+
+    public Page<Pelicula> paginacionPorCategoria(Pageable pageable, String titulo){
+        return peliculaRepository.findByCategoriasTitulo(titulo, pageable);
     }
 }

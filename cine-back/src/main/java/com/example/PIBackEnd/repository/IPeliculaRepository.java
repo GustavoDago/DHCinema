@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface IPeliculaRepository extends JpaRepository<Pelicula,Long> {
     Optional<Pelicula> findByTitulo(String titulo);
     List<Pelicula> findByCategoriasId(Long id);
-    //Optional<Pelicula> findByTituloAndVigente(String titulo, Boolean vigente);
+    Page<Pelicula> findByCategoriasTitulo(String titulo, Pageable pageable);
     Page<Pelicula> findAll(Pageable pageable);
     List<Pelicula> findAllByVigenteTrue();
     Page<Pelicula> findAllByVigenteTrue(Pageable pageable);

@@ -11,7 +11,4 @@ public interface ICategoriaRepository extends JpaRepository<Categoria,Long> {
     Optional<Categoria> findByTituloAndVigenteTrue(String titulo);
     List<Categoria> findAllByVigenteTrue();
     Optional<Categoria> findByIdAndVigenteTrue(Long id);
-
-    //interface IPuntajeRepository {
-    //}
 }

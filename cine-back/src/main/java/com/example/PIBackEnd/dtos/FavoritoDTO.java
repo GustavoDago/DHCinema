@@ -5,7 +5,6 @@ public class FavoritoDTO {
     private Long pelicula_id;
     private Long usuario_id;
 
-
     public Boolean chequearAtributosVacios(){
         return null == this.pelicula_id || null == this.usuario_id;
     }

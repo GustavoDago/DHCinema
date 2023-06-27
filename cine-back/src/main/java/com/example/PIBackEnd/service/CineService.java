@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class CineService {
 
-    private final static Logger logger = Logger.getLogger(CineService.class);
+    private static final Logger logger = Logger.getLogger(CineService.class);
 
     private ICineRepository cineRepository;
 
@@ -58,7 +58,7 @@ public class CineService {
     public List<Cine> buscarTodosCines() throws ResourceNoContentException {
         logger.info("Buscando todos los Cines");
         List<Cine> lista = cineRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Cines registrados.");
@@ -88,6 +88,17 @@ public class CineService {
             }else{
                 throw new ResourceNotFoundException("Error. El Cine con nombre = " + cine.getNombre() + " no existe o ya no esta vigente");
             }
+        }
+    }
+
+    public Cine buscarCinePorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando Cine con id = " + id);
+        Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
+        if (cineBuscado.isPresent()){
+            return cineBuscado.get();
+        }
+        else{
+            throw new ResourceNotFoundException("Error. No existe el Cine con id = " + id + ".");
         }
     }
 
@@ -146,6 +157,7 @@ public class CineService {
         cine.setLatitud(cineDTO.getLatitud());
         cine.setLongitud(cineDTO.getLongitud());
         cine.setVigente(true);
+        cine.setPoliticas(cineDTO.getPoliticas());
         ciudad.setId(cineDTO.getCiudad_id());
 
         cine.setCiudad(ciudad);
@@ -161,6 +173,7 @@ public class CineService {
         cineDTO.setDireccion(cine.getDireccion());
         cineDTO.setLatitud(cine.getLatitud());
         cineDTO.setLongitud(cine.getLongitud());
+        cineDTO.setPoliticas(cine.getPoliticas());
         cineDTO.setCiudad_id(cine.getCiudad().getId());
 
         return cineDTO;
