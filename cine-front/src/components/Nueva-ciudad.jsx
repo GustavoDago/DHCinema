@@ -48,7 +48,7 @@ const Nuevaciudad = () => {
     };
 
         return (
-            <div>
+            <div className='crearCiudad'>
             <h2>Crear Ciudad</h2>
             <form onSubmit={handleSubmit} className='form-crearCategoria'>
               <div>

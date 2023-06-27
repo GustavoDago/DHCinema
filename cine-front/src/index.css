@@ -998,7 +998,7 @@ footer {
   border: none;
   /* Eliminar el borde predeterminado */
   border-top: 1px solid rgb(17, 5, 83);
-  /* Establecer el color del borde superior */
+  /* Es cer el color del borde superior */
 }
 
 .movie-first-info {
@@ -1850,6 +1850,24 @@ footer {
   font-size: large;
 }
 
+.tdTitulo {
+  font-size: medium;
+  font-weight: 500;
+  background-color: #778DA9;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.tdDescripcion {
+  font-size: small;
+  font-weight: 400;
+  background-color: #778DA9;
+}
+
+.tdUrlImagen {
+  background-color: #778DA9;
+  border-radius: 0px 4px 4px 0px;
+}
+
 .modal-confirmation {
   width: 100%;
   height: 100%;
@@ -1916,13 +1934,11 @@ footer {
 
 .form-crearCategoria div input {
   background-color: #1B263B;
+  color: #E0E1DD;
   border: none;
   border-radius: 10px;
   height: 3vh;
-  /*width: 90%;
-  padding-left: 20px;
-  text-align: left;
-  margin: 10px 0px 30px 0; */
+  width: 40%;
 }
 
 .form-crearCategoria button {
@@ -1937,6 +1953,31 @@ footer {
   color: #E0E1DD;
   background-color: #415A77;
   box-shadow: 0px 1px 5px #778DA9;
+}
+
+/* Crear ciudad form */
+
+.crearCiudad .form-crearCategoria{
+  color: #000;
+}
+
+
+.form-crearCategoria{
+  display: flex;
+  flex-direction: column;
+  color: #E0E1DD;
+}
+
+.crearCiudad{
+  background-color: #E0E1DD;
+  margin-left: 75px;
+  margin-right: 75px;
+  border-radius: 15px;
+  padding-bottom: 15px;
+}
+
+.crearCiudad h2{
+  color: #000;
 }
 
 
@@ -2305,7 +2346,7 @@ div .asignoCategorias div {
 .sign-in-inputs {
   align-self: center;
   height: 50px;
-  width: 40%;
+  width: 70%;
   border: 0px;
   filter: drop-shadow(0 0 1em #778DA9);
   padding-left: 40px;
@@ -2456,6 +2497,7 @@ div .asignoCategorias div {
 
 .new-button:hover {
   background-color: #0D1B2A;
+  color: #E0E1DD;
 }
 
 /** Vista confirmacion cuenta **/
