@@ -227,4 +227,8 @@ public class PeliculaService {
     public Page<Pelicula> paginacion(Pageable pageable){
         return peliculaRepository.findAllByVigenteTrue(pageable);
     }
+
+    public Page<Pelicula> paginacionPorCategoria(Pageable pageable, String titulo){
+        return peliculaRepository.findByCategoriasTitulo(titulo, pageable);
+    }
 }

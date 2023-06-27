@@ -54,7 +54,6 @@ public class PeliculaController {
 
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<Pelicula>> buscarPeliculasPorTitulo(@PathVariable String categoria) throws ResourceNoContentException {
-        System.out.println(categoria);
         return ResponseEntity.ok(peliculaService.buscarPeliculasPorTitulo(categoria));
     }
 
@@ -65,6 +64,11 @@ public class PeliculaController {
 
     @GetMapping("/pagina/{pagina}")
     public ResponseEntity<Page<Pelicula>> paginacion(@PathVariable Integer pagina){
-        return ResponseEntity.ok(peliculaService.paginacion(PageRequest.of(pagina,10)));
+        return ResponseEntity.ok(peliculaService.paginacion(PageRequest.of(pagina,12)));
+    }
+
+    @GetMapping("/pagina/{pagina}/{titulo}")
+    public ResponseEntity<Page<Pelicula>> paginacionPorCategoria(@PathVariable Integer pagina, @PathVariable String titulo){
+        return ResponseEntity.ok(peliculaService.paginacionPorCategoria(PageRequest.of(pagina,12), titulo));
     }
 }

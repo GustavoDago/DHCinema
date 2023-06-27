@@ -16,7 +16,6 @@ public class Cine {
     @Column(nullable = false, length = 40)
     private String nombre;
 
-    //hacer tabla a parte como el paciente-direccion
     @Column(nullable = false, length = 50)
     private String direccion;
 
@@ -28,6 +27,10 @@ public class Cine {
 
     @Column
     private Boolean vigente;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "politica_id", referencedColumnName = "id")
+    private Politica politicas;
 
     @ManyToOne
     @JsonIgnore
@@ -99,5 +102,13 @@ public class Cine {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public Politica getPoliticas() {
+        return politicas;
+    }
+
+    public void setPoliticas(Politica politicas) {
+        this.politicas = politicas;
     }
 }
