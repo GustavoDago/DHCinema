@@ -16,7 +16,8 @@ import java.util.Optional;
 
 @Service
 public class FavoritoService {
-    private final static Logger logger = Logger.getLogger(FavoritoService.class);
+
+    private static final Logger logger = Logger.getLogger(FavoritoService.class);
 
     private IFavoritoRepository iFavoritoRepository;
 
@@ -57,11 +58,7 @@ public class FavoritoService {
             throw new ResourceNotFoundException("Error. No existe el Favorito con id = " + id);
         }else{
             Favorito favorito = fav.get();
-            if(favorito.getFavorito()){
-                favorito.setFavorito(false);
-            }else{
-                favorito.setFavorito(true);
-            }
+            favorito.setFavorito(!favorito.getFavorito());
             return iFavoritoRepository.save(favorito);
         }
     }
@@ -91,7 +88,6 @@ public class FavoritoService {
         Usuario usuario = new Usuario();
 
         favorito.setId(favoritoDTO.getId());
-        //favorito.setFavorito(favoritoDTO.getFavorito());
         favorito.setIdPelicula(favoritoDTO.getPelicula_id());
         favorito.setFavorito(true);
         favorito.setVigente(true);
@@ -110,7 +106,6 @@ public class FavoritoService {
         favoritoDTO.setId(favorito.getId());
         favoritoDTO.setPelicula_id(favorito.getPelicula().getId());
         favoritoDTO.setUsuario_id(favorito.getUsuario().getId());
-        //favoritoDTO.setFavorito(favorito.getFavorito());
 
         return favoritoDTO;
     }

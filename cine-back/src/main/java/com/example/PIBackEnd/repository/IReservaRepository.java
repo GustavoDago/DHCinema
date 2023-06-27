@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface IReservaRepository extends JpaRepository<Reserva, Long> {
-
     List<Reserva> findAllByUsuarioEmail(String email);
     List<Reserva> findAllByVigenteTrueAndUsuarioEmail(String email);
     List<Reserva> findAllByVigenteTrue();

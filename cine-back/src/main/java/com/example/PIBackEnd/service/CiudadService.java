@@ -16,7 +16,7 @@ import java.util.Set;
 @Service
 public class CiudadService {
 
-    private final static Logger logger = Logger.getLogger(CiudadService.class);
+    private static final Logger logger = Logger.getLogger(CiudadService.class);
 
     private ICiudadRepository ciudadRepository;
 
@@ -67,19 +67,7 @@ public class CiudadService {
     public List<Ciudad> buscarTodasCiudades() throws ResourceNoContentException {
         logger.info("Buscando todas las Ciudades");
         List<Ciudad> lista = ciudadRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
-        /*List<Ciudad> ciudades = new ArrayList<>();
-            for (Ciudad ciudad:lista) {
-                Set<Cine> cines = ciudad.getCines();
-                for (Cine cine:cines) {
-                    if(!cine.getVigente()){
-
-                    }
-                    ciudades.add(ciudad);
-                }
-            }
-
-            return ciudades;*/
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Ciudades registradas.");

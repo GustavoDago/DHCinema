@@ -4,11 +4,6 @@ public class FavoritoDTO {
     private Long id;
     private Long pelicula_id;
     private Long usuario_id;
-    //private Boolean favorito;
-
-    /*public Boolean chequearAtributosVacios(){
-        return null == this.pelicula_id || null == this.usuario_id || null == this.favorito;
-    }*/
 
     public Boolean chequearAtributosVacios(){
         return null == this.pelicula_id || null == this.usuario_id;
