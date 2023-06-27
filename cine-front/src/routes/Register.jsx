@@ -178,7 +178,7 @@ function Register() {
                     </div>
 
 
-                    <button className="new-button" type="submit">Registrarse</button>
+                    <button className="new-button">Registrarse</button>
                 </form>
             </div>
             <Modal

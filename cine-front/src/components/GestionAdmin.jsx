@@ -25,6 +25,15 @@ const GestionAdmin = () => {
     } else if(panelElement == "asignar-categoria"){
       setTitle('Asignar Categoría')
       setDescription('Aquí podrá listar todas las películas y asignarle una nueva categoría.')
+    } else if(panelElement == "asignar-rol"){
+      setTitle('Asignar Rol')
+      setDescription('Aquí podrá listar todas los roles y asignarle un nuevo rol.')
+    } else if(panelElement == "listado-ciudades"){
+      setTitle('Listar Ciudades')
+      setDescription('Aquí podrá listar, modificar y eliminar todas las ciudades.')
+    } else if(panelElement == "crear-ciudad"){
+      setTitle('Crear Ciudades')
+      setDescription('Aquí podrá crear una ciudad.')
     } 
   },[panelElement])
 
