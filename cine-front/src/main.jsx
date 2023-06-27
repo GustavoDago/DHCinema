@@ -22,6 +22,7 @@ import ReserveSection from './components/ReserveSection.jsx'
 import ListadoCiudades from './components/ListadoCiudades.jsx'
 import Nuevaciudad from './components/Nueva-ciudad.jsx'
 import DetalleCiudad from './components/DetalleCiudad.jsx'
+import Reserva from './routes/Reserva.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='categorias' element={<Categories/>} />
         <Route path='peliculas/pagina/:id' element={<ShowMore />} />
         <Route path='peliculas/:id' element={<MovieDetails />} />
+        <Route path='peliculas/reserva/:id' element={<Reserva />} />
         <Route
           path='/admin' element={<GestionAdmin />}>
           <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
