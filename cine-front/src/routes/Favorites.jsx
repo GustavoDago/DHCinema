@@ -5,7 +5,8 @@ import React, { useEffect, useState } from "react";
 const Favorites = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [Favorites, setFavorites] = useState([])
-  const url = 'http://localhost:8080/favoritos/{email}';
+  const email = sessionStorage.getItem("email");
+  const url = `http://localhost:8080/favoritos/${encodeURIComponent(email)}`;
 
   
   
