@@ -64,6 +64,9 @@ const header = () => {
           <Link to="/categorias/">
             <p>CATEGORIAS</p>
           </Link>
+          <Link to="/categorias/">
+            <p>FAVORITOS</p>
+          </Link>
         </div>
       </div>
       <div className='right-header'>
