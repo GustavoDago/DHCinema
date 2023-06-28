@@ -164,7 +164,7 @@ function AdministrationPanel() {
             const response = await newMovie(data)
             console.log(response)
             if (response == true) {
-                setErrorMessage("Se cargó la pelicula correctamente.")
+                setErrorMessage("Se cargó la película correctamente.")
                 setTimeout(() => {
                     setTitle('')
                     setDescription('')
@@ -187,14 +187,14 @@ function AdministrationPanel() {
                     setDirector('')
                 }, 2000)
             } else {
-                setErrorMessage("Error al cargar la pelicula.")
+                setErrorMessage("Error al cargar la película.")
                 setTimeout(() => {
                     setShowConfirmation(false)
                 }, 2000)
             }
         } catch (error) {
             console.log(error)
-            setErrorMessage("Error al cargar la pelicula.")
+            setErrorMessage("Error al cargar la película.")
             setTimeout(() => {
                 setShowConfirmation(false)
             }, 2000)
@@ -329,7 +329,7 @@ function AdministrationPanel() {
                                 <input
                                     className="form-title"
                                     type="text"
-                                    placeholder="Titulo de pelicula"
+                                    placeholder="Título de película"
                                     value={title}
                                     onChange={onChangeTitle}
                                 />

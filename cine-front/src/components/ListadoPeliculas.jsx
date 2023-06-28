@@ -107,13 +107,13 @@ const ListadoPeliculas = () => {
         isOpen={showModal}
         style={customStyles}
         onRequestClose={closeModal}
-        contentLabel="Confirmacion"
+        contentLabel="Confirmación"
         className="modal-confirmation"
       >
 
         
           <div className="confirmation-content">
-            {!deleted ? (<h2>Confirmacion</h2>) : ('')}
+            {!deleted ? (<h2>Confirmación</h2>) : ('')}
 
             <p>{content}</p>
             {!deleted ? (

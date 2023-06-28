@@ -171,7 +171,7 @@ function Home() {
                     isClearable={true}
                     isSearchable={true}
                     className="react-select-container"
-                    placeholder="Busque o seleccione una pelicula"
+                    placeholder="Busque o seleccione una película"
                     options={[{ value: null, label: "Sin opciones" }]} />
             )
         }
@@ -183,7 +183,7 @@ function Home() {
                     isClearable={true}
                     isSearchable={true}
                     className="react-select-container"
-                    placeholder="Busque o seleccione una pelicula"
+                    placeholder="Busque o seleccione una película"
                     options={newMovies.map(
                         (movie) => (
                             { value: movie.titulo, label: movie.titulo }
@@ -201,7 +201,7 @@ function Home() {
                     isClearable={true}
                     className="react-select-container"
                     isSearchable={true}
-                    placeholder="Busque o seleccione una pelicula"
+                    placeholder="Busque o seleccione una película"
                     options={movies.map(
                         (movie) => (
                             { value: movie.titulo, label: movie.titulo }
@@ -310,7 +310,7 @@ function Home() {
                 </div>
             </div>
             <div className="search-reserva">
-                <h2>Busca peliculas en cartelera y en tu cine preferido</h2>
+                <h2>Busca películas en cartelera y en tu cine preferido</h2>
                 <form onSubmit={handleSearch} className="search-form">
                     {!isLoading &&
                         handleMoviesSwitcher()

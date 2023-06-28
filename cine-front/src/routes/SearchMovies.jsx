@@ -206,7 +206,7 @@ function SearchMovies() {
                                 <h3>{movies[index + 1].caracteristicas.sala}</h3>
                                 <h5>Modalidad</h5>
                                 <h3>{movies[index + 1].caracteristicas.modalidad}</h3>
-                                <h5>Duracion</h5>
+                                <h5>Duración</h5>
                                 <h3>{movies[index + 1].caracteristicas.duracion}</h3>
                                 <h5>Idioma</h5>
                                 <h3>{movies[index + 1].caracteristicas.opcionesIdioma}</h3>

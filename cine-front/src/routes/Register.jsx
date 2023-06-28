@@ -29,7 +29,7 @@ const schema = yup.object({
     contraseñaConfirmacion: yup.string()
         .required('Se requiere este campo.')
         .min(6, 'La contraseña debe ser mayor a 6 caracteres.')
-        .oneOf([yup.ref('password')], 'Las contraseñas no coinciden entre si.'),
+        .oneOf([yup.ref('password')], 'Las contraseñas no coinciden entre sí.'),
 })
 
 function Register() {
