@@ -16,6 +16,7 @@ import moment from "moment/moment"
 import ModalGlobal from "../components/GlobalModal";
 import es from "date-fns/locale/es"
 import ActorsCard from "../components/MovieDetails/ActorsCard";
+import { array } from "yup";
 registerLocale('es', es)
 
 Modal.setAppElement('#root')
@@ -54,27 +55,65 @@ function MovieDetails() {
     const [pointsRank, setPointsRank] = useState(0)
     const [informationOption, setInformationOption] = useState(1)
     const [showReseña, setShowReseña] = useState(false)
-
+    const [cinemas, setCinemas] = useState([])
+    const [allFunctions, setAllFunctions] = useState([])
+    const [allCinemasNames, setAllCinemasNames] = useState([])
+    const [selectedButton, setSelectedButton] = useState(null)
+    const [allDatosObject,setAllDatosObject] = useState([])
+    const [allActivesAccordions,setAllActivesAccordions] = useState([])
+    const [activeOthers,setActiveOthers] = useState(false)
+    const [isActive,setIsActive] = useState(true)
+    const [newIndex, setNewIndex] = useState(null)
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
 
     const fetchMovieCine = async (title, cinema) => {
-        if (cinema != null && title != null) {
-            const search = await fetchSearchFunction(cinema, title)
-            if (search) {
-                setCinema(cinema);
-                setTitulo(title);
-                setSearchFunctions(search)
-                console.log(search)
-            }
-        } else if (cinema == null) {
+        if (cinema) {
             const search = await fetchCinemaForTitle(title)
             if (search) {
                 setAllCinemas(search)
-                console.log(search)
+                const names = search.map(cine => cine.nombre);
+                const filterN = names.filter(name => name !== cinema)
+                console.log(filterN)
+                setAllCinemasNames(filterN);
+                const searchFuncPromises = filterN.map(async name => {
+                    const fetchFunc = await fetchSearchFunction(name, title);
+                    if (fetchFunc) {
+                        return fetchFunc;
+                    }
+                });
+                const actives = filterN.map(name => {return false})
+                setAllActivesAccordions(actives)
+                Promise.all(searchFuncPromises).then(functions => {
+                    const filteredFunctions = functions.filter(func => func !== undefined);
+                    setAllFunctions(filteredFunctions);
+                    console.log(filteredFunctions);
+                });
             }
+        } else {
+            const search = await fetchCinemaForTitle(title)
+            if (search) {
+                setAllCinemas(search)
+                const names = search.map(cine => cine.nombre);
+                setAllCinemasNames(names);
+                const searchFuncPromises = names.map(async name => {
+                    const fetchFunc = await fetchSearchFunction(name, title);
+                    if (fetchFunc) {
+                        return fetchFunc;
+                    }
+                });
+                const actives = names.map(name => {return false})
+                setAllActivesAccordions(actives)
+                Promise.all(searchFuncPromises).then(functions => {
+                    const filteredFunctions = functions.filter(func => func !== undefined);
+                    setAllFunctions(filteredFunctions);
+                    console.log(filteredFunctions);
+                });
+            }
+
+
         }
     }
 
@@ -159,7 +198,7 @@ function MovieDetails() {
 
 
     useEffect(() => {
-        if (searchFunctions && selectedDate) {
+        if (searchFunctions && selectedDate && isActive) {
             const date = moment(selectedDate, 'DD/MM/YYYY')
             const formattedDate = date.format('YYYY-MM-DD')
             const newArray = searchFunctions.filter(func => func.fechaProyeccion == formattedDate)
@@ -179,10 +218,30 @@ function MovieDetails() {
 
             console.log(dividedData);
             setDatosObjeto(dividedData)
-        } else {
+        } else if (!searchFunctions || !selectedDate) {
             setDatosObjeto(null)
+        } else {
+            const date = moment(selectedDate, 'DD/MM/YYYY')
+            const formattedDate = date.format('YYYY-MM-DD')
+            const newArray = allFunctions[newIndex].filter(func => func.fechaProyeccion == formattedDate)
+            const dividedData = newArray.reduce((result, obj) => {
+                if (!result[obj.modalidad]) {
+                    result[obj.modalidad] = {};
+                }
+
+                if (result[obj.modalidad][obj.opcionesIdioma]) {
+                    result[obj.modalidad][obj.opcionesIdioma].push(obj);
+                } else {
+                    result[obj.modalidad][obj.opcionesIdioma] = [obj];
+                }
+
+                return result;
+            }, {});
+            console.log(dividedData);
+            setDatosObjeto(dividedData)
         }
     }, [selectedDate])
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -231,7 +290,12 @@ function MovieDetails() {
                 const movieRandom = await searchRandomMovies()
 
                 if (movieForId != false) {
-                    await fetchMovieCine(movieForId.titulo, null)
+                    if (cinemaS) {
+                        await fetchMovieCine(movieForId.titulo, cinemaS)
+                    } else {
+                        await fetchMovieCine(movieForId.titulo, null)
+                    }
+
                     console.log(movieForId)
                     setMovie(movieForId);
                     const fetchRank = await fetchRanking(params.id)
@@ -333,16 +397,16 @@ function MovieDetails() {
     const handleReservaYes = async () => {
         setContentAwait(true)
         setReserveContent(
-        <div>
-            <h5>Usted sera redirigido a la seccion de reserva</h5>
-        </div>)
+            <div>
+                <h5>Usted sera redirigido a la seccion de reserva</h5>
+            </div>)
         setTimeout(() => {
             setReserveContent('')
             setContentAwait(false)
             setShowReserve(false)
             const url = `/peliculas/reserva/${movie.id}?cine=${cinema}&funcion=${functionReserve.id}&titulo=${titulo}`
             navigate(url)
-        },3000)
+        }, 3000)
     }
 
     const handleReservaNo = () => {
@@ -351,6 +415,43 @@ function MovieDetails() {
 
     const handleCloseReserve = () => {
         setShowReserve(!showReserve)
+    }
+
+    const handleActive = (index,active) => {
+        
+        setIsActive(active)
+        if(active == true){
+            setSelectedButton(null)
+            setSelectedDate(null)
+            setSelectedTime(null)
+            setFunctionReserve(null)
+            const newActives = allActivesAccordions.map((data) => {
+                return false
+            })
+            setAllActivesAccordions(newActives)
+        }
+        console.log(isActive)
+    }
+
+    const handleAllActives = (index,active) => {
+            const newActives = allActivesAccordions.map((data,indexS) => {
+                if(indexS == index)
+                    return active
+                else return false
+            })
+            console.log(newActives)
+            setIsActive(false)
+            setSelectedButton(null)
+            setSelectedDate(null)
+            setSelectedTime(null)
+            setFunctionReserve(null)
+            setAllActivesAccordions(newActives)
+            setNewIndex(index)
+            console.log(newActives)
+    }
+
+    const handleActiveOthers = (index,active) => {
+        setActiveOthers(active)
     }
 
     return (
@@ -391,14 +492,15 @@ function MovieDetails() {
                                         <h2 className="details-titles">DETALLES</h2>
                                         <p>{movie.descripcion}</p>
                                     </div>
-                                    {cinema != null &&
+                                   
                                         <div>
                                             <h2 className="details-titles">RESERVA</h2>
                                             <div className="accordion-reserva">
 
-                                                <Accordion
+                                                {cinema != null && <Accordion
                                                     title={cinema.toUpperCase()}
-                                                    active={true}
+                                                    active={isActive}
+                                                    onChange={handleActive}
                                                     content={
                                                         <div>
                                                             <div className="reserve-datepicker">
@@ -426,13 +528,15 @@ function MovieDetails() {
                                                                                 <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
                                                                                 <div>
                                                                                     {datosObjeto[modalidad][idioma].map(obj => (
-                                                                                        <button className={selectedTime == obj.horaProyeccion ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
-                                                                                            if (selectedTime == obj.horaProyeccion) {
+                                                                                        <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                            if (selectedButton == obj.id) {
                                                                                                 setSelectedTime(null)
                                                                                                 setFunctionReserve(null)
+                                                                                                setSelectedButton(null)
                                                                                             } else {
                                                                                                 setSelectedTime(obj.horaProyeccion)
                                                                                                 setFunctionReserve(obj)
+                                                                                                setSelectedButton(obj.id)
                                                                                             }
 
                                                                                         }}>{obj.horaProyeccion}</button>
@@ -445,10 +549,72 @@ function MovieDetails() {
                                                             </div>}
                                                         </div>
                                                     }
+                                                /> }
+                                                <Accordion
+                                                    title="OTROS CINES"
+                                                    active={activeOthers}
+                                                    onChange={handleActiveOthers}
+                                                    content={
+                                                        allCinemasNames.map((cinema, index) =>
+                                                            <Accordion
+                                                                title={cinema.toUpperCase()}
+                                                                active={allActivesAccordions[index]}
+                                                                onChange={handleAllActives}
+                                                                index={index}
+                                                                content={
+                                                                    <div>
+                                                                        <div className="reserve-datepicker">
+                                                                            {Array.isArray(allFunctions) && allFunctions.length > 0 &&
+                                                                                (<DatePicker
+                                                                                    showIcon
+                                                                                    selected={selectedDate}
+                                                                                    onChange={date => setSelectedDate(date)}
+                                                                                    filterDate={date => {
+                                                                                        const formattedDate = date.toISOString().slice(0, 10)
+                                                                                        return allFunctions[index].some(func => func.fechaProyeccion == formattedDate)
+                                                                                    }}
+                                                                                    className="reserve-input-date"
+                                                                                    isClearable
+                                                                                    locale="es"
+                                                                                    placeholderText="Seleccione una fecha"
+                                                                                />)}
+
+                                                                        </div>
+                                                                        {datosObjeto != null && <div className="modalidad-content">
+                                                                            {datosObjeto != null && (
+                                                                                Object.keys(datosObjeto).map(modalidad => (
+                                                                                    Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                                        <div key={`${modalidad}-${idioma}`}>
+                                                                                            <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
+                                                                                            <div>
+                                                                                                {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                                    <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                                        if (selectedButton == obj.id) {
+                                                                                                            setSelectedTime(null)
+                                                                                                            setFunctionReserve(null)
+                                                                                                            setSelectedButton(null)
+                                                                                                        } else {
+                                                                                                            setSelectedTime(obj.horaProyeccion)
+                                                                                                            setFunctionReserve(obj)
+                                                                                                            setSelectedButton(obj.id)
+                                                                                                        }
+
+                                                                                                    }}>{obj.horaProyeccion}</button>
+                                                                                                ))}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    ))
+                                                                                ))
+                                                                            )}
+                                                                        </div>}
+                                                                    </div>
+                                                                }
+                                                            />)
+                                                    }
                                                 />
                                                 <button className="reserva-button" disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
                                             </div>
-                                        </div>}
+                                        </div>
 
                                 </div>
                             )}
@@ -753,7 +919,7 @@ function MovieDetails() {
                                             console.log(rank)
                                             console.log(allUsers)
                                             console.log(sessionStorage.getItem('id'))
-                                            const usuario = allUsers.find(user => user.id == rank.id)
+                                            const usuario = allUsers.find(user => user.id == rank.idUsuario)
                                             if (usuario) {
                                                 return <div className="rank-comment">
 
@@ -796,7 +962,7 @@ function MovieDetails() {
                 </div>
 
 
-                <div>
+                <div className="cinema-policy">
                     <h2 className="tituloPoliticas">Qué tenés que saber</h2>
                     <BloquePoliticas />
                 </div>

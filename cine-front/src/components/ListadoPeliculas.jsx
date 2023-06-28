@@ -16,7 +16,6 @@ const ListadoPeliculas = () => {
   const [movieId,setMovieId] = useState('')
   const [deleted, setDeleted] = useState(false)
   const [content, setContent] = useState('¿Estás seguro de que deseas eliminar los datos?')
-
   const params = useParams()
   const navigate = useNavigate();
 
