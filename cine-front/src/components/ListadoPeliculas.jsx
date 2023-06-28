@@ -52,16 +52,16 @@ const ListadoPeliculas = () => {
           setDeleted(true)
           const fila = document.querySelector(`tr[id="${id}"]`);
           fila.remove();
-          setContent('La pelicula fue eliminada con exito')
+          setContent('La pelicula fue eliminada con éxito')
           setTimeout(() => {
             setShowConfirmation(false)
           }, 2000);
         } else {
-          setContent('Hubo un problema a la hora de eliminar la pelicula')
+          setContent('Hubo un problema a la hora de eliminar la película')
           setShowConfirmation(false)
         }
       } catch (error) {
-        setContent('Hubo un error en la peticion a la red')
+        setContent('Hubo un error en la petición a la red')
         setShowConfirmation(false)
       }
     } else {

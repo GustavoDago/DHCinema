@@ -64,7 +64,7 @@ const header = () => {
           <Link to="/categorias/">
             <p>CATEGORIAS</p>
           </Link>
-          <Link to="/categorias/">
+          <Link to="/favoritos/">
             <p>FAVORITOS</p>
           </Link>
         </div>

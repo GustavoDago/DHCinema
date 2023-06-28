@@ -13,19 +13,19 @@ import moment from "moment/moment";
 const schema = yup.object({
     nombre: yup.string()
         .required('Se requiere un nombre.')
-        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o números.'),
     apellido: yup.string()
         .required('Se requiere un apellido.')
-        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o números.'),
     dni: yup.number()
         .required('Se requiere un DNI.')
         .min(6, 'El DNI debe ser mayor a 6 caracteres.'),
     email: yup.string()
         .required('Se requiere un email.')
-        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.'),
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email válido.'),
     confirmacionEmail: yup.string()
         .required('Se requiere este campo.')
-        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.')
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email válido.')
         .oneOf([yup.ref('email')], 'Los emails no coinciden entre si.'),
 
 })
@@ -133,13 +133,13 @@ const Reserva = () => {
                 <Stepper activeStep={activeStep} >
 
                     <Step >
-                        <StepLabel>Informacion</StepLabel>
+                        <StepLabel>Información</StepLabel>
                     </Step>
                     <Step>
                         <StepLabel>Pago</StepLabel>
                     </Step>
                     <Step>
-                        <StepLabel>Confirmacion</StepLabel>
+                        <StepLabel>Confirmación</StepLabel>
                     </Step>
 
                 </Stepper>
@@ -156,7 +156,7 @@ const Reserva = () => {
                                 <h4>{movie.titulo}</h4>
                                 <div className="reserve-text-elements">
                                     <div>
-                                        <h5>Clasificacion</h5>
+                                        <h5>Clasificación</h5>
                                         <p>{movie.caracteristicas.clasificacion}</p>
                                     </div>
                                     <div>
@@ -225,8 +225,8 @@ const Reserva = () => {
 
                         </div>
                         <div>
-                            <h3>Informacion de reserva</h3>
-                            <p className="reserve-user-information">Debe completar con la infomacion de la persona encargada de retirar la reserva. En caso de necesitar cambiar la persona permitida para retirar una vez efectuada la reserva, puede actualizarlo desde la seccion de su perfil.</p>
+                            <h3>Información de reserva</h3>
+                            <p className="reserve-user-information">Debe completar con la infomación de la persona encargada de retirar la reserva. En caso de necesitar cambiar la persona permitida para retirar una vez efectuada la reserva, puede actualizarlo desde la sección de su perfil.</p>
                             <form onSubmit={handleSubmit(onSubmit)} id="reserve-form">
                                 <div className="general-input-section">
                                     <div className="general-input-box">
@@ -297,7 +297,7 @@ const Reserva = () => {
                                             <img src="/icons/email-form.svg" />
                                             <input
                                                 className={`${errors.confirmacionEmail ? 'general-error-input' : 'general-input'}`}
-                                                placeholder="Confirmacion e-mail"
+                                                placeholder="Confirmación e-mail"
                                                 type='email'
                                                 {...register('confirmacionEmail')}
                                                 aria-invalid={errors.confirmacionEmail ? "true" : "false"}

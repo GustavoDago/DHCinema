@@ -509,9 +509,9 @@ function MovieDetails() {
                         <div className="caracteristicas-container">
                             {movie && movie.caracteristicas && informationOption == 1 && (
                                 <div className="caracteristica-item">
-                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Clasificacion: {movie.caracteristicas.clasificacion}</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Clasificación: {movie.caracteristicas.clasificacion}</span>
                                     <span> <FontAwesomeIcon icon={faClapperboard} /> Director: {movie.caracteristicas.director}</span>
-                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Duracion: {movie.caracteristicas.duracion} minutos</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Duración: {movie.caracteristicas.duracion} minutos</span>
                                     <span> <FontAwesomeIcon icon={faClapperboard} /> Tipo de pantalla: {movie.caracteristicas.modalidad}</span>
                                 </div>
                             )}

@@ -99,7 +99,7 @@ const AsignarRol = () => {
                 <h4>Nombre: {user.nombre}</h4>
                 <h4>Apellido: {user.apellido}</h4>
                 <h4>Email: {user.email}</h4>
-                <h4>Esta activo: {user.activo ? 'Usuario activado' : 'Falta confirmacion del email'}</h4>
+                <h4>Está activo: {user.activo ? 'Usuario activado' : 'Falta confirmacion del email'}</h4>
                 <label>Roles:</label>
                 {Array.isArray(user.roles) && user.roles.length > 0 && (
                   user.roles.map(rol => (

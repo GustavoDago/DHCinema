@@ -12,10 +12,10 @@ const GestionAdmin = () => {
   useEffect(() => {
     if(panelElement == "listar"){
       setTitle('Listar Películas')
-      setDescription('Aqui podra encontrar un listado de todas las películas en cartelera. Puede actualizarlas como eliminarlas.')
+      setDescription('Aqui podrá encontrar un listado de todas las películas en cartelera. Puede actualizarlas como eliminarlas.')
     } else if (panelElement == "nueva-pelicula"){
       setTitle('Agregar Nueva Pelicula')
-      setDescription('Aqui podra agregar una nueva película. Por favor proporcione el titulo, descripcion, género/s, fechas disponibles, tiempo de reproduccion, imagenes de portada, banner y de galeria')
+      setDescription('Aqui podrá agregar una nueva película. Por favor proporcione el titulo, descripcion, género/s, fechas disponibles, tiempo de reproduccion, imagenes de portada, banner y de galeria')
     } else if(panelElement == "listado-categorias"){
       setTitle('Listar Categorías')
       setDescription('Aqui podrá listar todas las categorías que se encuentran disponibles.')
