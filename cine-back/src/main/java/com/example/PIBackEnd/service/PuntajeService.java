@@ -2,25 +2,23 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.Pelicula;
 import com.example.PIBackEnd.domain.Puntaje;
-
 import com.example.PIBackEnd.domain.Usuario;
 import com.example.PIBackEnd.dtos.PuntajeDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
-
 import com.example.PIBackEnd.repository.IPeliculaRepository;
 import com.example.PIBackEnd.repository.IPuntajeRepository;
 import com.example.PIBackEnd.repository.IUsuarioRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PuntajeService {
-    private final static Logger logger = Logger.getLogger(PuntajeService.class);
+
+    private static final Logger logger = Logger.getLogger(PuntajeService.class);
 
     private IPuntajeRepository puntajeRepository;
 

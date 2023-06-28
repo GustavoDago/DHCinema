@@ -34,6 +34,8 @@ function Home() {
                 const movie = await searchMoviesForCategories('Ninguno')
                 const cinema = await fetchAllCinemas();
                 if (movie && cinema) {
+                    console.log(movie)
+                    console.log(cinema)
                     setMovies(movie)
                     setCinemas(cinema)
                     setIsLoading(false)
@@ -70,7 +72,7 @@ function Home() {
                     sala.funciones.forEach((funcion) => {
                         movies.forEach((movie) => {
                             movie.funciones.forEach((funcionMovie) => {
-                                if (funcionMovie.id === funcion.id) {
+                                if ((funcionMovie.id == funcion.id)) {
                                     setNewMovies((prevMovies) => [...prevMovies, movie]);
                                 }
                             });
@@ -171,7 +173,7 @@ function Home() {
                     isClearable={true}
                     isSearchable={true}
                     className="react-select-container"
-                    placeholder="Busque o seleccione una pelicula"
+                    placeholder="Busque o seleccione una película"
                     options={[{ value: null, label: "Sin opciones" }]} />
             )
         }
@@ -184,7 +186,9 @@ function Home() {
                     isSearchable={true}
                     className="react-select-container"
                     placeholder="Busque o seleccione una pelicula"
-                    options={newMovies.map(
+                    options={newMovies.filter((value,index) => {
+                        return newMovies.indexOf(value) === index
+                    }).map(
                         (movie) => (
                             { value: movie.titulo, label: movie.titulo }
                         )
@@ -201,7 +205,7 @@ function Home() {
                     isClearable={true}
                     className="react-select-container"
                     isSearchable={true}
-                    placeholder="Busque o seleccione una pelicula"
+                    placeholder="Busque o seleccione una película"
                     options={movies.map(
                         (movie) => (
                             { value: movie.titulo, label: movie.titulo }
@@ -223,7 +227,9 @@ function Home() {
                     placeholder="Busque o seleccione un cine"
                     value={cinemaSelected}
                     onChange={setCinemaSelected}
-                    options={newCinemas.map(
+                    options={newCinemas.filter((value,index) => {
+                        return newCinemas.indexOf(value) === index
+                    }).map(
                         (cinema) => (
                             { value: cinema.nombre, label: cinema.nombre }
                         )
@@ -310,7 +316,7 @@ function Home() {
                 </div>
             </div>
             <div className="search-reserva">
-                <h2>Busca peliculas en cartelera y en tu cine preferido</h2>
+                <h2>Busca películas en cartelera y en tu cine preferido</h2>
                 <form onSubmit={handleSearch} className="search-form">
                     {!isLoading &&
                         handleMoviesSwitcher()

@@ -15,17 +15,19 @@ const ListadoCategorias = () => {
       .then(data => setCategorias(data))
   }, [])
 
+
   const handleBorrarCategoria = (id) => {
+    if (!confirm("Confirma eliminar esta categoría?")) return
     const settings = {
       method: 'DELETE'
     };
-    fetch(url + id, settings)
+    fetch(url + "/" + id, settings)
       .then(response => {
         if (response.ok) {
 
           const fila = document.querySelector(`tr[id="${id}"]`);
           fila.remove();
-
+          alert("categoría borrada correctamente")
           return response.text();
         } else {
           throw new Error(response.text());
@@ -35,7 +37,6 @@ const ListadoCategorias = () => {
       .catch(error => console.log((error.message)))
 
   };
-
 
   return (
     <main >
@@ -62,9 +63,9 @@ const ListadoCategorias = () => {
                 Esta línea permite a futuro modificar una película
                 <td scope='row'><button ><Link key={dentista.id} to={"/Odontologos/" + dentista.id}>✍</Link> </button></td> 
                 */}
-                  {/*
-                  Esta línea permite borrar categorías
-                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)} >🚮</button></td> */}
+
+
+                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)} >🚮</button></td> 
                 </tr>
                 <tr>
                   <td colSpan='4'><hr /></td>

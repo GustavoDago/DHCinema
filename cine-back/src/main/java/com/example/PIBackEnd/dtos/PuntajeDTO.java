@@ -4,9 +4,13 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 
 public class PuntajeDTO {
     private Long id;
+
     private Long pelicula_id;
+
     private Long usuario_id;
+
     private Integer puntaje;
+
     private String valoracion;
 
     public Long getId() {

@@ -164,7 +164,7 @@ function AdministrationPanel() {
             const response = await newMovie(data)
             console.log(response)
             if (response == true) {
-                setErrorMessage("Se cargo la pelicula correctamente.")
+                setErrorMessage("Se cargó la película correctamente.")
                 setTimeout(() => {
                     setTitle('')
                     setDescription('')
@@ -187,14 +187,14 @@ function AdministrationPanel() {
                     setDirector('')
                 }, 2000)
             } else {
-                setErrorMessage("Error al cargar la pelicula.")
+                setErrorMessage("Error al cargar la película.")
                 setTimeout(() => {
                     setShowConfirmation(false)
                 }, 2000)
             }
         } catch (error) {
             console.log(error)
-            setErrorMessage("Error al cargar la pelicula.")
+            setErrorMessage("Error al cargar la película.")
             setTimeout(() => {
                 setShowConfirmation(false)
             }, 2000)
@@ -242,7 +242,7 @@ function AdministrationPanel() {
         const galleryUpload = await uploadMultipleCloudinary()
 
         if (imageUpload == false || bannerUpload == false || galleryUpload == false) {
-            setErrorMessage("Error al subir las imagenes.")
+            setErrorMessage("Error al subir las imágenes.")
             setTimeout(() => {
                 setShowConfirmation(false)
             }, 2000)
@@ -251,7 +251,7 @@ function AdministrationPanel() {
 
             setTimeout(() => {
                 if ((imageUpload == "" || null) || (bannerUpload == "" || null)) {
-                    setErrorMessage("Error al subir las imagenes.")
+                    setErrorMessage("Error al subir las imágenes.")
 
                     setMultipleUrl([])
                     setTimeout(() => {
@@ -329,7 +329,7 @@ function AdministrationPanel() {
                                 <input
                                     className="form-title"
                                     type="text"
-                                    placeholder="Titulo de pelicula"
+                                    placeholder="Título de película"
                                     value={title}
                                     onChange={onChangeTitle}
                                 />
@@ -347,11 +347,11 @@ function AdministrationPanel() {
                                         </label>
                                     ))}
                                 </div>
-                                <label>Descripcion</label>
+                                <label>Descripción</label>
                                 <input
                                     className="form-description"
                                     type="text"
-                                    placeholder="Descripcion"
+                                    placeholder="Descripción"
                                     value={description}
                                     onChange={onChangeDescription}
                                 />
@@ -419,7 +419,7 @@ function AdministrationPanel() {
                                     <label>Duración</label>
                                     <input
                                         type="text"
-                                        placeholder="Duracion"
+                                        placeholder="Duración"
                                         value={duration}
                                         onChange={onChangeDuration}
                                     />
@@ -429,7 +429,7 @@ function AdministrationPanel() {
                                     <label>Clasificación</label>
                                     <input
                                         type="text"
-                                        placeholder="Clasificacion"
+                                        placeholder="Clasificación"
                                         value={clasification}
                                         onChange={onChangeClasification}
                                     />
@@ -458,7 +458,7 @@ function AdministrationPanel() {
                             image={banner}
                             setImage={setBanner}
                         />
-                        <label>Galeria:</label>
+                        <label>Galería:</label>
                         <MultipleImageDrop
                             gallery={gallery}
                             setGallery={setGallery}

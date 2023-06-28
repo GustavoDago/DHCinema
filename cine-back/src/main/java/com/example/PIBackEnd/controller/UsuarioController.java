@@ -73,6 +73,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarTodosUsuarios());
     }
 
+    @GetMapping("/roles/{nombre}")
+    public ResponseEntity<List<Usuario>> buscarTodosUsuariosPorRol(@PathVariable String nombre) throws ResourceNoContentException {
+        return ResponseEntity.ok(usuarioService.buscarTodosUsuariosPorRol(nombre));
+    }
+
     @GetMapping("/{email}")
     public ResponseEntity<Usuario> buscarUsuario(@PathVariable String email) throws ResourceNotFoundException {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));

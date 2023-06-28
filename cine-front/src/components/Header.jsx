@@ -32,14 +32,14 @@ const header = () => {
       if (response != false) {
         navigate(`/peliculas/${response.id}`)
       } else {
-        setErrorMessage("No se pudo encontrar la pelicula o no existe.")
+        setErrorMessage("No se pudo encontrar la película o no existe.")
         setTimeout(() => {
           setShowConfirmation(false)
         }, 2000)
         return
       }
     } catch (error) {
-      setErrorMessage("Error al cargar la pelicula.")
+      setErrorMessage("Error al cargar la película.")
       setTimeout(() => {
         setShowConfirmation(false)
       }, 2000)
@@ -62,7 +62,10 @@ const header = () => {
             <p>CARTELERA</p>
           </Link>
           <Link to="/categorias/">
-            <p>CATEGORIAS</p>
+            <p>CATEGORÍAS</p>
+          </Link>
+          <Link to="/favoritos/">
+            <p>FAVORITOS</p>
           </Link>
         </div>
       </div>

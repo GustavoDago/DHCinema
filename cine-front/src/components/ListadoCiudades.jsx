@@ -17,6 +17,7 @@ const ListadoCiudades = () => {
   }, [])
 
   const handleBorrarCiudad = (id) => {
+    if (!confirm("Confirma eliminar esta ciudad?")) return
     const settings = {
       method: 'DELETE'
     };

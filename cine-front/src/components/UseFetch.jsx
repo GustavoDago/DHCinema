@@ -395,3 +395,15 @@ export const postRanking = async (rank) => {
 
     return response;
 }
+
+export const searchCategoriesMovies = async (page,categorie) => {
+    const url = `/peliculas/pagina/${page}/${categorie}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}

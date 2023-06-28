@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class CineService {
 
-    private final static Logger logger = Logger.getLogger(CineService.class);
+    private static final Logger logger = Logger.getLogger(CineService.class);
 
     private ICineRepository cineRepository;
 
@@ -58,7 +58,7 @@ public class CineService {
     public List<Cine> buscarTodosCines() throws ResourceNoContentException {
         logger.info("Buscando todos los Cines");
         List<Cine> lista = cineRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Cines registrados.");
@@ -91,6 +91,17 @@ public class CineService {
         }
     }
 
+    public Cine buscarCinePorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando Cine con id = " + id);
+        Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
+        if (cineBuscado.isPresent()){
+            return cineBuscado.get();
+        }
+        else{
+            throw new ResourceNotFoundException("Error. No existe el Cine con id = " + id + ".");
+        }
+    }
+
     public List<Cine> buscarCinesPorTituloPelicula(String titulo){
         List<Cine> lista = cineRepository.findAllByVigenteTrue();
         List<Cine> cinesNuevos = new ArrayList<>();
@@ -108,6 +119,16 @@ public class CineService {
         return cinesNuevos;
     }
 
+    public Cine buscarCinePorNombre(String nombre) throws ResourceNotFoundException {
+        logger.info("Buscando Cine con nombre = " + nombre);
+        Optional<Cine> cineBuscado = cineRepository.findByNombreAndVigenteTrue(nombre);
+        if(cineBuscado.isPresent()){
+            return cineBuscado.get();
+        }else{
+            throw new ResourceNotFoundException("Error. No existe el Cine con nombre = " + nombre + " o no esta vigente");
+        }
+    }
+
     public void eliminarCine(Long id) throws ResourceNotFoundException {
         logger.warn("Borrando Cine con id = " + id);
         Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
@@ -123,7 +144,7 @@ public class CineService {
         }
     }
 
-    public void eliminarCineCascada(Long id) throws ResourceNotFoundException {
+    public void eliminarCineCascada(Long id){
         logger.warn("Borrando Cine con id = " + id);
         Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
         if (cineBuscado.isPresent()){
@@ -146,6 +167,7 @@ public class CineService {
         cine.setLatitud(cineDTO.getLatitud());
         cine.setLongitud(cineDTO.getLongitud());
         cine.setVigente(true);
+        cine.setPoliticas(cineDTO.getPoliticas());
         ciudad.setId(cineDTO.getCiudad_id());
 
         cine.setCiudad(ciudad);
@@ -161,6 +183,7 @@ public class CineService {
         cineDTO.setDireccion(cine.getDireccion());
         cineDTO.setLatitud(cine.getLatitud());
         cineDTO.setLongitud(cine.getLongitud());
+        cineDTO.setPoliticas(cine.getPoliticas());
         cineDTO.setCiudad_id(cine.getCiudad().getId());
 
         return cineDTO;

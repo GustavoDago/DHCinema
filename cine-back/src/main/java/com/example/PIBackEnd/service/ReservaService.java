@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ReservaService {
 
-    private final static Logger logger = Logger.getLogger(ReservaService.class);
+    private static final Logger logger = Logger.getLogger(ReservaService.class);
 
     private IReservaRepository reservaRepository;
 
@@ -56,6 +55,23 @@ public class ReservaService {
         }
     }
 
+    public ReservaDTO actualizarReserva(ReservaDTO reserva) throws ResourceBadRequestException, ResourceNotFoundException {
+        logger.info("Actualizando Reserva");
+        if (reserva.chequearAtributosVacios()) {
+            throw new ResourceBadRequestException("Error. La Reserva tiene que contener todos sus campos");
+        }else{
+            Optional<Reserva> reservaBuscada = reservaRepository.findByIdAndVigenteTrue(reserva.getId());
+            if(reservaBuscada.isEmpty()){
+                throw new ResourceNotFoundException("Error. La Reserva con id = " + reserva.getId() + " no existe o ya no esta vigente");
+            }
+            ReservaDTO reservaDTOBuscada = convertirReservaaReservaDTO(reservaBuscada.get());
+            if(!(reserva.getUsuario_id().equals(reservaDTOBuscada.getUsuario_id()) && reserva.getFuncion_id().equals(reservaDTOBuscada.getFuncion_id()))){
+                throw new ResourceBadRequestException("Error. La Reserva tiene que contener el mismo Usuario y la misma Funcion");
+            }
+            return convertirReservaaReservaDTO(reservaRepository.save(convertirReservaDTOaReserva(reserva)));
+        }
+    }
+
     public Reserva buscarReservaPorId(Long id) throws ResourceNotFoundException {
         logger.info("Buscando Reserva con ID: " + id);
         Optional<Reserva> reservaBuscada = reservaRepository.findById(id);
@@ -77,10 +93,9 @@ public class ReservaService {
         }
     }
 
-    //METODO ACTUALIZAR
+    //HISTORIAL CON SOLO RESERVAS ACTIVAS
 
-    //HISTORIA 42, EDITAR METODO
-    public List<Reserva> buscarTodasReservasPorUsuario(String email) throws ResourceNoContentException {
+    /*public List<Reserva> buscarTodasReservasPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas para Usuario: " + email);
         List<Reserva> lista = reservaRepository.findAllByVigenteTrueAndUsuarioEmail(email);
         List<Reserva> nuevaLista = new ArrayList<>();
@@ -98,6 +113,23 @@ public class ReservaService {
             throw new ResourceNoContentException("Error. No existen Reservas vigentes registradas para el Usuario: " + email);
         }
         return nuevaLista;
+    }*/
+
+    //HISTORIAL CON TODAS LAS RESERVAS
+
+    public List<Reserva> buscarTodasReservasPorUsuario(String email){
+        logger.info("Buscando todas las Reservas para Usuario: " + email);
+        List<Reserva> listaAModificar = reservaRepository.findAllByVigenteTrueAndUsuarioEmail(email);
+        List<Reserva> lista = reservaRepository.findAllByUsuarioEmail(email);
+        LocalDate fechaActual = LocalDate.now();
+        LocalTime horaActual = LocalTime.now();
+        for (Reserva reserva:listaAModificar) {
+            if(!(reserva.getFechaProyeccion().isAfter(fechaActual) || (reserva.getFechaProyeccion().isEqual(fechaActual) && reserva.getHoraProyeccion().isAfter(horaActual)))){
+                reserva.setVigente(false);
+                reservaRepository.save(reserva);
+            }
+        }
+        return lista;
     }
 
     private Reserva convertirReservaDTOaReserva(ReservaDTO reservaDTO){
@@ -109,6 +141,10 @@ public class ReservaService {
         Optional<Sala> sala = salaRepository.findById(func.get().getSala().getId());
 
         reserva.setId(reservaDTO.getId());
+        reserva.setNombre(reservaDTO.getNombre());
+        reserva.setApellido(reservaDTO.getApellido());
+        reserva.setDni(reservaDTO.getDni());
+        reserva.setEmail(reservaDTO.getEmail());
         reserva.setModalidad(func.get().getModalidad());
         reserva.setFechaProyeccion(func.get().getFechaProyeccion());
         reserva.setHoraProyeccion(func.get().getHoraProyeccion());
@@ -128,6 +164,10 @@ public class ReservaService {
         ReservaDTO reservaDTO = new ReservaDTO();
 
         reservaDTO.setId(reserva.getId());
+        reservaDTO.setNombre(reserva.getNombre());
+        reservaDTO.setApellido(reserva.getApellido());
+        reservaDTO.setDni(reserva.getDni());
+        reservaDTO.setEmail(reserva.getEmail());
         reservaDTO.setUsuario_id(reserva.getUsuario().getId());
         reservaDTO.setFuncion_id(reserva.getFuncion().getId());
 
