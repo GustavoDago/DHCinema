@@ -40,10 +40,11 @@ const Reserva = () => {
     const [searchFunctions, setSearchFunctions] = useState(null)
     const [seats, setSeats] = useState(1)
     const [price, setPrice] = useState(0)
-    const [message,setMessage] = useState("Cargando la reserva")
-    const [submessage,setSubmessage] = useState("Espere un momento mientras cargamos su reserva. Por favor no refresque ni cierre la pagina.")
-    const [contentAwait,setContentAwait] = useState(true)
+    const [message, setMessage] = useState("Cargando la reserva")
+    const [submessage, setSubmessage] = useState("Espere un momento mientras cargamos su reserva. Por favor no refresque ni cierre la pagina.")
+    const [contentAwait, setContentAwait] = useState(true)
     const params = useParams()
+    const [sameUserData, setSameUserData] = useState(false);
 
 
 
@@ -230,6 +231,7 @@ const Reserva = () => {
                             <form onSubmit={handleSubmit(onSubmit)} id="reserve-form">
                                 <div className="general-input-section">
                                     <div className="general-input-box">
+
                                         <label>NOMBRE *</label>
                                         <div className="general-input-container">
                                             <img src="/icons/user-form.svg" />
@@ -239,7 +241,8 @@ const Reserva = () => {
                                                 className={` ${errors.nombre ? 'general-error-input' : 'general-input'}`}
                                                 {...register('nombre')}
                                                 aria-invalid={errors.nombre ? "true" : "false"}
-
+                                                disabled={sameUserData}
+                                                value={sameUserData ? sessionStorage.getItem('nombre') : ''}
                                             />
                                         </div>
                                         <p>{errors.nombre?.message}</p>
@@ -254,6 +257,8 @@ const Reserva = () => {
                                                 type='text'
                                                 {...register('apellido')}
                                                 aria-invalid={errors.apellido ? "true" : "false"}
+                                                disabled={sameUserData}
+                                                value={sameUserData ? sessionStorage.getItem('apellido') : ''}
                                             />
 
                                         </div>
@@ -287,6 +292,8 @@ const Reserva = () => {
                                                 type='email'
                                                 {...register('email')}
                                                 aria-invalid={errors.email ? "true" : "false"}
+                                                disabled={sameUserData}
+                                                value={sameUserData ? sessionStorage.getItem('email') : ''}
                                             />
                                         </div>
                                         <p>{errors.email?.message}</p>
@@ -301,10 +308,20 @@ const Reserva = () => {
                                                 type='email'
                                                 {...register('confirmacionEmail')}
                                                 aria-invalid={errors.confirmacionEmail ? "true" : "false"}
+                                                disabled={sameUserData}
+                                                value={sameUserData ? sessionStorage.getItem('email') : ''}
                                             />
                                         </div>
                                         <p>{errors.confirmacionEmail?.message}</p>
                                     </div>
+                                </div>
+                                <div className="checkerCopiador">
+                                        <label>Copiar datos del usuario</label>
+                                        <input
+                                            type="checkbox"
+                                            checked={sameUserData}
+                                            onChange={(e) => setSameUserData(e.target.checked)}
+                                            />
                                 </div>
                             </form>
 
@@ -366,7 +383,7 @@ const Reserva = () => {
                 </div>
             )}
 
-            {!isLoading && activeStep == 2 &&(
+            {!isLoading && activeStep == 2 && (
                 <div>
 
                 </div>

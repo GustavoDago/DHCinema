@@ -156,7 +156,9 @@ nav {
 
 }
 
-
+.checkerCopiador{
+  color: gray;
+}
 .detail-image-part img {
   height: 50%;
   align-self: center;
