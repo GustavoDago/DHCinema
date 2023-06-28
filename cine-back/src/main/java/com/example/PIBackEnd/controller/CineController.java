@@ -34,6 +34,11 @@ public class CineController {
         return ResponseEntity.ok(cineService.buscarCinePorId(id));
     }
 
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<Cine> buscarCinePorNombre(@PathVariable String nombre) throws ResourceNotFoundException {
+        return ResponseEntity.ok(cineService.buscarCinePorNombre(nombre));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCine(@PathVariable Long id) throws ResourceNotFoundException {
         cineService.eliminarCine(id);
