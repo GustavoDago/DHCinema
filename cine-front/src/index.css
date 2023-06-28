@@ -395,9 +395,6 @@ header {
 
 
 /* Perfil dropdown*/
-
-
-
 .datosDropDown h3 {
   color: #415A77;
   font-weight: 200;
@@ -409,7 +406,16 @@ header {
   margin-bottom: 10px;
 }
 
+.h1dropdown {
+  margin-left: 15px;
+  text-align: start;
+}
 
+.nombreDropdown{
+  display: flex;
+  flex-direction: row;
+
+}
 
 
 /* footer */
