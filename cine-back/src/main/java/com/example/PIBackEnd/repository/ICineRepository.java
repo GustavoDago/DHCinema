@@ -11,5 +11,4 @@ public interface ICineRepository extends JpaRepository<Cine, Long> {
     Optional<Cine> findByIdAndVigenteTrue(Long id);
     Optional<Cine> findByNombreAndVigenteTrue(String nombre);
     List<Cine> findAllByVigenteTrue();
-    Optional<Cine> findByNombre(String nombre);
 }

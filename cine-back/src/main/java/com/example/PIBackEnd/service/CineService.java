@@ -121,11 +121,11 @@ public class CineService {
 
     public Cine buscarCinePorNombre(String nombre) throws ResourceNotFoundException {
         logger.info("Buscando Cine con nombre = " + nombre);
-        Optional<Cine> cineBuscado = cineRepository.findByNombre(nombre);
+        Optional<Cine> cineBuscado = cineRepository.findByNombreAndVigenteTrue(nombre);
         if(cineBuscado.isPresent()){
             return cineBuscado.get();
         }else{
-            throw new ResourceNotFoundException("Error. No existe el Cine con nombre = " + nombre + ".");
+            throw new ResourceNotFoundException("Error. No existe el Cine con nombre = " + nombre + " o no esta vigente");
         }
     }
 
