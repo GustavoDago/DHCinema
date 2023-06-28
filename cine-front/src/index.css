@@ -3327,12 +3327,11 @@ div .asignoCategorias div {
     flex-direction: column;
     align-items: center;
   }
-
-  .caracteristica-item {
-    display: flex;
-    width: 98vw;
-    flex-direction: column;
-  }
+  /* .admin-banner{
+    margin-top: 15vh;
+  } */ 
+  /* Tocar de vuelta cuando el header este arreglado */
+  
 
   .headerContainer img {
     height: 130px;
@@ -3354,15 +3353,7 @@ div .asignoCategorias div {
     font-size: 12px;
   }
 
-  .iconosFooter {
-    justify-content: space-evenly;
-    width: 20vw;
-    flex-direction: row;
-  }
-
-  .iconosFooter a {
-    margin-right: 6px;
-  }
+  
 
   .movie-second-div {
     flex-direction: column;
@@ -3430,5 +3421,43 @@ div .asignoCategorias div {
 
   .bloquePoliticas div {
     padding: 1%;
+  }
+  .admin-links{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .admin-links a{
+    margin: 10px;
+  }
+  .caracteristica-item {
+    display: flex;
+    width: 98vw;
+    flex-direction: column;
+  }
+  .crearCategoria form div{
+    width: 25vh;
+    font-size: medium;
+  }
+  .crearCategoria form div input{
+    padding-left: 0px;
+    width: 50%;
+  }
+  .crearCategoria form button{
+    margin-bottom:2vh;
+  }
+  /* Footer */
+  footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .iconosFooter {
+    justify-content: space-evenly;
+    width: 20vw;
+    flex-direction: row;
+    margin-left: 80%;
+  }
+
+  .iconosFooter a {
+    margin-right: 6px;
   }
 }
