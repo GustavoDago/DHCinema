@@ -1485,13 +1485,9 @@ footer {
   color: #E0E1DD;
   background-color: #778DA9;
   margin-bottom: 2px;
-<<<<<<< HEAD
   margin-right: 75px;
   margin-left: 75px;
   border-radius: 10px;
-=======
-  font-weight: 500;
->>>>>>> 1300a707a4f72ed38d3510a890aad90072a75fc3
 }
 
 .accordion-title:hover {
@@ -3248,6 +3244,11 @@ div .asignoCategorias div {
 /** Tablet **/
 
 @media (min-width:425px) and (max-width:768px) {
+  .movie-container{
+    width: 86vw;
+  }
+  
+  
   .movie-second-div {
     flex-direction: column;
   }
@@ -3288,6 +3289,12 @@ div .asignoCategorias div {
     height: 10vh;
   }
 
+.billboard-section h2{
+  padding-left: 7%
+}
+  .recommended-section h2{
+  padding-left: 7%;
+}
 
 
   .movie-second-info {
