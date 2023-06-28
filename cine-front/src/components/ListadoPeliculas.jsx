@@ -3,6 +3,8 @@ import { deleteMovie } from './UseFetch'
 import { searchMoviesForCategories } from './UseFetch'
 import Modal from 'react-modal'
 import { useParams, useNavigate } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 //Genera una nabvar para elegir entre ver la lista de películas y el form de agregar película
 //Este código muestra una tabla con todas las películas, y a la derecha un botón para eliminar. 
 //También se puede agregar un botón para modificar y un form para hacer la modificación.
@@ -82,7 +84,7 @@ const ListadoPeliculas = () => {
         <table>
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">#</th>
               <th scope="col">Título</th>
             </tr>
           </thead>
@@ -96,7 +98,10 @@ const ListadoPeliculas = () => {
                 Esta línea permite a futuro modificar una película
                 <td scope='row'><button ><Link key={dentista.id} to={"/Odontologos/" + dentista.id}>✍</Link> </button></td> 
                 */}
-                <td scope='row'><button onClick={() => handleDeleteButtonClick(pelicula.id)}>🚮</button></td>
+                <td scope='row'>
+                  <button onClick={() => handleDeleteButtonClick(pelicula.id)}>
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button></td>
               </tr>
             ))}
           </tbody>
