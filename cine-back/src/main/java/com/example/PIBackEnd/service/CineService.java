@@ -119,6 +119,16 @@ public class CineService {
         return cinesNuevos;
     }
 
+    public Cine buscarCinePorNombre(String nombre) throws ResourceNotFoundException {
+        logger.info("Buscando Cine con nombre = " + nombre);
+        Optional<Cine> cineBuscado = cineRepository.findByNombreAndVigenteTrue(nombre);
+        if(cineBuscado.isPresent()){
+            return cineBuscado.get();
+        }else{
+            throw new ResourceNotFoundException("Error. No existe el Cine con nombre = " + nombre + " o no esta vigente");
+        }
+    }
+
     public void eliminarCine(Long id) throws ResourceNotFoundException {
         logger.warn("Borrando Cine con id = " + id);
         Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
@@ -134,7 +144,7 @@ public class CineService {
         }
     }
 
-    public void eliminarCineCascada(Long id) throws ResourceNotFoundException {
+    public void eliminarCineCascada(Long id){
         logger.warn("Borrando Cine con id = " + id);
         Optional<Cine> cineBuscado = cineRepository.findByIdAndVigenteTrue(id);
         if (cineBuscado.isPresent()){
