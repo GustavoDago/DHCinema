@@ -62,7 +62,7 @@ const header = () => {
             <p>CARTELERA</p>
           </Link>
           <Link to="/categorias/">
-            <p>CATEGORIAS</p>
+            <p>CATEGORÍAS</p>
           </Link>
           <Link to="/favoritos/">
             <p>FAVORITOS</p>

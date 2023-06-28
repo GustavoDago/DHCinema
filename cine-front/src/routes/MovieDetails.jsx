@@ -498,11 +498,11 @@ function MovieDetails() {
                             <h2 className="details-titles">INFORMACION GENERAL</h2>
                             <div className="movie-details-features-options">
                                 <h3 className={informationOption == 1 ? 'h3-selected' : ''}
-                                    onClick={() => setInformationOption(1)}>Informacion</h3>
+                                    onClick={() => setInformationOption(1)}>Información</h3>
                                 <h3 className={informationOption == 2 ? 'h3-selected' : ''}
                                     onClick={() => setInformationOption(2)}>Reparto</h3>
                                 <h3 className={informationOption == 3 ? 'h3-selected' : ''}
-                                    onClick={() => setInformationOption(3)}>Peliculas similares</h3>
+                                    onClick={() => setInformationOption(3)}>Películas similares</h3>
                             </div>
                             <hr></hr>
                         </div>
@@ -785,7 +785,7 @@ function MovieDetails() {
                             ) :
                                 <div className="rank-movie-container">
                                     <div className="no-rank">
-                                        <h4>Esta pelicula no posee ninguna reseña.</h4>
+                                        <h4>Esta película no posee ninguna reseña.</h4>
                                     </div>
                                     <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
                                 </div>}

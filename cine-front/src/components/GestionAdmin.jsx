@@ -14,8 +14,8 @@ const GestionAdmin = () => {
       setTitle('Listar Películas')
       setDescription('Aqui podrá encontrar un listado de todas las películas en cartelera. Puede actualizarlas como eliminarlas.')
     } else if (panelElement == "nueva-pelicula"){
-      setTitle('Agregar Nueva Pelicula')
-      setDescription('Aqui podrá agregar una nueva película. Por favor proporcione el titulo, descripcion, género/s, fechas disponibles, tiempo de reproduccion, imagenes de portada, banner y de galeria')
+      setTitle('Agregar Nueva Película')
+      setDescription('Aqui podrá agregar una nueva película. Por favor proporcione el titulo, descripción, género/s, fechas disponibles, tiempo de reproduccion, imagenes de portada, banner y de galeria')
     } else if(panelElement == "listado-categorias"){
       setTitle('Listar Categorías')
       setDescription('Aqui podrá listar todas las categorías que se encuentran disponibles.')
@@ -46,11 +46,11 @@ const GestionAdmin = () => {
         </div>
       </div>
       <div className='admin-links'>
-        <Link onClick={() => setPanelElement("listar")} to="/admin/ListadoPeliculas">LISTAR PELICULAS</Link>
-        <Link onClick={() => setPanelElement("nueva-pelicula")} to="/admin/nueva-pelicula">CARGAR PELICULA</Link>
-        <Link onClick={() => setPanelElement("listado-categorias")} to="/admin/ListadoCategorias">LISTAR CATEGORIAS</Link>
-        <Link onClick={() => setPanelElement("crear-categoria")} to="/admin/nueva-categoria">CREAR CATEGORIA</Link>
-        <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORIA</Link>
+        <Link onClick={() => setPanelElement("listar")} to="/admin/ListadoPeliculas">LISTAR PELÍCULAS</Link>
+        <Link onClick={() => setPanelElement("nueva-pelicula")} to="/admin/nueva-pelicula">CARGAR PELÍCULA</Link>
+        <Link onClick={() => setPanelElement("listado-categorias")} to="/admin/ListadoCategorias">LISTAR CATEGORÍAS</Link>
+        <Link onClick={() => setPanelElement("crear-categoria")} to="/admin/nueva-categoria">CREAR CATEGORÍA</Link>
+        <Link onClick={() => setPanelElement("asignar-categoria")} to="/admin/asignar-categoria">ASIGNAR CATEGORÍA</Link>
         <Link onClick={() => setPanelElement("asignar-rol")} to="/admin/asignar-rol">ASIGNAR ROL</Link>
         <Link onClick={() => setPanelElement("listado-ciudades")} to="/admin/ListadoCiudades">LISTAR CIUDADES</Link>
         <Link onClick={() => setPanelElement("crear-ciudad")} to="/admin/nueva-ciudad">CREAR CIUDAD</Link>

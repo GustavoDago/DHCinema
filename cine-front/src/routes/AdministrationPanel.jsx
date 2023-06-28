@@ -351,7 +351,7 @@ function AdministrationPanel() {
                                 <input
                                     className="form-description"
                                     type="text"
-                                    placeholder="Descripcion"
+                                    placeholder="Descripción"
                                     value={description}
                                     onChange={onChangeDescription}
                                 />
