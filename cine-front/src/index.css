@@ -387,9 +387,6 @@ header {
 
 
 /* Perfil dropdown*/
-
-
-
 .datosDropDown h3 {
   color: #415A77;
   font-weight: 200;
@@ -401,7 +398,16 @@ header {
   margin-bottom: 10px;
 }
 
+.h1dropdown {
+  margin-left: 15px;
+  text-align: start;
+}
 
+.nombreDropdown{
+  display: flex;
+  flex-direction: row;
+
+}
 
 
 /* footer */
@@ -1016,7 +1022,7 @@ footer {
   border: none;
   /* Eliminar el borde predeterminado */
   border-top: 1px solid rgb(17, 5, 83);
-  /* Establecer el color del borde superior */
+  /* Es cer el color del borde superior */
 }
 
 .movie-first-info {
@@ -1474,13 +1480,16 @@ footer {
 
 .accordion-title {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  color: white;
-  background-color: #1B263B;
+  color: #E0E1DD;
+  background-color: #778DA9;
   margin-bottom: 2px;
-  font-weight: 500;
+  margin-right: 75px;
+  margin-left: 75px;
+  border-radius: 10px;
 }
 
 .accordion-title:hover {
@@ -1493,7 +1502,11 @@ footer {
 }
 
 .accordion-content {
-  background-color: #415A77;
+  background-color: #E0E1DD;
+  margin-right: 75px;
+  margin-left: 75px;
+  color: #000;
+  align-items: center;
 }
 .modalidad-content {
   background-color: #0D1B2A;
@@ -2079,6 +2092,33 @@ footer {
   flex-wrap: wrap;
   flex-direction: column;
   padding: 30px 20%;
+  background-color: #E0E1DD;
+  color: #000;
+  margin: 0px 150px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.tabla th{
+  font-weight: 700;
+  font-size: large;
+}
+
+.tdTitulo {
+  font-size: medium;
+  font-weight: 500;
+  background-color: #778DA9;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.tdDescripcion {
+  font-size: small;
+  font-weight: 400;
+  background-color: #778DA9;
+}
+
+.tdUrlImagen {
+  background-color: #778DA9;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .modal-confirmation {
@@ -2114,13 +2154,19 @@ footer {
 /* Div de creacion de categoria; panel admin */
 
 
+.crearCategoria{
+  background-color: #E0E1DD;
+  margin: 0px 300px;
+  color: #000;
+  border-radius: 10px;
+}
+
 .crearCategoria form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  align-items: center;
+  color: #000;
 }
 
 
@@ -2141,13 +2187,11 @@ footer {
 
 .form-crearCategoria div input {
   background-color: #1B263B;
+  color: #E0E1DD;
   border: none;
   border-radius: 10px;
   height: 3vh;
-  /*width: 90%;
-  padding-left: 20px;
-  text-align: left;
-  margin: 10px 0px 30px 0; */
+  width: 40%;
 }
 
 .form-crearCategoria button {
@@ -2164,16 +2208,65 @@ footer {
   box-shadow: 0px 1px 5px #778DA9;
 }
 
+/* Crear ciudad form */
+
+.crearCiudad .form-crearCategoria{
+  color: #000;
+}
+
+
+.form-crearCategoria{
+  display: flex;
+  flex-direction: column;
+  color: #E0E1DD;
+}
+
+.crearCiudad{
+  background-color: #E0E1DD;
+  margin-left: 75px;
+  margin-right: 75px;
+  border-radius: 15px;
+  padding-bottom: 15px;
+}
+
+.crearCiudad h2{
+  color: #000;
+}
+
 
 
 /** vista Asignar Categorías **/
 div.asignoCategorias {
   display: flex;
   justify-content: space-evenly;
+  margin-right: 350px;
 }
 
 div .asignoCategorias div {
   width: 20vw;
+}
+
+.asignoCategorias .tabla{
+  border-radius: 15px 15px 15px 15px;
+}
+
+.asignacionesRol h2{
+  text-shadow: 0 0 5px #fff;
+}
+
+
+/* Asignar rol */
+
+.asignacionesRol h2{
+  color: #E0E1DD;
+  font-size: larger;
+  font-weight: 700;
+}
+
+/* Contenido del div de asignacion de rol */
+
+.divContent{
+  margin: 150px;
 }
 
 /** Vista de mostrar todas las peliculas **/
@@ -2507,7 +2600,6 @@ div .asignoCategorias div {
   align-self: center;
   height: 50px;
   width: 70%;
-  background-color: white;
   border: 0px;
   filter: drop-shadow(0 0 1em #778DA9);
   padding-left: 40px;
@@ -2659,6 +2751,7 @@ div .asignoCategorias div {
 
 .new-button:hover {
   background-color: #0D1B2A;
+  color: #E0E1DD;
 }
 
 /** Vista confirmacion cuenta **/
@@ -3153,6 +3246,11 @@ div .asignoCategorias div {
 /** Tablet **/
 
 @media (min-width:425px) and (max-width:768px) {
+  .movie-container{
+    width: 86vw;
+  }
+  
+  
   .movie-second-div {
     flex-direction: column;
   }
@@ -3193,6 +3291,12 @@ div .asignoCategorias div {
     height: 10vh;
   }
 
+.billboard-section h2{
+  padding-left: 7%
+}
+  .recommended-section h2{
+  padding-left: 7%;
+}
 
 
   .movie-second-info {
@@ -3225,12 +3329,11 @@ div .asignoCategorias div {
     flex-direction: column;
     align-items: center;
   }
-
-  .caracteristica-item {
-    display: flex;
-    width: 98vw;
-    flex-direction: column;
-  }
+  /* .admin-banner{
+    margin-top: 15vh;
+  } */ 
+  /* Tocar de vuelta cuando el header este arreglado */
+  
 
   .headerContainer img {
     height: 130px;
@@ -3252,15 +3355,7 @@ div .asignoCategorias div {
     font-size: 12px;
   }
 
-  .iconosFooter {
-    justify-content: space-evenly;
-    width: 20vw;
-    flex-direction: row;
-  }
-
-  .iconosFooter a {
-    margin-right: 6px;
-  }
+  
 
   .movie-second-div {
     flex-direction: column;
@@ -3328,5 +3423,43 @@ div .asignoCategorias div {
 
   .bloquePoliticas div {
     padding: 1%;
+  }
+  .admin-links{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .admin-links a{
+    margin: 10px;
+  }
+  .caracteristica-item {
+    display: flex;
+    width: 98vw;
+    flex-direction: column;
+  }
+  .crearCategoria form div{
+    width: 25vh;
+    font-size: medium;
+  }
+  .crearCategoria form div input{
+    padding-left: 0px;
+    width: 50%;
+  }
+  .crearCategoria form button{
+    margin-bottom:2vh;
+  }
+  /* Footer */
+  footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .iconosFooter {
+    justify-content: space-evenly;
+    width: 20vw;
+    flex-direction: row;
+    margin-left: 80%;
+  }
+
+  .iconosFooter a {
+    margin-right: 6px;
   }
 }

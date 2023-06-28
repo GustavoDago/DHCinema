@@ -56,9 +56,9 @@ const ListadoCategorias = () => {
               <React.Fragment key={categoria.id}>
                 <tr id={categoria.id}>
                   <th scope='row'>{categoria.id}</th>
-                  <td scope='row'>{categoria.titulo}</td>
-                  <td scope='row'>{categoria.descripcion}</td>
-                  <td scope='row'>{categoria.urlImagen}</td>
+                  <td scope='row' className='tdTitulo'>{categoria.titulo}</td>
+                  <td scope='row' className='tdDescripcion'>{categoria.descripcion}</td>
+                  <td scope='row' className='tdUrlImagen'>{categoria.urlImagen}</td>
                   {/* 
                 Esta línea permite a futuro modificar una película
                 <td scope='row'><button ><Link key={dentista.id} to={"/Odontologos/" + dentista.id}>✍</Link> </button></td> 

@@ -9,7 +9,7 @@ const footer = () => {
     const openModal = () => {
         setShowModal(true);
     };
-    const closeModal = () => {
+    const handleCloseModal = () => {
         setShowModal(false);
     };
 
@@ -32,7 +32,7 @@ const footer = () => {
                 <a target='_blank' rel="noopener noreferrer" onClick={openModal}>
                 <ShareModal
                     showConfirmation={showModal}
-                    closeModal={closeModal}
+                    closeModal={handleCloseModal}
                     shouldClose={true}
                 />
                 <FontAwesomeIcon icon={faCloudsmith} />
