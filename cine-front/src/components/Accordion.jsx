@@ -1,17 +1,20 @@
-import { useState } from "react"
 
-const Accordion = ({title, content, active}) => {
-    const [isActive,setIsActive] = useState(active)
 
+
+const Accordion = ({title, content, active, onChange,index}) => {
+    
+    
     return (
         <div className="accordion-item">
           <div className="accordion-title" onClick={() => {
-            setIsActive(!isActive)
+            
+            onChange(index,!active)
+            
             }}>
             <div>{title}</div>
-            <div>{isActive ? <img src="/icons/close-accordion.svg"/> : <img src="/icons/open-accordion.svg"/>}</div>
+            <div>{active ? <img src="/icons/close-accordion.svg"/> : <img src="/icons/open-accordion.svg"/>}</div>
           </div>
-          {isActive && <div className="accordion-content">{content}</div>}
+          {active && <div className="accordion-content">{content}</div>}
         </div>
       );
 }

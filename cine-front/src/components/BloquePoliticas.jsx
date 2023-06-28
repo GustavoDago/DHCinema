@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BloquePoliticas = () => {
+const BloquePoliticas = ({policys}) => {
   return (
     <div className='bloquePoliticas'>
         <div className='politicas1'><div>
