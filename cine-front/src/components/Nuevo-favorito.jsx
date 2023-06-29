@@ -17,7 +17,7 @@ const NuevoFavorito = (props) => {
         const response = await searchFavorite(email)
         if (Array.isArray(response) && response.length>0) {
           
-          const data = response.filter((favorite) => favorite.idPelicula == pelicula_id)
+          const data = response.filter((favorite) => favorite.pelicula_id == pelicula_id)
           if(Array.isArray(data) && data.length > 0){
             setFavoritoId(data[0].id)
             setIsFavorited(data[0].favorito)

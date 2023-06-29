@@ -96,7 +96,7 @@ public class FavoritoService {
         Usuario usuario = new Usuario();
 
         favorito.setId(favoritoDTO.getId());
-        favorito.setIdPelicula(favoritoDTO.getPelicula_id());
+
         favorito.setFavorito(true);
         favorito.setVigente(true);
         pelicula.setId(favoritoDTO.getPelicula_id());

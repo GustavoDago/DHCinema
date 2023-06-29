@@ -95,7 +95,8 @@ const Favorites = () => {
       <div className="favorites-container">
         <h2>FAVORITOS</h2>
         {!isLoading && favorites.map(favorite => {
-          const data = allMovies.filter(movie => movie.id == favorite.idPelicula)
+          console.log(favorite)
+          const data = allMovies.filter(movie => movie.id == favorite.pelicula_id)
           if (Array.isArray(data) && data.length > 0) {
             if (favorite.favorito) {
               return (
