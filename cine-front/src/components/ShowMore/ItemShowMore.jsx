@@ -27,9 +27,10 @@ function ItemShowMore({ movie }) {
                     <div className="item-show-more-description">
                         <div className="item-show-title">
                             <h4>{movie.titulo}</h4>
-                            <NuevoFavorito 
+                            {sessionStorage.getItem('id') && <NuevoFavorito 
                                 id={movie.id}
-                            />
+                            />}
+                            
                         </div>
                         
                         <div>

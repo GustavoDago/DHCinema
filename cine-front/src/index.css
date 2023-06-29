@@ -227,6 +227,9 @@ header {
   justify-content: center;
 }
 
+.dropdown-content {
+  display: none;
+}
 
 .drop-down-profile {
   position: absolute;
@@ -1512,7 +1515,7 @@ footer {
   height: 45px;
   align-self: center;
   margin-top: 5px;
-  background-color: #0D1B2A;
+  background-color: #778DA9;
 }
 
 .button-review:hover {
@@ -2269,11 +2272,16 @@ footer {
   transform: translate(-50%, -50%);
 }
 
-.confirmation-content .modal-buttons button {
-  width: 5vh;
-  height: 3vh;
+.modal-buttons button {
+  padding: 10px 20px;
   background-color: #415A77;
   margin: 0px 20px;
+}
+
+.modal-buttons button:hover{
+  color: #415A77;
+  background-color: white;
+  border: 1px solid #415A77;
 }
 
 /* Div de creacion de categoria; panel admin */
@@ -2716,11 +2724,11 @@ div .asignoCategorias div {
 
 .sign-in-first button {
   align-self: center;
-  width: 40%;
+  padding: 10px;
   background-color: #778DA9;
   border: 2px solid #0D1B2A;
   margin-top: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .sign-in-first button:hover {
@@ -2757,7 +2765,8 @@ div .asignoCategorias div {
   filter: drop-shadow(0 0 1em #778DA9);
   padding-left: 40px;
   color: #1b263b;
-  border-radius: 30px;
+  border-radius: 10px;
+  background-color: white;
 }
 
 
@@ -2895,17 +2904,17 @@ div .asignoCategorias div {
 
 .new-button {
   align-self: center;
-  width: 40%;
+  padding: 10px 40px;
   background-color: #778DA9;
   border: 2px solid #0D1B2A;
   margin-top: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .new-button:hover {
   background-color: #1B263B;
   color: #E0E1DD;
-  transform: scale(1.2)
+  
 }
 
 /** Vista confirmacion cuenta **/
@@ -4047,6 +4056,12 @@ div .asignoCategorias div {
 
   .options-buttons button {
     padding: 0px 5px;
+  }
+
+  /* Registrarse */
+  .register-seccion1{
+    flex-direction: column;
+    width: 50%;
   }
 }
 
