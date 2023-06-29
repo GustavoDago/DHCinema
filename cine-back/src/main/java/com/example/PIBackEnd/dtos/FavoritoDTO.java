@@ -1,8 +1,11 @@
 package com.example.PIBackEnd.dtos;
 
 public class FavoritoDTO {
+
     private Long id;
+
     private Long pelicula_id;
+
     private Long usuario_id;
 
     private Boolean favorito;
