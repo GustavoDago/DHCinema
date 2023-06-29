@@ -24,12 +24,12 @@ public class FavoritoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Favorito> actualizarFavorito(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<FavoritoDTO> actualizarFavorito(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(favoritoService.actualizarFavorito(id));
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<List<Favorito>> buscarFavoritosPorUsuario(@PathVariable String email) throws ResourceNoContentException{
+    public ResponseEntity<List<FavoritoDTO>> buscarFavoritosPorUsuario(@PathVariable String email) throws ResourceNoContentException{
         return ResponseEntity.ok(favoritoService.buscarFavoritosPorUsuario(email));
     }
 }
