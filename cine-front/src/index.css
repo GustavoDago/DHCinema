@@ -3339,7 +3339,10 @@ div .asignoCategorias div {
     margin-top: 15vh;
   } */ 
   /* Tocar de vuelta cuando el header este arreglado */
-  
+  .crearCiudad .new-button{ 
+    width: 30%;
+    font-size: small;
+  }
 
   .headerContainer img {
     height: 130px;
@@ -3533,7 +3536,7 @@ div .asignoCategorias div {
     flex-wrap: wrap;
     flex-direction: column;
 
-    width: 28vh;
+    width: 9;
     padding: 20px 5%;
     background-color: #eaebef;
     color: #000;
@@ -3558,6 +3561,12 @@ div .asignoCategorias div {
     width: fit-content;
     margin: 5px;
   }
+
+  /* Asignar Roles */
+  .asignacionesRol .new-button{
+    width: 30%;
+  }
+
   /* Footer */
   footer{
     display: grid;
@@ -3602,10 +3611,5 @@ div .asignoCategorias div {
     margin-right: 10%;
   }
 
-  .tabla{
-    padding: 30px 20%;
-    margin: 0;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
+  
 }

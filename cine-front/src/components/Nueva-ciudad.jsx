@@ -52,7 +52,7 @@ const Nuevaciudad = () => {
             <h2>Crear Ciudad</h2>
             <form onSubmit={handleSubmit} className='form-crearCategoria'>
               <div>
-                <label>Título : </label>
+                <label>Título:</label>
                 <input
                   className='sign-in-inputs'
                   type="text"

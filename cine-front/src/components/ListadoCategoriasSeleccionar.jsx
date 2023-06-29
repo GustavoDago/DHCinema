@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccionadas, handleCategoriasSeleccionadas }) => {
   const [Categorias, setCategorias] = useState([]);

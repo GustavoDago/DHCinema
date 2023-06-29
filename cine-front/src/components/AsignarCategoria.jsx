@@ -59,7 +59,7 @@ const AsignarCategoria = () => {
       handleCategoriasSeleccionadas={handleCategoriasSeleccionadas} /></div>
       </div>
       <hr/>
-      <button onClick={guardarCambios}>Guardar cambios</button>
+      <button className="botonAsignarCategoria" onClick={guardarCambios}>Guardar cambios</button>
       {guardado && <p>Los cambios se han guardado.</p>}
     </div>
   );

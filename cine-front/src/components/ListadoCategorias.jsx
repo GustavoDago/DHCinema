@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ListadoCategorias = () => {
 
@@ -65,7 +67,7 @@ const ListadoCategorias = () => {
                 */}
 
 
-                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)} >🚮</button></td> 
+                <td scope='row'><button onClick={() => handleBorrarCategoria(categoria.id)}><FontAwesomeIcon icon={faTimes} /></button></td> 
                 </tr>
                 <tr>
                   <td colSpan='4'><hr /></td>
