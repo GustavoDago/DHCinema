@@ -1,5 +1,8 @@
 package com.example.PIBackEnd.dtos;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class ReservaDTO {
 
     private Long id;
@@ -11,6 +14,28 @@ public class ReservaDTO {
     private String dni;
 
     private String email;
+
+    private String peliculaNombre;
+
+    private String usuarioEmail;
+
+    private LocalDate fechaProyeccion;
+
+    private LocalTime horaProyeccion;
+
+    private String cine;
+
+    private String banner;
+
+    private String portadaPelicula;
+
+    private String sala;
+
+    private String modalidad;
+
+    private String opcionesIdioma;
+
+    private Boolean vigente;
 
     private Long usuario_id;
 
@@ -74,5 +99,93 @@ public class ReservaDTO {
 
     public void setFuncion_id(Long funcion_id) {
         this.funcion_id = funcion_id;
+    }
+
+    public String getPeliculaNombre() {
+        return peliculaNombre;
+    }
+
+    public void setPeliculaNombre(String peliculaNombre) {
+        this.peliculaNombre = peliculaNombre;
+    }
+
+    public String getUsuarioEmail() {
+        return usuarioEmail;
+    }
+
+    public void setUsuarioEmail(String usuarioEmail) {
+        this.usuarioEmail = usuarioEmail;
+    }
+
+    public LocalDate getFechaProyeccion() {
+        return fechaProyeccion;
+    }
+
+    public void setFechaProyeccion(LocalDate fechaProyeccion) {
+        this.fechaProyeccion = fechaProyeccion;
+    }
+
+    public LocalTime getHoraProyeccion() {
+        return horaProyeccion;
+    }
+
+    public void setHoraProyeccion(LocalTime horaProyeccion) {
+        this.horaProyeccion = horaProyeccion;
+    }
+
+    public String getCine() {
+        return cine;
+    }
+
+    public void setCine(String cine) {
+        this.cine = cine;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public String getPortadaPelicula() {
+        return portadaPelicula;
+    }
+
+    public void setPortadaPelicula(String portadaPelicula) {
+        this.portadaPelicula = portadaPelicula;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
+    public String getOpcionesIdioma() {
+        return opcionesIdioma;
+    }
+
+    public void setOpcionesIdioma(String opcionesIdioma) {
+        this.opcionesIdioma = opcionesIdioma;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }

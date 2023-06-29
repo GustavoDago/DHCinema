@@ -1,6 +1,5 @@
 package com.example.PIBackEnd.controller;
 
-import com.example.PIBackEnd.domain.Reserva;
 import com.example.PIBackEnd.dtos.ReservaDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
@@ -30,17 +29,17 @@ public class ReservaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Reserva>> buscarTodasReservas() throws ResourceNoContentException {
+    public ResponseEntity<List<ReservaDTO>> buscarTodasReservas() throws ResourceNoContentException {
         return ResponseEntity.ok(reservaService.buscarTodasReservas());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reserva> buscarReservaPorId(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<ReservaDTO> buscarReservaPorId(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(reservaService.buscarReservaPorId(id));
     }
 
     @GetMapping("/usuario/{email}")
-    public ResponseEntity<List<Reserva>> buscarTodasReservasPorUsuario(@PathVariable String email){
+    public ResponseEntity<List<ReservaDTO>> buscarTodasReservasPorUsuario(@PathVariable String email){
         return ResponseEntity.ok(reservaService.buscarTodasReservasPorUsuario(email));
     }
 }
