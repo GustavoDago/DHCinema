@@ -23,7 +23,7 @@ public class PuntajeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Puntaje>> buscarPuntajeDePelicula(@PathVariable Long id) throws ResourceNoContentException {
+    public ResponseEntity<List<PuntajeDTO>> buscarPuntajeDePelicula(@PathVariable Long id) throws ResourceNoContentException {
         return ResponseEntity.ok(puntajeService.devolverPuntajes(id));
     }
 }
