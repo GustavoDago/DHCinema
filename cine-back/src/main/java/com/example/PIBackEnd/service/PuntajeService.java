@@ -12,6 +12,7 @@ import com.example.PIBackEnd.repository.IUsuarioRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,58 +35,69 @@ public class PuntajeService {
     }
 
     public PuntajeDTO guardarPuntaje(PuntajeDTO puntaje) throws ResourceBadRequestException {
-        Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(puntaje.getPelicula_id());
-        Optional<Usuario> usuarioBuscado = usuarioRepository.findById(puntaje.getUsuario_id());
-        boolean existePuntaje = puntajeRepository.existsByUsuarioAndPelicula(usuarioBuscado.orElse(null),
-                peliculaBuscada.orElse(null));
-
-        if(existePuntaje){
-            throw new ResourceBadRequestException("Error. El usuario ya registró reseña o puntaje");
+        if(puntaje.chequearAtributosVacios()){
+            throw new ResourceBadRequestException("Error. El Puntaje tiene que contener todos sus campos");
         }else{
-            logger.info("Guardando en tabla puntaje");
-            return convertirPuntajeaPuntajeDTO(puntajeRepository.save(convertirPuntajeDTOaPuntaje(puntaje)));
+            Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(puntaje.getPelicula_id());
+            Optional<Usuario> usuarioBuscado = usuarioRepository.findById(puntaje.getUsuario_id());
+            boolean existePuntaje = puntajeRepository.existsByUsuarioAndPelicula(usuarioBuscado.orElse(null),
+                    peliculaBuscada.orElse(null));
+
+            if(existePuntaje){
+                throw new ResourceBadRequestException("Error. El usuario ya registró reseña o puntaje");
+            }else{
+                logger.info("Guardando en tabla puntaje");
+                return convertirPuntajeaPuntajeDTO(puntajeRepository.save(convertirPuntajeDTOaPuntaje(puntaje)));
+            }
         }
     }
 
-    public List<Puntaje> devolverPuntajes(Long id) throws ResourceNoContentException {
+    public List<PuntajeDTO> devolverPuntajes(Long id) throws ResourceNoContentException {
         logger.info("Devuelvo todos los puntajes y reseñas de la película");
         Optional<Pelicula> peliculaBuscada = peliculaRepository.findById(id);
-
         if (peliculaBuscada.isEmpty()) {
             throw new ResourceNoContentException("Error. La película no existe");
         }
 
         List<Puntaje> puntajes = puntajeRepository.findAllByPelicula(peliculaBuscada.get());
-
-        if (puntajes.isEmpty()) {
+        List<PuntajeDTO> puntajesDto = new ArrayList<>();
+        if(puntajes.isEmpty()){
             throw new ResourceNoContentException("Error. La película no tiene valoraciones");
+        }else{
+            for (Puntaje puntaje:puntajes) {
+                PuntajeDTO puntajeDTOAGuardar = convertirPuntajeaPuntajeDTO(puntaje);
+                puntajesDto.add(puntajeDTOAGuardar);
+            }
         }
-
-        return puntajes;
+        return puntajesDto;
     }
 
     private Puntaje convertirPuntajeDTOaPuntaje(PuntajeDTO puntajeDTO){
         Puntaje puntaje = new Puntaje();
         Pelicula pelicula= new Pelicula();
         Usuario usuario = new Usuario();
+
         puntaje.setId(puntajeDTO.getId());
         puntaje.setPuntaje(puntajeDTO.getPuntaje());
         puntaje.setValoracion(puntajeDTO.getValoracion());
-        puntaje.setIdUsuario(puntajeDTO.getUsuario_id());
+
         pelicula.setId(puntajeDTO.getPelicula_id());
         usuario.setId(puntajeDTO.getUsuario_id());
         puntaje.setPelicula(pelicula);
         puntaje.setUsuario(usuario);
+
         return puntaje;
     }
 
     private PuntajeDTO convertirPuntajeaPuntajeDTO(Puntaje puntaje){
         PuntajeDTO puntajeDTO = new PuntajeDTO();
+
         puntajeDTO.setId(puntaje.getId());
         puntajeDTO.setPelicula_id(puntaje.getPelicula().getId());
         puntajeDTO.setUsuario_id(puntaje.getUsuario().getId());
         puntajeDTO.setPuntaje(puntaje.getPuntaje());
         puntajeDTO.setValoracion(puntaje.getValoracion());
+
         return puntajeDTO;
     }
 

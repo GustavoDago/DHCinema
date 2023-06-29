@@ -38,6 +38,12 @@ public class Reserva {
     private LocalTime horaProyeccion;
 
     @Column
+    private String cine;
+
+    @Column
+    private String portadaPelicula;
+
+    @Column
     private String sala;
 
     @Column
@@ -178,5 +184,21 @@ public class Reserva {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCine() {
+        return cine;
+    }
+
+    public void setCine(String cine) {
+        this.cine = cine;
+    }
+
+    public String getPortadaPelicula() {
+        return portadaPelicula;
+    }
+
+    public void setPortadaPelicula(String portadaPelicula) {
+        this.portadaPelicula = portadaPelicula;
     }
 }

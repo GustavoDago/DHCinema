@@ -152,6 +152,8 @@ public class ReservaService {
         reserva.setUsuarioEmail(usuario.get().getEmail());
         reserva.setPeliculaNombre(pelicula.get().getTitulo());
         reserva.setSala(sala.get().getNombre());
+        reserva.setCine(sala.get().getCine().getNombre());
+        reserva.setPortadaPelicula(pelicula.get().getPortada());
         reserva.setVigente(true);
 
         reserva.setUsuario(usuario.get());

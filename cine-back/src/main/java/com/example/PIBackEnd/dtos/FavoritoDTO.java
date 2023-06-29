@@ -32,12 +32,4 @@ public class FavoritoDTO {
     public void setUsuario_id(Long usuario_id) {
         this.usuario_id = usuario_id;
     }
-
-    /*public Boolean getFavorito() {
-        return favorito;
-    }
-
-    public void setFavorito(Boolean favorito) {
-        this.favorito = favorito;
-    }*/
 }
