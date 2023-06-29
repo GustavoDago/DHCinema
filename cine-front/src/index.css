@@ -3418,9 +3418,32 @@ div .asignoCategorias div {
 
 @media (min-width:425px) and (max-width:768px) {
   .logoHambur{
-        display: block;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
     }
-  
+
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .dropdown-content a {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  }
+  .dropdown-content a:hover {
+  color: #000;
+}
   .header-section{
     display: none;
   }
@@ -3513,14 +3536,38 @@ div .asignoCategorias div {
     height: 130px;
   }
   .logoHambur{
-        display: block;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
     }
   .header-section{
       display: none;
     }
   .divHambur{
+    position: relative;
     padding-right: 2%;
   }
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .dropdown-content a {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  }
+  .dropdown-content a:hover {
+  color: #000;
+}
   /* .admin-banner{
     margin-top: 15vh;
   } */ 

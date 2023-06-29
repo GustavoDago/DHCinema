@@ -14,6 +14,7 @@ const header = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const customStyles = {
     overlay: { zIndex: 1000 }
@@ -50,6 +51,10 @@ const header = () => {
 
   const modalClassName = showConfirmation ? 'modal-overlay' : 'modal-overlay hidden';
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header>
       <div className="headerContainer">
@@ -85,9 +90,17 @@ const header = () => {
         </div>
         <DropdownProfile />
         <div className='divHambur'>
-        <button className='logoHambur'>
+          <button className='logoHambur' onClick={handleToggle}>
           <FontAwesomeIcon icon={faBars} />
-        </button>
+          </button>
+            {isOpen && (
+            <div className="dropdown-content">
+              <Link to="/">HOME</Link>
+              <Link to="/peliculas/pagina/1">CARTELERA</Link>
+              <Link to="/categorias/">CATEGORÍAS</Link>
+              <Link to="/favoritos/">FAVORITOS</Link>
+            </div>
+          )}
         </div>
       </div>
 
