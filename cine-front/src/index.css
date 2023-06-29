@@ -3883,6 +3883,7 @@ div .asignoCategorias div {
     width: 40px;
     height: 40px;
     font-size:x-large;
+    /* margin-top: 1vh; */
   }
   .admin-div-first .categories-form{
     display: grid;
@@ -3890,10 +3891,11 @@ div .asignoCategorias div {
     height: 38vh;
     width: fit-content;
     padding-bottom: 25%;
+    margin-bottom: 5vh;
   }
   .admin-div-first .categories-form label{
     padding: 5%;
-    margin: 1vh 3vh;
+    margin:2vh 2vh;
     font-size:medium;
   }
   
