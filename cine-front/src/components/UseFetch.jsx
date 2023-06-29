@@ -54,10 +54,8 @@ export const deleteMovie = async (id) => {
         method: 'DELETE'
     })
         .then((response) => {
-            console.log(response.status)
-            if (response.status == 200)
-                return true
-            else return false
+            return true;
+
         }
 
         )
@@ -132,7 +130,7 @@ export const fetchMovieTilte = async (title) => {
 export const fetchRegisterUser = async (user) => {
     const url = "/usuarios/register"
     console.log(user)
-    const response = await fetch(`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -140,21 +138,21 @@ export const fetchRegisterUser = async (user) => {
         },
         body: JSON.stringify(user),
     }).then((response) => {
-        if (response){
+        if (response) {
             console.log(response)
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
         }
-        
+
     }).then(data => {
         console.log(data)
         return data;
     })
-    .catch((error) => {
-        console.log(error)
-        return false;
-    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
 
     return response;
 }
@@ -162,7 +160,7 @@ export const fetchRegisterUser = async (user) => {
 export const fetchLogInUser = async (user) => {
     const url = "/usuarios/login"
 
-    const response = await fetch(`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -170,7 +168,7 @@ export const fetchLogInUser = async (user) => {
         },
         body: JSON.stringify(user),
     }).then((response) => {
-        if (response.ok){
+        if (response.ok) {
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
@@ -179,10 +177,10 @@ export const fetchLogInUser = async (user) => {
         console.log(data)
         return data;
     })
-    .catch((error) => {
-        console.log(error)
-        return false;
-    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
 
     return response;
 }
@@ -191,20 +189,20 @@ export const confirmAccount = async (token) => {
     const url = `/usuarios/confirmar-cuenta?token=${token}`
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
-    .then((response) => {
-        if (response){
-            return response.text();
-        } else {
-            throw new Error('Error en la solicitud HTTP');
-        }
-    }).then(data => {
-        console.log(data)
-        return data;
-    })
-    .catch((error) => {
-        console.log(error)
-        return false;
-    })
+        .then((response) => {
+            if (response) {
+                return response.text();
+            } else {
+                throw new Error('Error en la solicitud HTTP');
+            }
+        }).then(data => {
+            console.log(data)
+            return data;
+        })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
 
     return response;
 }
@@ -226,7 +224,7 @@ export const fetchGetUsuario = async (email) => {
 }
 
 export const fetchCategorias = async () => {
-    const url='/categorias'
+    const url = '/categorias'
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
@@ -239,8 +237,8 @@ export const fetchCategorias = async () => {
     return response;
 }
 
-export const fetchUserList = async () =>{
-    const url='/usuarios'
+export const fetchUserList = async () => {
+    const url = '/usuarios'
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
@@ -252,8 +250,8 @@ export const fetchUserList = async () =>{
     return response;
 }
 
-export const fetchRolList = async () =>{
-    const url='/roles'
+export const fetchRolList = async () => {
+    const url = '/roles'
 
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
@@ -304,7 +302,7 @@ export const fetchAllFunction = async () => {
     return response;
 }
 
-export const fetchSearchFunction = async (cine,pelicula) => {
+export const fetchSearchFunction = async (cine, pelicula) => {
     const url = `/funciones/buscador?cine=${cine}&pelicula=${pelicula}`
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
@@ -328,10 +326,10 @@ export const fetchCinemaForTitle = async (titulo) => {
     return response;
 }
 
-export const fetchReserve = async (reserva) =>{
+export const fetchReserve = async (reserva) => {
     const url = '/reservas'
     console.log(JSON.stringify(reserva))
-    const response = await fetch(`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -339,7 +337,7 @@ export const fetchReserve = async (reserva) =>{
         },
         body: JSON.stringify(reserva),
     }).then((response) => {
-        if (response.ok){
+        if (response.ok) {
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
@@ -348,15 +346,15 @@ export const fetchReserve = async (reserva) =>{
         console.log(data)
         return data;
     })
-    .catch((error) => {
-        console.log(error)
-        return false;
-    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
 
     return response;
 }
 
-export const fetchRanking = async (id) =>{
+export const fetchRanking = async (id) => {
     const url = `/puntajes/${id}`
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
@@ -371,7 +369,7 @@ export const fetchRanking = async (id) =>{
 export const postRanking = async (rank) => {
     const url = '/puntajes'
     console.log(JSON.stringify(rank))
-    const response = await fetch(`${API_ENDPOINT}${url}`,{
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -379,7 +377,7 @@ export const postRanking = async (rank) => {
         },
         body: JSON.stringify(rank),
     }).then((response) => {
-        if (response.ok){
+        if (response.ok) {
             return response.text();
         } else {
             throw new Error('Error en la solicitud HTTP');
@@ -388,16 +386,65 @@ export const postRanking = async (rank) => {
         console.log(data)
         return data;
     })
-    .catch((error) => {
-        console.log(error)
-        return false;
-    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
 
     return response;
 }
 
-export const searchCategoriesMovies = async (page,categorie) => {
+export const searchCategoriesMovies = async (page, categorie) => {
     const url = `/peliculas/pagina/${page}/${categorie}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const searchFavorite = async (email) => {
+    const url = `/favoritos/${encodeURIComponent(email)}`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+        .then((response) => {
+            return response.json()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    return response;
+}
+
+export const updateFavorite = async (id, body) => {
+    const url = `/favoritos/${id}`
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    }).then((response) => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
+}
+
+export const fetchUserReserves = async (email) => {
+    const url = `/reservas/usuario/${email}`
     const response = await fetch(`${API_ENDPOINT}${url}`)
         .then((response) => {
             return response.json()

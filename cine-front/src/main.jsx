@@ -18,12 +18,12 @@ import ConfirmAccount from './routes/ConfirmAccount.jsx'
 import Categories from './routes/Categories.jsx'
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
 import AsignarRol from './components/AsignarRol.jsx'
-import ReserveSection from './components/ReserveSection.jsx'
 import ListadoCiudades from './components/ListadoCiudades.jsx'
 import Nuevaciudad from './components/Nueva-ciudad.jsx'
 import DetalleCiudad from './components/DetalleCiudad.jsx'
 import Reserva from './routes/Reserva.jsx'
 import Favorites from './routes/Favorites.jsx'
+import ReservaCuenta from './routes/ReservasCuenta.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -49,7 +49,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/Ciudades/:id' element={<DetalleCiudad />} />
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
-        <Route path='reservas' element={<ReserveSection />}/>
+        <Route path='reservas' element={<ReservaCuenta />}/>
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
       </Route>

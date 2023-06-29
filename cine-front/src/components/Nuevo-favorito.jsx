@@ -1,37 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { searchFavorite } from "./UseFetch";
 
 const NuevoFavorito = (props) => {
-  const [isFavorited, setIsFavorited] = useState(null);
+  const [isFavorited, setIsFavorited] = useState(false);
   const [favoritoId, setFavoritoId] = useState(null);
   
 
   useEffect(() => {
     const fetchFavorito = async () => {
       const pelicula_id = props.id;
-      const usuario_id = sessionStorage.getItem("id");
       const email = sessionStorage.getItem("email");
 
       try {
-        const response = await axios.get(`http://localhost:8080/favoritos/${encodeURIComponent(email)}`, {
-          params: { pelicula_id, usuario_id },
-        });
-
-        if (response.data && response.data.id) {
-          setFavoritoId(response.data.id);
-          setIsFavorited(response.data.favorito);
-        } else {
-          setFavoritoId(null);
-          setIsFavorited(false);
-        }
+        const response = await searchFavorite(email)
+        if (Array.isArray(response) && response.length>0) {
+          
+          const data = response.filter((favorite) => favorite.idPelicula == pelicula_id)
+          if(Array.isArray(data) && data.length > 0){
+            setFavoritoId(data[0].id)
+            setIsFavorited(data[0].favorito)
+          }
+        } 
       } catch (error) {
         console.error(error); // Handle the error if it occurs
       }
     };
 
     fetchFavorito();
-  }, [props.id]);
+  }, []);
 
   const handleFavorite = () => {
     const pelicula_id = props.id;
@@ -71,10 +69,8 @@ const NuevoFavorito = (props) => {
   };
 
   return (
-    <div>
-      <button onClick={handleFavorite}>
-        {isFavorited ? "Unfavorite" : "Favorite"}
-      </button>
+    <div className="favorite-button">
+      {isFavorited ? <img onClick={handleFavorite} src="/icons/new-favorite.svg" /> : <img onClick={handleFavorite} src="/icons/unfavorite.svg" />}
     </div>
   );
 };

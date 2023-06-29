@@ -269,15 +269,17 @@ header {
   transition: var(--speed) ease;
 }
 
+
 .drop-down-profile ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  justify-content: center;
   padding: 0;
 }
 
-.drop-down-profile ul li {
+.drop-down-item {
   padding: 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -292,7 +294,52 @@ header {
   cursor: pointer;
 }
 
+.drop-down-new-item .accordion-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  margin: 0;
+}
 
+
+
+.drop-down-new-item .accordion-title{
+ align-self: center;
+  background-color: transparent;
+  color: #0D1B2A;
+  margin: 0;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  padding-bottom: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.drop-down-new-item .accordion-title div{
+  margin: 0;
+}
+
+.drop-down-new-item .accordion-content{
+  background-color: transparent;
+  align-self: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.drop-down-new-item .accordion-content ul li{
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+
+.drop-down-new-item .accordion-title:hover{
+  background-color: transparent;
+}
 
 .drop-down-item a {
   text-decoration: none;
@@ -801,7 +848,6 @@ footer {
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 10px 10px 15px rgba(138, 136, 136, 0.664);
-  cursor: pointer;
   margin: 0;
 
   flex-grow: 0;
@@ -827,7 +873,8 @@ footer {
   flex-grow: 0;
 }
 
-.movie-card figure img {
+
+.opt-image{
   width: 100%;
   height: 100%;
   transition: all 1s ease-out;
@@ -838,6 +885,7 @@ footer {
   height: 100%;
   transition: all 1s ease-out;
 }
+
 
 .opt-card {
   display: flex;
@@ -1587,12 +1635,22 @@ footer {
 }
 
 
-.form-rank {
+.form-rank {position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  background-color: #1B263B;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
+  height: 50%;
   justify-content: center;
   align-items: center;
+  background-color: #415A77;
+  border-radius: 10px;
 }
 
 .form-rank p{
@@ -1609,6 +1667,7 @@ footer {
   color: #3d3f42;
   text-align: left;
   vertical-align: top;
+  border: 1px solid rgba(0, 0, 0, .3);
 }
 
 .icon-reserva {
@@ -2970,6 +3029,7 @@ div .asignoCategorias div {
   flex-direction: row;
   justify-content: center;
   margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 .reserve-template h3{
@@ -3246,7 +3306,109 @@ div .asignoCategorias div {
   color: #1b263b;
 }
 
+.complete-reserve{
+  width: 50%;
+  height: 50vh;
+  background-color: white;
+  margin-top: 50px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+}
 
+.complete-reserve h3{
+  color: #1b263b;
+  font-weight: 300;
+  text-align: center;
+}
+
+.complete-reserve p{
+  color: #0D1B2A;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+.complete-reserve-img{
+  width: 80px;
+  align-self: center;
+}
+
+/** Favorito **/
+
+.favorite-button{
+  width: 40px;
+  cursor: pointer;
+}
+
+.information-button{
+  width: 40px;
+  margin-right: 20px;
+}
+
+.item-buttons{
+  display: flex;
+}
+
+.favorites-box{
+  display: flex;
+  flex-direction: column;
+  
+  width: 100%;
+}
+
+.favorites-container{
+  background-color: #1B263B;
+  padding: 20px;
+  margin: 20px 0;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+}
+
+.favorites-container .reserve-information{
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.favorites-container .reserve-information-text{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.favorites-container .reserve-information-text h4{
+  margin-right: 20px;
+}
+
+.favorites-container .reserve-information-text img{
+  width: 30px;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.favorites-information{
+  width: 80%;
+}
+
+/** Listar reservas **/
+
+.reserve-user{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.amount-reserves{
+  background-color: white;
+  color: #0D1B2A;
+  display: flex;
+  flex-direction: column;
+}
 
 /** Tablet **/
 
