@@ -191,9 +191,12 @@ header {
 }
 
 
-.logoHambur{
+
+
+.logoHambur {
   display: none;
 }
+
 .account-container {
   position: relative;
   padding-right: 30px;
@@ -235,6 +238,7 @@ header {
   width: 200px;
   color: #1B263B;
   font-weight: 500;
+  z-index: 1000;
 }
 
 .drop-down-profile ul a li {
@@ -395,9 +399,7 @@ header {
   width: auto;
 }
 
-.right-header div {
-  margin-right: 30px;
-}
+
 
 .error-message-header {
   width: 200px;
@@ -700,10 +702,6 @@ footer {
   color: white;
   margin: 0;
   font-size: 2em;
-}
-
-.card figure h4{
-
 }
 
 .card figure div h3 {
@@ -1526,18 +1524,18 @@ footer {
 /* Bloque de Politicas */
 .tituloPoliticas {
   color: #61635d;
-    font-weight: 100;
-    border-left: 8px solid #1b263b;
-    padding-left: 10px;
-    text-align: left;
-    margin-left: 40px;
+  font-weight: 100;
+  border-left: 8px solid #1b263b;
+  padding-left: 10px;
+  text-align: left;
+  margin-left: 40px;
 }
 
-.cinema-policy{
+.cinema-policy {
   margin-bottom: 10px;
 }
 
-.cinema-policy .accordion-title{
+.cinema-policy .accordion-title {
   background-color: #0D1B2A;
   margin-bottom: 5px;
 }
@@ -2533,7 +2531,7 @@ div .asignoCategorias div {
   margin: 10px 20px;
 }
 
-.show-more .search-form{
+.show-more .search-form {
   margin: 40px 0;
 }
 
@@ -2548,26 +2546,26 @@ div .asignoCategorias div {
   border-radius: 30px;
 }
 
-.item-show-more-description p{
+.item-show-more-description p {
   font-size: 15px;
   font-weight: 500;
   margin: 0;
 }
 
-.item-show-more-description img{
+.item-show-more-description img {
   width: 30px;
   margin: 0;
 }
 
-.item-show-more .favorite-button{
+.item-show-more .favorite-button {
   width: fit-content;
 }
 
-.item-show-tile{
+.item-show-tile {
   justify-content: center;
 }
 
-.item-show-more-description div{
+.item-show-more-description div {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -2575,7 +2573,7 @@ div .asignoCategorias div {
   width: 100%;
 }
 
-.clasificacion{
+.clasificacion {
   border: 2px solid black;
   padding: 5px;
 }
@@ -2658,7 +2656,7 @@ div .asignoCategorias div {
 .options-buttons button {
   height: auto;
   padding: 0;
-  
+
   border: none;
   padding: 0px 10px;
   display: flex;
@@ -3224,7 +3222,7 @@ div .asignoCategorias div {
 
 }
 
-.update-reserve button{
+.update-reserve button {
   padding: 10px 20px;
   margin-bottom: 20px;
   background-color: #778DA9;
@@ -3511,13 +3509,13 @@ div .asignoCategorias div {
   scroll-behavior: smooth;
   width: 90vw;
   align-self: center;
- 
+
   margin-top: 20px;
 }
 
 .ticket-container {
   color: #0000;
-  width:350px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3739,114 +3737,121 @@ div .asignoCategorias div {
 /** Tablet **/
 
 @media (min-width:425px) and (max-width:768px) {
-  .logoHambur{
+  .logoHambur {
     display: block;
     background: none;
     border: none;
     cursor: pointer;
-    }
+    margin-right: 20px;
+  }
+
+  .logoHambur img {
+    width: 15px;
+  }
 
   .dropdown-content {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #1B263B;
     border-top: none;
     display: flex;
     flex-direction: column;
+    border-top: 1px solid black;
   }
+
   .dropdown-content a {
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #333;
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
   }
+
   .dropdown-content a:hover {
-  color: #000;
-}
-  .header-section{
+    color: #000;
+  }
+
+  .header-section {
     display: none;
   }
 
 
-  
+
   .movie-container {
     width: 86vw;
   }
 
-  .movie-first-info{
+  .movie-first-info {
     left: 10%;
     top: 50%;
   }
 
- .general-input-section{
+  .general-input-section {
     flex-direction: column;
-    
+
     align-items: center;
   }
 
-  .general-input{
+  .general-input {
     width: 30vh;
   }
 
-  .movie-second-info{
+  .movie-second-info {
     flex-direction: column;
     padding: 0;
     align-items: center;
   }
 
-  .movie-details-description{
+  .movie-details-description {
     margin: 0;
     width: 80vw;
     margin-top: 30px;
   }
 
-  .reserve-modal{
+  .reserve-modal {
     font-size: 90%;
   }
 
-  .movie-details-related{
+  .movie-details-related {
     width: 90%;
     border: none;
   }
 
-  .movie-details-map-ranking{
+  .movie-details-map-ranking {
     flex-direction: column-reverse;
     align-items: center;
   }
 
-  .rank-comment-container{
+  .rank-comment-container {
     height: 200px;
   }
 
-  .map-container{
+  .map-container {
     width: 90%;
   }
 
-  .rank-container{
+  .rank-container {
     width: 90%;
   }
 
-  .image-details{
+  .image-details {
     height: 30vh;
   }
 
-  .movie-details-title h1{
+  .movie-details-title h1 {
     font-size: 30px;
     margin-right: 10px;
   }
 
-  .play-icon{
+  .play-icon {
     width: 15%;
   }
 
-  .no-mostrar{
+  .no-mostrar {
     display: none;
   }
 
-  .banner-video{
+  .banner-video {
     background-position: left calc((73vw - 170px) - 340px) top;
   }
 
@@ -3854,7 +3859,7 @@ div .asignoCategorias div {
     flex-direction: column;
   }
 
-  
+
 
   .movie-second-div .image-details {
     width: 100%;
@@ -3921,117 +3926,126 @@ div .asignoCategorias div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  .admin-links a{
+
+  .admin-links a {
     padding-top: 3vh;
     margin: 1vh;
   }
+
   /* Listar Peliculas */
-  .listadoPeliculas .tabla{
+  .listadoPeliculas .tabla {
     padding: 30px 8%;
   }
 
   /*Cargar Pelicula */
-  .admin-form .admin-div{
+  .admin-form .admin-div {
     display: flex;
     flex-direction: column;
   }
-  .admin-div label{
+
+  .admin-div label {
     font-size: large;
   }
-  .admin-div-first .categories-form{
+
+  .admin-div-first .categories-form {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin-bottom: 20vh;
     margin-top: 2vh;
   }
-  .categories-form label{
+
+  .categories-form label {
     margin: 5px 50px 5px 0px;
     font-size: medium;
   }
-  
+
   .date-center {
     text-align: left;
     margin: 5px 0px 20px 0px;
   }
-  
-  .admin-div-last{
+
+  .admin-div-last {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
     width: fit-content;
   }
-  .admin-div-last div{
-    margin:0% 50% 0% 0%;
+
+  .admin-div-last div {
+    margin: 0% 50% 0% 0%;
   }
-  
+
   /* Listar Categorias */
   main .tabla {
     width: fit-content;
     padding: 30px 10%;
   }
-  
+
 
   /* Crear Categoria */
   .crearCategoria {
     width: 80%;
     margin: 0px 0px 0px 10%;
   }
-  .crearCategoria .form-crearCategoria button{
+
+  .crearCategoria .form-crearCategoria button {
     margin-bottom: 25px;
   }
-  
-  
-  
+
+
+
   /* Asignar Categoria */
-  .botonAsignarCategoria{
+  .botonAsignarCategoria {
     align-self: center;
     background-color: white;
     color: #1B263B;
     margin-top: 10px;
     margin-bottom: 20px;
   }
-  
+
   /* Asignar Rol: no hace falta hacer cambios */
-  
+
   /* Listar Ciudades */
-  .listadoCiudades .tabla{
+  .listadoCiudades .tabla {
     width: 25vh;
     border-radius: 15px 15px 15px 15px;
   }
+
   /*  Crear Ciudad*/
-  .crearCiudad .new-button{
+  .crearCiudad .new-button {
     width: 20%;
   }
+
   /* Reserva */
 
-  .reserve-template{
+  .reserve-template {
     flex-direction: column;
   }
 
-  .reserve-first-information{
+  .reserve-first-information {
     width: 70%;
     align-self: center;
     margin: 0;
   }
 
-  .reserve-information{
+  .reserve-information {
     font-size: 80%;
   }
 
-  .reserve-second-information{
+  .reserve-second-information {
     width: 65%;
     align-self: center;
     margin-top: 20px;
   }
- 
+
   /* Cartelera */
 
-  .item-show-more{
-   width: 46vw;
-   font-size: 80%;
+  .item-show-more {
+    width: 46vw;
+    font-size: 80%;
   }
 
-  .options-buttons button{
+  .options-buttons button {
     padding: 0px 5px;
   }
 }
@@ -4042,69 +4056,78 @@ div .asignoCategorias div {
 
   /* Header */
   header {
-    display: block;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    height: 130px;
+    justify-content: space-between;
+    height: 80px;
   }
-  .logoHambur{
+
+  .logoHambur {
     display: block;
     background: none;
     border: none;
     cursor: pointer;
-    }
-  .header-section{
-      display: none;
-    }
-  .divHambur{
-    position: relative;
-    padding-right: 2%;
+    margin: 0 20px;
   }
+
+  .logoHambur img {
+    width: 15px;
+  }
+
+  .header-section {
+    display: none;
+  }
+
+  
+
   .dropdown-content {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #1B263B;
     border-top: none;
     display: flex;
     flex-direction: column;
+    border-top: 1px solid black;
   }
+
   .dropdown-content a {
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #333;
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
   }
+
   .dropdown-content a:hover {
-  color: #000;
-}
+    color: #000;
+  }
+
   /* .admin-banner{
     margin-top: 15vh;
   } */
   /* Tocar de vuelta cuando el header este arreglado */
-  
+
   /* funcionalidad de logo hambur */
-  
+
   /* -----------------------------*/
-  .headerContainer{
+  .headerContainer {
     position: initial;
   }
 
-  .search-bar{
+  .search-bar {
     padding: 0;
     width: 225px;
     padding-left: 3%;
   }
 
-  .account-trigger div{
+  .account-trigger div {
     width: 32px;
     height: 30px;
-    
+
   }
-  
-  .crearCiudad .new-button{ 
+
+  .crearCiudad .new-button {
     width: 30%;
     font-size: small;
   }
@@ -4112,7 +4135,7 @@ div .asignoCategorias div {
   .headerContainer img {
     height: 70px;
     width: 100px;
-    
+
   }
 
   .headerUsuario {
@@ -4130,85 +4153,83 @@ div .asignoCategorias div {
     font-size: 12px;
   }
 
-  div.admin-details{
+  div.admin-details {
     margin-top: 60px;
   }
 
 
-  .admin-details h1{
+  .admin-details h1 {
     padding: 0;
     font-size: large;
     padding-left: 5%;
   }
 
-  .admin-details h2{
+  .admin-details h2 {
     width: 90%;
     font-size: small;
   }
 
-  .right-header div{
-    margin-right: 1%;
-    padding-left: 2%;
-  }
+ 
 
-  .right-header div .account-container{
+  .right-header div .account-container {
     margin-right: 0;
     margin-left: 5px;
   }
 
-  .account-container{
+  .account-container {
     padding-right: 0;
   }
 
-  div.account-container{
+  div.account-container {
     padding-left: 4%;
   }
 
   /* Home */
 
-  .carousel-section{
+  .carousel-section {
     height: 40vh;
   }
 
-  .card{
+  .card {
     width: 90%;
     height: 60%;
-    
+
   }
 
-  .card figure{
+  .card figure {
     height: 30vh;
 
   }
 
-  .card figure div h4{
+  .card figure div h4 {
     font-size: 10px;
     margin: 0 0 5px 0;
   }
-  .card figure div h3{
+
+  .card figure div h3 {
     font-size: 12px;
   }
 
-  .card figure div h1{
+  .card figure div h1 {
     margin: 0;
     font-size: 15px;
   }
 
-  .card figure div button{
+  .card figure div button {
     padding: 5px 10px;
     text-align: center;
-    
+
     margin: 5px;
     font-size: 6px;
   }
 
-  .search-form{
+  .search-form {
     flex-direction: column;
     justify-content: space-between;
     height: 15vh;
   }
 
-  
+
 
   /* Contenido principal */
 
@@ -4216,32 +4237,33 @@ div .asignoCategorias div {
     flex-direction: column;
   }
 
-  .banner-video{
+  .banner-video {
     background-position: left calc((120vw - 170px) - 340px) bottom;
     background-size: cover;
   }
 
-  .movie-first-info-details img{
+  .movie-first-info-details img {
     width: 30%;
   }
 
-  .movie-first-info{
+  .movie-first-info {
     left: 10%;
     top: 50%;
   }
 
-  .movie-second-info{
+  .movie-second-info {
     flex-direction: column;
     padding: 0;
     align-items: center;
     width: 100%;
   }
 
-  .movie-details-related{
+  .movie-details-related {
     width: 90%;
     border: none;
   }
-  .movie-details-description{
+
+  .movie-details-description {
     margin: 0;
     width: 80vw;
     margin-top: 30px;
@@ -4257,15 +4279,16 @@ div .asignoCategorias div {
 
   }
 
-  .play-icon{
+  .play-icon {
     width: 15%;
   }
+
   .bloquePoliticas {
     display: inline;
   }
 
 
-  .no-mostrar{
+  .no-mostrar {
     display: none;
   }
 
@@ -4306,7 +4329,7 @@ div .asignoCategorias div {
     width: 60vw;
   }
 
-  .banner-video{
+  .banner-video {
     height: 30vh;
   }
 
@@ -4414,8 +4437,8 @@ div .asignoCategorias div {
 
   .admin-div-first .categories-form label {
     padding: 5%;
-    margin:2vh 2vh;
-    font-size:medium;
+    margin: 2vh 2vh;
+    font-size: medium;
   }
 
   .admin-div-last {
@@ -4466,7 +4489,7 @@ div .asignoCategorias div {
   }
 
   /* Asignar Roles */
-  .asignacionesRol .new-button{
+  .asignacionesRol .new-button {
     width: 30%;
   }
 
@@ -4523,64 +4546,64 @@ div .asignoCategorias div {
   }
 
   /* Reserva */
-  .general-input-section{
+  .general-input-section {
     flex-direction: column;
-    
+
     align-items: center;
   }
 
-  .general-input{
+  .general-input {
     width: 14vh;
   }
 
-  .reserve-modal{
+  .reserve-modal {
     font-size: 60%;
     height: 40%;
     width: 80vw;
   }
 
-  .reserve-template{
+  .reserve-template {
     flex-direction: column;
   }
 
-  .reserve-first-information{
+  .reserve-first-information {
     width: 70%;
     align-self: center;
     margin: 0;
   }
 
-  .reserve-information{
+  .reserve-information {
     font-size: 70%;
   }
 
-  
-  
-  .reserve-text-elements{
+
+
+  .reserve-text-elements {
     flex-direction: column;
   }
 
-  .reserve-text-elements p{
+  .reserve-text-elements p {
     margin: 0;
     margin-bottom: 10px;
   }
 
-  .reserve-text-elements h5{
+  .reserve-text-elements h5 {
     margin: 0;
   }
 
-  .reserve-second-information{
+  .reserve-second-information {
     width: 65%;
     align-self: center;
     margin-top: 20px;
   }
 
   /* Cartelera */
-  .item-show-more{
+  .item-show-more {
     width: 90vw;
     font-size: 80%;
-   }
- 
-   .options-buttons button{
-     padding: 0px 5px;
-   }
+  }
+
+  .options-buttons button {
+    padding: 0px 5px;
+  }
 }

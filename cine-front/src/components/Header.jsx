@@ -77,28 +77,18 @@ const header = () => {
         </div>
       </div>
       <div className='right-header'>
-        <div className="search-movie">
-          <form onSubmit={handleSearch} className='search-bar'>
-            <input
-              
-              type="text"
-              placeholder="Buscar películas..."
-              value={searchTerm}
-              onChange={handleInputChange} />
-            <button type='submit'><img src='/icons/search.svg' /></button>
-          </form>
-        </div>
+        
         <DropdownProfile />
         <div className='divHambur'>
           <button className='logoHambur' onClick={handleToggle}>
-          <FontAwesomeIcon icon={faBars} />
+          {!isOpen ? <FontAwesomeIcon icon={faBars} />: <img src='/icons/close.svg'/> }
           </button>
             {isOpen && (
             <div className="dropdown-content">
               <Link to="/">HOME</Link>
               <Link to="/peliculas/pagina/1">CARTELERA</Link>
-              <Link to="/categorias/">CATEGORÍAS</Link>
-              <Link to="/favoritos/">FAVORITOS</Link>
+              <Link to="/reservas">RESERVAS</Link>
+              <Link to="/favoritos">FAVORITOS</Link>
             </div>
           )}
         </div>
