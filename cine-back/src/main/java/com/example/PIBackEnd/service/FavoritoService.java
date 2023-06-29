@@ -2,6 +2,7 @@ package com.example.PIBackEnd.service;
 
 import com.example.PIBackEnd.domain.*;
 import com.example.PIBackEnd.dtos.FavoritoDTO;
+import com.example.PIBackEnd.dtos.ReservaDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
@@ -11,6 +12,8 @@ import com.example.PIBackEnd.repository.IUsuarioRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +54,7 @@ public class FavoritoService {
         }
     }
 
-    public Favorito actualizarFavorito(Long id) throws ResourceNotFoundException {
+    public FavoritoDTO actualizarFavorito(Long id) throws ResourceNotFoundException {
         logger.warn("Actualizando Favorito con id = " + id);
         Optional<Favorito> fav = iFavoritoRepository.findById(id);
         if(fav.isEmpty()){
@@ -59,15 +62,20 @@ public class FavoritoService {
         }else{
             Favorito favorito = fav.get();
             favorito.setFavorito(!favorito.getFavorito());
-            return iFavoritoRepository.save(favorito);
+            return convertirFavoritoaFavoritoDTO(iFavoritoRepository.save(favorito));
         }
     }
 
-    public List<Favorito> buscarFavoritosPorUsuario(String email) throws ResourceNoContentException {
+    public List<FavoritoDTO> buscarFavoritosPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todos los Favoritos para Usuario con email = " + email);
         List<Favorito> favoritos = iFavoritoRepository.findAllByVigenteTrueAndUsuario_Email(email);
         if(!favoritos.isEmpty()){
-            return favoritos;
+            List<FavoritoDTO> favoritosDto = new ArrayList<>();
+            for (Favorito fav:favoritos) {
+                FavoritoDTO favoritoDTOAGuardar = convertirFavoritoaFavoritoDTO(fav);
+                favoritosDto.add(favoritoDTOAGuardar);
+            }
+            return favoritosDto;
         }else{
             throw new ResourceNoContentException("Error. No existen Favoritos registrados o no estan vigentes.");
         }
@@ -106,6 +114,8 @@ public class FavoritoService {
         favoritoDTO.setId(favorito.getId());
         favoritoDTO.setPelicula_id(favorito.getPelicula().getId());
         favoritoDTO.setUsuario_id(favorito.getUsuario().getId());
+        favoritoDTO.setFavorito(favorito.getFavorito());
+        favoritoDTO.setVigente(favorito.getVigente());
 
         return favoritoDTO;
     }

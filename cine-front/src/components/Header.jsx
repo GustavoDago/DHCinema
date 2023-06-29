@@ -4,14 +4,17 @@ import { fetchMovieTilte } from './UseFetch'
 import { useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 Modal.setAppElement('#root')
 
 const header = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const customStyles = {
     overlay: { zIndex: 1000 }
@@ -48,6 +51,10 @@ const header = () => {
 
   const modalClassName = showConfirmation ? 'modal-overlay' : 'modal-overlay hidden';
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header>
       <div className="headerContainer">
@@ -82,6 +89,19 @@ const header = () => {
           </form>
         </div>
         <DropdownProfile />
+        <div className='divHambur'>
+          <button className='logoHambur' onClick={handleToggle}>
+          <FontAwesomeIcon icon={faBars} />
+          </button>
+            {isOpen && (
+            <div className="dropdown-content">
+              <Link to="/">HOME</Link>
+              <Link to="/peliculas/pagina/1">CARTELERA</Link>
+              <Link to="/categorias/">CATEGORÍAS</Link>
+              <Link to="/favoritos/">FAVORITOS</Link>
+            </div>
+          )}
+        </div>
       </div>
 
       <Modal

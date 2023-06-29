@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,28 +73,33 @@ public class ReservaService {
         }
     }
 
-    public Reserva buscarReservaPorId(Long id) throws ResourceNotFoundException {
+    public ReservaDTO buscarReservaPorId(Long id) throws ResourceNotFoundException {
         logger.info("Buscando Reserva con ID: " + id);
         Optional<Reserva> reservaBuscada = reservaRepository.findById(id);
         if(reservaBuscada.isPresent()){
-            return reservaBuscada.get();
+            return convertirReservaaReservaDTO(reservaBuscada.get());
         }
         else{
             throw new ResourceNotFoundException("Error. No existe la Reserva con ID = " + id + ".");
         }
     }
 
-    public List<Reserva> buscarTodasReservas() throws ResourceNoContentException {
+    public List<ReservaDTO> buscarTodasReservas() throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas");
         List<Reserva> lista = reservaRepository.findAllByVigenteTrue();
         if(!lista.isEmpty()){
-            return lista;
+            List<ReservaDTO> reservasDto = new ArrayList<>();
+            for (Reserva reserva:lista) {
+                ReservaDTO reservaDTOAGuardar = convertirReservaaReservaDTO(reserva);
+                reservasDto.add(reservaDTOAGuardar);
+            }
+            return reservasDto;
         }else{
             throw new ResourceNoContentException("Error. No existen Reservas registradas.");
         }
     }
 
-    //HISTORIAL CON SOLO RESERVAS ACTIVAS
+    //HISTORIAL CON SOLO RESERVAS ACTIVAS (falta retornar ReservaDTO si se llega a usar)
 
     /*public List<Reserva> buscarTodasReservasPorUsuario(String email) throws ResourceNoContentException {
         logger.info("Buscando todas las Reservas para Usuario: " + email);
@@ -117,7 +123,7 @@ public class ReservaService {
 
     //HISTORIAL CON TODAS LAS RESERVAS
 
-    public List<Reserva> buscarTodasReservasPorUsuario(String email){
+    public List<ReservaDTO> buscarTodasReservasPorUsuario(String email){
         logger.info("Buscando todas las Reservas para Usuario: " + email);
         List<Reserva> listaAModificar = reservaRepository.findAllByVigenteTrueAndUsuarioEmail(email);
         List<Reserva> lista = reservaRepository.findAllByUsuarioEmail(email);
@@ -129,7 +135,12 @@ public class ReservaService {
                 reservaRepository.save(reserva);
             }
         }
-        return lista;
+        List<ReservaDTO> reservas = new ArrayList<>();
+        for (Reserva reserva:lista) {
+            ReservaDTO reservaDTO = convertirReservaaReservaDTO(reserva);
+            reservas.add(reservaDTO);
+        }
+        return reservas;
     }
 
     private Reserva convertirReservaDTOaReserva(ReservaDTO reservaDTO){
@@ -171,6 +182,17 @@ public class ReservaService {
         reservaDTO.setApellido(reserva.getApellido());
         reservaDTO.setDni(reserva.getDni());
         reservaDTO.setEmail(reserva.getEmail());
+        reservaDTO.setPeliculaNombre(reserva.getPeliculaNombre());
+        reservaDTO.setUsuarioEmail(reserva.getUsuarioEmail());
+        reservaDTO.setFechaProyeccion(reserva.getFechaProyeccion());
+        reservaDTO.setHoraProyeccion(reserva.getHoraProyeccion());
+        reservaDTO.setCine(reserva.getCine());
+        reservaDTO.setBanner(reserva.getBanner());
+        reservaDTO.setPortadaPelicula(reserva.getPortadaPelicula());
+        reservaDTO.setSala(reserva.getSala());
+        reservaDTO.setModalidad(reserva.getModalidad());
+        reservaDTO.setOpcionesIdioma(reserva.getOpcionesIdioma());
+        reservaDTO.setVigente(reserva.getVigente());
         reservaDTO.setUsuario_id(reserva.getUsuario().getId());
         reservaDTO.setFuncion_id(reserva.getFuncion().getId());
 
