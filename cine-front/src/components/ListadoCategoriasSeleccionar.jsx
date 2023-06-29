@@ -61,15 +61,15 @@ const ListadoCategoriasSeleccionar = ({ peliculaSeleccionada, categoriasSeleccio
         <table>
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              {/* <th scope="col">Id</th> */}
               <th scope="col">Título</th>
-              <th scope="col">Seleccionar</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             {Categorias.map(categoria => (
               <tr id={categoria.id} key={categoria.id}>
-                <td scope='row'>{categoria.id}</td>
+                {/* <td scope='row'>{categoria.id}</td> */}
                 <td scope='row'>{categoria.titulo}</td>
                 <td scope='row'>
                   <input

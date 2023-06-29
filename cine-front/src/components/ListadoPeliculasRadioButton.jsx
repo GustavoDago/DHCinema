@@ -25,7 +25,7 @@ useEffect(() => {
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
+                            <th scope="col"></th>
                             <th scope="col">Título</th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@ useEffect(() => {
                                         onChange={() => handleSelectPelicula(pelicula)}
                                     />
                                 </td>
-                                <th scope="row">{pelicula.id}</th>
+                                {/* <th scope="row">{pelicula.id}</th> */}
                                 <td scope="row">{pelicula.titulo}</td>
                             </tr>
                         ))}

@@ -3438,7 +3438,12 @@ div .asignoCategorias div {
   .admin-links a{
     margin: 10px;
   }
+
   /* Crear Categoria */
+  .crearCategoria{
+    margin: 0px;
+    background-color: #e7ecf7;
+  }
   .crearCategoria form div{
     width: 25vh;
     font-size: medium;
@@ -3447,10 +3452,29 @@ div .asignoCategorias div {
     padding-left: 0px;
     width: 50%;
   }
-  .crearCategoria form button{
-    margin-bottom:2vh;
+  
+
+
+  .crearCategoria form button {
+    align-self: center;
+    width: 40%;
+    background-color: #778DA9;
+    border: 2px solid #0D1B2A;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
   }
+  
+  .crearCategoria form button{
+    background-color: #0D1B2A;
+    color: #E0E1DD;
+  }
+  .mensajeError{
+    color: red;
+  }
+
   /* Cargar Pelicula */
+  
   .admin-form form{
     padding: 10% 10% 10% 4%;
     font-size:x-large;
@@ -3509,7 +3533,24 @@ div .asignoCategorias div {
     margin: 0% 5%;
     border-radius: 15px 15px 0px 0px;
   }
-  
+  /* Asignar Categorias */
+  div.asignoCategorias{
+    margin: 0;
+    /* width: fit-content; */
+
+    display: flex;
+    justify-content: space-evenly;
+  }
+  div.asignoCategorias div{
+    width: fit-content;
+  }
+  .asignoCategorias main{
+    width: fit-content;
+  }
+  div.asignoCategorias .tabla{
+    width: fit-content;
+    margin: 5px;
+  }
   /* Footer */
   footer{
     display: grid;
