@@ -71,7 +71,6 @@ h3 {
 
 button {
   border-radius: 8px;
-
   border: 1px solid transparent;
   font-size: 1em;
   font-weight: 500;
@@ -156,7 +155,9 @@ nav {
 
 }
 
-
+.checkerCopiador{
+  color: gray;
+}
 .detail-image-part img {
   height: 50%;
   align-self: center;
@@ -2101,6 +2102,11 @@ footer {
   font-size: large;
 }
 
+.tabla button{
+  background-color: #778DA9;
+  border: #000;
+}
+
 .tdTitulo {
   font-size: medium;
   font-weight: 500;
@@ -2231,7 +2237,9 @@ footer {
   color: #000;
 }
 
-
+.crearCiudad .new-button{
+  width: 12%;
+}
 
 /** vista Asignar Categorías **/
 div.asignoCategorias {
@@ -2250,15 +2258,13 @@ div .asignoCategorias div {
 
 .asignacionesRol h2{
   text-shadow: 0 0 5px #fff;
-}
-
-
-/* Asignar rol */
-
-.asignacionesRol h2{
   color: #E0E1DD;
   font-size: larger;
   font-weight: 700;
+}
+
+.asignacionesRol .new-button{
+  width: 10%;
 }
 
 /* Contenido del div de asignacion de rol */
@@ -2748,8 +2754,9 @@ div .asignoCategorias div {
 }
 
 .new-button:hover {
-  background-color: #0D1B2A;
+  background-color: #1B263B;
   color: #E0E1DD;
+  transform: scale(1.2)
 }
 
 /** Vista confirmacion cuenta **/
@@ -3565,5 +3572,40 @@ div .asignoCategorias div {
 
   .iconosFooter a {
     margin-right: 6px;
+  }
+
+  .form-crearCategoria div{
+    width: 70%;
+  }
+
+  .form-crearCategoria h2{
+    margin-top: 15px;
+  }
+
+  .form-crearCategoria{
+    padding-bottom: 5px;
+    justify-content: space-around;
+  }
+
+  .form-crearCategoria button{
+    margin: 0;
+    margin-top: 5px;
+    width: 0;
+    width: 60%;
+    height: 45px;
+  }
+
+  .crearCiudad{
+    margin: 0;
+    padding: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .tabla{
+    padding: 30px 20%;
+    margin: 0;
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }

@@ -1,6 +1,8 @@
 package com.example.PIBackEnd.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "puntaje")
 public class Puntaje {
@@ -18,24 +20,11 @@ public class Puntaje {
     @JoinColumn(name = "pelicula_id", nullable = false)
     private Pelicula pelicula;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Integer puntaje;
 
-    @Column(nullable = true, length = 450)
+    @Column(nullable = false, length = 450)
     private String valoracion;
-
-    @Column
-    private Long IdUsuario;
-
-    public Puntaje() {
-    }
-
-    public Puntaje(Usuario usuario, Pelicula pelicula, Integer puntaje, String valoracion) {
-        this.usuario = usuario;
-        this.pelicula = pelicula;
-        this.puntaje = puntaje;
-        this.valoracion = valoracion;
-    }
 
     public Long getId() {
         return id;
@@ -75,13 +64,5 @@ public class Puntaje {
 
     public void setValoracion(String valoracion) {
         this.valoracion = valoracion;
-    }
-
-    public Long getIdUsuario() {
-        return IdUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        IdUsuario = idUsuario;
     }
 }
