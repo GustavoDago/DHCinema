@@ -3410,7 +3410,7 @@ div .asignoCategorias div {
   flex-direction: column;
 }
 
-/** Tablet **/
+/** TABLET **/
 
 @media (min-width:425px) and (max-width:768px) {
   .movie-container{
@@ -3487,10 +3487,97 @@ div .asignoCategorias div {
     padding: 1%;
   }
 
+  /* PANEL ADMIN*/
+  /* Menu de links de admin */
+  .admin-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .admin-links a{
+    padding-top: 3vh;
+    margin: 1vh;
+  }
+  /* Listar Peliculas */
+  .listadoPeliculas .tabla{
+    padding: 30px 8%;
+  }
+
+  /*Cargar Pelicula */
+  .admin-form .admin-div{
+    display: flex;
+    flex-direction: column;
+  }
+  .admin-div label{
+    font-size: large;
+  }
+  .admin-div-first .categories-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 20vh;
+    margin-top: 2vh;
+  }
+  .categories-form label{
+    margin: 5px 50px 5px 0px;
+    font-size: medium;
+  }
+  
+  .date-center {
+    text-align: left;
+    margin: 5px 0px 20px 0px;
+  }
+  
+  .admin-div-last{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: fit-content;
+  }
+  .admin-div-last div{
+    margin:0% 50% 0% 0%;
+  }
+  
+  /* Listar Categorias */
+  main .tabla {
+    width: fit-content;
+    padding: 30px 10%;
+  }
+  
+
+  /* Crear Categoria */
+  .crearCategoria{
+    width: 90%;
+    margin: 0px 0px 0px 5%;
+  }
+  .crearCategoria .form-crearCategoria button{
+    margin-bottom: 25px;
+  }
+  
+  
+  
+  /* Asignar Categoria */
+  .botonAsignarCategoria{
+    align-self: center;
+    background-color: white;
+    color: #1B263B;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Asignar Rol: no hace falta hacer cambios */
+  
+  /* Listar Ciudades */
+  .listadoCiudades .tabla{
+    width: 25vh;
+    border-radius: 15px 15px 15px 15px;
+  }
+  /*  Crear Ciudad*/
+  .crearCiudad .new-button{
+    width: 20%;
+  }
 }
 
 
-
+/* MOBILE */
 @media (min-width:320px) and (max-width:425px) {
   /* Header */
   header {
@@ -3613,7 +3700,6 @@ div .asignoCategorias div {
 
   /* Crear Categoria */
   .crearCategoria{
-    margin: 0px;
     background-color: #e7ecf7;
   }
   .crearCategoria form div{

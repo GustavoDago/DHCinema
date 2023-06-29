@@ -88,7 +88,7 @@ const ListadoPeliculas = () => {
 
 
   return (
-    <div>
+    <div className='listadoPeliculas'>
       {/* renderizo las cards */}
       <div className='tabla' >
         <table>

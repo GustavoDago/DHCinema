@@ -41,7 +41,7 @@ const ListadoCiudades = () => {
   };
 
   return (
-    <main >
+    <main className='listadoCiudades'>
       {/* renderizo las cards */}
       <div className='tabla' >
         <table>
