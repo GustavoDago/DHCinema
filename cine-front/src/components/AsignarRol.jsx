@@ -122,7 +122,7 @@ const AsignarRol = () => {
           />
         ))
       ) : 'Cargando listado'}
-      <button onClick={submitChanges}>Guardar</button>
+      <button onClick={submitChanges} className="new-button">Guardar</button>
     </div>
   );
 };
