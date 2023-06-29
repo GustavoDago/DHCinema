@@ -155,9 +155,10 @@ nav {
 
 }
 
-.checkerCopiador{
+.checkerCopiador {
   color: gray;
 }
+
 .detail-image-part img {
   height: 50%;
   align-self: center;
@@ -298,7 +299,7 @@ header {
   cursor: pointer;
 }
 
-.drop-down-new-item .accordion-item{
+.drop-down-new-item .accordion-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -306,10 +307,16 @@ header {
   margin: 0;
 }
 
+.drop-down-new-item .accordion-title {
+  display: flex;
+  flex-direction: row;
+}
 
 
-.drop-down-new-item .accordion-title{
- align-self: center;
+
+
+.drop-down-new-item .accordion-title {
+  align-self: center;
   background-color: transparent;
   color: #0D1B2A;
   margin: 0;
@@ -321,11 +328,11 @@ header {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.drop-down-new-item .accordion-title div{
+.drop-down-new-item .accordion-title div {
   margin: 0;
 }
 
-.drop-down-new-item .accordion-content{
+.drop-down-new-item .accordion-content {
   background-color: transparent;
   align-self: center;
   width: 100%;
@@ -334,14 +341,14 @@ header {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.drop-down-new-item .accordion-content ul li{
+.drop-down-new-item .accordion-content ul li {
   padding: 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 
 
-.drop-down-new-item .accordion-title:hover{
+.drop-down-new-item .accordion-title:hover {
   background-color: transparent;
 }
 
@@ -453,7 +460,7 @@ header {
   text-align: start;
 }
 
-.nombreDropdown{
+.nombreDropdown {
   display: flex;
   flex-direction: row;
 
@@ -553,6 +560,7 @@ footer {
 .shareModalhtml .urlLink {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
 }
 
 .modalCompartirLink a {
@@ -571,6 +579,11 @@ footer {
   align-items: center;
   justify-content: center;
 
+}
+
+.closeShare {
+  align-self: flex-start;
+  cursor: pointer;
 }
 
 
@@ -611,9 +624,11 @@ footer {
   background-color: white;
   color: #415A77;
   border: 2px solid #415A77;
+  padding: 10px 20px;
 }
 
-.search-form button:hover{
+
+.search-form button:hover {
   background-color: #415A77;
   color: white;
   transition: 300ms;
@@ -664,8 +679,8 @@ footer {
 .card figure {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
+  width: 90vw;
+  height: 50vh;
   border-radius: 20px;
 }
 
@@ -684,6 +699,11 @@ footer {
 .card figure div h1 {
   color: white;
   margin: 0;
+  font-size: 2em;
+}
+
+.card figure h4{
+
 }
 
 .card figure div h3 {
@@ -698,7 +718,8 @@ footer {
 
 .card figure div button {
   margin: 10px 0px;
-  background-color: #1b263b
+  background-color: #1b263b;
+  padding: 10px 20px;
 }
 
 .card figure div button:hover {
@@ -878,7 +899,7 @@ footer {
 }
 
 
-.opt-image{
+.opt-image {
   width: 100%;
   height: 100%;
   transition: all 1s ease-out;
@@ -1005,11 +1026,10 @@ footer {
 
 .banner-video {
   width: 100%;
-  height: 60vh;
-  background-position: left calc((50vw - 170px) - 340px) top;
-  background-size: cover;
+  height: 40vh;
+  background-position: left calc((10vw - 170px) - 340px) top;
+  background-size: fill;
   background-repeat: no-repeat;
-
   position: relative;
   border-bottom: 1px solid black;
   box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.7);
@@ -1019,7 +1039,7 @@ footer {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 60vh;
+  height: 100%;
   background-image: linear-gradient(to right, rgba(31.5, 10.5, 94.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 10.5, 94.5, 0.84) 50%, rgba(31.5, 10.5, 94.5, 0.84) 100%);
 }
 
@@ -1029,37 +1049,37 @@ footer {
   width: 98vw;
 }
 
-.caracteristicas-container{
+.caracteristicas-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .movie-details-features {
-  
+
   font-weight: 600;
   margin-top: 4vh;
   margin-bottom: 10vh;
   color: #000;
 }
 
-.movie-details-features-options{
+.movie-details-features-options {
   display: flex;
   margin-left: 40px;
 }
 
 
-.movie-details-features-options h3{
+.movie-details-features-options h3 {
   font-weight: 100;
   margin: 0px 15px 0px 20px;
 }
 
-.movie-details-features-options h3:hover{
+.movie-details-features-options h3:hover {
   font-weight: 500;
   cursor: pointer;
 }
 
-.movie-details-features-options .h3-selected{
+.movie-details-features-options .h3-selected {
   font-weight: 500;
 }
 
@@ -1095,7 +1115,7 @@ footer {
 }
 
 .movie-first-info img {
-  width: 30vh;
+  width: 20%;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
   margin-bottom: 3;
 }
@@ -1134,12 +1154,16 @@ footer {
   position: absolute;
   bottom: 0;
   left: 33%;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .movie-details-title h1 {
   color: white;
   font-size: 2.5em;
+  margin: 0;
 }
 
 .movie-details-description {
@@ -1177,15 +1201,15 @@ footer {
   flex-direction: row;
   width: 100%;
   justify-content: flex-end;
-  
+
 }
 
-.rank-comment-content{
+.rank-comment-content {
   display: flex;
   align-items: center;
 }
 
-.rank-comment-content h4{
+.rank-comment-content h4 {
   margin-right: 40px;
 }
 
@@ -1200,7 +1224,7 @@ footer {
 
 
 
-.details-titles{
+.details-titles {
   color: #61635d;
   font-weight: 100;
   border-left: 8px solid #1b263b;
@@ -1372,7 +1396,7 @@ footer {
   transition: all 500ms ease-out;
 }
 
-.half-right div figure div:hover{
+.half-right div figure div:hover {
   backdrop-filter: blur(5px);
 }
 
@@ -1387,7 +1411,7 @@ footer {
   transition: all 500ms ease-out;
 }
 
-.half-right div figure div p:hover{
+.half-right div figure div p:hover {
   background-color: white;
   color: #1B263B;
 }
@@ -1431,36 +1455,36 @@ footer {
 
 }
 
-.movie-details-map-ranking{
+.movie-details-map-ranking {
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: auto;
 }
 
-.movie-details-map-ranking hr{
+.movie-details-map-ranking hr {
   margin: 5px;
 }
 
-.ranking-numbers{
+.ranking-numbers {
   display: flex;
   flex-direction: column;
 }
 
-.calculate-ranks{
+.calculate-ranks {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.rank-previsualizacion{
+.rank-previsualizacion {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.rank-previsualizacion p:first-child{
+.rank-previsualizacion p:first-child {
   color: #000;
   font-size: 40px;
   padding: 0;
@@ -1469,14 +1493,14 @@ footer {
   font-weight: 500;
 }
 
-.rank-previsualizacion p:last-child{
+.rank-previsualizacion p:last-child {
   color: #61635d;
   font-weight: 200;
   margin: 5px 0 20px 0;
 }
 
-.percentage-bar{
-  position:relative;
+.percentage-bar {
+  position: relative;
   width: 300px;
   height: 10px;
   border-radius: 40px;
@@ -1485,7 +1509,7 @@ footer {
   margin-left: 10px;
 }
 
-.button-review{
+.button-review {
   width: 30%;
   height: 45px;
   align-self: center;
@@ -1493,7 +1517,7 @@ footer {
   background-color: #0D1B2A;
 }
 
-.button-review:hover{
+.button-review:hover {
   background-color: white;
   color: #0D1B2A;
   border: 1px solid #0D1B2A
@@ -1501,7 +1525,21 @@ footer {
 
 /* Bloque de Politicas */
 .tituloPoliticas {
+  color: #61635d;
+    font-weight: 100;
+    border-left: 8px solid #1b263b;
+    padding-left: 10px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.cinema-policy{
+  margin-bottom: 10px;
+}
+
+.cinema-policy .accordion-title{
   background-color: #0D1B2A;
+  margin-bottom: 5px;
 }
 
 .bloquePoliticas {
@@ -1529,7 +1567,7 @@ footer {
   color: #0D1B2A;
 }
 
-.accordion-title {
+.asignacionesRol .accordion-title {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -1552,13 +1590,14 @@ footer {
   padding: 1rem;
 }
 
-.accordion-content {
+.asignacionesRol .accordion-content {
   background-color: #E0E1DD;
   margin-right: 75px;
   margin-left: 75px;
   color: #000;
   align-items: center;
 }
+
 .modalidad-content {
   background-color: #0D1B2A;
   padding: 20px 10px;
@@ -1566,39 +1605,39 @@ footer {
   margin: 10px;
 }
 
-.modalidad-title{
+.modalidad-title {
   display: flex;
   align-items: center;
-  
+
 }
 
-.modalidad-content h3{
+.modalidad-content h3 {
   color: white;
   border: none;
   font-weight: 500;
   margin-right: 10px;
 }
 
-.modalidad-content h4{
+.modalidad-content h4 {
   font-weight: 100;
- 
+
 }
 
 .modalidad-content button {
   margin-top: 10px;
 }
 
-.modalidad-content .option-button{
+.modalidad-content .option-button {
   color: white;
   border: 1px solid white;
 }
 
-.modalidad-content .option-button:hover{
+.modalidad-content .option-button:hover {
   background-color: white;
   color: #1b263b;
 }
 
-.modalidad-content .selected{
+.modalidad-content .selected {
   background-color: white;
   color: #1b263b;
 }
@@ -1607,10 +1646,33 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+}
+
+.accordion-reserva .accordion-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  color: white;
+  background-color: #1B263B;
+  margin-bottom: 2px;
+  font-weight: 500;
+  border-radius: none;
+
+}
+
+.accordion-reserva .accordion-content {
+  background-color: #778DA9;
+}
+
+.accordion-reserva .accordion-title,
+.accordion-reserva .accordion-content {
+  padding: 1rem;
 }
 
 
-.reserva-button{
+.reserva-button {
   width: 30%;
   margin-top: 10px;
   align-self: center;
@@ -1619,17 +1681,17 @@ footer {
   background-color: #0D1B2A;
 }
 
-.reserva-button:disabled{
+.reserva-button:disabled {
   pointer-events: none;
   opacity: .8;
 }
 
-.reserve-datepicker{
- width: fit-content;
- 
+.reserve-datepicker {
+  width: fit-content;
+
 }
 
-.reserve-input-date{
+.reserve-input-date {
   background-color: white;
   border: none;
   height: 20px;
@@ -1639,7 +1701,8 @@ footer {
 }
 
 
-.form-rank {position: absolute;
+.form-rank {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1657,13 +1720,13 @@ footer {
   border-radius: 10px;
 }
 
-.form-rank p{
-  margin:0;
+.form-rank p {
+  margin: 0;
   margin-top: 20px;
   font-size: 25px;
 }
 
-.form-rank input{
+.form-rank input {
   background-color: white;
   margin: 30px 0;
   width: 70%;
@@ -1687,17 +1750,17 @@ footer {
   color: white;
 }
 
-.rank-container{
+.rank-container {
   width: 50%;
 }
 
-.rank-number p{
+.rank-number p {
   color: #0D1B2A;
   font-size: 50px;
   margin: 0;
 }
 
-.rank-number p img{
+.rank-number p img {
   width: 20px;
   margin: 0;
 }
@@ -1711,12 +1774,12 @@ footer {
   height: auto;
   align-items: center;
   color: #000;
-  border-top: 1px solid rgba(0,0,0,0.2);
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 20px 0;
 }
 
-.icon-name-reserva{
+.icon-name-reserva {
   align-self: flex-start;
   display: flex;
   flex-direction: row;
@@ -1724,12 +1787,12 @@ footer {
   align-items: center;
 }
 
-.icon-name-reserva div:last-child p{
+.icon-name-reserva div:last-child p {
   margin: 0;
 
 }
 
-.icon-name-reserva div:last-child div{
+.icon-name-reserva div:last-child div {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1737,7 +1800,7 @@ footer {
   margin-top: 10px;
 }
 
-.icon-name-reserva div:last-child div h4{
+.icon-name-reserva div:last-child div h4 {
   margin: 0;
 }
 
@@ -1747,7 +1810,7 @@ footer {
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  height: 400px;
+  height: 250px;
 }
 
 .social-section {
@@ -1787,25 +1850,25 @@ footer {
   border-radius: 10px;
 }
 
-.actor-card{
+.actor-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: auto;
   width: 200px;
   border: 2px solid #0D1B2A;
-  
+
 }
 
-.actor-card img{
+.actor-card img {
   width: 85%;
   padding: 30px 0;
   align-self: center;
 }
 
-.details-reparto{
+.details-reparto {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 30px;
   grid-auto-flow: column;
   scroll-behavior: smooth;
@@ -1815,7 +1878,7 @@ footer {
   padding: 0 10px;
 }
 
-.actor-card div{
+.actor-card div {
   border-top: 2px solid #0D1B2A;
 }
 
@@ -2160,12 +2223,12 @@ footer {
   border-radius: 15px 15px 0px 0px;
 }
 
-.tabla th{
+.tabla th {
   font-weight: 700;
   font-size: large;
 }
 
-.tabla button{
+.tabla button {
   background-color: #778DA9;
   border: #000;
 }
@@ -2215,13 +2278,10 @@ footer {
   margin: 0px 20px;
 }
 
-
-
-
 /* Div de creacion de categoria; panel admin */
 
 
-.crearCategoria{
+.crearCategoria {
   background-color: #E0E1DD;
   margin: 0px 35%;
   color: #000;
@@ -2277,18 +2337,18 @@ footer {
 
 /* Crear ciudad form */
 
-.crearCiudad .form-crearCategoria{
+.crearCiudad .form-crearCategoria {
   color: #000;
 }
 
 
-.form-crearCategoria{
+.form-crearCategoria {
   display: flex;
   flex-direction: column;
   color: #E0E1DD;
 }
 
-.crearCiudad{
+.crearCiudad {
   background-color: #E0E1DD;
   margin-left: 75px;
   margin-right: 75px;
@@ -2296,11 +2356,11 @@ footer {
   padding-bottom: 15px;
 }
 
-.crearCiudad h2{
+.crearCiudad h2 {
   color: #000;
 }
 
-.crearCiudad .new-button{
+.crearCiudad .new-button {
   width: 12%;
 }
 
@@ -2315,24 +2375,24 @@ div .asignoCategorias div {
   width: 20vw;
 }
 
-.asignoCategorias .tabla{
+.asignoCategorias .tabla {
   border-radius: 15px 15px 15px 15px;
 }
 
-.asignacionesRol h2{
+.asignacionesRol h2 {
   text-shadow: 0 0 5px #fff;
   color: #E0E1DD;
   font-size: larger;
   font-weight: 700;
 }
 
-.asignacionesRol .new-button{
+.asignacionesRol .new-button {
   width: 10%;
 }
 
 /* Contenido del div de asignacion de rol */
 
-.divContent{
+.divContent {
   margin: 150px;
 }
 
@@ -2363,6 +2423,7 @@ div .asignoCategorias div {
 .page-container {
   width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
   align-self: start;
@@ -2372,13 +2433,11 @@ div .asignoCategorias div {
 .page-container .movie-card {
   width: auto;
   padding: 10px;
-
 }
 
 .page-container .movie-card figure {
   padding: 0;
   margin: 0;
-
 }
 
 .page-container .movie-card figure img {
@@ -2474,14 +2533,51 @@ div .asignoCategorias div {
   margin: 10px 20px;
 }
 
+.show-more .search-form{
+  margin: 40px 0;
+}
+
 .item-show-more {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 50%;
-  height: 40vh;
-  margin: 20px 0px;
+  width: 32vw;
+  height: 30vh;
+
+  margin: 20px 2px;
   border-radius: 30px;
+}
+
+.item-show-more-description p{
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.item-show-more-description img{
+  width: 30px;
+  margin: 0;
+}
+
+.item-show-more .favorite-button{
+  width: fit-content;
+}
+
+.item-show-tile{
+  justify-content: center;
+}
+
+.item-show-more-description div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.clasificacion{
+  border: 2px solid black;
+  padding: 5px;
 }
 
 .item-show-more:hover {
@@ -2519,16 +2615,12 @@ div .asignoCategorias div {
   justify-content: space-evenly;
   color: #000;
   width: 50%;
-
+  padding: 20px;
   box-shadow: 0px 5px 30px rgba(255, 255, 255, 0.1);
 }
 
 
-.item-show-more-second div div {
-  flex-direction: row;
-  display: flex;
-  justify-content: center;
-}
+
 
 .option-button {
   padding: 10px;
@@ -2555,24 +2647,20 @@ div .asignoCategorias div {
   justify-content: space-evenly;
 }
 
-.options-buttons button:nth-child(1) {
+.movie-button {
   background-color: red;
 }
 
-.options-buttons button:nth-child(2) {
-  background-color: #0D1B2A;
-}
-
-.options-buttons button:nth-child(3) {
+.info-button {
   background-color: cyan;
 }
 
 .options-buttons button {
   height: auto;
   padding: 0;
-  width: 100px;
+  
   border: none;
-  background: none;
+  padding: 0px 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -3011,24 +3099,24 @@ div .asignoCategorias div {
 
 /** Reserva **/
 
-.reserve-conteiner{
+.reserve-conteiner {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.reserve-stepper{
+.reserve-stepper {
   margin-top: 20px;
   width: 80%;
   color: white;
   align-self: center;
 }
 
-.reserve-stepper span{
+.reserve-stepper span {
   color: white;
 }
 
-.reserve-template{
+.reserve-template {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -3036,13 +3124,13 @@ div .asignoCategorias div {
   padding-bottom: 50px;
 }
 
-.reserve-template h3{
+.reserve-template h3 {
   text-align: left;
   margin: 30px 0px 10px 40px;
   color: #415A77;
 }
 
-.reserve-user-information{
+.reserve-user-information {
   color: gray;
   text-align: left;
   margin: 0px 40px 20px 40px;
@@ -3050,7 +3138,7 @@ div .asignoCategorias div {
   font-weight: 500;
 }
 
-.reserve-first-information{
+.reserve-first-information {
   height: auto;
   width: 60%;
   background-color: white;
@@ -3061,7 +3149,7 @@ div .asignoCategorias div {
   margin-right: 30px;
 }
 
-.reserve-information{
+.reserve-information {
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -3073,14 +3161,14 @@ div .asignoCategorias div {
   border-radius: 10px;
 }
 
-.reserve-information img{
+.reserve-information img {
   width: 25%;
   height: 100%;
   object-fit: cover;
   align-self: center;
 }
 
-.reserve-information-text{
+.reserve-information-text {
   color: #000;
   display: flex;
   flex-direction: column;
@@ -3088,44 +3176,44 @@ div .asignoCategorias div {
   justify-content: space-around;
 }
 
-.reserve-information-text h4{
+.reserve-information-text h4 {
   text-align: left;
   margin-left: 30px;
   color: #415A77;
 }
 
-.reserve-text-elements{
+.reserve-text-elements {
   display: flex;
   flex-direction: row;
   color: #415A77;
   justify-content: space-evenly;
 }
 
-.reserve-text-elements h5{
+.reserve-text-elements h5 {
   font-weight: 500;
   color: gray;
 }
 
-.reserve-text-elements p{
+.reserve-text-elements p {
   font-weight: 500;
 }
 
-.general-input-container{
+.general-input-container {
   position: relative;
-  width:fit-content;
+  width: fit-content;
   align-self: center;
 }
 
-.general-input-container img{
+.general-input-container img {
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
   width: 15px;
-  
+
 }
 
-.general-input{
+.general-input {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 10px;
@@ -3136,25 +3224,31 @@ div .asignoCategorias div {
 
 }
 
-.general-input:focus-visible{
+.update-reserve button{
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #778DA9;
+}
+
+.general-input:focus-visible {
   filter: drop-shadow(0 0 10px #778DA9);
 }
 
-.general-input:focus .general-input-container{
+.general-input:focus .general-input-container {
   border: 1px solid #1b263b;
   filter: drop-shadow(0 0 10px #778DA9);
   box-shadow: #1b263b;
-  
+
 }
 
-.general-input-box{
+.general-input-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
 }
 
-.general-input-box p{
+.general-input-box p {
   color: red;
   margin-top: 3px;
   margin-bottom: 20px;
@@ -3164,20 +3258,20 @@ div .asignoCategorias div {
   font-size: 10px;
 }
 
-.general-input-box label{
-  color:gray;
+.general-input-box label {
+  color: gray;
   margin-bottom: 5px;
   font-size: small;
   font-weight: 500;
 }
 
-.general-input-section{
+.general-input-section {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.general-error-input{
+.general-error-input {
   background-color: white;
   border: 1px solid rgb(255, 0, 0);
   border-radius: 10px;
@@ -3187,12 +3281,13 @@ div .asignoCategorias div {
   color: black;
 }
 
-.general-input:disabled{
-  background-color: rgba(0,0,0,.1);
-  color: rgba(0,0,0,.4);;
+.general-input:disabled {
+  background-color: rgba(0, 0, 0, .1);
+  color: rgba(0, 0, 0, .4);
+  ;
 }
 
-.reserve-second-information{
+.reserve-second-information {
   background-color: white;
   width: 25%;
   border-radius: 10px;
@@ -3200,7 +3295,7 @@ div .asignoCategorias div {
   padding: 10px 20px;
 }
 
-.reserve-summary{
+.reserve-summary {
   color: #778DA9;
   border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 10px;
@@ -3211,50 +3306,50 @@ div .asignoCategorias div {
   padding: 10px;
 }
 
-.reserve-summary h5{
+.reserve-summary h5 {
   margin: 0;
   font-weight: 300;
   font-size: 12px;
-  
+
 }
 
-.reserve-summary p{
+.reserve-summary p {
   margin: 0;
   margin-top: 2px;
 }
 
-.date-reserve-summary h5{
+.date-reserve-summary h5 {
   margin-bottom: 10px;
-  
+
 }
 
-.date-reserve-summary p:nth-child(2){
+.date-reserve-summary p:nth-child(2) {
   font-weight: 500;
   color: #1b263b;
 }
 
-.date-reserve-summary p:nth-child(3){
+.date-reserve-summary p:nth-child(3) {
   font-weight: 300;
   color: #1b263b;
 }
 
-.reserve-summary-cinema{
+.reserve-summary-cinema {
   display: flex;
   flex-direction: column;
 }
 
-.seats-amount{
+.seats-amount {
   margin: 20px 0;
   display: flex;
   flex-direction: column;
 }
 
-.seats-amount label{
+.seats-amount label {
   font-size: 12px;
   font-weight: 300;
 }
 
-.seats-amount input{
+.seats-amount input {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -3262,12 +3357,12 @@ div .asignoCategorias div {
   margin-top: 5px;
 }
 
-.reserve-summary-selection p{
+.reserve-summary-selection p {
   color: #1b263b;
   font-weight: 500;
 }
 
-.reserve-price{
+.reserve-price {
   display: flex;
   flex-direction: column;
   color: #1b263b;
@@ -3276,41 +3371,41 @@ div .asignoCategorias div {
   padding: 10px;
 }
 
-.reserve-price div{
+.reserve-price div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.reserve-price p{
+.reserve-price p {
   margin: 0;
   margin-top: 10px;
 }
 
-.reserve-price div p:nth-child(2){
+.reserve-price div p:nth-child(2) {
   font-weight: 500;
 }
 
-.reserve-price div:nth-child(4){
+.reserve-price div:nth-child(4) {
   margin-top: 20px;
   font-weight: 500;
 }
 
-.reserve-second-information button{
+.reserve-second-information button {
   margin: 30px 0;
   padding: 10px 30px;
   font-weight: 400;
   background-color: #1b263b;
-} 
+}
 
-.reserve-second-information button:hover{
+.reserve-second-information button:hover {
   border: 1px solid #1b263b;
   background-color: white;
   color: #1b263b;
 }
 
-.complete-reserve{
+.complete-reserve {
   width: 50%;
   height: 50vh;
   background-color: white;
@@ -3322,48 +3417,48 @@ div .asignoCategorias div {
   border-radius: 10px;
 }
 
-.complete-reserve h3{
+.complete-reserve h3 {
   color: #1b263b;
   font-weight: 300;
   text-align: center;
 }
 
-.complete-reserve p{
+.complete-reserve p {
   color: #0D1B2A;
   font-weight: 500;
   text-align: center;
 }
 
 
-.complete-reserve-img{
+.complete-reserve-img {
   width: 80px;
   align-self: center;
 }
 
 /** Favorito **/
 
-.favorite-button{
+.favorite-button {
   width: 40px;
   cursor: pointer;
 }
 
-.information-button{
+.information-button {
   width: 40px;
   margin-right: 20px;
 }
 
-.item-buttons{
+.item-buttons {
   display: flex;
 }
 
-.favorites-box{
+.favorites-box {
   display: flex;
   flex-direction: column;
-  
+
   width: 100%;
 }
 
-.favorites-container{
+.favorites-container {
   background-color: #1B263B;
   padding: 20px;
   margin: 20px 0;
@@ -3374,47 +3469,274 @@ div .asignoCategorias div {
   justify-content: center;
 }
 
-.favorites-container .reserve-information{
+.favorites-container .reserve-information {
   margin: 10px 0;
   justify-content: center;
 }
 
-.favorites-container .reserve-information-text{
+.favorites-container .reserve-information-text {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.favorites-container .reserve-information-text h4{
+.favorites-container .reserve-information-text h4 {
   margin-right: 20px;
 }
 
-.favorites-container .reserve-information-text img{
+.favorites-container .reserve-information-text img {
   width: 30px;
   height: fit-content;
   object-fit: contain;
 }
 
-.favorites-information{
+.favorites-information {
   width: 80%;
 }
 
 /** Listar reservas **/
 
-.reserve-user{
+.reserve-user {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 }
 
-.amount-reserves{
+.amount-reserves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, max(350px, 1fr));
+  grid-gap: 80px;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 90vw;
+  align-self: center;
+ 
+  margin-top: 20px;
+}
+
+.ticket-container {
+  color: #0000;
+  width:350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.reserve-ticket {
+  height: 80%;
+  width: 100%;
+  border-radius: 10px;
   background-color: white;
-  color: #0D1B2A;
+  --mask: radial-gradient(20px at 20px 100%, #0000 98%, #000) -20px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+
+}
+
+.last-ticket {
+  border-top: 5px dashed rgba(13, 22, 42);
+
+  width: 100%;
+  padding: 50px 0;
+
+  background-color: white;
+
+  --mask: radial-gradient(20px at 20px 0, #0000 91%, #000) -20px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+
+}
+
+.title-ticket {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 20px;
+}
+
+.title-ticket p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, .3);
+}
+
+.title-ticket h4 {
+  margin: 0;
+  font-size: 17px;
+  color: #1b263b;
+}
+
+.reserve-ticket img {
+  width: 100%;
+  object-fit: cover;
+  height: 200px;
+}
+
+.date-ticket {
   display: flex;
   flex-direction: column;
 }
 
-/** TABLET **/
+.ticket-description {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.ticket-description h5 {
+  margin: 0;
+  color: rgba(0, 0, 0, .3);
+
+}
+
+.ticket-description div {
+  width: 30%;
+}
+
+.ticket-description h5 {
+  margin: 20px 0px 10px 0;
+}
+
+.ticket-description p {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #1b263b;
+}
+
+.date-ticket {
+  text-align: left;
+  margin: 10px 0 10px 40px;
+}
+
+.date-ticket h5 {
+  margin: 0;
+  color: rgba(0, 0, 0, .3);
+}
+
+.date-ticket p {
+  margin: 0;
+  color: #0D1B2A;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+.last-ticket-button:hover {
+  color: white;
+  background-color: #0D1B2A;
+}
+
+.last-ticket-button {
+  padding: 10px 30px;
+  background-color: white;
+  color: #0D1B2A;
+  border: 2px solid #0D1B2A;
+}
+
+.last-ticket-selected {
+  color: white;
+  background-color: #0D1B2A;
+  padding: 10px 30px;
+  border: 2px solid #0D1B2A;
+}
+
+.update-reserve {
+  background-color: white;
+  width: 80%;
+  align-self: center;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.reserve-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background-color: #1B263B;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reserve-modal h2 {
+  margin: 0;
+}
+
+.reserve-modal-account h3 {
+  margin: 0;
+  color: gray;
+  text-align: center;
+  padding: 30px 0 5px 0;
+}
+
+.reserve-modal-function h3 {
+  margin: 0;
+  color: gray;
+  text-align: center;
+  padding: 30px 0 5px 0;
+}
+
+.reserve-modal-account {
+  width: 70%;
+}
+
+.reserve-modal-function {
+  width: 70%;
+}
+
+
+
+.modal-function-content div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.modal-account div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-account div h4 {
+  margin: 0;
+}
+
+.modal-account div p {
+  margin: 0;
+}
+
+.modal-function-content h4 {
+  margin: 0;
+}
+
+.modal-function-content p {
+  margin: 0;
+}
+
+.reserve-modal-confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/** Tablet **/
 
 @media (min-width:425px) and (max-width:768px) {
   .logoHambur{
@@ -3449,18 +3771,90 @@ div .asignoCategorias div {
   }
 
 
-  .movie-container{
+  
+  .movie-container {
     width: 86vw;
   }
-  
-  
+
+  .movie-first-info{
+    left: 10%;
+    top: 50%;
+  }
+
+ .general-input-section{
+    flex-direction: column;
+    
+    align-items: center;
+  }
+
+  .general-input{
+    width: 30vh;
+  }
+
+  .movie-second-info{
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+  }
+
+  .movie-details-description{
+    margin: 0;
+    width: 80vw;
+    margin-top: 30px;
+  }
+
+  .reserve-modal{
+    font-size: 90%;
+  }
+
+  .movie-details-related{
+    width: 90%;
+    border: none;
+  }
+
+  .movie-details-map-ranking{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .rank-comment-container{
+    height: 200px;
+  }
+
+  .map-container{
+    width: 90%;
+  }
+
+  .rank-container{
+    width: 90%;
+  }
+
+  .image-details{
+    height: 30vh;
+  }
+
+  .movie-details-title h1{
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+  .play-icon{
+    width: 15%;
+  }
+
+  .no-mostrar{
+    display: none;
+  }
+
+  .banner-video{
+    background-position: left calc((73vw - 170px) - 340px) top;
+  }
+
   .movie-second-div {
     flex-direction: column;
   }
 
-  .movie-details-description {
-    width: auto;
-  }
+  
 
   .movie-second-div .image-details {
     width: 100%;
@@ -3494,12 +3888,13 @@ div .asignoCategorias div {
     height: 10vh;
   }
 
-.billboard-section h2{
-  padding-left: 7%
-}
-  .recommended-section h2{
-  padding-left: 7%;
-}
+  .billboard-section h2 {
+    padding-left: 7%
+  }
+
+  .recommended-section h2 {
+    padding-left: 7%;
+  }
 
 
   .movie-second-info {
@@ -3510,13 +3905,10 @@ div .asignoCategorias div {
     text-align: center;
   }
 
-  .bloque_img {
-    display: none;
-  }
+
 
   .bloquePoliticas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: inline;
   }
 
   .bloquePoliticas div {
@@ -3610,11 +4002,44 @@ div .asignoCategorias div {
   .crearCiudad .new-button{
     width: 20%;
   }
+  /* Reserva */
+
+  .reserve-template{
+    flex-direction: column;
+  }
+
+  .reserve-first-information{
+    width: 70%;
+    align-self: center;
+    margin: 0;
+  }
+
+  .reserve-information{
+    font-size: 80%;
+  }
+
+  .reserve-second-information{
+    width: 65%;
+    align-self: center;
+    margin-top: 20px;
+  }
+ 
+  /* Cartelera */
+
+  .item-show-more{
+   width: 46vw;
+   font-size: 80%;
+  }
+
+  .options-buttons button{
+    padding: 0px 5px;
+  }
 }
 
 
 /* MOBILE */
 @media (min-width:320px) and (max-width:425px) {
+
   /* Header */
   header {
     display: block;
@@ -3657,7 +4082,7 @@ div .asignoCategorias div {
 }
   /* .admin-banner{
     margin-top: 15vh;
-  } */ 
+  } */
   /* Tocar de vuelta cuando el header este arreglado */
   
   /* funcionalidad de logo hambur */
@@ -3739,10 +4164,87 @@ div .asignoCategorias div {
     padding-left: 4%;
   }
 
+  /* Home */
+
+  .carousel-section{
+    height: 40vh;
+  }
+
+  .card{
+    width: 90%;
+    height: 60%;
+    
+  }
+
+  .card figure{
+    height: 30vh;
+
+  }
+
+  .card figure div h4{
+    font-size: 10px;
+    margin: 0 0 5px 0;
+  }
+  .card figure div h3{
+    font-size: 12px;
+  }
+
+  .card figure div h1{
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .card figure div button{
+    padding: 5px 10px;
+    text-align: center;
+    
+    margin: 5px;
+    font-size: 6px;
+  }
+
+  .search-form{
+    flex-direction: column;
+    justify-content: space-between;
+    height: 15vh;
+  }
+
+  
+
   /* Contenido principal */
 
   .movie-second-div {
     flex-direction: column;
+  }
+
+  .banner-video{
+    background-position: left calc((120vw - 170px) - 340px) bottom;
+    background-size: cover;
+  }
+
+  .movie-first-info-details img{
+    width: 30%;
+  }
+
+  .movie-first-info{
+    left: 10%;
+    top: 50%;
+  }
+
+  .movie-second-info{
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+    width: 100%;
+  }
+
+  .movie-details-related{
+    width: 90%;
+    border: none;
+  }
+  .movie-details-description{
+    margin: 0;
+    width: 80vw;
+    margin-top: 30px;
   }
 
   .movie-second-div .image-details {
@@ -3753,6 +4255,18 @@ div .asignoCategorias div {
     width: auto;
     height: 40vh;
 
+  }
+
+  .play-icon{
+    width: 15%;
+  }
+  .bloquePoliticas {
+    display: inline;
+  }
+
+
+  .no-mostrar{
+    display: none;
   }
 
   .movie-second-div .description {
@@ -3785,10 +4299,6 @@ div .asignoCategorias div {
     height: 10vh;
   }
 
-  .ocultoEnMovil {
-    display: none;
-  }
-
   .movie-card-cartelera {
     display: flex;
     justify-content: center;
@@ -3796,8 +4306,8 @@ div .asignoCategorias div {
     width: 60vw;
   }
 
-  .movie-details-related {
-    display: none;
+  .banner-video{
+    height: 30vh;
   }
 
   .bloquePoliticas {
@@ -3808,37 +4318,41 @@ div .asignoCategorias div {
   .bloquePoliticas div {
     padding: 1%;
   }
-  
+
   .caracteristica-item {
     display: flex;
     width: 98vw;
     flex-direction: column;
   }
-  
+
   /* Panel admin */
-  .admin-links{
+  .admin-links {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  .admin-links a{
+
+  .admin-links a {
     margin: 10px;
   }
 
   /* Crear Categoria */
-  .crearCategoria{
+  .crearCategoria {
+    margin: 0px;
     background-color: #e7ecf7;
     width: 90vw;
     margin: 0% 0% 0% 7%;
   }
-  .crearCategoria form div{
+
+  .crearCategoria form div {
     width: 25vh;
     font-size: medium;
   }
-  .crearCategoria form div input{
+
+  .crearCategoria form div input {
     padding-left: 0px;
     width: 50%;
   }
-  
+
 
 
   .crearCategoria form button {
@@ -3850,42 +4364,46 @@ div .asignoCategorias div {
     margin-bottom: 20px;
     border-radius: 30px;
   }
-  
-  .crearCategoria form button{
+
+  .crearCategoria form button {
     background-color: #0D1B2A;
     color: #E0E1DD;
   }
-  
-  .mensajeError{
+
+  .mensajeError {
     color: red;
   }
 
   /* Cargar Pelicula */
-  
-  .admin-form form{
+
+  .admin-form form {
     padding: 10% 10% 10% 4%;
-    font-size:x-large;
+    font-size: x-large;
   }
-  .admin-form form button{
+
+  .admin-form form button {
     padding: 3% 4%;
     border-radius: 9%;
     margin-left: 54%;
     margin-right: 46%;
   }
-  .admin-div{
+
+  .admin-div {
     display: flex;
     flex-direction: column;
   }
-  .admin-div-first{
-    padding-left: 5%;    
+
+  .admin-div-first {
+    padding-left: 5%;
   }
-  .admin-div-first label{
+
+  .admin-div-first label {
     width: 40px;
     height: 40px;
-    font-size:x-large;
-    /* margin-top: 1vh; */
+    font-size: x-large;
   }
-  .admin-div-first .categories-form{
+
+  .admin-div-first .categories-form {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     height: 38vh;
@@ -3893,18 +4411,20 @@ div .asignoCategorias div {
     padding-bottom: 25%;
     margin-bottom: 5vh;
   }
-  .admin-div-first .categories-form label{
+
+  .admin-div-first .categories-form label {
     padding: 5%;
     margin:2vh 2vh;
     font-size:medium;
   }
-  
-  .admin-div-last{
+
+  .admin-div-last {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: fit-content;
   }
-    .dropzone-container{
+
+  .dropzone-container {
     margin-left: 25%;
   }
 
@@ -3922,21 +4442,25 @@ div .asignoCategorias div {
     margin: 0% 5%;
     border-radius: 15px 15px 0px 0px;
   }
+
   /* Asignar Categorias */
-  div.asignoCategorias{
+  div.asignoCategorias {
     margin: 0;
     /* width: fit-content; */
 
     display: flex;
     justify-content: space-evenly;
   }
-  div.asignoCategorias div{
+
+  div.asignoCategorias div {
     width: fit-content;
   }
-  .asignoCategorias main{
+
+  .asignoCategorias main {
     width: fit-content;
   }
-  div.asignoCategorias .tabla{
+
+  div.asignoCategorias .tabla {
     width: fit-content;
     margin: 5px;
   }
@@ -3947,10 +4471,11 @@ div .asignoCategorias div {
   }
 
   /* Footer */
-  footer{
+  footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
   .iconosFooter {
     justify-content: space-evenly;
     width: 20vw;
@@ -3962,20 +4487,20 @@ div .asignoCategorias div {
     margin-right: 6px;
   }
 
-  .form-crearCategoria div{
+  .form-crearCategoria div {
     width: 70%;
   }
 
-  .form-crearCategoria h2{
+  .form-crearCategoria h2 {
     margin-top: 15px;
   }
 
-  .form-crearCategoria{
+  .form-crearCategoria {
     padding-bottom: 5px;
     justify-content: space-around;
   }
 
-  .form-crearCategoria button{
+  .form-crearCategoria button {
     margin: 0;
     margin-top: 5px;
     width: 0;
@@ -3983,12 +4508,79 @@ div .asignoCategorias div {
     height: 45px;
   }
 
-  .crearCiudad{
+  .crearCiudad {
     margin: 0;
     padding: 0;
     margin-left: 10%;
     margin-right: 10%;
   }
 
+  .tabla {
+    padding: 30px 20%;
+    margin: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  /* Reserva */
+  .general-input-section{
+    flex-direction: column;
+    
+    align-items: center;
+  }
+
+  .general-input{
+    width: 14vh;
+  }
+
+  .reserve-modal{
+    font-size: 60%;
+    height: 40%;
+    width: 80vw;
+  }
+
+  .reserve-template{
+    flex-direction: column;
+  }
+
+  .reserve-first-information{
+    width: 70%;
+    align-self: center;
+    margin: 0;
+  }
+
+  .reserve-information{
+    font-size: 70%;
+  }
+
   
+  
+  .reserve-text-elements{
+    flex-direction: column;
+  }
+
+  .reserve-text-elements p{
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .reserve-text-elements h5{
+    margin: 0;
+  }
+
+  .reserve-second-information{
+    width: 65%;
+    align-self: center;
+    margin-top: 20px;
+  }
+
+  /* Cartelera */
+  .item-show-more{
+    width: 90vw;
+    font-size: 80%;
+   }
+ 
+   .options-buttons button{
+     padding: 0px 5px;
+   }
 }

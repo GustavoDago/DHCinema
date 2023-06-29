@@ -454,3 +454,25 @@ export const fetchUserReserves = async (email) => {
         })
     return response;
 }
+
+export const fetchUpdateReserve = async (email, data) => {
+    const url = `/reservas/usuario/${email}`
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    }).then((response) => {
+        return true
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
+    return response
+}

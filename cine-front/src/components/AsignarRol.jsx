@@ -21,7 +21,7 @@ const AsignarRol = () => {
               const isSelected = user.roles.some(userRol => userRol.nombre === rol.nombre);
               return { ...rol, isSelected };
             });
-            return { ...user, roles: userRoles };
+            return { ...user, roles: userRoles, isActive: false };
           })
           setUserList(updatedList);
           setIsLoading(false);
@@ -77,6 +77,18 @@ const AsignarRol = () => {
     }
   };
 
+  const handleActive = (index,active) => {
+    if(index){
+      const newArray = userList.map(user => {
+        if(user.id == index){
+          user.isActive = active
+        }
+        return user;
+      })
+      setUserList(newArray)
+    }
+  }
+
   return (
     <div className="asignacionesRol">
       <div>
@@ -86,6 +98,7 @@ const AsignarRol = () => {
         userList.filter(user => user.email !== sessionStorage.getItem('email')).map(user => (
           <Accordion
             key={user.id}
+
             title={
               <div>
                 <h3>{user.id}</h3>
@@ -114,7 +127,9 @@ const AsignarRol = () => {
                 )}
               </div>
             }
-            active={false}
+            index={user.id}
+            onChange={handleActive}
+            active={user.isActive}
           />
         ))
       ) : 'Cargando listado'}

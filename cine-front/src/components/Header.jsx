@@ -68,8 +68,8 @@ const header = () => {
           <Link to="/peliculas/pagina/1">
             <p>CARTELERA</p>
           </Link>
-          <Link to="/categorias/">
-            <p>CATEGORÍAS</p>
+          <Link to="/reservas/">
+            <p>RESERVAS</p>
           </Link>
           <Link to="/favoritos/">
             <p>FAVORITOS</p>

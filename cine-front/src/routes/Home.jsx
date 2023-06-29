@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react"
 import Billboard from "../components/home/Billboard"
 import Recommended from "../components/home/Recommended"
 import { useEffect } from "react"
-import { searchMoviesForCategories, fetchAllCinemas } from "../components/UseFetch"
+import { searchMoviesForCategories, fetchAllCinemas, searchRandomMovies } from "../components/UseFetch"
 import Select from "react-select";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
@@ -17,6 +17,7 @@ function Home() {
     const [newCinemas, setNewCinemas] = useState([])
     const [newMovies, setNewMovies] = useState([])
     const [cinemaSelected, setCinemaSelected] = useState()
+    const [randomMovies, setRandomMovies] = useState([])
     const timeRef = useRef(null)
     const navigate = useNavigate()
 
@@ -31,14 +32,20 @@ function Home() {
 
         const fetchAllFilter = async () => {
             try {
+                const random = await searchRandomMovies()
                 const movie = await searchMoviesForCategories('Ninguno')
                 const cinema = await fetchAllCinemas();
-                if (movie && cinema) {
+                if (movie && cinema && random) {
                     console.log(movie)
                     console.log(cinema)
+                    setRandomMovies(random)
                     setMovies(movie)
                     setCinemas(cinema)
-                    setIsLoading(false)
+                    setTimeout(() => {
+
+                        setIsLoading(false)
+                    }, 100)
+
                 }
             } catch (error) {
                 console.log(error)
@@ -186,7 +193,7 @@ function Home() {
                     isSearchable={true}
                     className="react-select-container"
                     placeholder="Busque o seleccione una pelicula"
-                    options={newMovies.filter((value,index) => {
+                    options={newMovies.filter((value, index) => {
                         return newMovies.indexOf(value) === index
                     }).map(
                         (movie) => (
@@ -227,7 +234,7 @@ function Home() {
                     placeholder="Busque o seleccione un cine"
                     value={cinemaSelected}
                     onChange={setCinemaSelected}
-                    options={newCinemas.filter((value,index) => {
+                    options={newCinemas.filter((value, index) => {
                         return newCinemas.indexOf(value) === index
                     }).map(
                         (cinema) => (
@@ -270,7 +277,7 @@ function Home() {
         <div className="home-section">
             <div className="carousel-section">
                 <div className="carousel">
-                    {cards.map((item, i) => {
+                    {!isLoading && Array.isArray(randomMovies) && randomMovies.length > 0 && randomMovies.map((item, i) => {
                         const indexLeft = mod(index - 1, cards.length);
                         const indexRight = mod(index + 1, cards.length);
 
@@ -299,13 +306,16 @@ function Home() {
                                 <figure>
                                     <div>
                                         <h4>DESTACADOS</h4>
-                                        <h1>{item.name}</h1>
-                                        <h3>{item.generos} - {item.time}</h3>
-                                        <button>Detalles</button>
-                                        <button>Reservar Ahora</button>
+                                        <h1>{item.titulo}</h1>
+                                        <h3>{item.categorias[0].titulo} - {item.caracteristicas.duracion} minutos</h3>
+                                        <Link to={`/peliculas/${item.id}`}>
+                                            <button>Detalles</button>
+                                        </Link>
+
+
                                     </div>
                                     <img
-                                        src={item.image}
+                                        src={item.portada}
                                         alt="Desctacados"
                                     ></img>
                                 </figure>

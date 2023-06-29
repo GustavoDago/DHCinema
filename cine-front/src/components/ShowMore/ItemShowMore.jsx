@@ -1,15 +1,20 @@
 import { useState } from "react";
+import NuevoFavorito from "../Nuevo-favorito";
+import { Link } from "react-router-dom";
+import Modal from "react-modal"
+import ReactPlayer from "react-player"
 
 function ItemShowMore({ movie }) {
-    const [selectedRoom, setSelectedRoom] = useState(null)
-    const [selectedLenguaje,setSelectedLenguaje] = useState(null)
+    const [showVideo, setShowVideo] = useState(false);
 
-    const handleButtonClickRoom = (option) => {
-        setSelectedRoom(option);
+    const handleCloseVideo = () => {
+        setShowVideo(false)
     }
 
-    const handleButtonClickLenguaje = (option) => {
-        setSelectedLenguaje(option)
+
+
+    const customStyles = {
+        overlay: { zIndex: 1000 }
     }
 
     return (
@@ -18,37 +23,51 @@ function ItemShowMore({ movie }) {
                 <img src={movie.portada} />
             </div>
             <div className="item-show-more-second">
-                <div>
-                    <h5>Sala</h5>
-                    <div>
-                        <button className={selectedRoom == 1 ? 'option-button selected' : 'option-button'}
-                            onClick={()=> handleButtonClickRoom(1)}
-                        >2D</button>
-                        <button
-                        className={selectedRoom == 2 ? 'option-button selected' : 'option-button'}
-                        onClick={() => handleButtonClickRoom(2)}
-                        >3D</button>
-                        <button className={selectedRoom == 3 ? 'option-button selected' : 'option-button'}
-                            onClick={() => handleButtonClickRoom(3)}
-                        >4D</button>
+                
+                    <div className="item-show-more-description">
+                        <div className="item-show-title">
+                            <h4>{movie.titulo}</h4>
+                            <NuevoFavorito 
+                                id={movie.id}
+                            />
+                        </div>
+                        
+                        <div>
+                            <p className="clasificacion">{movie.caracteristicas.clasificacion}</p> 
+                            <p>{movie.caracteristicas.director}</p> 
+                            <p>{movie.caracteristicas.duracion} mins</p>
+                        </div>
+                        
                     </div>
-                </div>
-                <div>
-                    <h5>Idioma</h5>
-                    <div>
-                        <button className={selectedLenguaje == 1 ? 'option-button selected' : 'option-button'}
-                            onClick={() => handleButtonClickLenguaje(1)}>Castellano</button>
-                        <button className={selectedLenguaje == 2 ? 'option-button selected' : 'option-button'}
-                            onClick={() => handleButtonClickLenguaje(2)}>Subtitulada</button>
-                    </div>
-                </div>
+               
                 <div className="options-buttons">
-                    <button><img src="/icons/youtube-3.svg" /><p>Trailer</p></button>
-                    <button><img src="/icons/ticket.svg" /><p>Reserva</p></button>
-                    <button><img src="/icons/information.svg" /><p>Info</p></button>
+                    <button className="movie-button" onClick={() => setShowVideo(true)}><img src="/icons/youtube-3.svg" /><p>Trailer</p></button>
+                    <Link to={`/peliculas/${movie.id}`}>
+                        <button className="info-button"><img src="/icons/information.svg" /><p>Info</p></button>
+                    </Link>
+                    
                 </div>
 
             </div>
+
+            <Modal
+                style={customStyles}
+                className="video-modal"
+                isOpen={showVideo}
+                onRequestClose={handleCloseVideo}
+                shouldCloseOnOverlayClick={false}
+            >
+                <div className="video-details">
+                    <div className="detail-video-part">
+                        <img src="/icons/close.svg" onClick={handleCloseVideo} />
+                    </div>
+                    <ReactPlayer
+                        width='100%'
+                        height='100%'
+                        url={movie.trailer}
+                    />
+                </div>
+            </Modal>
         </div>
     )
 }

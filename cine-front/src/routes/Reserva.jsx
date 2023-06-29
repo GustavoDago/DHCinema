@@ -46,7 +46,6 @@ const Reserva = () => {
     const navigate = useNavigate()
     const [contentAwait, setContentAwait] = useState(true)
     const params = useParams()
-    const [sameUserData, setSameUserData] = useState(false);
 
 
 
@@ -124,7 +123,7 @@ const Reserva = () => {
         setActiveStep(2)
         setContentAwait(true)
         const newData = data;
-        delete newData.confirmacionEmail
+        delete newData.confirmacionEmail;
         newData.usuario_id = parseInt(sessionStorage.getItem('id'));
         newData.funcion_id = funct.id;
         console.log(newData)
@@ -271,8 +270,6 @@ const Reserva = () => {
                                                 className={` ${errors.nombre ? 'general-error-input' : 'general-input'}`}
                                                 {...register('nombre')}
                                                 aria-invalid={errors.nombre ? "true" : "false"}
-                                                disabled={sameUserData}
-                                                value={sameUserData ? sessionStorage.getItem('nombre') : ''}
                                             />
                                         </div>
                                         <p>{errors.nombre?.message}</p>
@@ -287,8 +284,6 @@ const Reserva = () => {
                                                 type='text'
                                                 {...register('apellido')}
                                                 aria-invalid={errors.apellido ? "true" : "false"}
-                                                disabled={sameUserData}
-                                                value={sameUserData ? sessionStorage.getItem('apellido') : ''}
                                             />
 
                                         </div>
@@ -322,8 +317,6 @@ const Reserva = () => {
                                                 type='email'
                                                 {...register('email')}
                                                 aria-invalid={errors.email ? "true" : "false"}
-                                                disabled={sameUserData}
-                                                value={sameUserData ? sessionStorage.getItem('email') : ''}
                                             />
                                         </div>
                                         <p>{errors.email?.message}</p>
@@ -338,21 +331,12 @@ const Reserva = () => {
                                                 type='email'
                                                 {...register('confirmacionEmail')}
                                                 aria-invalid={errors.confirmacionEmail ? "true" : "false"}
-                                                disabled={sameUserData}
-                                                value={sameUserData ? sessionStorage.getItem('email') : ''}
                                             />
                                         </div>
                                         <p>{errors.confirmacionEmail?.message}</p>
                                     </div>
                                 </div>
-                                <div className="checkerCopiador">
-                                        <label>Copiar datos del usuario</label>
-                                        <input
-                                            type="checkbox"
-                                            checked={sameUserData}
-                                            onChange={(e) => setSameUserData(e.target.checked)}
-                                            />
-                                </div>
+                                
                             </form>
 
                         </div>
@@ -365,7 +349,7 @@ const Reserva = () => {
                         <div className="reserve-summary">
                             <div className="date-reserve-summary">
                                 <h5>FECHA INGRESO:</h5>
-                                <p>{moment(funct.fechaProyeccion).format('dddd, d MMMM YYYY')}</p>
+                                <p>{moment(funct.fechaProyeccion).format('dddd, D MMMM YYYY')}</p>
                                 <p>a las {funct.horaProyeccion} hs</p>
                             </div>
 
