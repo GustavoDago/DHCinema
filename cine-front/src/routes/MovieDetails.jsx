@@ -60,10 +60,10 @@ function MovieDetails() {
     const [allFunctions, setAllFunctions] = useState([])
     const [allCinemasNames, setAllCinemasNames] = useState([])
     const [selectedButton, setSelectedButton] = useState(null)
-    const [allDatosObject,setAllDatosObject] = useState([])
-    const [allActivesAccordions,setAllActivesAccordions] = useState([])
-    const [activeOthers,setActiveOthers] = useState(false)
-    const [isActive,setIsActive] = useState(true)
+    const [allDatosObject, setAllDatosObject] = useState([])
+    const [allActivesAccordions, setAllActivesAccordions] = useState([])
+    const [activeOthers, setActiveOthers] = useState(false)
+    const [isActive, setIsActive] = useState(true)
     const [newIndex, setNewIndex] = useState(null)
     const customStyles = {
         overlay: { zIndex: 1000 }
@@ -75,7 +75,7 @@ function MovieDetails() {
             const search = await fetchCinemaForTitle(title)
             if (search) {
                 setAllCinemas(search)
-                
+
                 const names = search.map(cine => cine.nombre);
                 const filterN = names.filter(name => name !== cinema)
                 console.log(filterN)
@@ -87,7 +87,7 @@ function MovieDetails() {
                     }
                 });
                 console.log(search)
-                const actives = filterN.map(name => {return false})
+                const actives = filterN.map(name => { return false })
                 setAllActivesAccordions(actives)
                 Promise.all(searchFuncPromises).then(functions => {
                     const filteredFunctions = functions.filter(func => func !== undefined);
@@ -98,9 +98,9 @@ function MovieDetails() {
         } else {
             const search = await fetchCinemaForTitle(title)
             if (search) {
-                
+
                 const names = search.map(cine => cine.nombre);
-                const newCinemas = search.map(cine => {return {...cine, isActive:false}})
+                const newCinemas = search.map(cine => { return { ...cine, isActive: false } })
                 setAllCinemas(newCinemas)
                 setAllCinemasNames(names);
                 const searchFuncPromises = names.map(async name => {
@@ -109,7 +109,7 @@ function MovieDetails() {
                         return fetchFunc;
                     }
                 });
-                const actives = names.map(name => {return false})
+                const actives = names.map(name => { return false })
                 setAllActivesAccordions(actives)
                 Promise.all(searchFuncPromises).then(functions => {
                     const filteredFunctions = functions.filter(func => func !== undefined);
@@ -126,10 +126,10 @@ function MovieDetails() {
         setShowReseña(false)
     }
 
-    const handleOnChangeActive = (id,active) => {
-        if(id != null){
+    const handleOnChangeActive = (id, active) => {
+        if (id != null) {
             const newArray = allCinemas.map(cine => {
-                if(cine.id == id)
+                if (cine.id == id)
                     cine.isActive = active;
                 return cine;
             })
@@ -348,10 +348,8 @@ function MovieDetails() {
     }
 
     const handleShowVideo = () => {
-        if (showVideo == false)
-            setShowVideo(true)
-        else
-            setShowVideo(false)
+
+        setShowVideo(true)
     }
 
     const handleShowGallery = () => {
@@ -432,10 +430,10 @@ function MovieDetails() {
         setShowReserve(!showReserve)
     }
 
-    const handleActive = (index,active) => {
-        
+    const handleActive = (index, active) => {
+
         setIsActive(active)
-        if(active == true){
+        if (active == true) {
             setSelectedButton(null)
             setSelectedDate(null)
             setSelectedTime(null)
@@ -448,24 +446,24 @@ function MovieDetails() {
         console.log(isActive)
     }
 
-    const handleAllActives = (index,active) => {
-            const newActives = allActivesAccordions.map((data,indexS) => {
-                if(indexS == index)
-                    return active
-                else return false
-            })
-            console.log(newActives)
-            setIsActive(false)
-            setSelectedButton(null)
-            setSelectedDate(null)
-            setSelectedTime(null)
-            setFunctionReserve(null)
-            setAllActivesAccordions(newActives)
-            setNewIndex(index)
-            console.log(newActives)
+    const handleAllActives = (index, active) => {
+        const newActives = allActivesAccordions.map((data, indexS) => {
+            if (indexS == index)
+                return active
+            else return false
+        })
+        console.log(newActives)
+        setIsActive(false)
+        setSelectedButton(null)
+        setSelectedDate(null)
+        setSelectedTime(null)
+        setFunctionReserve(null)
+        setAllActivesAccordions(newActives)
+        setNewIndex(index)
+        console.log(newActives)
     }
 
-    const handleActiveOthers = (index,active) => {
+    const handleActiveOthers = (index, active) => {
         setActiveOthers(active)
     }
 
@@ -493,10 +491,10 @@ function MovieDetails() {
                             </div>
                             <div className="movie-details-title">
                                 {!isLoading && <h1>{movie.titulo.toUpperCase()}</h1>}
-                                {!isLoading &&
-                                <NuevoFavorito 
-                                    id={movie.id}/> }
-                                
+                                {!isLoading && sessionStorage.getItem('id') &&
+                                    <NuevoFavorito
+                                        id={movie.id} />}
+
                             </div>
 
                         </div>
@@ -511,129 +509,131 @@ function MovieDetails() {
                                         <h2 className="details-titles">DETALLES</h2>
                                         <p>{movie.descripcion}</p>
                                     </div>
-                                   
-                                        <div>
-                                            <h2 className="details-titles">RESERVA</h2>
-                                            <div className="accordion-reserva">
 
-                                                {cinema != null && <Accordion
-                                                    title={cinema.toUpperCase()}
-                                                    active={isActive}
-                                                    onChange={handleActive}
-                                                    content={
-                                                        <div>
-                                                            <div className="reserve-datepicker">
-                                                                {Array.isArray(searchFunctions) && searchFunctions.length > 0 &&
-                                                                    (<DatePicker
-                                                                        showIcon
-                                                                        selected={selectedDate}
-                                                                        onChange={date => setSelectedDate(date)}
-                                                                        filterDate={date => {
-                                                                            const formattedDate = date.toISOString().slice(0, 10)
-                                                                            return searchFunctions.some(func => func.fechaProyeccion == formattedDate)
-                                                                        }}
-                                                                        className="reserve-input-date"
-                                                                        isClearable
-                                                                        locale="es"
-                                                                        placeholderText="Seleccione una fecha"
-                                                                    />)}
+                                    <div>
+                                        <h2 className="details-titles">RESERVA</h2>
+                                        <div className="accordion-reserva">
 
-                                                            </div>
-                                                            {datosObjeto != null && <div className="modalidad-content">
-                                                                {datosObjeto != null && (
-                                                                    Object.keys(datosObjeto).map(modalidad => (
-                                                                        Object.keys(datosObjeto[modalidad]).map(idioma => (
-                                                                            <div key={`${modalidad}-${idioma}`}>
-                                                                                <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
-                                                                                <div>
-                                                                                    {datosObjeto[modalidad][idioma].map(obj => (
-                                                                                        <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
-                                                                                            if (selectedButton == obj.id) {
-                                                                                                setSelectedTime(null)
-                                                                                                setFunctionReserve(null)
-                                                                                                setSelectedButton(null)
-                                                                                            } else {
-                                                                                                setSelectedTime(obj.horaProyeccion)
-                                                                                                setFunctionReserve(obj)
-                                                                                                setSelectedButton(obj.id)
-                                                                                            }
+                                            {cinema != null && <Accordion
+                                                title={cinema.toUpperCase()}
+                                                active={isActive}
+                                                onChange={handleActive}
+                                                content={
+                                                    <div>
+                                                        <div className="reserve-datepicker">
+                                                            {Array.isArray(searchFunctions) && searchFunctions.length > 0 &&
+                                                                (<DatePicker
+                                                                    showIcon
+                                                                    selected={selectedDate}
+                                                                    onChange={date => setSelectedDate(date)}
+                                                                    filterDate={date => {
+                                                                        const formattedDate = date.toISOString().slice(0, 10)
+                                                                        return searchFunctions.some(func => func.fechaProyeccion == formattedDate)
+                                                                    }}
+                                                                    className="reserve-input-date"
+                                                                    isClearable
+                                                                    locale="es"
+                                                                    placeholderText="Seleccione una fecha"
+                                                                />)}
 
-                                                                                        }}>{obj.horaProyeccion}</button>
-                                                                                    ))}
-                                                                                </div>
-                                                                            </div>
-                                                                        ))
-                                                                    ))
-                                                                )}
-                                                            </div>}
                                                         </div>
-                                                    }
-                                                /> }
-                                                <Accordion
-                                                    title="OTROS CINES"
-                                                    active={activeOthers}
-                                                    onChange={handleActiveOthers}
-                                                    content={
-                                                        allCinemasNames.map((cinema, index) =>
-                                                            <Accordion
-                                                                title={cinema.toUpperCase()}
-                                                                active={allActivesAccordions[index]}
-                                                                onChange={handleAllActives}
-                                                                index={index}
-                                                                content={
-                                                                    <div>
-                                                                        <div className="reserve-datepicker">
-                                                                            {Array.isArray(allFunctions) && allFunctions.length > 0 &&
-                                                                                (<DatePicker
-                                                                                    showIcon
-                                                                                    selected={selectedDate}
-                                                                                    onChange={date => setSelectedDate(date)}
-                                                                                    filterDate={date => {
-                                                                                        const formattedDate = date.toISOString().slice(0, 10)
-                                                                                        return allFunctions[index].some(func => func.fechaProyeccion == formattedDate)
-                                                                                    }}
-                                                                                    className="reserve-input-date"
-                                                                                    isClearable
-                                                                                    locale="es"
-                                                                                    placeholderText="Seleccione una fecha"
-                                                                                />)}
+                                                        {datosObjeto != null && <div className="modalidad-content">
+                                                            {datosObjeto != null && (
+                                                                Object.keys(datosObjeto).map(modalidad => (
+                                                                    Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                        <div key={`${modalidad}-${idioma}`}>
+                                                                            <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
+                                                                            <div>
+                                                                                {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                    <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                        if (selectedButton == obj.id) {
+                                                                                            setSelectedTime(null)
+                                                                                            setFunctionReserve(null)
+                                                                                            setSelectedButton(null)
+                                                                                        } else {
+                                                                                            setSelectedTime(obj.horaProyeccion)
+                                                                                            setFunctionReserve(obj)
+                                                                                            setSelectedButton(obj.id)
+                                                                                        }
 
+                                                                                    }}>{obj.horaProyeccion}</button>
+                                                                                ))}
+                                                                            </div>
                                                                         </div>
-                                                                        {datosObjeto != null && <div className="modalidad-content">
-                                                                            {datosObjeto != null && (
-                                                                                Object.keys(datosObjeto).map(modalidad => (
-                                                                                    Object.keys(datosObjeto[modalidad]).map(idioma => (
-                                                                                        <div key={`${modalidad}-${idioma}`}>
-                                                                                            <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
-                                                                                            <div>
-                                                                                                {datosObjeto[modalidad][idioma].map(obj => (
-                                                                                                    <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
-                                                                                                        if (selectedButton == obj.id) {
-                                                                                                            setSelectedTime(null)
-                                                                                                            setFunctionReserve(null)
-                                                                                                            setSelectedButton(null)
-                                                                                                        } else {
-                                                                                                            setSelectedTime(obj.horaProyeccion)
-                                                                                                            setFunctionReserve(obj)
-                                                                                                            setSelectedButton(obj.id)
-                                                                                                        }
+                                                                    ))
+                                                                ))
+                                                            )}
+                                                        </div>}
+                                                    </div>
+                                                }
+                                            />}
+                                            <Accordion
+                                                title="OTROS CINES"
+                                                active={activeOthers}
+                                                onChange={handleActiveOthers}
+                                                content={
+                                                    allCinemasNames.map((cinema, index) =>
+                                                        <Accordion
+                                                            title={cinema.toUpperCase()}
+                                                            active={allActivesAccordions[index]}
+                                                            onChange={handleAllActives}
+                                                            index={index}
+                                                            content={
+                                                                <div>
+                                                                    <div className="reserve-datepicker">
+                                                                        {Array.isArray(allFunctions) && allFunctions.length > 0 &&
+                                                                            (<DatePicker
+                                                                                showIcon
+                                                                                selected={selectedDate}
+                                                                                onChange={date => setSelectedDate(date)}
+                                                                                filterDate={date => {
+                                                                                    const formattedDate = date.toISOString().slice(0, 10)
+                                                                                    return allFunctions[index].some(func => func.fechaProyeccion == formattedDate)
+                                                                                }}
+                                                                                className="reserve-input-date"
+                                                                                isClearable
+                                                                                locale="es"
+                                                                                placeholderText="Seleccione una fecha"
+                                                                            />)}
 
-                                                                                                    }}>{obj.horaProyeccion}</button>
-                                                                                                ))}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    ))
-                                                                                ))
-                                                                            )}
-                                                                        </div>}
                                                                     </div>
-                                                                }
-                                                            />)
-                                                    }
-                                                />
-                                                <button className="reserva-button" disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
-                                            </div>
+                                                                    {datosObjeto != null && <div className="modalidad-content">
+                                                                        {datosObjeto != null && (
+                                                                            Object.keys(datosObjeto).map(modalidad => (
+                                                                                Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                                    <div key={`${modalidad}-${idioma}`}>
+                                                                                        <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
+                                                                                        <div>
+                                                                                            {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                                <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                                    if (selectedButton == obj.id) {
+                                                                                                        setSelectedTime(null)
+                                                                                                        setFunctionReserve(null)
+                                                                                                        setSelectedButton(null)
+                                                                                                        setCinema(null)
+                                                                                                    } else {
+                                                                                                        setSelectedTime(obj.horaProyeccion)
+                                                                                                        setFunctionReserve(obj)
+                                                                                                        setSelectedButton(obj.id)
+                                                                                                        setCinema(cinema)
+                                                                                                    }
+
+                                                                                                }}>{obj.horaProyeccion}</button>
+                                                                                            ))}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                ))
+                                                                            ))
+                                                                        )}
+                                                                    </div>}
+                                                                </div>
+                                                            }
+                                                        />)
+                                                }
+                                            />
+                                            <button className="reserva-button" disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
                                         </div>
+                                    </div>
 
                                 </div>
                             )}
@@ -964,7 +964,7 @@ function MovieDetails() {
                                                 </div>;
                                             }
                                         })}
-                                    
+
                                 </div>
 
                             ) :
@@ -972,9 +972,9 @@ function MovieDetails() {
                                     <div className="no-rank">
                                         <h4>Esta película no posee ninguna reseña.</h4>
                                     </div>
-                                    
+
                                 </div>}
-                                <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
+                            <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
                         </div>
 
                     </div>
@@ -986,21 +986,21 @@ function MovieDetails() {
                     <h2 className="tituloPoliticas">POLTICAS DE CINES</h2>
                     {!isLoading && (allCinemas.map((cinema) => {
                         console.log(cinema)
-                        return <Accordion 
-                        title={cinema.nombre}
-                        content={
-                        <BloquePoliticas 
-                            policys={cinema.politicas}
-                        />}
-                        active={cinema.isActive}
-                        onChange={handleOnChangeActive}
-                        index={cinema.id}
-                    />
+                        return <Accordion
+                            title={cinema.nombre}
+                            content={
+                                <BloquePoliticas
+                                    policys={cinema.politicas}
+                                />}
+                            active={cinema.isActive}
+                            onChange={handleOnChangeActive}
+                            index={cinema.id}
+                        />
                     }
 
                     ))}
-                    
-                    
+
+
                 </div>
 
             </div>
@@ -1014,7 +1014,7 @@ function MovieDetails() {
             >
                 <div className="video-details">
                     <div className="detail-video-part">
-                        <img src="/icons/close.svg" onClick={handleShowVideo} />
+                        <img src="/icons/close.svg" onClick={handleCloseVideo} />
                     </div>
                     <ReactPlayer
                         width='100%'
@@ -1053,9 +1053,11 @@ function MovieDetails() {
                                 <button className="button-review" onClick={handleSubmit}>Enviar</button>
                             </form>
                         </div> :
-                        <div>
-                            <p>Debes <Link>iniciar sesion</Link> o <Link>registrarte</Link> para escribir una reseña</p>
-                            <button className="button-review">Cerrar</button>
+                        <div className="reserve-content">
+                            <div className="reserve-box">
+                                <p>Debes <Link to='/inicio-sesion'>iniciar sesion</Link> o <Link to='/registrarse'>registrarte</Link> para escribir una reseña</p>
+                                <button onClick={handleCloseReseña} className="button-review">Cerrar</button>
+                            </div>
                         </div>
 
 

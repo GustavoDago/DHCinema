@@ -68,27 +68,32 @@ const header = () => {
           <Link to="/peliculas/pagina/1">
             <p>CARTELERA</p>
           </Link>
-          <Link to="/reservas/">
+          {sessionStorage.getItem('id' && <Link to="/reservas/">
             <p>RESERVAS</p>
-          </Link>
-          <Link to="/favoritos/">
+          </Link>)}
+          {sessionStorage.getItem('id' && <Link to="/favoritos/">
             <p>FAVORITOS</p>
-          </Link>
+          </Link>)}
+
         </div>
       </div>
       <div className='right-header'>
-        
+
         <DropdownProfile />
         <div className='divHambur'>
           <button className='logoHambur' onClick={handleToggle}>
-          {!isOpen ? <FontAwesomeIcon icon={faBars} />: <img src='/icons/close.svg'/> }
+            {!isOpen ? <FontAwesomeIcon icon={faBars} /> : <img src='/icons/close.svg' />}
           </button>
-            {isOpen && (
+          {isOpen && (
             <div className="dropdown-content">
               <Link to="/">HOME</Link>
               <Link to="/peliculas/pagina/1">CARTELERA</Link>
-              <Link to="/reservas">RESERVAS</Link>
-              <Link to="/favoritos">FAVORITOS</Link>
+              {sessionStorage.getItem('id' && <Link to="/reservas/">
+                <p>RESERVAS</p>
+              </Link>)}
+              {sessionStorage.getItem('id' && <Link to="/favoritos/">
+                <p>FAVORITOS</p>
+              </Link>)}
             </div>
           )}
         </div>

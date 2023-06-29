@@ -1,17 +1,12 @@
-import { Link } from "react-router-dom";
+
 import React, { useEffect, useState } from "react";
 import { searchMoviesForCategories, searchFavorite, updateFavorite } from "../components/UseFetch";
-import NuevoFavorito from "../components/Nuevo-favorito";
+
 
 const Favorites = () => {
-  const [errorMessage, setErrorMessage] = useState('')
   const [favorites, setFavorites] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [allMovies, setAllMovies] = useState([])
-
-
-
-
 
   useEffect(() => {
     setIsLoading(true)
@@ -93,9 +88,7 @@ const Favorites = () => {
       }
   
       fetchAllMovies()
-  }, 200)
-    
-  }
+  }, 300)}
 
   return (
     <div className="favorites-box">

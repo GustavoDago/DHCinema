@@ -24,9 +24,13 @@ const DropdownProfile = () => {
         if (confirm) {
             sessionStorage.clear()
             setMessage(
+                <div className="reserve-content">
+                <div className="reserve-box">
                 <div className="modal-content-register">
                     Cerró sesión correctamente!
                     <img src='/icons/accept.svg' />
+                </div>
+                </div>
                 </div>
             )
             setTimeout(() => {
@@ -43,14 +47,15 @@ const DropdownProfile = () => {
     const handleShowConfirmation = () => {
         setShowConfirmation(true)
         setMessage(
-            <div className="modal-content-register">
-                <div className="log-out-confirmation">
+            <div className="reserve-content">
+                <div className="reserve-box">
                     <h3>Seguro que quieres cerrar sesión?</h3>
-                </div>
-                <div className="modal-buttons">
+                    <div className="modal-buttons">
                     <button onClick={() => handleConfirm(true)}>Si</button>
                     <button onClick={() => handleConfirm(false)}>No</button>
                 </div>
+                </div>
+                
             </div>
         )
     }

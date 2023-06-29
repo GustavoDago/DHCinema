@@ -315,7 +315,7 @@ function Home() {
 
                                     </div>
                                     <img
-                                        src={item.portada}
+                                        src={item.banner}
                                         alt="Desctacados"
                                     ></img>
                                 </figure>
