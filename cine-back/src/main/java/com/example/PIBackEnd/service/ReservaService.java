@@ -8,6 +8,7 @@ import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.repository.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,13 +31,16 @@ public class ReservaService {
 
     private ISalaRepository salaRepository;
 
+    private EmailService emailService;
+
     @Autowired
-    public ReservaService(IReservaRepository reservaRepository, IFuncionRepository funcionRepository, IPeliculaRepository peliculaRepository, IUsuarioRepository usuarioRepository, ISalaRepository salaRepository) {
+    public ReservaService(IReservaRepository reservaRepository, IFuncionRepository funcionRepository, IPeliculaRepository peliculaRepository, IUsuarioRepository usuarioRepository, ISalaRepository salaRepository, EmailService emailService) {
         this.reservaRepository = reservaRepository;
         this.funcionRepository = funcionRepository;
         this.peliculaRepository = peliculaRepository;
         this.usuarioRepository = usuarioRepository;
         this.salaRepository = salaRepository;
+        this.emailService = emailService;
     }
 
     public ReservaDTO guardarReserva(ReservaDTO reserva) throws ResourceBadRequestException {
@@ -52,6 +56,15 @@ public class ReservaService {
             if(optionalFuncion.isEmpty()){
                 throw new ResourceBadRequestException("Error. No se encontró la Funcion con ID: " + reserva.getFuncion_id());
             }
+
+            SimpleMailMessage mensajeEmail = new SimpleMailMessage();
+            mensajeEmail.setFrom("dhcinemaauth@gmail.com");
+            mensajeEmail.setTo(optionalUsuario.get().getEmail());
+            mensajeEmail.setSubject("Confirmación de reserva");
+            mensajeEmail.setText("Tu reserva ha sido guardada exitosamente.");
+
+            emailService.sendEmail(mensajeEmail);
+
             return convertirReservaaReservaDTO(reservaRepository.save(convertirReservaDTOaReserva(reserva)));
         }
     }
