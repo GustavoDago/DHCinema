@@ -1,6 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react"
-import { fetchCinemaForTitle, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
+import { fetchAllCinemas, fetchCinemaForTitle, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import Modal from "react-modal"
 import ReactPlayer from "react-player"
@@ -75,6 +75,7 @@ function MovieDetails() {
             const search = await fetchCinemaForTitle(title)
             if (search) {
                 setAllCinemas(search)
+                
                 const names = search.map(cine => cine.nombre);
                 const filterN = names.filter(name => name !== cinema)
                 console.log(filterN)
@@ -85,6 +86,7 @@ function MovieDetails() {
                         return fetchFunc;
                     }
                 });
+                console.log(search)
                 const actives = filterN.map(name => {return false})
                 setAllActivesAccordions(actives)
                 Promise.all(searchFuncPromises).then(functions => {
@@ -96,8 +98,10 @@ function MovieDetails() {
         } else {
             const search = await fetchCinemaForTitle(title)
             if (search) {
-                setAllCinemas(search)
+                
                 const names = search.map(cine => cine.nombre);
+                const newCinemas = search.map(cine => {return {...cine, isActive:false}})
+                setAllCinemas(newCinemas)
                 setAllCinemasNames(names);
                 const searchFuncPromises = names.map(async name => {
                     const fetchFunc = await fetchSearchFunction(name, title);
@@ -122,6 +126,17 @@ function MovieDetails() {
         setShowReseña(false)
     }
 
+    const handleOnChangeActive = (id,active) => {
+        if(id != null){
+            const newArray = allCinemas.map(cine => {
+                if(cine.id == id)
+                    cine.isActive = active;
+                return cine;
+            })
+
+            setAllCinemas(newArray)
+        }
+    }
 
     const handleSubmit = async () => {
         setShowReseña(false)
@@ -242,7 +257,6 @@ function MovieDetails() {
             setDatosObjeto(dividedData)
         }
     }, [selectedDate])
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -466,7 +480,7 @@ function MovieDetails() {
                                 {!isLoading &&
                                     <div className="movie-first-info-details">
                                         <img src={movie.portada} />
-                                        <div>
+                                        <div className="no-mostrar">
                                             <h4>GENEROS </h4>
 
                                             {movie.categorias.map(categorias => (
@@ -924,7 +938,7 @@ function MovieDetails() {
                                             console.log(rank)
                                             console.log(allUsers)
                                             console.log(sessionStorage.getItem('id'))
-                                            const usuario = allUsers.find(user => user.id == rank.idUsuario)
+                                            const usuario = allUsers.find(user => user.id == rank.usuario_id)
                                             if (usuario) {
                                                 return <div className="rank-comment">
 
@@ -950,7 +964,7 @@ function MovieDetails() {
                                                 </div>;
                                             }
                                         })}
-                                    <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
+                                    
                                 </div>
 
                             ) :
@@ -958,8 +972,9 @@ function MovieDetails() {
                                     <div className="no-rank">
                                         <h4>Esta película no posee ninguna reseña.</h4>
                                     </div>
-                                    <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
+                                    
                                 </div>}
+                                <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
                         </div>
 
                     </div>
@@ -968,8 +983,24 @@ function MovieDetails() {
 
 
                 <div className="cinema-policy">
-                    <h2 className="tituloPoliticas">Qué tenés que saber</h2>
-                    <BloquePoliticas />
+                    <h2 className="tituloPoliticas">POLTICAS DE CINES</h2>
+                    {!isLoading && (allCinemas.map((cinema) => {
+                        console.log(cinema)
+                        return <Accordion 
+                        title={cinema.nombre}
+                        content={
+                        <BloquePoliticas 
+                            policys={cinema.politicas}
+                        />}
+                        active={cinema.isActive}
+                        onChange={handleOnChangeActive}
+                        index={cinema.id}
+                    />
+                    }
+
+                    ))}
+                    
+                    
                 </div>
 
             </div>

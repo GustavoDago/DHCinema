@@ -16,7 +16,6 @@ const footer = () => {
 
     return (
         <footer>
-            
             <div className="derechosFooter">
                 <Link to="../">
                     <img src="../../icons/dhcinema2-logo.png" alt="logoCinemaFooter" />
@@ -30,11 +29,6 @@ const footer = () => {
             </div>
             <div className="iconosFooter">
                 <a target='_blank' rel="noopener noreferrer" onClick={openModal}>
-                <ShareModal
-                    showConfirmation={showModal}
-                    closeModal={handleCloseModal}
-                    shouldClose={true}
-                />
                 <FontAwesomeIcon icon={faCloudsmith} />
                 </a>
                 <a href="https://m.facebook.com" target="_blank" rel="noopener noreferrer">
@@ -50,7 +44,11 @@ const footer = () => {
                     <FontAwesomeIcon icon={faInstagram} />
                 </a>
             </div>
-            
+            <ShareModal
+                    showConfirmation={showModal}
+                    closeModal={handleCloseModal}
+                    shouldClose={true}
+            />
         </footer>
 
     )

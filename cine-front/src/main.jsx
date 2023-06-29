@@ -15,7 +15,6 @@ import ListadoCategorias from './components/ListadoCategorias.jsx'
 import NuevaCategoria from './components/Nueva-categoria.jsx'
 import AsignarCategoria from './components/AsignarCategoria.jsx'
 import ConfirmAccount from './routes/ConfirmAccount.jsx'
-import Categories from './routes/Categories.jsx'
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
 import AsignarRol from './components/AsignarRol.jsx'
 import ListadoCiudades from './components/ListadoCiudades.jsx'
@@ -31,7 +30,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path='/confirmar-cuenta' element={<ConfirmAccount />} />
       <Route path='/' element={<App />}>
         <Route path='/' element={<Home />} />
-        <Route path='categorias' element={<Categories/>} />
         <Route path='favoritos' element={<Favorites/>} />
         <Route path='peliculas/pagina/:id' element={<ShowMore />} />
         <Route path='peliculas/:id' element={<MovieDetails />} />
