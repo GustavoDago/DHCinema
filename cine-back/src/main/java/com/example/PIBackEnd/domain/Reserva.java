@@ -41,6 +41,9 @@ public class Reserva {
     private String cine;
 
     @Column
+    private String banner;
+
+    @Column
     private String portadaPelicula;
 
     @Column
@@ -200,5 +203,13 @@ public class Reserva {
 
     public void setPortadaPelicula(String portadaPelicula) {
         this.portadaPelicula = portadaPelicula;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 }
