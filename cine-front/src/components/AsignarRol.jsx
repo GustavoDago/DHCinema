@@ -56,10 +56,6 @@ const AsignarRol = () => {
     try {
       for (const user of userList) {
         const updatedRoles = user.roles.filter(rol => rol.isSelected).map(rol => ({ nombre: rol.nombre }));
-
-        
-
-
         const requestBody = updatedRoles
         console.log(requestBody);
         const response = await fetch(`http://localhost:8080/usuarios/${user.email}/roles`, {

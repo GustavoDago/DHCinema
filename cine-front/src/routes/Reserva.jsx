@@ -1,7 +1,8 @@
 import { Stepper, Step, StepLabel } from "@mui/material";
 import { useEffect, useState } from "react";
-import { fetchSearchFunction, searchMovieDetails } from "../components/UseFetch";
-import { useParams } from "react-router-dom";
+import { fetchSearchFunction, searchMovieDetails, fetchReserve } from "../components/UseFetch";
+import { useNavigate, useParams } from "react-router-dom";
+import BounceLoader from "react-spinners/BounceLoader";
 import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -40,9 +41,10 @@ const Reserva = () => {
     const [searchFunctions, setSearchFunctions] = useState(null)
     const [seats, setSeats] = useState(1)
     const [price, setPrice] = useState(0)
-    const [message,setMessage] = useState("Cargando la reserva")
-    const [submessage,setSubmessage] = useState("Espere un momento mientras cargamos su reserva. Por favor no refresque ni cierre la pagina.")
-    const [contentAwait,setContentAwait] = useState(true)
+    const [message, setMessage] = useState("Cargando la reserva")
+    const [submessage, setSubmessage] = useState("Espere un momento mientras cargamos su reserva. Por favor no refresque ni cierre la pagina.")
+    const navigate = useNavigate()
+    const [contentAwait, setContentAwait] = useState(true)
     const params = useParams()
 
 
@@ -125,6 +127,34 @@ const Reserva = () => {
         newData.usuario_id = parseInt(sessionStorage.getItem('id'));
         newData.funcion_id = funct.id;
         console.log(newData)
+        try {
+            const reserva = await fetchReserve(newData)
+            if (reserva) {
+                setTimeout(() => {
+                    setTimeout(() => {
+                        setContentAwait(false)
+                        setMessage("RESERVA COMPLETADA")
+                        setSubmessage("Su reserva fue ingresada con exito")
+
+                    }, 3000)
+                }, 4000)
+            } else {
+                setContentAwait(false)
+                setMessage("RESERVA DENEGADA")
+                setSubmessage("Ya hay una reserva activa con su email")
+            }
+
+        } catch (error) {
+            setMessage("RESERVA DENEGADA")
+            setSubmessage("Ya hay una reserva activa con su email")
+            setContentAwait(false)
+            console.error(error)
+            setTimeout(() => {
+                setMessage('')
+                setSubmessage('')
+                navigate('/')
+            }, 3000)
+        }
     }
 
     return (
@@ -331,10 +361,13 @@ const Reserva = () => {
                                         value={seats}
                                         onChange={(event) => setSeats(event.target.value)}
                                     />
+                                    {seats <= 0 && (<p>Debe seleccionar un asiento</p>)}
+                                    {seats > 55 && (<p>Los asientos no deben superar 55</p>)}
                                 </div>
                                 <div className="reserve-summary-selection">
                                     <h5>SELECCIONASTE:</h5>
                                     <p>{titulo} en {funct.modalidad} {funct.opcionesIdioma} el {moment(funct.fechaProyeccion).format('dddd, d MMMM YYYY')} a las {funct.horaProyeccion} hs para {seats} personas</p>
+
                                 </div>
                             </div>
 
@@ -361,13 +394,25 @@ const Reserva = () => {
                             </div>
                         </div>
 
-                        <button type="submit" form="reserve-form">Completar Reserva</button>
+                        <button disabled={seats <= 0 || seats > 55} type="submit" form="reserve-form">Completar Reserva</button>
                     </div>
                 </div>
             )}
 
-            {!isLoading && activeStep == 2 &&(
-                <div>
+            {!isLoading && activeStep == 2 && (
+                <div className="complete-reserve">
+
+                    <h3>{message}</h3>
+                    <p>{submessage}</p>
+                    <div className="complete-reserve-img">
+                        {contentAwait ? (<BounceLoader
+                            color="#36d7b7"
+                            speedMultiplier={2}
+                            loading
+                        />) : (message.includes("COMPLETADA") ? (<img src="/icons/accept.svg" />) : (<img src="/icons/denied.svg" />))}
+                    </div>
+
+
 
                 </div>
             )}

@@ -1,43 +1,140 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-
+import { searchMoviesForCategories, searchFavorite, updateFavorite } from "../components/UseFetch";
+import NuevoFavorito from "../components/Nuevo-favorito";
 
 const Favorites = () => {
   const [errorMessage, setErrorMessage] = useState('')
-  const [Favorites, setFavorites] = useState([])
-  const email = sessionStorage.getItem("email");
-  const url = `http://localhost:8080/favoritos/${encodeURIComponent(email)}`;
+  const [favorites, setFavorites] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [allMovies, setAllMovies] = useState([])
 
-  
-  
+
+
+
+
   useEffect(() => {
-    const settings = {
-      method: 'GET'
+    setIsLoading(true)
+    const fetchFavorites = async () => {
+      try {
+        const response = await searchFavorite(sessionStorage.getItem("email"))
+        if (Array.isArray(response) && response.length > 0) {
+          setFavorites(response)
+        }
+      } catch (error) {
+        console.error(error); // Handle the error if it occurs
+      }
+
     }
-    fetch(url, settings)
-      .then(response => response.json())
-      .then(data => setFavorites(data))
+
+    fetchFavorites()
+
+    const fetchAllMovies = async () => {
+      try {
+        const response = await searchMoviesForCategories('Ninguno')
+        if (response) {
+          setAllMovies(response)
+          setIsLoading(false)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchAllMovies()
   }, [])
+
+  const handleUnfavorite = (id,idFavorite) => {
+    setIsLoading(true)
+    const pelicula_id = id;
+    const usuario_id = sessionStorage.getItem("id");
+
+    const categoryData = {
+      pelicula_id,
+      usuario_id,
+    };
+
+
+    const fetchUpdate = async() => {
+      try{
+        await updateFavorite(idFavorite,categoryData)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchUpdate()
+
+    setTimeout(() => {
+      const fetchFavorites = async () => {
+        try {
+          const response = await searchFavorite(sessionStorage.getItem("email"))
+          if (Array.isArray(response) && response.length > 0) {
+            setFavorites(response)
+          }
+        } catch (error) {
+          console.error(error); // Handle the error if it occurs
+        }
+  
+      }
+  
+      fetchFavorites()
+  
+      const fetchAllMovies = async () => {
+        try {
+          const response = await searchMoviesForCategories('Ninguno')
+          if (response) {
+            setAllMovies(response)
+            setIsLoading(false)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+  
+      fetchAllMovies()
+  }, 200)
+    
+  }
+
   return (
-    <div>
-      <h2>favorites</h2>
-      <tbody>
-            {Favorites.map((favorite) => (
-              <React.Fragment key={favorite.id}>
-                <tr id={favorite.id}>
-                  <th scope='row'>{favorite.id}</th>
-                  <td scope='row'>{favorite.nombre}</td>
+    <div className="favorites-box">
+      <div className="favorites-container">
+        <h2>FAVORITOS</h2>
+        {!isLoading && favorites.map(favorite => {
+          const data = allMovies.filter(movie => movie.id == favorite.idPelicula)
+          if (Array.isArray(data) && data.length > 0) {
+            if (favorite.favorito) {
+              return (
 
-                  <td scope='row'><button ><Link key={favorite.id} to={`/admin/Favorites/${favorite.id}`}>✍</Link> </button></td>
-                  
-                </tr>
+                <div className="reserve-information">
+                  <img src={data[0].portada} />
+                  <div className="favorites-information">
 
-              </React.Fragment>
-            ))}
+                    <div className="reserve-information-text">
+                      <h4>{data[0].titulo}</h4>
+                      {favorite.favorito ? <img onClick={() => handleUnfavorite(data[0].id,favorite.id)} src="/icons/new-favorite.svg" /> : <img src="/icons/unfavorite.svg" />}
 
+                    </div>
+                    <div className="reserve-text-elements">
+                      <div>
+                        <h5>Clasificación</h5>
+                        <p>{data[0].caracteristicas.clasificacion}</p>
+                      </div>
+                      <div>
+                        <h5>Tiempo</h5>
+                        <p>{data[0].caracteristicas.duracion} minutos</p>
+                      </div>
 
+                    </div>
+                  </div>
+                </div>
 
-          </tbody>
+              )
+            }
+          }
+        })}
+      </div>
     </div>
 
   )

@@ -17,6 +17,7 @@ import ModalGlobal from "../components/GlobalModal";
 import es from "date-fns/locale/es"
 import ActorsCard from "../components/MovieDetails/ActorsCard";
 import { array } from "yup";
+import NuevoFavorito from "../components/Nuevo-favorito";
 registerLocale('es', es)
 
 Modal.setAppElement('#root')
@@ -478,6 +479,10 @@ function MovieDetails() {
                             </div>
                             <div className="movie-details-title">
                                 {!isLoading && <h1>{movie.titulo.toUpperCase()}</h1>}
+                                {!isLoading &&
+                                <NuevoFavorito 
+                                    id={movie.id}/> }
+                                
                             </div>
 
                         </div>
@@ -716,7 +721,7 @@ function MovieDetails() {
                     <div className="map-container">
                         <h2 className="details-titles">UBICACIONES DE CINES</h2>
                         <GoogleMap
-                            mapContainerStyle={{ width: '100%', height: '100%' }}
+                            mapContainerStyle={{ width: '100%', height: '80%' }}
                             center={location}
                             zoom={6}
                         >
