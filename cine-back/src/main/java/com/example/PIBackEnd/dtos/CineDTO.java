@@ -1,7 +1,5 @@
 package com.example.PIBackEnd.dtos;
 
-import com.example.PIBackEnd.domain.Politica;
-
 public class CineDTO {
 
     private Long id;
@@ -14,12 +12,10 @@ public class CineDTO {
 
     private Double longitud;
 
-    private Politica politicas;
-
     private Long ciudad_id;
 
     public Boolean chequearAtributosVacios(){
-        return null == this.nombre || null == this.direccion || null == this.latitud || null == this.longitud || null == this.ciudad_id || null == this.politicas;
+        return null == this.nombre || null == this.direccion || null == this.latitud || null == this.longitud || null == this.ciudad_id;
     }
 
     public Long getId() {
@@ -68,13 +64,5 @@ public class CineDTO {
 
     public void setCiudad_id(Long ciudad_id) {
         this.ciudad_id = ciudad_id;
-    }
-
-    public Politica getPoliticas() {
-        return politicas;
-    }
-
-    public void setPoliticas(Politica politicas) {
-        this.politicas = politicas;
     }
 }

@@ -167,7 +167,6 @@ public class CineService {
         cine.setLatitud(cineDTO.getLatitud());
         cine.setLongitud(cineDTO.getLongitud());
         cine.setVigente(true);
-        cine.setPoliticas(cineDTO.getPoliticas());
         ciudad.setId(cineDTO.getCiudad_id());
 
         cine.setCiudad(ciudad);
@@ -183,7 +182,6 @@ public class CineService {
         cineDTO.setDireccion(cine.getDireccion());
         cineDTO.setLatitud(cine.getLatitud());
         cineDTO.setLongitud(cine.getLongitud());
-        cineDTO.setPoliticas(cine.getPoliticas());
         cineDTO.setCiudad_id(cine.getCiudad().getId());
 
         return cineDTO;

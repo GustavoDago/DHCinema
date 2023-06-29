@@ -68,12 +68,12 @@ const header = () => {
           <Link to="/peliculas/pagina/1">
             <p>CARTELERA</p>
           </Link>
-          {sessionStorage.getItem('id' && <Link to="/reservas/">
+          {sessionStorage.getItem('id') && <Link to="/reservas/">
             <p>RESERVAS</p>
-          </Link>)}
-          {sessionStorage.getItem('id' && <Link to="/favoritos/">
+          </Link>}
+          {sessionStorage.getItem('id') && <Link to="/favoritos/">
             <p>FAVORITOS</p>
-          </Link>)}
+          </Link>}
 
         </div>
       </div>
@@ -88,12 +88,12 @@ const header = () => {
             <div className="dropdown-content">
               <Link to="/">HOME</Link>
               <Link to="/peliculas/pagina/1">CARTELERA</Link>
-              {sessionStorage.getItem('id' && <Link to="/reservas/">
+              {sessionStorage.getItem('id') && <Link to="/reservas/">
                 <p>RESERVAS</p>
-              </Link>)}
-              {sessionStorage.getItem('id' && <Link to="/favoritos/">
+              </Link>}
+              {sessionStorage.getItem('id') && <Link to="/favoritos/">
                 <p>FAVORITOS</p>
-              </Link>)}
+              </Link>}
             </div>
           )}
         </div>

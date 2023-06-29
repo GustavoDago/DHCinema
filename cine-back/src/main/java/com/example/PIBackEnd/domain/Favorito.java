@@ -12,7 +12,7 @@ public class Favorito {
 
     @ManyToOne
     @JsonIgnore
-     @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne

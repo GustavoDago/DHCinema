@@ -58,6 +58,7 @@ public class SecurityConfig {
                 .requestMatchers("/cines/**").permitAll()
                 .requestMatchers("/salas/**").permitAll()
                 .requestMatchers("/reservas/**").permitAll()
+                .requestMatchers("/politicas/**").permitAll()
 
                 .requestMatchers("/categorias/**").permitAll()
                 .requestMatchers("/usuarios/**").permitAll()
