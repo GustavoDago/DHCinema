@@ -154,6 +154,7 @@ public class ReservaService {
         reserva.setSala(sala.get().getNombre());
         reserva.setCine(sala.get().getCine().getNombre());
         reserva.setPortadaPelicula(pelicula.get().getPortada());
+        reserva.setBanner(pelicula.get().getBanner());
         reserva.setVigente(true);
 
         reserva.setUsuario(usuario.get());

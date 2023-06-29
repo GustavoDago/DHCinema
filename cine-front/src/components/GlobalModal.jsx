@@ -14,7 +14,7 @@ const ModalGlobal = ({ showConfirmation,closeModal,message,shouldClose }) => {
             shouldCloseOnOverlayClick= {shouldClose}
         >
 
-            <div className="modal-conteiner">
+            <div>
                 {message}
             </div>
         </Modal>

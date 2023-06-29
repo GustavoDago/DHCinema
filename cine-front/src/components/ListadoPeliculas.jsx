@@ -30,8 +30,11 @@ const ListadoPeliculas = () => {
       
       try {
         const movies = await searchMoviesForCategories("Ninguno");
-        setPeliculas(movies);
-        setIsLoading(false)
+        if(movies){
+          setPeliculas(movies);
+          setIsLoading(false)
+        }
+        
       } catch (error) {
         console.log(error)
       }
@@ -49,21 +52,28 @@ const ListadoPeliculas = () => {
     if (res == 'yes') {
       try {
         const response = await deleteMovie(movieId)
-        if (response == true) {
+        if (response) {
           setDeleted(true)
-          const fila = document.querySelector(`tr[id="${id}"]`);
+          const fila = document.querySelector(`tr[id="${movieId}"]`);
           fila.remove();
           setContent('La pelicula fue eliminada con éxito')
           setTimeout(() => {
-            setShowConfirmation(false)
+            setShowModal(false)
+            setDeleted(false)
           }, 2000);
         } else {
           setContent('Hubo un problema a la hora de eliminar la película')
-          setShowConfirmation(false)
+          setTimeout(() => {
+            setShowModal(false)
+            setDeleted(false)
+          }, 2000);
         }
       } catch (error) {
         setContent('Hubo un error en la petición a la red')
-        setShowConfirmation(false)
+        setTimeout(() => {
+          setShowModal(false)
+          setDeleted(false)
+        }, 2000);
       }
     } else {
       setShowModal(false)
