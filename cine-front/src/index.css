@@ -2223,7 +2223,7 @@ footer {
 
 .crearCategoria{
   background-color: #E0E1DD;
-  margin: 0px 300px;
+  margin: 0px 35%;
   color: #000;
   border-radius: 10px;
 }
@@ -3580,9 +3580,9 @@ div .asignoCategorias div {
   
 
   /* Crear Categoria */
-  .crearCategoria{
-    width: 90%;
-    margin: 0px 0px 0px 5%;
+  .crearCategoria {
+    width: 80%;
+    margin: 0px 0px 0px 10%;
   }
   .crearCategoria .form-crearCategoria button{
     margin-bottom: 25px;
@@ -3827,6 +3827,8 @@ div .asignoCategorias div {
   /* Crear Categoria */
   .crearCategoria{
     background-color: #e7ecf7;
+    width: 90vw;
+    margin: 0% 0% 0% 7%;
   }
   .crearCategoria form div{
     width: 25vh;
@@ -3853,6 +3855,7 @@ div .asignoCategorias div {
     background-color: #0D1B2A;
     color: #E0E1DD;
   }
+  
   .mensajeError{
     color: red;
   }
