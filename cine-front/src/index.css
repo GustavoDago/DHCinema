@@ -189,6 +189,10 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+
+.logoHambur{
+  display: none;
+}
 .account-container {
   position: relative;
   padding-right: 30px;
@@ -3413,6 +3417,15 @@ div .asignoCategorias div {
 /** Tablet **/
 
 @media (min-width:425px) and (max-width:768px) {
+  .logoHambur{
+        display: block;
+    }
+  
+  .header-section{
+    display: none;
+  }
+
+
   .movie-container{
     width: 86vw;
   }
@@ -3494,18 +3507,48 @@ div .asignoCategorias div {
 @media (min-width:320px) and (max-width:425px) {
   /* Header */
   header {
+    display: block;
     flex-direction: column;
     align-items: center;
+    height: 130px;
+  }
+  .logoHambur{
+        display: block;
+    }
+  .header-section{
+      display: none;
+    }
+  .divHambur{
+    padding-right: 2%;
   }
   /* .admin-banner{
     margin-top: 15vh;
   } */ 
   /* Tocar de vuelta cuando el header este arreglado */
   
+  /* funcionalidad de logo hambur */
+  
+  /* -----------------------------*/
+  .headerContainer{
+    position: initial;
+  }
 
+  .search-bar{
+    padding: 0;
+    width: 225px;
+    padding-left: 3%;
+  }
+
+  .account-trigger div{
+    width: 32px;
+    height: 30px;
+    
+  }
+  
   .headerContainer img {
-    height: 130px;
-    width: 200px;
+    height: 70px;
+    width: 100px;
+    
   }
 
   .headerUsuario {
@@ -3521,6 +3564,40 @@ div .asignoCategorias div {
 
   .headerUsuario button {
     font-size: 12px;
+  }
+
+  div.admin-details{
+    margin-top: 60px;
+  }
+
+
+  .admin-details h1{
+    padding: 0;
+    font-size: large;
+    padding-left: 5%;
+  }
+
+  .admin-details h2{
+    width: 90%;
+    font-size: small;
+  }
+
+  .right-header div{
+    margin-right: 1%;
+    padding-left: 2%;
+  }
+
+  .right-header div .account-container{
+    margin-right: 0;
+    margin-left: 5px;
+  }
+
+  .account-container{
+    padding-right: 0;
+  }
+
+  div.account-container{
+    padding-left: 4%;
   }
 
   /* Contenido principal */

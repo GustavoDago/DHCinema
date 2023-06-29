@@ -4,11 +4,13 @@ import { fetchMovieTilte } from './UseFetch'
 import { useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 Modal.setAppElement('#root')
 
 const header = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
   const navigate = useNavigate();
@@ -82,6 +84,11 @@ const header = () => {
           </form>
         </div>
         <DropdownProfile />
+        <div className='divHambur'>
+        <button className='logoHambur'>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+        </div>
       </div>
 
       <Modal
