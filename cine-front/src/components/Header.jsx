@@ -89,10 +89,10 @@ const header = () => {
               <Link to="/">HOME</Link>
               <Link to="/peliculas/pagina/1">CARTELERA</Link>
               {sessionStorage.getItem('id') && <Link to="/reservas/">
-                <p>RESERVAS</p>
+                RESERVAS
               </Link>}
               {sessionStorage.getItem('id') && <Link to="/favoritos/">
-                <p>FAVORITOS</p>
+                FAVORITOS
               </Link>}
             </div>
           )}
