@@ -29,7 +29,7 @@ public class FavoritoController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<List<Favorito>> buscarFavoritosPorUsuario(@PathVariable String email) throws ResourceNoContentException{
+    public ResponseEntity<List<FavoritoDTO>> buscarFavoritosPorUsuario(@PathVariable String email) throws ResourceNoContentException{
         return ResponseEntity.ok(favoritoService.buscarFavoritosPorUsuario(email));
     }
 }

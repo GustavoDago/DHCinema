@@ -22,6 +22,9 @@ public class Categoria {
     @Column(length = 500)
     private String urlImagen;
 
+    @Column
+    private Boolean vigente;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "categorias")
     private Set<Pelicula> peliculas = new HashSet<>();
@@ -64,5 +67,13 @@ public class Categoria {
 
     public void setPeliculas(Set<Pelicula> peliculas) {
         this.peliculas = peliculas;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }

@@ -21,7 +21,7 @@ const AsignarRol = () => {
               const isSelected = user.roles.some(userRol => userRol.nombre === rol.nombre);
               return { ...rol, isSelected };
             });
-            return { ...user, roles: userRoles };
+            return { ...user, roles: userRoles, isActive: false };
           })
           setUserList(updatedList);
           setIsLoading(false);
@@ -56,10 +56,6 @@ const AsignarRol = () => {
     try {
       for (const user of userList) {
         const updatedRoles = user.roles.filter(rol => rol.isSelected).map(rol => ({ nombre: rol.nombre }));
-
-        
-
-
         const requestBody = updatedRoles
         console.log(requestBody);
         const response = await fetch(`http://localhost:8080/usuarios/${user.email}/roles`, {
@@ -81,13 +77,28 @@ const AsignarRol = () => {
     }
   };
 
+  const handleActive = (index,active) => {
+    if(index){
+      const newArray = userList.map(user => {
+        if(user.id == index){
+          user.isActive = active
+        }
+        return user;
+      })
+      setUserList(newArray)
+    }
+  }
+
   return (
-    <div>
-      <div>Listado Usuarios</div>
+    <div className="asignacionesRol">
+      <div>
+        <h2>Listado Usuarios</h2>
+      </div>
       {!isLoading && Array.isArray(userList) && userList.length > 0 ? (
         userList.filter(user => user.email !== sessionStorage.getItem('email')).map(user => (
           <Accordion
             key={user.id}
+
             title={
               <div>
                 <h3>{user.id}</h3>
@@ -95,11 +106,11 @@ const AsignarRol = () => {
               </div>
             }
             content={
-              <div>
+              <div className="divContent">
                 <h4>Nombre: {user.nombre}</h4>
                 <h4>Apellido: {user.apellido}</h4>
                 <h4>Email: {user.email}</h4>
-                <h4>Esta activo: {user.activo ? 'Usuario activado' : 'Falta confirmacion del email'}</h4>
+                <h4>Está activo: {user.activo ? 'Usuario activado' : 'Falta confirmación del email'}</h4>
                 <label>Roles:</label>
                 {Array.isArray(user.roles) && user.roles.length > 0 && (
                   user.roles.map(rol => (
@@ -116,11 +127,13 @@ const AsignarRol = () => {
                 )}
               </div>
             }
-            active={false}
+            index={user.id}
+            onChange={handleActive}
+            active={user.isActive}
           />
         ))
       ) : 'Cargando listado'}
-      <button onClick={submitChanges}>Guardar</button>
+      <button onClick={submitChanges} className="new-button">Guardar</button>
     </div>
   );
 };

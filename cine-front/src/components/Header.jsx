@@ -4,14 +4,17 @@ import { fetchMovieTilte } from './UseFetch'
 import { useNavigate } from "react-router-dom"
 import Modal from "react-modal"
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 Modal.setAppElement('#root')
 
 const header = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Buscando. Por favor, aguarde...")
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const customStyles = {
     overlay: { zIndex: 1000 }
@@ -32,14 +35,14 @@ const header = () => {
       if (response != false) {
         navigate(`/peliculas/${response.id}`)
       } else {
-        setErrorMessage("No se pudo encontrar la pelicula o no existe.")
+        setErrorMessage("No se pudo encontrar la película o no existe.")
         setTimeout(() => {
           setShowConfirmation(false)
         }, 2000)
         return
       }
     } catch (error) {
-      setErrorMessage("Error al cargar la pelicula.")
+      setErrorMessage("Error al cargar la película.")
       setTimeout(() => {
         setShowConfirmation(false)
       }, 2000)
@@ -47,6 +50,10 @@ const header = () => {
   }
 
   const modalClassName = showConfirmation ? 'modal-overlay' : 'modal-overlay hidden';
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <header>
@@ -61,24 +68,35 @@ const header = () => {
           <Link to="/peliculas/pagina/1">
             <p>CARTELERA</p>
           </Link>
-          <Link to="/categorias/">
-            <p>CATEGORIAS</p>
-          </Link>
+          {sessionStorage.getItem('id') && <Link to="/reservas/">
+            <p>RESERVAS</p>
+          </Link>}
+          {sessionStorage.getItem('id') && <Link to="/favoritos/">
+            <p>FAVORITOS</p>
+          </Link>}
+
         </div>
       </div>
       <div className='right-header'>
-        <div className="search-movie">
-          <form onSubmit={handleSearch} className='search-bar'>
-            <input
-              
-              type="text"
-              placeholder="Buscar películas..."
-              value={searchTerm}
-              onChange={handleInputChange} />
-            <button type='submit'><img src='/icons/search.svg' /></button>
-          </form>
-        </div>
+
         <DropdownProfile />
+        <div className='divHambur'>
+          <button className='logoHambur' onClick={handleToggle}>
+            {!isOpen ? <FontAwesomeIcon icon={faBars} /> : <img src='/icons/close.svg' />}
+          </button>
+          {isOpen && (
+            <div className="dropdown-content">
+              <Link to="/">HOME</Link>
+              <Link to="/peliculas/pagina/1">CARTELERA</Link>
+              {sessionStorage.getItem('id') && <Link to="/reservas/">
+                RESERVAS
+              </Link>}
+              {sessionStorage.getItem('id') && <Link to="/favoritos/">
+                FAVORITOS
+              </Link>}
+            </div>
+          )}
+        </div>
       </div>
 
       <Modal

@@ -81,7 +81,7 @@ function SignIn() {
                     if (response) {
                         console.log(response)
                         setIsLoading(false);
-                        setMessage('Ingreso sesion correctamente.')
+                        setMessage('Ingreso sesión correctamente.')
                         sessionStorage.setItem('id',response.id)
                         sessionStorage.setItem('nombre', response.nombre)
                         sessionStorage.setItem('apellido', response.apellido)
@@ -99,7 +99,7 @@ function SignIn() {
 
             } else {
                 setIsLoading(false);
-                setMessage('Por favor, verifica tu direccion de correo.')
+                setMessage('Por favor, verifica tu dirección de correo.')
                 setAccepted(false);
                 setTimeout(() => {
                     setMessage('')
@@ -192,7 +192,7 @@ function SignIn() {
             <Modal
                 isOpen={showConfirmation}
                 onRequestClose={closeModal}
-                contentLabel="Confirmacion"
+                contentLabel="Confirmación"
                 className="modal"
                 style={customStyles}
                 shouldCloseOnOverlayClick={false}

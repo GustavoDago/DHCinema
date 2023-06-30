@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import ModalGlobal from "./GlobalModal";
+import Accordion from "./Accordion";
 
 const DropdownProfile = () => {
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('')
+    const [active, setActive] = useState(false)
     let menuRef = useRef();
     const navigate = useNavigate()
+
+    const handleActive = (index, act) => {
+        setActive(act)
+    }
 
     const closeModal = () => {
         setShowConfirmation(false)
@@ -18,16 +24,20 @@ const DropdownProfile = () => {
         if (confirm) {
             sessionStorage.clear()
             setMessage(
+                <div className="reserve-content">
+                <div className="reserve-box">
                 <div className="modal-content-register">
                     Cerró sesión correctamente!
                     <img src='/icons/accept.svg' />
+                </div>
+                </div>
                 </div>
             )
             setTimeout(() => {
                 setShowConfirmation(false)
                 setMessage('')
                 navigate('/')
-            },3000)
+            }, 3000)
         } else {
             setMessage('')
             setShowConfirmation(false)
@@ -37,14 +47,15 @@ const DropdownProfile = () => {
     const handleShowConfirmation = () => {
         setShowConfirmation(true)
         setMessage(
-            <div className="modal-content-register">
-                <div className="log-out-confirmation">
+            <div className="reserve-content">
+                <div className="reserve-box">
                     <h3>Seguro que quieres cerrar sesión?</h3>
-                </div>
-                <div className="modal-buttons">
+                    <div className="modal-buttons">
                     <button onClick={() => handleConfirm(true)}>Si</button>
                     <button onClick={() => handleConfirm(false)}>No</button>
                 </div>
+                </div>
+                
             </div>
         )
     }
@@ -65,20 +76,40 @@ const DropdownProfile = () => {
 
     return (
         <div className="account-container" ref={menuRef}>
-            
-            <div className="account-trigger" onClick={() => {setOpen(!open)}}>
-            {!sessionStorage.getItem('role') ? 
-            (<img src="/icons/account-icon.svg" />) 
-            :
-            <div>{sessionStorage.getItem('nombre').charAt(0)}{sessionStorage.getItem('apellido').charAt(0)} </div>
-            }
+
+            <div className="account-trigger" onClick={() => { setOpen(!open) }}>
+                {!sessionStorage.getItem('role') ?
+                    (<img src="/icons/account-icon.svg" />)
+                    :
+                    <div>{sessionStorage.getItem('nombre').charAt(0)}{sessionStorage.getItem('apellido').charAt(0)} </div>
+                }
             </div>
             <div className={`drop-down-profile ${open ? 'active' : 'inactive'}`}>
                 <ul>
                     {sessionStorage.getItem('role') &&
-                        <Link to='/perfil'>
-                            <li className="drop-down-item">Perfil {!sessionStorage.getItem('nombre')}</li>
-                        </Link>
+
+                        <li className="drop-down-new-item">
+                            <Accordion
+                                title="Perfil"
+                                active={active}
+                                onChange={handleActive}
+                                index={0}
+                                content={
+                                    <ul>
+                                        <Link to='/perfil'>
+                                            <li>Configuracion</li>
+                                        </Link>
+                                        <Link to='/favoritos'>
+                                            <li>Favoritos</li>
+                                        </Link>
+                                        <Link to='/reservas'>
+                                            <li id="padding-problem">Reservas</li>
+                                        </Link>
+                                    </ul>
+                                }
+                            />
+                        </li>
+
                     }
                     {!sessionStorage.getItem('role') &&
                         <Link to='/inicio-sesion'>

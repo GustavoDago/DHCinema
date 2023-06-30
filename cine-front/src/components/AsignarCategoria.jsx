@@ -21,7 +21,7 @@ const AsignarCategoria = () => {
 
 
   const guardarCambios = () => {
-    const url = "http://18.220.249.237:8080/peliculas";
+    const url = "http://localhost:8080/peliculas";
 
     const stringificar =() => JSON.stringify({
       ...peliculaSeleccionada,
@@ -59,7 +59,7 @@ const AsignarCategoria = () => {
       handleCategoriasSeleccionadas={handleCategoriasSeleccionadas} /></div>
       </div>
       <hr/>
-      <button onClick={guardarCambios}>Guardar cambios</button>
+      <button className="botonAsignarCategoria" onClick={guardarCambios}>Guardar cambios</button>
       {guardado && <p>Los cambios se han guardado.</p>}
     </div>
   );

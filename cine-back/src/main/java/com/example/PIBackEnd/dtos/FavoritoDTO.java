@@ -1,14 +1,16 @@
 package com.example.PIBackEnd.dtos;
 
 public class FavoritoDTO {
-    private Long id;
-    private Long pelicula_id;
-    private Long usuario_id;
-    //private Boolean favorito;
 
-    /*public Boolean chequearAtributosVacios(){
-        return null == this.pelicula_id || null == this.usuario_id || null == this.favorito;
-    }*/
+    private Long id;
+
+    private Long pelicula_id;
+
+    private Long usuario_id;
+
+    private Boolean favorito;
+
+    private Boolean vigente;
 
     public Boolean chequearAtributosVacios(){
         return null == this.pelicula_id || null == this.usuario_id;
@@ -38,11 +40,19 @@ public class FavoritoDTO {
         this.usuario_id = usuario_id;
     }
 
-    /*public Boolean getFavorito() {
+    public Boolean getFavorito() {
         return favorito;
     }
 
     public void setFavorito(Boolean favorito) {
         this.favorito = favorito;
-    }*/
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
+    }
 }

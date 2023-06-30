@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ListadoCiudades = () => {
 
@@ -17,6 +19,7 @@ const ListadoCiudades = () => {
   }, [])
 
   const handleBorrarCiudad = (id) => {
+    if (!confirm("Confirma eliminar esta ciudad?")) return
     const settings = {
       method: 'DELETE'
     };
@@ -38,13 +41,13 @@ const ListadoCiudades = () => {
   };
 
   return (
-    <main >
+    <main className='listadoCiudades'>
       {/* renderizo las cards */}
       <div className='tabla' >
         <table>
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">#</th>
               <th scope="col">Nombre</th>
 
             </tr>
@@ -57,7 +60,7 @@ const ListadoCiudades = () => {
                   <td scope='row'>{ciudad.nombre}</td>
 
                   <td scope='row'><button ><Link key={ciudad.id} to={`/admin/Ciudades/${ciudad.id}`}>✍</Link> </button></td>
-                  <td scope='row'><button onClick={() => handleBorrarCiudad(ciudad.id)} >🚮</button></td>
+                  <td scope='row'><button onClick={() => handleBorrarCiudad(ciudad.id)} > <FontAwesomeIcon icon={faTimes} /></button></td>
                 </tr>
 
               </React.Fragment>

@@ -64,12 +64,12 @@ function SingleImageDrop({ image, setImage }) {
                 {isDragActive ? (
                     <div className="dropzone-info">
                         <img src="/icons/drag-drop.svg" />
-                        <p>Suelta las imagenes aquí...</p>
+                        <p>Suelta las imágenes aquí...</p>
                     </div>
                 ) : (
                     <div className="dropzone-info">
                         <img src="/icons/cloud.svg" />
-                        <p>Arrastra y suelta imagenes aquí, o haz clic para seleccionar imagenes.</p>
+                        <p>Arrastra y suelta imágenes aquí, o haz clic para seleccionar imágenes.</p>
                     </div>
                 )}
             </div>

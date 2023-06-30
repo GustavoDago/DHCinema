@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const ListadoPeliculasRadioButton = ({handleSelectPelicula}) => {
     const [Peliculas, setPeliculas] = useState([]);
-    const url = "http://18.220.249.237:8080/peliculas";
+    const url = "http://localhost:8080/peliculas";
 
 
 useEffect(() => {
@@ -25,7 +25,7 @@ useEffect(() => {
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
+                            <th scope="col"></th>
                             <th scope="col">Título</th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@ useEffect(() => {
                                         onChange={() => handleSelectPelicula(pelicula)}
                                     />
                                 </td>
-                                <th scope="row">{pelicula.id}</th>
+                                {/* <th scope="row">{pelicula.id}</th> */}
                                 <td scope="row">{pelicula.titulo}</td>
                             </tr>
                         ))}

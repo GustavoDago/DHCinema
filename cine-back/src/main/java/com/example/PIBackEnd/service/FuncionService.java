@@ -19,7 +19,7 @@ import java.util.*;
 @Service
 public class FuncionService {
 
-    private final static Logger logger = Logger.getLogger(FuncionService.class);
+    private static final Logger logger = Logger.getLogger(FuncionService.class);
 
     private IFuncionRepository funcionRepository;
 
@@ -74,14 +74,14 @@ public class FuncionService {
     public List<Funcion> buscarTodasFunciones() throws ResourceNoContentException {
         logger.info("Buscando todas los Funciones");
         List<Funcion> lista = funcionRepository.findAllByVigenteTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Funciones registradas.");
         }
     }
 
-    public List<Funcion> buscarFuncionesPorNombrePelicula(String peliculaNombre) throws ResourceNoContentException, ResourceNotFoundException {
+    public List<Funcion> buscarFuncionesPorNombrePelicula(String peliculaNombre) throws ResourceNoContentException {
         List<Funcion> lista = funcionRepository.findAllByVigenteTrueAndPelicula_Titulo(peliculaNombre);
         List<Funcion> nuevaLista = new ArrayList<>();
         LocalDate fechaActual = LocalDate.now();
@@ -97,7 +97,7 @@ public class FuncionService {
                 }
             }
         }
-        if(nuevaLista.size() < 1){
+        if(nuevaLista.isEmpty()){
             throw new ResourceNoContentException("Error. No existen Funciones registradas para la Pelicula: " + peliculaNombre);
         }
         return nuevaLista;
@@ -111,7 +111,7 @@ public class FuncionService {
                 Optional<Funcion> optionalFuncion = funcionRepository.findByIdAndVigente(funcion.getId(), true);
                 if(optionalFuncion.isPresent()){
                     Set<Reserva> reservas = convertirFuncionDTOaFuncion(funcion).getReservas();
-                    if(reservas.size() < 1){
+                    if(!reservas.isEmpty()){
                         throw new ResourceBadRequestException("Error. No se puede modificar la Funcion con Reservas activas");
                     }
                     Optional<Sala> optionalSala = salaRepository.findByIdAndVigenteTrue(funcion.getSala_id());
@@ -179,25 +179,17 @@ public class FuncionService {
         Optional<Funcion> funcionBuscada = funcionRepository.findByIdAndVigente(id, true);
         if (funcionBuscada.isPresent()){
             funcionBuscada.get().setVigente(false);
-            //Set<Reserva> reservas = funcionBuscada.get().getReservas();
-            //for (Reserva reserva:reservas) {
-            //    reservaService.eliminarReserva(reserva.getId());
-            //}
             funcionRepository.save(funcionBuscada.get());
         }else{
             throw new ResourceNotFoundException("Error. No existe la Funcion con id = " + id + " o no esta vigente");
         }
     }
 
-    public void eliminarFuncionCascada(Long id) throws ResourceNotFoundException {
+    public void eliminarFuncionCascada(Long id){
         logger.warn("Borrando Funcion con id = " + id);
         Optional<Funcion> funcionBuscada = funcionRepository.findByIdAndVigente(id, true);
         if (funcionBuscada.isPresent()){
             funcionBuscada.get().setVigente(false);
-            //Set<Reserva> reservas = funcionBuscada.get().getReservas();
-            //for (Reserva reserva:reservas) {
-            //    reservaService.eliminarReserva(reserva.getId());
-            //}
             funcionRepository.save(funcionBuscada.get());
         }
     }

@@ -1,6 +1,5 @@
 package com.example.PIBackEnd.service;
 
-import com.example.PIBackEnd.domain.Funcion;
 import com.example.PIBackEnd.domain.Rol;
 import com.example.PIBackEnd.domain.Usuario;
 import com.example.PIBackEnd.dtos.DtoLogin;
@@ -29,13 +28,20 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    private final static Logger logger = Logger.getLogger(UsuarioService.class);
+    private static final Logger logger = Logger.getLogger(UsuarioService.class);
+
     private PasswordEncoder passwordEncoder;
+
     private IRolRepository rolesRepository;
+
     private IUsuarioRepository usuarioRepository;
+
     private JwtGenerador jwtGenerador;
+
     private AuthenticationManager authenticationManager;
+
     private EmailService emailService;
+
     private JwtUtil jwtUtil;
 
 
@@ -85,7 +91,7 @@ public class UsuarioService {
 
     public String guardarUsuarioAdm(DtoRegistro dtoRegistro) throws ResourceBadRequestException {
         logger.info("Guardando Usuario ADMIN nuevo");
-        if (usuarioRepository.existsByEmail(dtoRegistro.getNombre())) {
+        if (usuarioRepository.existsByEmail(dtoRegistro.getEmail())) {
             throw new ResourceBadRequestException("Error. Ya existe una Usuario Admin con el mismo email");
         }
         Usuario usuarios = new Usuario();
@@ -143,7 +149,7 @@ public class UsuarioService {
     public List<Usuario> buscarTodosUsuarios() throws ResourceNoContentException {
         logger.info("Buscando todos los Usuarios");
         List<Usuario> lista = usuarioRepository.findAllByActivoTrue();
-        if(lista.size() > 0){
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Usuarios registrados.");
@@ -152,8 +158,8 @@ public class UsuarioService {
 
     public List<Usuario> buscarTodosUsuariosPorRol(String rol) throws ResourceNoContentException {
         logger.info("Buscando todos los Usuarios por Rol");
-        List<Usuario> lista = usuarioRepository.findAllByActivoTrue();
-        if(lista.size() > 0){
+        List<Usuario> lista = usuarioRepository.findByRolesNombreAndActivoTrue(rol);
+        if(!lista.isEmpty()){
             return lista;
         }else{
             throw new ResourceNoContentException("Error. No existen Usuarios registrados.");
@@ -191,13 +197,11 @@ public class UsuarioService {
                 }
             }
         }
-        System.out.println("LLEGA ACA3");
         return ResponseEntity.badRequest().body("Error: No se pudo verificar el email.");
     }
 
     public Boolean usuarioActivo (DtoLogin dtoLogin){
         Optional<Usuario> usuario = usuarioRepository.findByEmail(dtoLogin.getEmail());
-        System.out.println(usuario.get().getNombre());
         if(usuario.isPresent()){
             return usuario.get().getActivo();
         }

@@ -7,11 +7,8 @@ import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PIBackEnd.service.FuncionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,7 +30,7 @@ public class FuncionController {
     }
 
     @GetMapping("/{peliculaNombre}")
-    public ResponseEntity<List<Funcion>> buscarFuncionesPorNombrePelicula(@PathVariable String peliculaNombre) throws ResourceNoContentException, ResourceNotFoundException {
+    public ResponseEntity<List<Funcion>> buscarFuncionesPorNombrePelicula(@PathVariable String peliculaNombre) throws ResourceNoContentException {
         return ResponseEntity.ok(funcionService.buscarFuncionesPorNombrePelicula(peliculaNombre));
     }
 
@@ -53,10 +50,4 @@ public class FuncionController {
                                                   @RequestParam(required = false) String pelicula) throws ResourceBadRequestException, ResourceNoContentException {
         return ResponseEntity.ok(funcionService.buscador(cine, pelicula));
     }
-
-    /*@DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarFuncion(@PathVariable Long id) throws ResourceNotFoundException {
-        funcionService.eliminarFuncion(id);
-        return ResponseEntity.ok("Eliminación de la Funcion con id = " + id + " con éxito");
-    }*/
 }

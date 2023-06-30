@@ -1,13 +1,19 @@
 package com.example.PIBackEnd.dtos;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-
 public class PuntajeDTO {
     private Long id;
+
     private Long pelicula_id;
+
     private Long usuario_id;
+
     private Integer puntaje;
+
     private String valoracion;
+
+    public Boolean chequearAtributosVacios(){
+        return null == this.pelicula_id || null == this.usuario_id || null == this.puntaje || null == this.valoracion;
+    }
 
     public Long getId() {
         return id;

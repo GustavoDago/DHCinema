@@ -14,10 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -62,8 +58,9 @@ public class SecurityConfig {
                 .requestMatchers("/cines/**").permitAll()
                 .requestMatchers("/salas/**").permitAll()
                 .requestMatchers("/reservas/**").permitAll()
+                .requestMatchers("/politicas/**").permitAll()
 
-                .requestMatchers("/categorias").permitAll()
+                .requestMatchers("/categorias/**").permitAll()
                 .requestMatchers("/usuarios/**").permitAll()
                 .requestMatchers("/roles/**").permitAll()
                 .requestMatchers("/peliculas/**").permitAll()
