@@ -1,6 +1,5 @@
 package com.example.PIBackEnd.repository;
 
-import com.example.PIBackEnd.domain.Cine;
 import com.example.PIBackEnd.domain.Favorito;
 import com.example.PIBackEnd.domain.Pelicula;
 import com.example.PIBackEnd.domain.Usuario;
@@ -12,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface IFavoritoRepository extends JpaRepository<Favorito,Long> {
     boolean existsByUsuarioAndPelicula(Usuario usuario, Pelicula pelicula);
-    List<Favorito> findAllByVigenteTrueAndFavoritoTrueAndUsuario_Email(String email);
+    List<Favorito> findAllByVigenteTrueAndUsuario_Email(String email);
     Optional<Favorito> findByIdAndVigenteTrue(Long id);
 }

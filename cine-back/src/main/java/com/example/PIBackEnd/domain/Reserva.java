@@ -14,6 +14,18 @@ public class Reserva {
     private Long id;
 
     @Column
+    private String nombre;
+
+    @Column
+    private String apellido;
+
+    @Column
+    private String dni;
+
+    @Column
+    private String email;
+
+    @Column
     private String peliculaNombre;
 
     @Column
@@ -24,6 +36,15 @@ public class Reserva {
 
     @Column
     private LocalTime horaProyeccion;
+
+    @Column
+    private String cine;
+
+    @Column
+    private String banner;
+
+    @Column
+    private String portadaPelicula;
 
     @Column
     private String sala;
@@ -134,5 +155,61 @@ public class Reserva {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCine() {
+        return cine;
+    }
+
+    public void setCine(String cine) {
+        this.cine = cine;
+    }
+
+    public String getPortadaPelicula() {
+        return portadaPelicula;
+    }
+
+    public void setPortadaPelicula(String portadaPelicula) {
+        this.portadaPelicula = portadaPelicula;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 }

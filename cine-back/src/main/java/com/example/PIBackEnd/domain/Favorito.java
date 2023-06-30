@@ -12,7 +12,7 @@ public class Favorito {
 
     @ManyToOne
     @JsonIgnore
-     @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
@@ -22,9 +22,6 @@ public class Favorito {
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean favorito;
-
-    @Column(nullable = false)
-    private Long idPelicula;
 
     @Column
     private Boolean vigente;
@@ -59,14 +56,6 @@ public class Favorito {
 
     public void setFavorito(Boolean favorito) {
         this.favorito = favorito;
-    }
-
-    public Long getIdPelicula() {
-        return idPelicula;
-    }
-
-    public void setIdPelicula(Long idPelicula) {
-        this.idPelicula = idPelicula;
     }
 
     public Boolean getVigente() {

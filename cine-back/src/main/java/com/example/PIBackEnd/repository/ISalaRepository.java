@@ -8,8 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ISalaRepository extends JpaRepository<Sala, Long> {
-    Optional<Sala> findByNombre(String nombre);
-    Optional<Sala> findByNombreAndCine_Id(String nombre, Long id);
     Optional<Sala> findByNombreAndCine_IdAndVigenteTrue(String nombre, Long id);
     List<Sala> findAllByVigenteTrue();
     Optional<Sala> findByIdAndVigenteTrue(Long id);

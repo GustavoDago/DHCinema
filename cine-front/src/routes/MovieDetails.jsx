@@ -1,19 +1,24 @@
-import { useCallback, useEffect, useState } from "react"
-import { fetchCinemaForTitle, fetchMovieTilte, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
-import { useParams, useNavigate } from "react-router-dom"
+import "react-datepicker/dist/react-datepicker.css";
+import { useEffect, useState } from "react"
+import { fetchAllCinemas, fetchCinemaForTitle, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import Modal from "react-modal"
-import ContentLoader, { List } from "react-content-loader"
 import ReactPlayer from "react-player"
 import Item from "../components/Item"
 import BloquePoliticas from "../components/BloquePoliticas.jsx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
-import { GoogleMap, InfoWindow, LoadScript, MarkerF } from "@react-google-maps/api"
+import { GoogleMap, InfoWindow, MarkerF } from "@react-google-maps/api"
 import Accordion from "../components/Accordion"
-import { Box, Typography, FormControl, Select, MenuItem } from '@mui/material';
-
-
-
+import { Stack, Rating, LinearProgress, Slide } from '@mui/material';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import moment from "moment/moment"
+import ModalGlobal from "../components/GlobalModal";
+import es from "date-fns/locale/es"
+import ActorsCard from "../components/MovieDetails/ActorsCard";
+import { array } from "yup";
+import NuevoFavorito from "../components/Nuevo-favorito";
+registerLocale('es', es)
 
 Modal.setAppElement('#root')
 
@@ -49,31 +54,92 @@ function MovieDetails() {
     const [allUsers, setAllUsers] = useState([])
     const [descriptionRank, setDescriptionRank] = useState('')
     const [pointsRank, setPointsRank] = useState(0)
-
+    const [informationOption, setInformationOption] = useState(1)
+    const [showReseña, setShowReseña] = useState(false)
+    const [cinemas, setCinemas] = useState([])
+    const [allFunctions, setAllFunctions] = useState([])
+    const [allCinemasNames, setAllCinemasNames] = useState([])
+    const [selectedButton, setSelectedButton] = useState(null)
+    const [allDatosObject, setAllDatosObject] = useState([])
+    const [allActivesAccordions, setAllActivesAccordions] = useState([])
+    const [activeOthers, setActiveOthers] = useState(false)
+    const [isActive, setIsActive] = useState(true)
+    const [newIndex, setNewIndex] = useState(null)
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
 
+
     const fetchMovieCine = async (title, cinema) => {
-        if (cinema != null && title != null) {
-            const search = await fetchSearchFunction(cinema, title)
-            if (search) {
-                setCinema(cinema);
-                setTitulo(title);
-                setSearchFunctions(search)
-                console.log(search)
-            }
-        } else if (cinema == null) {
+        if (cinema) {
             const search = await fetchCinemaForTitle(title)
             if (search) {
                 setAllCinemas(search)
+
+                const names = search.map(cine => cine.nombre);
+                const filterN = names.filter(name => name !== cinema)
+                console.log(filterN)
+                setAllCinemasNames(filterN);
+                const searchFuncPromises = filterN.map(async name => {
+                    const fetchFunc = await fetchSearchFunction(name, title);
+                    if (fetchFunc) {
+                        return fetchFunc;
+                    }
+                });
                 console.log(search)
+                const actives = filterN.map(name => { return false })
+                setAllActivesAccordions(actives)
+                Promise.all(searchFuncPromises).then(functions => {
+                    const filteredFunctions = functions.filter(func => func !== undefined);
+                    setAllFunctions(filteredFunctions);
+                    console.log(filteredFunctions);
+                });
             }
+        } else {
+            const search = await fetchCinemaForTitle(title)
+            if (search) {
+
+                const names = search.map(cine => cine.nombre);
+                const newCinemas = search.map(cine => { return { ...cine, isActive: false } })
+                setAllCinemas(newCinemas)
+                setAllCinemasNames(names);
+                const searchFuncPromises = names.map(async name => {
+                    const fetchFunc = await fetchSearchFunction(name, title);
+                    if (fetchFunc) {
+                        return fetchFunc;
+                    }
+                });
+                const actives = names.map(name => { return false })
+                setAllActivesAccordions(actives)
+                Promise.all(searchFuncPromises).then(functions => {
+                    const filteredFunctions = functions.filter(func => func !== undefined);
+                    setAllFunctions(filteredFunctions);
+                    console.log(filteredFunctions);
+                });
+            }
+
+
         }
     }
 
+    const handleCloseReseña = () => {
+        setShowReseña(false)
+    }
+
+    const handleOnChangeActive = (id, active) => {
+        if (id != null) {
+            const newArray = allCinemas.map(cine => {
+                if (cine.id == id)
+                    cine.isActive = active;
+                return cine;
+            })
+
+            setAllCinemas(newArray)
+        }
+    }
 
     const handleSubmit = async () => {
+        setShowReseña(false)
         setShowReserve(true)
         setContentAwait(true)
         setReserveContent(
@@ -92,6 +158,7 @@ function MovieDetails() {
                 setReserveContent('')
                 setContentAwait(false)
                 setShowReserve(false)
+                setShowReseña(true)
                 return;
             }, 3000)
         } else {
@@ -114,6 +181,7 @@ function MovieDetails() {
                         setReserveContent('')
                         setContentAwait(false)
                         setShowReserve(false)
+                        window.location.reload()
                     }, 3000)
                 } else {
                     setReserveContent(
@@ -146,8 +214,10 @@ function MovieDetails() {
 
 
     useEffect(() => {
-        if (searchFunctions && selectedDate) {
-            const newArray = searchFunctions.filter(func => new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) == selectedDate)
+        if (searchFunctions && selectedDate && isActive) {
+            const date = moment(selectedDate, 'DD/MM/YYYY')
+            const formattedDate = date.format('YYYY-MM-DD')
+            const newArray = searchFunctions.filter(func => func.fechaProyeccion == formattedDate)
             const dividedData = newArray.reduce((result, obj) => {
                 if (!result[obj.modalidad]) {
                     result[obj.modalidad] = {};
@@ -162,6 +232,27 @@ function MovieDetails() {
                 return result;
             }, {});
 
+            console.log(dividedData);
+            setDatosObjeto(dividedData)
+        } else if (!searchFunctions || !selectedDate) {
+            setDatosObjeto(null)
+        } else {
+            const date = moment(selectedDate, 'DD/MM/YYYY')
+            const formattedDate = date.format('YYYY-MM-DD')
+            const newArray = allFunctions[newIndex].filter(func => func.fechaProyeccion == formattedDate)
+            const dividedData = newArray.reduce((result, obj) => {
+                if (!result[obj.modalidad]) {
+                    result[obj.modalidad] = {};
+                }
+
+                if (result[obj.modalidad][obj.opcionesIdioma]) {
+                    result[obj.modalidad][obj.opcionesIdioma].push(obj);
+                } else {
+                    result[obj.modalidad][obj.opcionesIdioma] = [obj];
+                }
+
+                return result;
+            }, {});
             console.log(dividedData);
             setDatosObjeto(dividedData)
         }
@@ -214,7 +305,12 @@ function MovieDetails() {
                 const movieRandom = await searchRandomMovies()
 
                 if (movieForId != false) {
-                    await fetchMovieCine(movieForId.titulo, null)
+                    if (cinemaS) {
+                        await fetchMovieCine(movieForId.titulo, cinemaS)
+                    } else {
+                        await fetchMovieCine(movieForId.titulo, null)
+                    }
+
                     console.log(movieForId)
                     setMovie(movieForId);
                     const fetchRank = await fetchRanking(params.id)
@@ -252,10 +348,8 @@ function MovieDetails() {
     }
 
     const handleShowVideo = () => {
-        if (showVideo == false)
-            setShowVideo(true)
-        else
-            setShowVideo(false)
+
+        setShowVideo(true)
     }
 
     const handleShowGallery = () => {
@@ -315,53 +409,17 @@ function MovieDetails() {
 
     const handleReservaYes = async () => {
         setContentAwait(true)
-        console.log(sessionStorage.getItem('id'))
-        const data = {
-            usuario_id: parseInt(sessionStorage.getItem('id')),
-            funcion_id: functionReserve.id
-        }
-        try {
-            const reserva = await fetchReserve(data)
-            if (reserva) {
-                setReserveContent(
-                    <div>
-                        <h5>Reserva realizada con exito</h5>
-                        <img src='/icons/accept.svg' />
-                    </div>
-                )
-                setTimeout(() => {
-                    setReserveContent('')
-                    setContentAwait(false)
-                    setShowReserve(false)
-                }, 3000)
-
-            } else {
-                setReserveContent(
-                    <div>
-                        <h5>Hubo un error con la reserva</h5>
-                        <img src='/icons/denied.svg' />
-                    </div>
-                )
-                setTimeout(() => {
-                    setReserveContent('')
-                    setContentAwait(false)
-                    setShowReserve(false)
-                }, 3000)
-            }
-
-        } catch (error) {
-            setReserveContent(
-                <div>
-                    <h5>Hubo un error con la reserva</h5>
-                    <img src='./icons/denied.svg' />
-                </div>
-            )
-            setTimeout(() => {
-                setReserveContent('')
-                setContentAwait(false)
-                setShowReserve(false)
-            }, 3000)
-        }
+        setReserveContent(
+            <div>
+                <h5>Usted sera redirigido a la seccion de reserva</h5>
+            </div>)
+        setTimeout(() => {
+            setReserveContent('')
+            setContentAwait(false)
+            setShowReserve(false)
+            const url = `/peliculas/reserva/${movie.id}?cine=${cinema}&funcion=${functionReserve.id}&titulo=${titulo}`
+            navigate(url)
+        }, 3000)
     }
 
     const handleReservaNo = () => {
@@ -372,279 +430,577 @@ function MovieDetails() {
         setShowReserve(!showReserve)
     }
 
+    const handleActive = (index, active) => {
 
+        setIsActive(active)
+        if (active == true) {
+            setSelectedButton(null)
+            setSelectedDate(null)
+            setSelectedTime(null)
+            setFunctionReserve(null)
+            const newActives = allActivesAccordions.map((data) => {
+                return false
+            })
+            setAllActivesAccordions(newActives)
+        }
+        console.log(isActive)
+    }
+
+    const handleAllActives = (index, active) => {
+        const newActives = allActivesAccordions.map((data, indexS) => {
+            if (indexS == index)
+                return active
+            else return false
+        })
+        console.log(newActives)
+        setIsActive(false)
+        setSelectedButton(null)
+        setSelectedDate(null)
+        setSelectedTime(null)
+        setFunctionReserve(null)
+        setAllActivesAccordions(newActives)
+        setNewIndex(index)
+        console.log(newActives)
+    }
+
+    const handleActiveOthers = (index, active) => {
+        setActiveOthers(active)
+    }
 
     return (
-        <div className={`movie-details `}>
+        <div className='movie-details'>
             <div>
-                <div className="banner-video" style={!isLoading ? banner : {}}>
-                    <div className="banner-details">
-                        <img className="play-icon" src="/icons/play_icon.svg" onClick={handleShowVideo} />
-                        <div className="movie-first-info">
-                            {!isLoading &&
-                                <div className="movie-first-info-details">
-                                    <img src={movie.portada} />
-                                    <div>
-                                        <h4>GENEROS </h4>
+                <div className="movie-details-first-content">
+                    <div className="banner-video" style={!isLoading ? banner : {}}>
+                        <div className="banner-details">
+                            <img className="play-icon" src="/icons/play_icon.svg" onClick={handleShowVideo} />
+                            <div className="movie-first-info">
+                                {!isLoading &&
+                                    <div className="movie-first-info-details">
+                                        <img src={movie.portada} />
+                                        <div className="no-mostrar">
+                                            <h4>GENEROS </h4>
 
-                                        {movie.categorias.map(categorias => (
-                                            <p key={categorias.id}>{categorias.titulo}</p>
-                                        ))}
+                                            {movie.categorias.map(categorias => (
+                                                <p key={categorias.id}>{categorias.titulo}</p>
+                                            ))}
 
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
-                        <div className="movie-details-title">
-                            {!isLoading && <h1>{movie.titulo.toUpperCase()}</h1>}
+                                }
+                            </div>
+                            <div className="movie-details-title">
+                                {!isLoading && <h1>{movie.titulo.toUpperCase()}</h1>}
+                                {!isLoading && sessionStorage.getItem('id') &&
+                                    <NuevoFavorito
+                                        id={movie.id} />}
+
+                            </div>
+
                         </div>
 
                     </div>
+                    <div className="movie-details-second">
+                        <div className="movie-second-info">
+                            {!isLoading && (
+                                <div className="movie-details-description">
 
-                </div>
-                <div className="movie-details-second">
-                    <div className="movie-second-info">
-                        {!isLoading && (
-                            <div className="movie-details-description">
-                                <div>
-                                    <h2>DETALLES</h2>
-                                    <p>{movie.descripcion}</p>
-                                </div>
-                                {cinema != null &&
-                                    <div className="accordion-reserva">
-                                        <Accordion
-                                            title={cinema}
-                                            active={true}
-                                            content={
-                                                <div>
+                                    <div>
+                                        <h2 className="details-titles">DETALLES</h2>
+                                        <p>{movie.descripcion}</p>
+                                    </div>
+
+                                    <div>
+                                        <h2 className="details-titles">RESERVA</h2>
+                                        <div className="accordion-reserva">
+
+                                            {cinema != null && <Accordion
+                                                title={cinema.toUpperCase()}
+                                                active={isActive}
+                                                onChange={handleActive}
+                                                content={
                                                     <div>
-                                                        {Array.isArray(searchFunctions) && searchFunctions.length > 0 && (
-                                                            searchFunctions.map((func) => (
-                                                                <button key={func.id} onClick={() => setSelectedDate(new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }))}>{new Date(func.fechaProyeccion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</button>
-                                                            ))
-                                                        )}
+                                                        <div className="reserve-datepicker">
+                                                            {Array.isArray(searchFunctions) && searchFunctions.length > 0 &&
+                                                                (<DatePicker
+                                                                    showIcon
+                                                                    selected={selectedDate}
+                                                                    onChange={date => setSelectedDate(date)}
+                                                                    filterDate={date => {
+                                                                        const formattedDate = date.toISOString().slice(0, 10)
+                                                                        return searchFunctions.some(func => func.fechaProyeccion == formattedDate)
+                                                                    }}
+                                                                    className="reserve-input-date"
+                                                                    isClearable
+                                                                    locale="es"
+                                                                    placeholderText="Seleccione una fecha"
+                                                                />)}
 
-                                                    </div>
-                                                    <div className="modalidad-content">
-                                                        {datosObjeto != null && (
-                                                            Object.keys(datosObjeto).map(modalidad => (
-                                                                Object.keys(datosObjeto[modalidad]).map(idioma => (
-                                                                    <div key={`${modalidad}-${idioma}`}>
-                                                                        <div>{modalidad} - {idioma}</div>
-                                                                        <div>
-                                                                            {datosObjeto[modalidad][idioma].map(obj => (
-                                                                                <button key={obj.id} onClick={() => {
-                                                                                    setSelectedTime(obj.horaProyeccion)
-                                                                                    setFunctionReserve(obj)
-                                                                                }}>{obj.horaProyeccion}</button>
-                                                                            ))}
+                                                        </div>
+                                                        {datosObjeto != null && <div className="modalidad-content">
+                                                            {datosObjeto != null && (
+                                                                Object.keys(datosObjeto).map(modalidad => (
+                                                                    Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                        <div key={`${modalidad}-${idioma}`}>
+                                                                            <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
+                                                                            <div>
+                                                                                {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                    <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                        if (selectedButton == obj.id) {
+                                                                                            setSelectedTime(null)
+                                                                                            setFunctionReserve(null)
+                                                                                            setSelectedButton(null)
+                                                                                        } else {
+                                                                                            setSelectedTime(obj.horaProyeccion)
+                                                                                            setFunctionReserve(obj)
+                                                                                            setSelectedButton(obj.id)
+                                                                                        }
+
+                                                                                    }}>{obj.horaProyeccion}</button>
+                                                                                ))}
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    ))
                                                                 ))
-                                                            ))
-                                                        )}
+                                                            )}
+                                                        </div>}
                                                     </div>
-                                                </div>
-                                            }
-                                        />
-                                        <button disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
-                                    </div>}
+                                                }
+                                            />}
+                                            <Accordion
+                                                title="OTROS CINES"
+                                                active={activeOthers}
+                                                onChange={handleActiveOthers}
+                                                content={
+                                                    allCinemasNames.map((cinema, index) =>
+                                                        <Accordion
+                                                            title={cinema.toUpperCase()}
+                                                            active={allActivesAccordions[index]}
+                                                            onChange={handleAllActives}
+                                                            index={index}
+                                                            content={
+                                                                <div>
+                                                                    <div className="reserve-datepicker">
+                                                                        {Array.isArray(allFunctions) && allFunctions.length > 0 &&
+                                                                            (<DatePicker
+                                                                                showIcon
+                                                                                selected={selectedDate}
+                                                                                onChange={date => setSelectedDate(date)}
+                                                                                filterDate={date => {
+                                                                                    const formattedDate = date.toISOString().slice(0, 10)
+                                                                                    return allFunctions[index].some(func => func.fechaProyeccion == formattedDate)
+                                                                                }}
+                                                                                className="reserve-input-date"
+                                                                                isClearable
+                                                                                locale="es"
+                                                                                placeholderText="Seleccione una fecha"
+                                                                            />)}
 
-                            </div>
-                        )}
-                        <div className="movie-details-related">
-                            <h2>PELICULAS SIMILARES</h2>
-                            <div className="movie-container">
-                                {Array.isArray(movies) && movies.length > 0 ? (
-                                    movies.slice(0, 4).map(movie => (
-                                        <Item
+                                                                    </div>
+                                                                    {datosObjeto != null && <div className="modalidad-content">
+                                                                        {datosObjeto != null && (
+                                                                            Object.keys(datosObjeto).map(modalidad => (
+                                                                                Object.keys(datosObjeto[modalidad]).map(idioma => (
+                                                                                    <div key={`${modalidad}-${idioma}`}>
+                                                                                        <div className="modalidad-title"><h3>{modalidad}</h3> <h4>{idioma}</h4></div>
+                                                                                        <div>
+                                                                                            {datosObjeto[modalidad][idioma].map(obj => (
+                                                                                                <button className={selectedButton == obj.id ? 'option-button selected' : 'option-button'} key={obj.id} onClick={() => {
+                                                                                                    if (selectedButton == obj.id) {
+                                                                                                        setSelectedTime(null)
+                                                                                                        setFunctionReserve(null)
+                                                                                                        setSelectedButton(null)
+                                                                                                        setCinema(null)
+                                                                                                    } else {
+                                                                                                        setSelectedTime(obj.horaProyeccion)
+                                                                                                        setFunctionReserve(obj)
+                                                                                                        setSelectedButton(obj.id)
+                                                                                                        setCinema(cinema)
+                                                                                                    }
 
-                                            key={movie.id}
-                                            id={movie.id}
-                                            name={movie.titulo}
-                                            image={movie.portada}
-                                        />
-                                    ))
-                                ) : null}
+                                                                                                }}>{obj.horaProyeccion}</button>
+                                                                                            ))}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                ))
+                                                                            ))
+                                                                        )}
+                                                                    </div>}
+                                                                </div>
+                                                            }
+                                                        />)
+                                                }
+                                            />
+                                            <button className="reserva-button" disabled={!selectedDate || !selectedTime} onClick={handleReserva}>Reserva</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            )}
+                            <div className="movie-details-related">
+                                <h2 className="details-titles">GALERIA</h2>
+                                {!isLoading && (
+                                    <div className="image-details">
+                                        <div className="grid-container bloque_img">
+
+                                            <div className="half-left">
+                                                <img src={first[0].imagen} alt="Movie" />
+                                            </div>
+                                            <div className="half-right">
+                                                {last.map((mov, index) => (
+                                                    <div key={mov.id}>
+                                                        {index == last.length - 1 ? (
+                                                            <figure>
+                                                                <div>
+                                                                    <p onClick={handleShowGallery}>{`+ ${movie.imagenes.length - 6}`}</p>
+                                                                </div>
+                                                                <img src={mov.imagen} alt="Movie Gallery" />
+                                                            </figure>
+                                                        ) :
+                                                            (
+                                                                <img src={mov.imagen} alt="Movie" />
+                                                            )}
+
+                                                    </div>
+                                                ))}
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                )}
+
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div className="movie-details-features">
                     <div>
-                        <div className="h2-movieDetails">
-                            <h2>Que ofrece esta película?</h2>
+                        <div>
+                            <h2 className="details-titles">INFORMACION GENERAL</h2>
+                            <div className="movie-details-features-options">
+                                <h3 className={informationOption == 1 ? 'h3-selected' : ''}
+                                    onClick={() => setInformationOption(1)}>Información</h3>
+                                <h3 className={informationOption == 2 ? 'h3-selected' : ''}
+                                    onClick={() => setInformationOption(2)}>Reparto</h3>
+                                <h3 className={informationOption == 3 ? 'h3-selected' : ''}
+                                    onClick={() => setInformationOption(3)}>Películas similares</h3>
+                            </div>
                             <hr></hr>
                         </div>
                         <div className="caracteristicas-container">
-                            {movie && movie.caracteristicas && (
+                            {movie && movie.caracteristicas && informationOption == 1 && (
                                 <div className="caracteristica-item">
-                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Clasificacion: {movie.caracteristicas.clasificacion}</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Clasificación: {movie.caracteristicas.clasificacion}</span>
                                     <span> <FontAwesomeIcon icon={faClapperboard} /> Director: {movie.caracteristicas.director}</span>
-                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Duracion: {movie.caracteristicas.duracion} minutos</span>
+                                    <span> <FontAwesomeIcon icon={faClapperboard} /> Duración: {movie.caracteristicas.duracion} minutos</span>
                                     <span> <FontAwesomeIcon icon={faClapperboard} /> Tipo de pantalla: {movie.caracteristicas.modalidad}</span>
                                 </div>
+                            )}
+                            {!isLoading && movie && informationOption == 2 && (<div className="details-reparto">
+                                {
+                                    movie.caracteristicas.reparto.split(',').map((reparto, index) => (
+                                        <ActorsCard
+                                            key={index}
+                                            nombre={reparto}
+                                        />
+
+                                    ))
+                                }
+                            </div>)}
+                            {!isLoading && movie && informationOption == 3 && (
+
+                                <div className="movie-container">
+                                    {Array.isArray(movies) && movies.length > 0 ? (
+                                        movies.map(movie => (
+                                            <Item
+
+                                                key={movie.id}
+                                                id={movie.id}
+                                                name={movie.titulo}
+                                                image={movie.portada}
+                                            />
+                                        ))
+                                    ) : null}
+                                </div>
+
                             )}
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <div>
-                            <div className="social-section">
+                <div className="movie-details-map-ranking">
+                    <div className="map-container">
+                        <h2 className="details-titles">UBICACIONES DE CINES</h2>
+                        <GoogleMap
+                            mapContainerStyle={{ width: '100%', height: '80%' }}
+                            center={location}
+                            zoom={6}
+                        >
+                            <MarkerF
+                                position={location}
+                                title="Tu ubicacion actual"
+                            >
+                            </MarkerF>
+                            {Array.isArray(allCinemas) && allCinemas.length > 0 && (
+                                allCinemas.map((cinema) => (
+                                    <MarkerF
+                                        key={cinema.id}
+                                        position={{ lat: cinema.latitud, lng: cinema.longitud }}
+                                        title={cinema.nombre}
+                                        icon={{
+                                            url: '/icons/dhcinema2-logo-tiny.png',
+                                            scaledSize: new google.maps.Size(40, 40)
+                                        }}
+                                        onClick={() => setSelectedMarker(cinema)}
 
-                                <h2>Reseñas</h2>
-                            </div>
 
-                            <hr></hr>
+                                    />
+
+                                ))
+                            )
+                            }
+                            {
+                                selectedMarker && (
+                                    <InfoWindow
+                                        position={{ lat: selectedMarker.latitud, lng: selectedMarker.longitud }}
+                                        onCloseClick={() => setSelectedMarker(null)}
+                                    >
+                                        <div className="cinema-item-map">
+                                            <h3>{selectedMarker.nombre}</h3>
+                                            <h5>{selectedMarker.direccion}</h5>
+                                            {sessionStorage.getItem('role') == 'ADMIN' && (
+                                                <h5>Latitud: {selectedMarker.latitud}, Longitud: {selectedMarker.longitud}</h5>
+                                            )}
+                                        </div>
+                                    </InfoWindow>
+                                )
+                            }
+                        </GoogleMap>
+                    </div>
+
+                    <div className="rank-container">
+                        <div className="social-section">
+                            <h2 className="details-titles">RESEÑAS</h2>
                         </div>
                         <div>
+
+                            <div className="rank-movie-container">
+                                <div className="ranking-numbers">
+                                    <div className="rank-previsualizacion">
+                                        <p>{Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                            allRanking.reduce((prev, rank) => prev + rank.puntaje, 0) / allRanking.length
+                                        ) : (0)}</p>
+                                        <Stack spacing={1}>
+                                            <Rating
+                                                name="size-large"
+                                                size="large"
+                                                value={Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                    allRanking.reduce((prev, rank) => prev + rank.puntaje, 0) / allRanking.length
+                                                ) : (0)}
+                                                readOnly
+                                            />
+                                        </Stack>
+                                        <p>basado en {allRanking.length} reseñas</p>
+                                    </div>
+                                    <div>
+                                        <div className="calculate-ranks">
+                                            <Rating
+                                                value={5}
+                                                readOnly
+                                            />
+
+                                            <div
+                                                className="percentage-bar"
+                                            >
+                                                <div
+                                                    style={
+                                                        {
+                                                            height: '100%',
+                                                            width: `${Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                                (allRanking.filter(rank => rank.puntaje == 5).length * 100) / allRanking.length
+                                                            ) : (0)}%`,
+                                                            backgroundColor: 'green',
+                                                            borderRadius: 40,
+                                                            textAlign: 'right'
+                                                        }
+                                                    }
+                                                >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="calculate-ranks">
+                                            <Rating
+                                                value={4}
+                                                readOnly
+                                            />
+                                            <div
+                                                className="percentage-bar"
+                                            >
+                                                <div
+                                                    style={
+                                                        {
+                                                            height: '100%',
+                                                            width: `${Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                                (allRanking.filter(rank => rank.puntaje == 4).length * 100) / allRanking.length
+                                                            ) : (0)}%`,
+                                                            backgroundColor: 'lightgreen',
+                                                            borderRadius: 40,
+                                                            textAlign: 'right'
+                                                        }
+                                                    }
+                                                >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="calculate-ranks">
+                                            <Rating
+                                                value={3}
+                                                readOnly
+                                            />
+                                            <div
+                                                className="percentage-bar"
+                                            >
+                                                <div
+                                                    style={
+                                                        {
+                                                            height: '100%',
+                                                            width: `${Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                                (allRanking.filter(rank => rank.puntaje == 3).length * 100) / allRanking.length
+                                                            ) : (0)}%`,
+                                                            backgroundColor: 'yellow',
+                                                            borderRadius: 40,
+                                                            textAlign: 'right'
+                                                        }
+                                                    }
+                                                >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="calculate-ranks">
+                                            <Rating
+                                                value={2}
+                                                readOnly
+                                            />
+                                            <div
+                                                className="percentage-bar"
+                                            >
+                                                <div
+                                                    style={
+                                                        {
+                                                            height: '100%',
+                                                            width: `${Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                                (allRanking.filter(rank => rank.puntaje == 2).length * 100) / allRanking.length
+                                                            ) : (0)}%`,
+                                                            backgroundColor: 'orange',
+                                                            borderRadius: 40,
+                                                            textAlign: 'right'
+                                                        }
+                                                    }
+                                                >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="calculate-ranks">
+                                            <Rating
+                                                value={1}
+                                                readOnly
+                                            />
+                                            <div
+                                                className="percentage-bar"
+                                            >
+                                                <div
+                                                    style={
+                                                        {
+                                                            height: '100%',
+                                                            width: `${Array.isArray(allRanking) && allRanking.length > 0 ? (
+                                                                (allRanking.filter(rank => rank.puntaje == 1).length * 100) / allRanking.length
+                                                            ) : (0)}%`,
+                                                            backgroundColor: 'red',
+                                                            borderRadius: 40,
+                                                            textAlign: 'right'
+                                                        }
+                                                    }
+                                                >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             {Array.isArray(allRanking) && allRanking.length > 0 ? (
-                                <div className="rank-movie-container">
-                                    <div className="rank-comment-container">
+                                <div className="rank-comment-container">
                                     {
                                         allRanking.map(rank => {
-                                            const usuario = allUsers.find(user => user.id == rank.id)
+                                            console.log(rank)
+                                            console.log(allUsers)
+                                            console.log(sessionStorage.getItem('id'))
+                                            const usuario = allUsers.find(user => user.id == rank.usuario_id)
                                             if (usuario) {
                                                 return <div className="rank-comment">
-                                                    <div className="icon-reserva">{usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}</div>
+
+                                                    <div className="icon-name-reserva">
+                                                        <div className="icon-reserva">
+                                                            {usuario.nombre.charAt(0).toUpperCase()}{usuario.apellido.charAt(0).toUpperCase()}
+                                                        </div>
+                                                        <div>
+                                                            <p>{usuario.nombre} {usuario.apellido}</p>
+                                                            <div>
+                                                                <Rating
+                                                                    value={rank.puntaje}
+                                                                    readOnly
+                                                                />
+                                                                <h4>{rank.puntaje}</h4>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                     <div className="rank-comment-content">
-                                                        <h4>{rank.puntaje}</h4>
                                                         <p>{rank.valoracion}</p>
                                                     </div>
                                                 </div>;
                                             }
                                         })}
-                                        </div>
+
                                 </div>
+
                             ) :
                                 <div className="rank-movie-container">
                                     <div className="no-rank">
-                                        <h4>Esta pelicula no posee ninguna reseña.</h4>
+                                        <h4>Esta película no posee ninguna reseña.</h4>
                                     </div>
+
                                 </div>}
+                            <button className="button-review" onClick={() => setShowReseña(true)}>Realizar reseña</button>
                         </div>
-                        {sessionStorage.getItem('id') &&
-                            <div>
-                                <form className="form-rank">
-                                    <Box>
-                                        <FormControl>
-                                            <Select value={pointsRank} onChange={(e) => { setPointsRank(parseInt(e.target.value)) }}>
-                                                <MenuItem value={0}>Puntaje</MenuItem>
-                                                <MenuItem value={1}>1</MenuItem>
-                                                <MenuItem value={2}>2</MenuItem>
-                                                <MenuItem value={3}>3</MenuItem>
-                                                <MenuItem value={4}>4</MenuItem>
-                                                <MenuItem value={5}>5</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </Box>
-                                    <input
-                                        className="descripcion-rank"
-                                        type="text"
-                                        placeholder="Deja tu comentario sobre la pelicula..."
-                                        value={descriptionRank}
-                                        onChange={e => setDescriptionRank(e.target.value)}
 
-                                    />
-                                    <img onClick={handleSubmit} src="/icons/send.svg" />
-                                </form>
-                            </div>
-                        }
                     </div>
 
                 </div>
-                {!isLoading && (<div className="movie-second-div">
-                    <div className="image-details">
-                        <div className="grid-container bloque_img">
-
-                            <div className="half-left">
-                                <img src={first[0].imagen} alt="Movie" />
-                            </div>
-                            <div className="half-right">
-                                {last.map((mov, index) => (
-                                    <div key={mov.id}>
-                                        {index == last.length - 1 ? (
-                                            <figure>
-                                                <div>
-                                                    <p onClick={handleShowGallery}>{`+ ${movie.imagenes.length - 6}`}</p>
-                                                </div>
-                                                <img src={mov.imagen} alt="Movie Gallery" />
-                                            </figure>
-                                        ) :
-                                            (
-                                                <img src={mov.imagen} alt="Movie" />
-                                            )}
-
-                                    </div>
-                                ))}
-
-                            </div>
-
-                        </div>
-                    </div>
 
 
-                </div>)}
-                <div className="map-container">
+                <div className="cinema-policy">
+                    <h2 className="tituloPoliticas">POLTICAS DE CINES</h2>
+                    {!isLoading && (allCinemas.map((cinema) => {
+                        console.log(cinema)
+                        return <Accordion
+                            title={cinema.nombre}
+                            content={
+                                <BloquePoliticas
+                                    policys={cinema.politicas}
+                                />}
+                            active={cinema.isActive}
+                            onChange={handleOnChangeActive}
+                            index={cinema.id}
+                        />
+                    }
 
-                    <GoogleMap
-                        mapContainerStyle={{ width: '100%', height: '100%' }}
-                        center={location}
-                        zoom={4}
-                    >
-                        <MarkerF
-                            position={location}
-                            title="Tu ubicacion actual"
-                        >
-
-                        </MarkerF>
-                        {Array.isArray(allCinemas) && allCinemas.length > 0 &&(
-                            allCinemas.map((cinema) => (
-                                <MarkerF
-                                    key={cinema.id}
-                                    position={{ lat: cinema.latitud, lng: cinema.longitud }}
-                                    title={cinema.nombre}
-                                    icon={{
-                                        url: '/icons/dhcinema2-logo-tiny.png',
-                                        scaledSize: new google.maps.Size(40, 40)
-                                    }}
-                                    onClick={() => setSelectedMarker(cinema)}
+                    ))}
 
 
-                                />
-
-                            ))
-                        )
-                        }
-                        {
-                            selectedMarker && (
-                                <InfoWindow
-                                    position={{ lat: selectedMarker.latitud, lng: selectedMarker.longitud }}
-                                    onCloseClick={() => setSelectedMarker(null)}
-                                >
-                                    <div className="cinema-item-map">
-                                        <h3>{selectedMarker.nombre}</h3>
-                                        <h5>{selectedMarker.direccion}</h5>
-                                        {sessionStorage.getItem('role') == 'ADMIN' && (
-                                            <h5>Latitud: {selectedMarker.latitud}, Longitud: {selectedMarker.longitud}</h5>
-                                        )}
-                                    </div>
-                                </InfoWindow>
-                            )
-                        }
-
-
-                    </GoogleMap>
-
-
-
-
-
-                </div>
-                <div>
-                    <h2 className="tituloPoliticas">Qué tenés que saber</h2>
-                    <BloquePoliticas/>
                 </div>
 
             </div>
@@ -658,7 +1014,7 @@ function MovieDetails() {
             >
                 <div className="video-details">
                     <div className="detail-video-part">
-                        <img src="/icons/close.svg" onClick={handleShowVideo} />
+                        <img src="/icons/close.svg" onClick={handleCloseVideo} />
                     </div>
                     <ReactPlayer
                         width='100%'
@@ -667,6 +1023,46 @@ function MovieDetails() {
                     />
                 </div>
             </Modal>)}
+
+            <ModalGlobal
+                showConfirmation={showReseña}
+                closeModal={handleCloseReseña}
+                shouldClose={true}
+                message={
+                    sessionStorage.getItem('id') ?
+                        <div>
+                            <form className="form-rank">
+                                <p>{pointsRank}</p>
+                                <Stack spacing={1}>
+                                    <Rating
+                                        name="size-large"
+                                        size="large"
+                                        value={pointsRank}
+                                        onChange={(e, newValue) => {
+                                            setPointsRank(newValue)
+                                        }}
+                                    />
+                                </Stack>
+                                <input
+                                    className="descripcion-rank"
+                                    type="text"
+                                    placeholder="Deja tu comentario sobre la pelicula..."
+                                    value={descriptionRank}
+                                    onChange={e => setDescriptionRank(e.target.value)}
+                                />
+                                <button className="button-review" onClick={handleSubmit}>Enviar</button>
+                            </form>
+                        </div> :
+                        <div className="reserve-content">
+                            <div className="reserve-box">
+                                <p>Debes <Link to='/inicio-sesion'>iniciar sesion</Link> o <Link to='/registrarse'>registrarte</Link> para escribir una reseña</p>
+                                <button onClick={handleCloseReseña} className="button-review">Cerrar</button>
+                            </div>
+                        </div>
+
+
+                }
+            />
 
 
             {!isLoading && (

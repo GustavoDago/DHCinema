@@ -15,13 +15,14 @@ import ListadoCategorias from './components/ListadoCategorias.jsx'
 import NuevaCategoria from './components/Nueva-categoria.jsx'
 import AsignarCategoria from './components/AsignarCategoria.jsx'
 import ConfirmAccount from './routes/ConfirmAccount.jsx'
-import Categories from './routes/Categories.jsx'
 import PerfilDropdown from './routes/PerfilDropDown.jsx'
 import AsignarRol from './components/AsignarRol.jsx'
-import ReserveSection from './components/ReserveSection.jsx'
 import ListadoCiudades from './components/ListadoCiudades.jsx'
 import Nuevaciudad from './components/Nueva-ciudad.jsx'
 import DetalleCiudad from './components/DetalleCiudad.jsx'
+import Reserva from './routes/Reserva.jsx'
+import Favorites from './routes/Favorites.jsx'
+import ReservaCuenta from './routes/ReservasCuenta.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -29,9 +30,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path='/confirmar-cuenta' element={<ConfirmAccount />} />
       <Route path='/' element={<App />}>
         <Route path='/' element={<Home />} />
-        <Route path='categorias' element={<Categories/>} />
+        <Route path='favoritos' element={<Favorites/>} />
         <Route path='peliculas/pagina/:id' element={<ShowMore />} />
         <Route path='peliculas/:id' element={<MovieDetails />} />
+        <Route path='peliculas/reserva/:id' element={<Reserva />} />
         <Route
           path='/admin' element={<GestionAdmin />}>
           <Route path='/admin/ListadoPeliculas' element={<ListadoPeliculas />} />
@@ -45,7 +47,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/Ciudades/:id' element={<DetalleCiudad />} />
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
-        <Route path='reservas' element={<ReserveSection />}/>
+        <Route path='reservas' element={<ReservaCuenta />}/>
         <Route path='inicio-sesion' element={<SignIn />} />
         <Route path='registrarse' element={<Register />} />
       </Route>

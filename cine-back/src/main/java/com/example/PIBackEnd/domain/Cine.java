@@ -16,7 +16,6 @@ public class Cine {
     @Column(nullable = false, length = 40)
     private String nombre;
 
-    //hacer tabla a parte como el paciente-direccion
     @Column(nullable = false, length = 50)
     private String direccion;
 

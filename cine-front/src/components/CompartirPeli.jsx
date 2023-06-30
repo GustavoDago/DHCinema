@@ -33,7 +33,7 @@ const ShareMovieModal = ({showConfirmation, closeModal, shouldClose}) => {
         </div>
         <hr />
         <div className=''>
-            <h3>Link de la pelicula</h3>
+            <h3>Link de la película</h3>
             <h3 className='modalCompartirLink'><a href={location.pathname}></a></h3>
         </div>
         </Modal>

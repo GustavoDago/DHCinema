@@ -12,16 +12,16 @@ Modal.setAppElement('#root')
 const schema = yup.object({
     nombre: yup.string()
         .required('Se requiere un nombre.')
-        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o números.'),
     apellido: yup.string()
         .required('Se requiere un apellido.')
-        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o numeros.'),
+        .matches(/^[a-zA-ZÀ-ÿ\s]/, 'El nombre no puede poseer caracteres especiales o números.'),
     email: yup.string()
         .required('Se requiere un email.')
-        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.'),
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email válido.'),
     confirmacionEmail: yup.string()
         .required('Se requiere este campo.')
-        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email valido.')
+        .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Se requiere un email válido.')
         .oneOf([yup.ref('email')], 'Los emails no coinciden entre si.'),
     password: yup.string()
         .required('Se requiere una contraseña.')
@@ -29,7 +29,7 @@ const schema = yup.object({
     contraseñaConfirmacion: yup.string()
         .required('Se requiere este campo.')
         .min(6, 'La contraseña debe ser mayor a 6 caracteres.')
-        .oneOf([yup.ref('password')], 'Las contraseñas no coinciden entre si.'),
+        .oneOf([yup.ref('password')], 'Las contraseñas no coinciden entre sí.'),
 })
 
 function Register() {
@@ -148,7 +148,7 @@ function Register() {
                         <div>
                             <input
                                 className={`${errors.confirmacionEmail ? 'error-input' : 'register-input'}`}
-                                placeholder="Confirmacion e-mail"
+                                placeholder="Confirmación e-mail"
                                 type='email'
                                 {...register('confirmacionEmail')}
                                 aria-invalid={errors.confirmacionEmail ? "true" : "false"}
@@ -168,7 +168,7 @@ function Register() {
                         <div>
                             <input
                                 className={`${errors.contraseñaConfirmacion ? 'error-input' : 'register-input'}`}
-                                placeholder="Confirmacion contraseña"
+                                placeholder="Confirmación contraseña"
                                 type='password'
                                 {...register('contraseñaConfirmacion')}
                                 aria-invalid={errors.contraseñaConfirmacion ? "true" : "false"}
@@ -178,13 +178,13 @@ function Register() {
                     </div>
 
 
-                    <button className="new-button" type="submit">Registrarse</button>
+                    <button className="new-button">Registrarse</button>
                 </form>
             </div>
             <Modal
                 isOpen={showConfirmation}
                 onRequestClose={closeModal}
-                contentLabel="Confirmacion"
+                contentLabel="Confirmación"
                 className="modal"
                 style={customStyles}
                 shouldCloseOnOverlayClick={false}

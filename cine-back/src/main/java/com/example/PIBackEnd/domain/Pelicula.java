@@ -58,7 +58,7 @@ public class Pelicula {
     private Set<Favorito> favoritos = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || null == this.portada || null == this.trailer || null == this.banner;
+        return null == this.titulo || null == this.descripcion || this.imagenes.isEmpty() || this.categorias.isEmpty() || null == this.portada || null == this.trailer || null == this.banner || null == this.caracteristicas;
     }
 
     public Long getId() {

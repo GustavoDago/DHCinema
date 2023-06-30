@@ -86,7 +86,7 @@ function Billboard() {
     <h2>CARTELERA</h2>
     {renderBillboard()}
     <Link to={`/peliculas/pagina/1`}>
-        <button>VER MAS</button>
+        <button>VER MÁS</button>
     </Link>
     </div>
     );

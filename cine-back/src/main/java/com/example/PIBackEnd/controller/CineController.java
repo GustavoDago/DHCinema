@@ -1,7 +1,6 @@
 package com.example.PIBackEnd.controller;
 
 import com.example.PIBackEnd.domain.Cine;
-import com.example.PIBackEnd.domain.Ciudad;
 import com.example.PIBackEnd.dtos.CineDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
@@ -28,6 +27,16 @@ public class CineController {
     @GetMapping
     public ResponseEntity<List<Cine>> buscarTodosCines() throws ResourceNoContentException {
         return ResponseEntity.ok(cineService.buscarTodosCines());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cine> buscarCinePorId(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(cineService.buscarCinePorId(id));
+    }
+
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<Cine> buscarCinePorNombre(@PathVariable String nombre) throws ResourceNotFoundException {
+        return ResponseEntity.ok(cineService.buscarCinePorNombre(nombre));
     }
 
     @DeleteMapping("/{id}")
