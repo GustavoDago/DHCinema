@@ -23,11 +23,7 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.guardarReserva(reserva));
     }
 
-<<<<<<< HEAD
     @PutMapping
-=======
-    @PutMapping("/usuario/{email}")
->>>>>>> development
     public ResponseEntity<ReservaDTO> actualizarReserva(@RequestBody ReservaDTO reserva) throws ResourceBadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(reservaService.actualizarReserva(reserva));
     }
@@ -45,5 +41,11 @@ public class ReservaController {
     @GetMapping("/usuario/{email}")
     public ResponseEntity<List<ReservaDTO>> buscarTodasReservasPorUsuario(@PathVariable String email){
         return ResponseEntity.ok(reservaService.buscarTodasReservasPorUsuario(email));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarReserva(@PathVariable Long id) throws ResourceNotFoundException {
+        reservaService.eliminarReserva(id);
+        return ResponseEntity.ok("Eliminación de la Reserva con id = " + id + " con éxito");
     }
 }

@@ -27,14 +27,14 @@ public class FuncionService {
 
     private IPeliculaRepository peliculaRepository;
 
-    private ReservaService reservaService;
+    private ButacaService butacaService;
 
     @Autowired
-    public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ReservaService reservaService) {
+    public FuncionService(IFuncionRepository funcionRepository, ISalaRepository salaRepository, IPeliculaRepository peliculaRepository, ButacaService butacaService) {
         this.funcionRepository = funcionRepository;
         this.salaRepository = salaRepository;
         this.peliculaRepository = peliculaRepository;
-        this.reservaService = reservaService;
+        this.butacaService = butacaService;
     }
 
     public FuncionDTO guardarFuncion(FuncionDTO funcion) throws ResourceBadRequestException {
@@ -53,7 +53,7 @@ public class FuncionService {
 
             LocalDate fechaActual = LocalDate.now();
             LocalTime horaActual = LocalTime.now();
-            List<Funcion> lista = funcionRepository.findAll();
+            List<Funcion> lista = funcionRepository.findAllByVigenteTrue();
             if(funcion.getFechaProyeccion().isAfter(fechaActual) || (funcion.getFechaProyeccion().isEqual(fechaActual) && funcion.getHoraProyeccion().isAfter(horaActual))){
                 for(Funcion func : lista){
                     if(Objects.equals(func.getSala().getId(), funcion.getSala_id()) && func.getFechaProyeccion().isEqual(funcion.getFechaProyeccion())){
@@ -140,6 +140,7 @@ public class FuncionService {
                         }
                         Funcion funcionAGuardar = convertirFuncionDTOaFuncion(funcion);
                         funcionAGuardar.setReservas(optionalFuncion.get().getReservas());
+                        funcionAGuardar.setButacas(optionalFuncion.get().getButacas());
                         return convertirFuncionaFuncionDTO(funcionRepository.save(funcionAGuardar));
                     }else{
                         throw new ResourceBadRequestException("Error. La Fecha o la Hora son anteriores a la Fecha y Hora actual");
@@ -179,6 +180,7 @@ public class FuncionService {
         Optional<Funcion> funcionBuscada = funcionRepository.findByIdAndVigente(id, true);
         if (funcionBuscada.isPresent()){
             funcionBuscada.get().setVigente(false);
+            butacaService.eliminarButacaCascadaFuncion(id);
             funcionRepository.save(funcionBuscada.get());
         }else{
             throw new ResourceNotFoundException("Error. No existe la Funcion con id = " + id + " o no esta vigente");
@@ -190,6 +192,7 @@ public class FuncionService {
         Optional<Funcion> funcionBuscada = funcionRepository.findByIdAndVigente(id, true);
         if (funcionBuscada.isPresent()){
             funcionBuscada.get().setVigente(false);
+            butacaService.eliminarButacaCascadaFuncion(id);
             funcionRepository.save(funcionBuscada.get());
         }
     }
