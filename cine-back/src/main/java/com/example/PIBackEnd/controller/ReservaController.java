@@ -23,7 +23,7 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.guardarReserva(reserva));
     }
 
-    @PutMapping
+    @PutMapping("/usuario/{email}")
     public ResponseEntity<ReservaDTO> actualizarReserva(@RequestBody ReservaDTO reserva) throws ResourceBadRequestException, ResourceNotFoundException {
         return ResponseEntity.ok(reservaService.actualizarReserva(reserva));
     }

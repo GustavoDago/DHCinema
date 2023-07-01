@@ -1,6 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react"
-import { fetchAllCinemas, fetchCinemaForTitle, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
+import { fetchAllCinemas, fetchAllPolicys, fetchCinemaForTitle, fetchRanking, fetchReserve, fetchSearchFunction, fetchUserList, postRanking, searchMovieDetails, searchRandomMovies } from "../components/UseFetch"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import Modal from "react-modal"
 import ReactPlayer from "react-player"
@@ -65,6 +65,7 @@ function MovieDetails() {
     const [activeOthers, setActiveOthers] = useState(false)
     const [isActive, setIsActive] = useState(true)
     const [newIndex, setNewIndex] = useState(null)
+    const [policy,setPolicy] = useState([])
     const customStyles = {
         overlay: { zIndex: 1000 }
     }
@@ -100,8 +101,8 @@ function MovieDetails() {
             if (search) {
 
                 const names = search.map(cine => cine.nombre);
-                const newCinemas = search.map(cine => { return { ...cine, isActive: false } })
-                setAllCinemas(newCinemas)
+                
+                setAllCinemas(search)
                 setAllCinemasNames(names);
                 const searchFuncPromises = names.map(async name => {
                     const fetchFunc = await fetchSearchFunction(name, title);
@@ -126,17 +127,6 @@ function MovieDetails() {
         setShowReseña(false)
     }
 
-    const handleOnChangeActive = (id, active) => {
-        if (id != null) {
-            const newArray = allCinemas.map(cine => {
-                if (cine.id == id)
-                    cine.isActive = active;
-                return cine;
-            })
-
-            setAllCinemas(newArray)
-        }
-    }
 
     const handleSubmit = async () => {
         setShowReseña(false)
@@ -300,9 +290,13 @@ function MovieDetails() {
                     setAllUsers(fetchUsers)
                 }
 
-
+                const policys = await fetchAllPolicys()
                 const movieForId = await searchMovieDetails(params.id)
                 const movieRandom = await searchRandomMovies()
+
+                if(policys){
+                    setPolicy(policys)
+                }
 
                 if (movieForId != false) {
                     if (cinemaS) {
@@ -360,7 +354,7 @@ function MovieDetails() {
     const handleReserva = () => {
         if (sessionStorage.getItem('id') == null) {
             setShowReserve(true)
-            setContentAwait(true)
+            
             setReserveContent(
                 <div>
                     <h3>Debe ser un usuario registrado para poder reservar una pelicula</h3>
@@ -370,58 +364,28 @@ function MovieDetails() {
             )
             setTimeout(() => {
                 setReserveContent('')
-                setContentAwait(false)
+                
                 setShowReserve(false)
                 navigate('/inicio-sesion')
             }, 3000)
         } else {
-            setReserveContent(
-                <div className="reserve-element">
-                    <h2>Datos usuario</h2>
-                    <div>
-                        <h4>Nombre: </h4><p>{sessionStorage.getItem('nombre')}</p>
-                    </div>
-                    <div>
-                        <h4>Apellido: </h4><p>{sessionStorage.getItem('apellido')}</p>
-                    </div>
-                    <div>
-                        <h4>Email: </h4><p>{sessionStorage.getItem('email')}</p>
-                    </div>
-                    <h3>{titulo}</h3>
-                    <div>
-                        <h4>Cine: </h4><p>{cinema}</p>
-                    </div>
-                    <div>
-                        <h4>Fecha: </h4><p>{functionReserve.fechaProyeccion}</p>
-                    </div>
-                    <div>
-                        <h4>Horario: </h4><p>{functionReserve.horaProyeccion}</p>
-                    </div>
-                    <div>
-                        <h4>Idioma: </h4><p>{functionReserve.opcionesIdioma}</p>
-                    </div>
-
-                </div>)
             setShowReserve(true)
+            setReserveContent(
+                <div>
+                    <h5>Usted sera redirigido a la seccion de reserva</h5>
+                </div>)
+            setTimeout(() => {
+                setReserveContent('')
+                
+                setShowReserve(false)
+                const url = `/peliculas/reserva/${movie.id}?cine=${cinema}&funcion=${functionReserve.id}&titulo=${titulo}`
+                navigate(url)
+            }, 3000)
         }
 
     }
 
-    const handleReservaYes = async () => {
-        setContentAwait(true)
-        setReserveContent(
-            <div>
-                <h5>Usted sera redirigido a la seccion de reserva</h5>
-            </div>)
-        setTimeout(() => {
-            setReserveContent('')
-            setContentAwait(false)
-            setShowReserve(false)
-            const url = `/peliculas/reserva/${movie.id}?cine=${cinema}&funcion=${functionReserve.id}&titulo=${titulo}`
-            navigate(url)
-        }, 3000)
-    }
-
+  
     const handleReservaNo = () => {
         handleCloseReserve()
     }
@@ -980,27 +944,19 @@ function MovieDetails() {
                     </div>
 
                 </div>
-
-
                 <div className="cinema-policy">
                     <h2 className="tituloPoliticas">POLTICAS DE CINES</h2>
-                    {!isLoading && (allCinemas.map((cinema) => {
-                        console.log(cinema)
-                        return <Accordion
-                            title={cinema.nombre}
-                            content={
-                                <BloquePoliticas
-                                    policys={cinema.politicas}
-                                />}
-                            active={cinema.isActive}
-                            onChange={handleOnChangeActive}
-                            index={cinema.id}
+                    {!isLoading && Array.isArray(policy) && policy.length > 0 ?(
+                        <BloquePoliticas 
+                            policys={policy[0]}
                         />
-                    }
-
-                    ))}
-
-
+                    ) : (
+                        <div className="policy-show">
+                            <div className="policy-show-container">
+                                <p>No se encuentra ninguna politica registrada</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
             </div>
@@ -1077,14 +1033,7 @@ function MovieDetails() {
                         <div className="reserve-box">
                             <h2>RESERVA</h2>
                             {reserveContent}
-                            {!contentAwait &&
-                                <div>
-                                    <h3>Deseas realizar la reserva?</h3>
-                                    <div className="reserve-buttons">
-                                        <button onClick={handleReservaYes}>Si</button>
-                                        <button onClick={handleReservaNo}>No</button>
-                                    </div>
-                                </div>}
+                            
 
                         </div>
 
