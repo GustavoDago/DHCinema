@@ -1028,7 +1028,7 @@ footer {
 .banner-video {
   width: 100%;
   height: 40vh;
-  background-position: left calc((10vw - 170px) - 340px) top;
+  background-position: 25% 25%;
   background-size: fill;
   background-repeat: no-repeat;
   position: relative;
@@ -1125,6 +1125,7 @@ footer {
   width: 5%;
   align-self: center;
   cursor: pointer;
+  z-index: 102;
 }
 
 .video-details {
@@ -1534,8 +1535,18 @@ footer {
   margin-left: 40px;
 }
 
-.cinema-policy {
-  margin-bottom: 10px;
+.policy-show{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.policy-show-container{
+  width: 40%;
+  align-self: center;
+  background-color: #415A77;
+  border-radius: 10px;
+  margin: 10px 0px;
 }
 
 .cinema-policy .accordion-title {
@@ -3447,11 +3458,11 @@ div .asignoCategorias div {
 .favorite-button {
   width: 40px;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .information-button {
   width: 40px;
-  margin-right: 20px;
 }
 
 .item-buttons {
@@ -3676,6 +3687,10 @@ div .asignoCategorias div {
   align-items: center;
 }
 
+.reserve-modal img{
+ width: 50px;
+}
+
 .reserve-modal h2 {
   margin: 0;
 }
@@ -3740,6 +3755,76 @@ div .asignoCategorias div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Politicas */
+
+.change-policys{
+  display: flex;
+  flex-direction: column;
+}
+
+.policys-form{
+  background-color: white;
+  border-radius: 10px;
+  width: 96%;
+  align-self: center;
+  margin: 20px 0;
+}
+
+.policys-form h2{
+  color: rgba(0, 0, 0, .5);
+}
+
+.policys-form p{
+  color: black;
+}
+
+.policys-form .general-input-box{
+  width: 100%;
+  align-items: left;
+
+}
+
+.policys-form .general-input-box label{
+  margin-left: 30px;
+}
+
+.policys-form .general-input-section{
+  justify-content: center;
+}
+
+.policys-form .general-input-container{
+  width: 66%;
+  margin-left: 30px;
+  align-self: flex-start;
+}
+
+.policys-form .general-input-box p{
+  color: red;
+  text-align: left;
+}
+
+.policys-form .general-input{
+  width: 100%;
+  height: 30vh;
+}
+
+.policys-form .general-error-input{
+  width: 100%;
+  height: 30vh;
+}
+
+.policys-form button{
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #415A77;
+}
+
+.policys-form button:hover{
+  background-color: white;
+  border: 1px solid #415A77;
+  color: #415A77;
 }
 
 
@@ -3861,7 +3946,7 @@ div .asignoCategorias div {
   }
 
   .banner-video {
-    background-position: left calc((73vw - 170px) - 340px) top;
+    background-position: 45% 15%;
   }
 
   .movie-second-div {
@@ -4093,8 +4178,21 @@ div .asignoCategorias div {
   .header-section {
     display: none;
   }
-
   
+  .movie-details-title{
+    width: 50%;
+    left: 38%;
+  }
+
+  .movie-details-title h1{
+    font-size: 20px;
+
+  }
+
+  .favorite-button{
+    width: 30px;
+    margin-left: 10px;
+  }
 
   .dropdown-content {
     position: absolute;

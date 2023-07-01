@@ -98,13 +98,11 @@ const header = () => {
           )}
         </div>
       </div>
-
       <Modal
         isOpen={showConfirmation}
         onRequestClose={closeModal}
         style={customStyles}
       >
-
         <div className={modalClassName}>
           <div className="modal-content">
             <h3>{errorMessage}</h3>

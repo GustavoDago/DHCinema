@@ -34,7 +34,10 @@ const GestionAdmin = () => {
     } else if(panelElement == "crear-ciudad"){
       setTitle('Crear Ciudades')
       setDescription('Aquí podrá crear una ciudad.')
-    } 
+    } else if(panelElement == "politicas"){
+      setTitle('Politicas')
+      setDescription('Aquí podrá crear o modificar las politicas.')
+    }
   },[panelElement])
 
   return (
@@ -54,6 +57,7 @@ const GestionAdmin = () => {
         <Link onClick={() => setPanelElement("asignar-rol")} to="/admin/asignar-rol">ASIGNAR ROL</Link>
         <Link onClick={() => setPanelElement("listado-ciudades")} to="/admin/ListadoCiudades">LISTAR CIUDADES</Link>
         <Link onClick={() => setPanelElement("crear-ciudad")} to="/admin/nueva-ciudad">CREAR CIUDAD</Link>
+        <Link onClick={() => setPanelElement("politicas")} to="/admin/politicas">POLITICAS</Link>
       </div>
       <hr />
       <Outlet />
