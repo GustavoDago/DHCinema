@@ -394,6 +394,69 @@ export const postRanking = async (rank) => {
     return response;
 }
 
+
+
+export const fetchAllPolicys = async () => {
+    const url = `/politicas`
+    const response = await fetch(`${API_ENDPOINT}${url}`)
+    .then((response) => {
+        return response.json()
+    })
+    .catch(error => {
+        console.error(error)
+    })
+    return response;
+}
+
+export const updatePolicys = async (data) => {
+    const url = '/politicas'
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then((response) => {
+        return true
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
+    return response
+}
+
+export const savePolicys = async (data) => {
+    const url = '/politicas'
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then((response) => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Error en la solicitud HTTP');
+        }
+    }).then(data => {
+        console.log(data)
+        return data;
+    })
+        .catch((error) => {
+            console.log(error)
+            return false;
+        })
+
+    return response;
+}
+
 export const searchCategoriesMovies = async (page, categorie) => {
     const url = `/peliculas/pagina/${page}/${categorie}`
     const response = await fetch(`${API_ENDPOINT}${url}`)

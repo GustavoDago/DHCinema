@@ -23,6 +23,7 @@ import DetalleCiudad from './components/DetalleCiudad.jsx'
 import Reserva from './routes/Reserva.jsx'
 import Favorites from './routes/Favorites.jsx'
 import ReservaCuenta from './routes/ReservasCuenta.jsx'
+import ListarPoliticas from './components/ListarPoliticas.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -45,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/admin/ListadoCiudades' element={<ListadoCiudades />} />
           <Route path='/admin/nueva-ciudad' element={<Nuevaciudad />} />
           <Route path='/admin/Ciudades/:id' element={<DetalleCiudad />} />
+          <Route path='/admin/politicas' element={<ListarPoliticas />}/>
         </Route>
         <Route path='perfil' element={<PerfilDropdown />} />
         <Route path='reservas' element={<ReservaCuenta />}/>

@@ -17,7 +17,6 @@ function AdministrationPanel() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [selectedCategories, setSelectedCategories] = useState([])
-    const [selectedDates, setSelectedDates] = useState([new Date()])
     const [image, setImage] = useState(null)
     const [banner, setBanner] = useState(null)
     const [gallery, setGallery] = useState([])
@@ -25,11 +24,8 @@ function AdministrationPanel() {
     const [errorMessage, setErrorMessage] = useState('')
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
-    const [sala, setSala] = useState('')
     const [duration, setDuration] = useState('')
-    const [type, setType] = useState('')
     const [clasification, setClasification] = useState('')
-    const [lenguage, setLenguage] = useState('')
     const [director, setDirector] = useState('')
     const [actors, setActors] = useState('')
     const [trailer, setTrailer] = useState('')
@@ -46,6 +42,7 @@ function AdministrationPanel() {
                         ...categoria,
                         selected: false
                     }));
+                    console.log(categories)
                     setSelectedCategories(updatedCategorias);
                     setIsLoading(false);
                     setErrorMessage('')
@@ -97,9 +94,12 @@ function AdministrationPanel() {
             })
 
             const result = await response.json();
-            const imageUrl = result.secure_url;
-            console.log(imageUrl)
-            return imageUrl;
+            if(result.secure_url){
+                const imageUrl = result.secure_url;
+                console.log(imageUrl)
+                return imageUrl;
+            }
+            
 
 
         } catch (error) {
@@ -109,7 +109,7 @@ function AdministrationPanel() {
     }
 
     const uploadMultipleCloudinary = async () => {
-        return gallery.map(async (image, index) => {
+        const multiple = await Promise.all(gallery.map(async (image) => {
             try {
                 const formData = new FormData()
                 formData.append('file', image.file)
@@ -122,19 +122,26 @@ function AdministrationPanel() {
                 })
 
                 const result = await response.json();
-                console.log(result.secure_url)
-                setMultipleUrl((prevUrlList) => [...prevUrlList, result.secure_url])
+                
 
-                if (gallery.length - 1 == index)
-                    return true;
+                
+
+                if(result.secure_url){
+                    console.log(result.secure_url)
+                    setMultipleUrl([...multipleUrl, result.secure_url])
+                    return result.secure_url
+                }
             } catch (error) {
                 console.error(error)
-                return false
+                
             }
-        })
+        }))
+
+        return multiple;
+        
     }
 
-    const fetchNewMovie = async (url, bannerUrl) => {
+    const fetchNewMovie = async (url, bannerUrl,multiple) => {
 
         try {
             const data = {
@@ -144,23 +151,16 @@ function AdministrationPanel() {
                 banner: bannerUrl,
                 descripcion: description,
                 caracteristicas: {
-                    sala: sala,
-                    modalidad: type,
                     reparto: actors,
                     duracion: duration,
                     clasificacion: clasification,
-                    opcionesIdioma: lenguage,
                     director: director
                 },
-                imagenes: multipleUrl.map((url) => ({ imagen: url })),
+                imagenes: multiple.map((url) => ({ imagen: url })),
                 categorias: selectedCategories.filter((category) => category.selected == true)
-                    .map((category) => ({ titulo: category.titulo })),
-                fechas: selectedDates.map((date) => ({ fecha: moment(date.toDate()).format('YYYY-MM-DD') }))
+                    .map((category) => ({ titulo: category.titulo,descripcion: category.descripcion, urlImagen: category.urlImagen })),  
             };
-            const jsonData = JSON.stringify(data);
-            console.log(jsonData);
-
-
+            console.log(data)
             const response = await newMovie(data)
             console.log(response)
             if (response == true) {
@@ -169,19 +169,14 @@ function AdministrationPanel() {
                     setTitle('')
                     setDescription('')
                     setSelectedCategories([])
-                    setSelectedDates([])
                     setShowConfirmation(false)
                     setImage(null)
                     setBanner(null)
                     setSelectedCategories([])
-                    setSelectedDates([])
                     setGallery([])
                     setMultipleUrl([])
-                    setSala('')
-                    setType('')
                     setTrailer('')
                     setDuration('')
-                    setLenguage('')
                     setActors('')
                     setClasification('')
                     setDirector('')
@@ -204,12 +199,12 @@ function AdministrationPanel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(selectedDates)
+        
         setErrorMessage("Cargando...")
         setShowConfirmation(true)
 
-        if (!title || !selectedCategories.length || !description || !selectedDates || !selectedCategories
-            || !image || !gallery || !banner || !sala || !duration || !type || !clasification || !lenguage
+        if (!title || !selectedCategories.length || !description || !selectedCategories
+            || !image || !gallery || !banner || !duration || !clasification
             || !director || !actors || !trailer) {
             setErrorMessage("Todos los campos son requeridos.");
             setTimeout(() => {
@@ -218,70 +213,43 @@ function AdministrationPanel() {
             return;
         }
 
-        const currentDate = new Date();
-        selectedDates.map((date) => {
-            const newDate = new Date(date)
-            if (date < currentDate) {
-                setErrorMessage("La fechas deben ser iguales o posteriores a la fecha actual")
-                if (isValid(newDate)) {
-                    console.log('valido'); // Formatear fecha válida
-                } else {
-                    console.log('invalido'); // Usar fecha predeterminada para fechas inválidas
-                }
-                setTimeout(() => {
-                    setShowConfirmation(false)
-                }, 2000)
-                return
-            }
-        })
 
 
 
         const imageUpload = await uploadCloudinary(image)
         const bannerUpload = await uploadCloudinary(banner)
-        const galleryUpload = await uploadMultipleCloudinary()
-
-        if (imageUpload == false || bannerUpload == false || galleryUpload == false) {
-            setErrorMessage("Error al subir las imágenes.")
-            setTimeout(() => {
-                setShowConfirmation(false)
-            }, 2000)
-            return
-        } else {
-
+        const multipleUpload = await uploadMultipleCloudinary()
+       
+        
+       
             setTimeout(() => {
                 if ((imageUpload == "" || null) || (bannerUpload == "" || null)) {
                     setErrorMessage("Error al subir las imágenes.")
-
+                    console.log(imageUpload)
+                    console.log(bannerUpload)
+                    console.log(multipleUrl)
                     setMultipleUrl([])
                     setTimeout(() => {
                         setShowConfirmation(false)
                     }, 2500)
                     return
-                } else {
-                    fetchNewMovie(imageUpload, bannerUpload)
+                } else {   
+                    setTimeout(() => {
+                    fetchNewMovie(imageUpload, bannerUpload,multipleUpload)
+                },10000)
                 }
-
-            }, 1000)
-
-        }
-
-
-
+            }, 5000)
+        
+     
     }
 
-    const onChangeSala = (e) => {
-        setSala(e.target.value)
-    }
     const onChangeDuration = (e) => {
         setDuration(e.target.value)
     }
     const onChangeClasification = (e) => {
         setClasification(e.target.value)
     }
-    const onChangeLenguage = (e) => {
-        setLenguage(e.target.value)
-    }
+
 
     const onChangeActors = (e) => {
         setActors(e.target.value)
@@ -291,9 +259,6 @@ function AdministrationPanel() {
         setDirector(e.target.value)
     }
 
-    const onChangeType = (e) => {
-        setType(e.target.value)
-    }
 
     const onChangeTrailer = (e) => {
         setTrailer(e.target.value)
@@ -380,41 +345,11 @@ function AdministrationPanel() {
                                     onChange={onChangeTrailer}
                                 />
 
-                                <div className="date-container">
-                                    <label>Fecha:</label>
-                                    <div className="date-center">
-                                        <DatePicker
-                                            className="date-picker"
-                                            multiple
-                                            selected={selectedDates}
-                                            onChange={setSelectedDates}
-                                            format={"YYYY-MM-DD"}
-                                            plugins={[
-                                                <DatePanel />
-                                            ]}
-                                        />
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div className="admin-div-last">
-                                <div>
-                                    <label>Sala</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Sala"
-                                        value={sala}
-                                        onChange={onChangeSala}
-                                    />
-                                </div>
-                                <div>
-                                    <label>Modalidad</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Modalidad"
-                                        value={type}
-                                        onChange={onChangeType}
-                                    />
-                                </div>
+                                
+                    
                                 <div>
                                     <label>Duración</label>
                                     <input
@@ -434,14 +369,8 @@ function AdministrationPanel() {
                                         onChange={onChangeClasification}
                                     />
                                 </div>
-                                <div>
-                                    <label>Idioma</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Idioma"
-                                        value={lenguage}
-                                        onChange={onChangeLenguage}
-                                    /></div>
+                                
+                                    
 
                             </div>
                         </div>

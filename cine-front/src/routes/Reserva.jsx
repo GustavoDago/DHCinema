@@ -134,8 +134,12 @@ const Reserva = () => {
                     setTimeout(() => {
                         setContentAwait(false)
                         setMessage("RESERVA COMPLETADA")
-                        setSubmessage("Su reserva fue ingresada con exito")
-
+                        setSubmessage("Su reserva fue ingresada con exito. Sera rederigido a la pantalla principal.")
+                        setTimeout(() => {
+                            setMessage('')
+                            setSubmessage('')
+                            navigate('/')
+                        }, 2000)
                     }, 3000)
                 }, 4000)
             } else {
