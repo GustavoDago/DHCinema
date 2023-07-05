@@ -42,4 +42,10 @@ public class ReservaController {
     public ResponseEntity<List<ReservaDTO>> buscarTodasReservasPorUsuario(@PathVariable String email){
         return ResponseEntity.ok(reservaService.buscarTodasReservasPorUsuario(email));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarReserva(@PathVariable Long id) throws ResourceNotFoundException {
+        reservaService.eliminarReserva(id);
+        return ResponseEntity.ok("Eliminación de la Reserva con id = " + id + " con éxito");
+    }
 }

@@ -7,6 +7,7 @@ import com.example.PIBackEnd.dtos.SalaDTO;
 import com.example.PIBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PIBackEnd.exceptions.ResourceNoContentException;
 import com.example.PIBackEnd.exceptions.ResourceNotFoundException;
+import com.example.PIBackEnd.repository.IButacaRepository;
 import com.example.PIBackEnd.repository.ICineRepository;
 import com.example.PIBackEnd.repository.ISalaRepository;
 import org.apache.log4j.Logger;
@@ -26,6 +27,9 @@ public class SalaService {
     private ICineRepository cineRepository;
 
     private FuncionService funcionService;
+
+    @Autowired
+    private IButacaRepository butacaRepository;
 
     @Autowired
     public SalaService(ISalaRepository salaRepository, ICineRepository cineRepository, FuncionService funcionService) {
@@ -96,7 +100,7 @@ public class SalaService {
             salaBuscada.get().setVigente(false);
             Set<Funcion> funciones = salaBuscada.get().getFunciones();
             for (Funcion funcion:funciones) {
-                funcionService.eliminarFuncion(funcion.getId());
+                funcionService.eliminarFuncionCascada(funcion.getId());
             }
             salaRepository.save(salaBuscada.get());
         }else{

@@ -33,14 +33,20 @@ public class ReservaService {
 
     private EmailService emailService;
 
+    private ButacaService butacaService;
+
+    private IButacaRepository butacaRepository;
+
     @Autowired
-    public ReservaService(IReservaRepository reservaRepository, IFuncionRepository funcionRepository, IPeliculaRepository peliculaRepository, IUsuarioRepository usuarioRepository, ISalaRepository salaRepository, EmailService emailService) {
+    public ReservaService(IReservaRepository reservaRepository, IFuncionRepository funcionRepository, IPeliculaRepository peliculaRepository, IUsuarioRepository usuarioRepository, ISalaRepository salaRepository, EmailService emailService, ButacaService butacaService, IButacaRepository butacaRepository) {
         this.reservaRepository = reservaRepository;
         this.funcionRepository = funcionRepository;
         this.peliculaRepository = peliculaRepository;
         this.usuarioRepository = usuarioRepository;
         this.salaRepository = salaRepository;
         this.emailService = emailService;
+        this.butacaService = butacaService;
+        this.butacaRepository = butacaRepository;
     }
 
     public ReservaDTO guardarReserva(ReservaDTO reserva) throws ResourceBadRequestException {
@@ -155,6 +161,35 @@ public class ReservaService {
         }
         return reservas;
     }
+
+    public void eliminarReserva(Long id) throws ResourceNotFoundException {
+        logger.warn("Borrando Reserva con id = " + id);
+        Optional<Reserva> reservaBuscada = reservaRepository.findByIdAndVigenteTrue(id);
+        if (reservaBuscada.isPresent()){
+            reservaBuscada.get().setVigente(false);
+            List<Butaca> butacas = butacaRepository.findAllByIdUsuarioAndFuncion_Id(reservaBuscada.get().getUsuario().getId(), reservaBuscada.get().getFuncion().getId());
+            for (Butaca butaca:butacas) {
+                butacaService.eliminarButacaCascada(butaca.getId());
+            }
+            reservaRepository.save(reservaBuscada.get());
+        }else{
+            throw new ResourceNotFoundException("Error. No existe la Reserva con id = " + id + " o no esta vigente");
+        }
+    }
+
+    /*public void eliminarReservaCascada(Long id) throws ResourceNotFoundException {
+        logger.warn("Borrando Reserva con id = " + id);
+        Optional<Reserva> reservaBuscada = reservaRepository.findByIdAndVigenteTrue(id);
+        if (reservaBuscada.isPresent()){
+            reservaBuscada.get().setVigente(false);
+            List<Butaca> butacas = butacaRepository.findAllByIdUsuarioAndFuncion_Id(reservaBuscada.get().getUsuario().getId(), reservaBuscada.get().getFuncion().getId());
+            for (Butaca butaca:butacas) {
+                butacaService.eliminarButacaCascada(butaca.getId());
+            }
+            reservaRepository.save(reservaBuscada.get());
+        }
+    }
+    }*/
 
     private Reserva convertirReservaDTOaReserva(ReservaDTO reservaDTO){
         Reserva reserva = new Reserva();

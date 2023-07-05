@@ -34,7 +34,7 @@ public class PoliticaService {
     }
 
     public PoliticaDTO actualizarPolitica(PoliticaDTO politicaDTO) throws ResourceBadRequestException {
-        logger.info("Actualizando Politicas nuevas");
+        logger.info("Actualizando Politicas");
         if(politicaDTO.chequearAtributosVacios()){
             throw new ResourceBadRequestException("Error. Las Politicas tienen que contener todos sus campos");
         }

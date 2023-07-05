@@ -43,6 +43,20 @@ public class Funcion {
     @OneToMany(mappedBy = "funcion")
     private Set<Reserva> reservas = new HashSet<>();
 
+    @OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Butaca> butacas = new HashSet<>();
+
+    public Funcion(){
+        for (int i = 1; i <= 55; i++) {
+            Butaca butaca = new Butaca();
+            butaca.setIdUsuario(null);
+            butaca.setFuncion(this);
+            butaca.setOcupado(false);
+            butaca.setPago(false);
+            butacas.add(butaca);
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -113,5 +127,13 @@ public class Funcion {
 
     public void setVigente(Boolean vigente) {
         this.vigente = vigente;
+    }
+
+    public Set<Butaca> getButacas() {
+        return butacas;
+    }
+
+    public void setButacas(Set<Butaca> butacas) {
+        this.butacas = butacas;
     }
 }

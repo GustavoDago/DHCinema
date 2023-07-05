@@ -58,7 +58,6 @@ public class Reserva {
     @Column
     private Boolean vigente;
 
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "funcion_id", referencedColumnName = "id")

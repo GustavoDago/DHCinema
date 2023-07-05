@@ -1,4 +1,3 @@
-import Accordion from "../components/Accordion";
 import { useState } from "react";
 import { useEffect } from "react";
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,7 +7,6 @@ import * as yup from "yup"
 import { fetchUpdateReserve, fetchUserReserves } from "../components/UseFetch";
 import ModalGlobal from "../components/GlobalModal";
 import { BounceLoader } from "react-spinners";
-import { parse } from "date-fns";
 
 
 
@@ -20,6 +18,8 @@ function ReservaCuenta() {
     const [active, setActive] = useState(null)
     const [message, setMessage] = useState(null)
     const [isUpdating, setIsUpdating] = useState(false)
+
+    
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -50,6 +50,7 @@ function ReservaCuenta() {
                 console.log(error)
             }
         }
+        
         fetchAllReserves()
     }, [])
 
@@ -173,9 +174,12 @@ function ReservaCuenta() {
         const updateReserve = () => {
             const newData = data;
             delete newData.confirmacionEmail;
+            newData.id = actualReserve.id
+            newData.funcion_id = actualReserve.funcion_id
             newData.usuario_id = parseInt(sessionStorage.getItem('id'))
-            const response = fetchUpdateReserve(sessionStorage.getItem('email'), data)
+            const response = fetchUpdateReserve(sessionStorage.getItem('email'), newData)
             if (response) {
+                setReserves([])
                 setMessage(
                     <div className="reserve-modal">
                         <h3>RESERVA ACTUALIZADA</h3>
@@ -195,19 +199,22 @@ function ReservaCuenta() {
                             })
                             console.log(updateResponse)
                             setReserves(updateResponse)
-
+                            
                         }
                     } catch (error) {
                         console.log(error)
                     }
                 }
                 fetchAllReserves()
+                handleInformation(false)
+                setActive(null)
                 setTimeout(() => {
-                    setTimeout(false)
+                    setIsLoading(false)
                     setOpenModal(false)
-                })
+                },2000)
             }
         }
+        updateReserve()
     }
 
     const handleNo = () => {
@@ -282,7 +289,7 @@ function ReservaCuenta() {
 
                 </div>
             )}
-            <div className="update-reserve">
+            {active != null && <div className="update-reserve">
                 <h3>Información de reserva</h3>
                 <p className="reserve-user-information">Debe completar con la infomación de la persona encargada de retirar la reserva. En caso de necesitar cambiar la persona permitida para retirar una vez efectuada la reserva, puede actualizarlo desde la sección de su perfil.</p>
                 <form onSubmit={handleSubmit(onSubmit)} id="reserve-form">
@@ -369,7 +376,8 @@ function ReservaCuenta() {
                     </div>
                     <button>ENVIAR</button>
                 </form>
-            </div>
+            </div>}
+            
 
             <ModalGlobal
                 showConfirmation={openModal}
